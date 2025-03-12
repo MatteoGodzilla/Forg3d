@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS Compratore (
 /* TODO: aggiungere verifica del venditore */
 CREATE TABLE IF NOT EXISTS Venditore (
     emailUtente VARCHAR(254) NOT NULL,
+    stato TINYINT DEFAULT 0 COMMENT "0: In attesa, 1: Verificato, 2: Bannato",
+    motivoBan VARCHAR(1024),
     FOREIGN KEY (emailUtente) REFERENCES Utente(email) ON DELETE CASCADE
 );
 
@@ -87,11 +89,16 @@ CREATE TABLE IF NOT EXISTS Variante (
 /* TODO:Decidere che cosa succede quando il venditore vuole rimuovere un prodotto/variante/materiale */
 
 /* Ordini */
+/* Carrello = 1+ Ordini associati ad un compratore con status 0 */
+/* L'ordine è associato soltanto a un singolo venditore */
 CREATE TABLE IF NOT EXISTS Ordine (
     id INT AUTO_INCREMENT PRIMARY KEY,
     emailCompratore VARCHAR(254) NOT NULL,
+    emailVenditore VARCHAR(254) NOT NULL,
     stato TINYINT DEFAULT 0 COMMENT "0: Carrello, 1: Pagato, 2: Spedito",
-    dataCreazione DATETIME DEFAULT CURRENT_TIMESTAMP
+    dataCreazione DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (emailCompratore) REFERENCES Compratore(emailUtente),
+    FOREIGN KEY (emailVenditore) REFERENCES Venditore(emailUtente)
 );
 
 CREATE TABLE IF NOT EXISTS InfoOrdine (
