@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS Ordine (
     emailVenditore VARCHAR(254) NOT NULL,
     stato TINYINT DEFAULT 0 COMMENT "0: Carrello, 1: Pagato, 2: Spedito",
     dataCreazione DATETIME DEFAULT CURRENT_TIMESTAMP,
+    prezzo INT NOT NULL,
     FOREIGN KEY (emailCompratore) REFERENCES Compratore(emailUtente),
     FOREIGN KEY (emailVenditore) REFERENCES Venditore(emailUtente)
 );
