@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `dododone` ;
-USE `dododone`;
+CREATE DATABASE IF NOT EXISTS `Forg3d` ;
+USE `Forg3d`;
 
 /* Utenti */
 
