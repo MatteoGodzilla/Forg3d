@@ -46,9 +46,32 @@ if($type == "0"){
 } elseif ($type == "1") {
     //Venditore
 
-    //Redirect
-    //header("Location:".$redirectVenditore);
-    exit();
+    $query = "SELECT U.email, U.password FROM Utente U
+        JOIN Venditore V ON (U.email = V.emailUtente)
+        WHERE U.email = ?
+    ";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt,"s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    if(isset($rows[0])){
+        //it exists
+
+        // To generate the password, run
+        // php -a
+        // echo(password_hash(<password>,PASSWORD_DEFAULT));
+
+        $dbPassword = $rows[0]["password"];
+        if(password_verify($clearPassword, $dbPassword)){
+            //set session token
+
+            //Redirect
+            header("Location:".$redirectVenditore);
+            exit();
+        }
+    }
 }
 
 //Redirect back
