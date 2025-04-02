@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS SegnalazioneVenditore(
 
 /*Admin registration token*/
 Create Table IF NOT EXISTS AdminToken(
-    token varchar(64), email varchar(254),
+    token varchar(64),
+    email varchar(254),
     used boolean DEFAULT false,
-    FOREIGN KEY (email) REFERENCES Admin(emailUtente));
+    FOREIGN KEY (email) REFERENCES Admin(emailUtente),
+    PRIMARY KEY(token));
