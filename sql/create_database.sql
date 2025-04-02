@@ -144,3 +144,9 @@ CREATE TABLE IF NOT EXISTS SegnalazioneVenditore(
     FOREIGN KEY (idSegnalazione) REFERENCES Segnalazione(id),
     FOREIGN KEY (emailVenditore) REFERENCES Venditore(emailUtente)
 );
+
+/*Admin registration token*/
+Create Table IF NOT EXISTS AdminToken(
+    token varchar(64), email varchar(254),
+    used boolean DEFAULT false,
+    FOREIGN KEY (email) REFERENCES Admin(emailUtente));
