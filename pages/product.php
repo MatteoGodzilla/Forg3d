@@ -1,9 +1,21 @@
 <?php
 require_once("../php/db.php"); // Connessione al database
+require_once("../php/session.php"); // Gestione sessione
+session_start();
 
 // Controlla se l'ID del prodotto è stato passato
 if (!isset($_GET) || !isset($_GET['id'])) {
-    die("Prodotto mancante.");// Modifica all pagina home
+    die("");// Modifica all pagina home
+}
+
+if (!$prodotto['visibile']) {
+    $emailUtente = getSessionEmail();
+    $tipoUtente = getTipoUtente();
+
+    // Se non è admin e non è il venditore stesso
+    if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
+        die("");// Modifica all pagina home
+    }
 }
 
 //Prendo l'Id del prodotto cliccato
@@ -61,5 +73,19 @@ $varianti = mysqli_stmt_get_result($stmt);
         <p><strong>Prezzo:</strong> €<?php echo number_format($variante['prezzo'] / 100, 2, ',', '.'); ?></p>
         <hr>
     <?php endwhile; ?>
+
+    <?php if ($tipoUtente==TipoUtente::COMPRATORE): ?>
+        <form action="aggiungi_carrello.php" method="POST">
+            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
+            <button type="submit">Aggiungi al Carrello</button>
+        </form>
+        
+        <h3>Scrivi una recensione</h3>
+        <form action="salva_recensione.php" method="POST">
+            <textarea name="recensione" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
+            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
+            <button type="submit">Invia Recensione</button>
+        </form>
+    <?php endif; ?>
 </body>
 </html>
