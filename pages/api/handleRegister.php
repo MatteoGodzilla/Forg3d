@@ -22,6 +22,7 @@ $BaseQuery = "INSERT INTO Utente(nome,cognome,email,password,telefono) VALUES(?,
 $SpecificQuery = "";
 $token = "";
 
+
 switch ($type) {
     case "0":
         $SpecificQuery = "INSERT INTO Compratore(emailUtente) VALUES(?)";
@@ -30,8 +31,8 @@ switch ($type) {
         $SpecificQuery = "INSERT INTO Venditore(emailUtente) VALUES(?)";
         break;
     case "2":
-        if(!isset($_POST["admin_token"])){
-            header("Location:".$redirectFailed);
+        if(!isset($_POST["admin_token"])){;
+            header("Location:".REDIRECT_FAILED);
             exit();
         }
         $token = $_POST["admin_token"];
@@ -45,7 +46,7 @@ switch ($type) {
 
 
 
-echo "lol";
+
 if($type!="2"){
     //transaction of 2 inserts
     $connection->begin_transaction();
@@ -83,14 +84,14 @@ if($type!="2"){
         mysqli_stmt_bind_param($stmt,"sssss", $_POST["name"],$_POST["surname"],$email,$hashedPassword,$_POST["cellphone"]);
         mysqli_stmt_execute($stmt);
 
+        $SpecificQuery = "INSERT INTO Admin(emailUtente) VALUES(?)";
+        $stmt = mysqli_prepare($connection, $SpecificQuery); 
+        mysqli_stmt_bind_param($stmt,"s", $email);
+        mysqli_stmt_execute($stmt);
+
         $SpecificQuery = "UPDATE AdminToken SET used=1, email=? WHERE token=?";
         $stmt = mysqli_prepare($connection, $SpecificQuery); //set token as used
         mysqli_stmt_bind_param($stmt,"ss", $email, $token);
-        mysqli_stmt_execute($stmt);
-
-        $SpecificQuery = "INSERT INTO Admin(emailUtente) VALUES(?)";
-        $stmt = mysqli_prepare($connection, $SpecificQuery); //set token as used
-        mysqli_stmt_bind_param($stmt,"s", $email);
         mysqli_stmt_execute($stmt);
     
         $connection->commit();

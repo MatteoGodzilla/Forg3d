@@ -14,7 +14,7 @@
     <input type= "hidden" name="type" id="type" value="<?php echo $userType?>"/> 
     <?php if($userType==2){?>
         <label for="token">Registration token</label>
-        <input type = "text" name="token" id="token">
+        <input type = "text" name="admin_token" id="token">
     <?php } ?>
     <input type="submit" value="Login">
 </form>
