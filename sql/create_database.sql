@@ -83,6 +83,13 @@ CREATE TABLE IF NOT EXISTS Variante (
     FOREIGN KEY (idMateriale) REFERENCES Materiale(id)
 );
 
+CREATE TABLE IF NOT EXISTS ImmaginiProdotto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idProdotto INT NOT NULL,
+    nomeFile VARCHAR(256) NOT NULL,
+    FOREIGN KEY (idProdotto) REFERENCES Prodotto(id)
+);
+
 /* ALTER TABLE Prodotto ADD FOREIGN KEY (varianteDefault) REFERENCES Variante(id); */
 
 /* TODO:Check che la variante e il prodotto facciano riferimento circolare tra loro */
