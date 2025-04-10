@@ -1,5 +1,6 @@
 <?php
 require_once("../../php/db.php");
+require_once("../../php/constants.php");
 
 const REDIRECT_FAILED = "../index.php";
 const REDIRECT_COMPRATORE = "../page2.php";
@@ -13,24 +14,24 @@ if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !i
 
 $email = $_POST["email"];
 $clearPassword = $_POST["password"];
-$type = $_POST["type"];
+$type = (int)$_POST["type"];
 
 //Check login
 $query = "";
 switch ($type) {
-    case "0":
+    case TipoUtente::COMPRATORE->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Compratore C ON (U.email = C.emailUtente)
             WHERE U.email = ?
         ";
         break;
-    case "1":
+    case TipoUtente::VENDITORE->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Venditore V ON (U.email = V.emailUtente)
             WHERE U.email = ?
         ";
         break;
-    case "2":
+    case TipoUtente::ADMIN->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Admin A ON (U.email = A.emailUtente)
             WHERE U.email = ?
@@ -61,13 +62,13 @@ if(isset($rows[0])){
         //set session token
 
         switch($type){
-            case "0":
+            case TipoUtente::COMPRATORE->value:
                 header("Location:".REDIRECT_COMPRATORE);
                 exit();
-            case "1":
+            case TipoUtente::VENDITORE->value:
                 header("Location:".REDIRECT_VENDITORE);
                 exit();
-            case "2":
+            case TipoUtente::ADMIN->value:
                 header("Location:".REDIRECT_ADMIN);
                 exit();
         }
