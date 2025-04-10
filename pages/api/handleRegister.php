@@ -11,11 +11,12 @@ if(!isset($_POST) || !isset($_POST["name"]) || !isset($_POST["surname"]) || !iss
     exit();
 }
 
+
 $email = $_POST["email"];
 $type = $_POST["type"];
 $clearPassword = $_POST["password"];
-$hashedPassword = password_hash($clearPassword);
 
+$hashedPassword = password_hash($clearPassword,PASSWORD_DEFAULT);
 
 $BaseQuery = "INSERT INTO Utente(nome,cognome,email,password,telefono) VALUES(?,?,?,?,?)";
 $SpecificQuery = "";
@@ -44,6 +45,7 @@ switch ($type) {
 
 
 
+echo "lol";
 if($type!="2"){
     //transaction of 2 inserts
     $connection->begin_transaction();
@@ -56,6 +58,7 @@ if($type!="2"){
         mysqli_stmt_bind_param($stmt,"s", $email);
         mysqli_stmt_execute($stmt);
         $connection->commit();
+        header("Location:".REDIRECT_COMPRATORE);
     }catch (mysqli_sql_exception $exception) {
         $connection->rollback();
     }
@@ -91,9 +94,13 @@ if($type!="2"){
         mysqli_stmt_execute($stmt);
     
         $connection->commit();
+        header("Location:".REDIRECT_ADMIN);
     }catch (mysqli_sql_exception $exception) {
         $connection->rollback();
+        header("Location:".REDIRECT_FAILED);
     }
+    
 }
+
 
 ?>
