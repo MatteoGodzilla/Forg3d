@@ -5,7 +5,8 @@ session_start();
 
 // Controlla se l'ID del prodotto è stato passato
 if (!isset($_GET) || !isset($_GET['id'])) {
-    die("");// Modifica all pagina home
+    header("Location:");
+    exit();;// Modifica all pagina home
 }
 
 if (!$prodotto['visibile']) {
@@ -14,7 +15,8 @@ if (!$prodotto['visibile']) {
 
     // Se non è admin e non è il venditore stesso
     if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
-        die("");// Modifica all pagina home
+        header("Location:");
+        exit();;// Modifica all pagina home
     }
 }
 
@@ -75,13 +77,13 @@ $varianti = mysqli_stmt_get_result($stmt);
     <?php endwhile; ?>
 
     <?php if ($tipoUtente==TipoUtente::COMPRATORE): ?>
-        <form action="aggiungi_carrello.php" method="POST">
+        <form action=".php" method="POST">
             <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
             <button type="submit">Aggiungi al Carrello</button>
         </form>
         
         <h3>Scrivi una recensione</h3>
-        <form action="salva_recensione.php" method="POST">
+        <form action="review.php" method="POST">
             <textarea name="recensione" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
             <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
             <button type="submit">Invia Recensione</button>
