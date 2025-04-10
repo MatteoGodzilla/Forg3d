@@ -1,0 +1,74 @@
+* {
+    color: var(--light-text);
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: var(--light-background);
+}
+
+h1 {
+    background-color: var(--light-container);
+    font-family: var(--font-family-header);
+    font-size: 5em;
+    padding: var(--padding-small);
+}
+
+h2 {
+    font-family: var(--font-family-header);
+    font-size: 4em;
+}
+
+h3 {
+    font-family: var(--font-family-header);
+    font-size: 3em;
+}
+
+p, label{
+    font-family: var(--font-family-paragraph);
+    font-size: 1em;
+}
+
+button{
+    font-family: var(--font-family-paragraph);
+    font-size: 1.2em;
+    border-radius: 70px;
+    padding: var(--padding-large) var(--padding-small);
+    border-style: none;
+}
+
+div{
+    background-color: var(--light-container);
+}
+
+a {
+    color: var(--light-link);
+    text-decoration: none;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: var(--light-container);
+    border-style: none;
+    font-size: 1.2em;
+}
+
+.compratore {
+    background-color: var(--light-primary-compratore);
+}
+
+.venditore {
+    background-color: var(--light-primary-venditore);
+}
+
+.admin {
+    background-color: var(--light-primary-admin);
+}
+
+.warning{
+    background: var(--light-warning);
+}
+
+.ok{
+    background: var(--light-ok);
+}
