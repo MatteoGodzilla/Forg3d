@@ -1,0 +1,55 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+}
+
+header h1 {
+    display: inline-block;
+    padding: 0px
+}
+
+header a {
+    background-image: linear-gradient(to bottom right, var(--light-primary-compratore), var(--light-primary-venditore));
+    color: var(--light-text);
+    padding: var(--padding-small) var(--padding-large);
+    border-radius: 70px;
+    font-size: 1.2em;
+}
+
+input[name="search"] {
+    position: sticky;
+    top: 100px;
+    background-color: var(--light-container);
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--padding-large);
+    border-width: var(--padding-small);
+    border-color: var(--light-background);
+    border-style: solid;
+    border-radius: 100px;
+}
+
+body > div {
+    background-color: var(--light-container);
+    display: flex;
+    align-items: end;
+    aspect-ratio: 4 / 3;
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    margin-bottom: var(--padding-small);
+}
+
+body > div > div {
+    padding: var(--padding-small);
+}
+
+body > div > div > p:last-child{
+    font-size: 1.2em;
+    font-weight: bolder;
+}

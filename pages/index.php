@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
+	<head>
+		<title>Forg3d Home</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./css/home.css">
+	</head>
 	<body>
+		<header>
+			<h1>Forg3d</h1>
+			<a href="#">Login</a>
+		</header>
+		<input type="search" name="search" id="search" placeholder="Ricerca">
 		<?php
-			require_once("../php/db.php");
-			require_once("components/login.php");
-
-			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
-				generateLoginForm(true);
-			} else {
-				generateLoginForm(false);
+			require_once("./components/homeProductPlaceholder.php");
+			for ($i=1; $i <= 100; $i++) {
+				generateProductPlaceholder($i);
 			}
 		?>
 	</body>

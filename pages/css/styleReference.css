@@ -8,21 +8,24 @@ body {
     background-color: var(--light-background);
 }
 
-h1 {
+header {
     background-color: var(--light-container);
-    font-family: var(--font-family-header);
-    font-size: 5em;
     padding: var(--padding-small);
 }
 
-h2 {
+h1 {
     font-family: var(--font-family-header);
     font-size: 4em;
 }
 
-h3 {
+h2 {
     font-family: var(--font-family-header);
     font-size: 3em;
+}
+
+h3 {
+    font-family: var(--font-family-header);
+    font-size: 2em;
 }
 
 p, label{
@@ -43,6 +46,7 @@ div{
 }
 
 a {
+    font-family: var(--font-family-paragraph);
     color: var(--light-link);
     text-decoration: none;
 }
