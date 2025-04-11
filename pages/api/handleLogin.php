@@ -19,19 +19,19 @@ $type = (int)$_POST["type"];
 //Check login
 $query = "";
 switch ($type) {
-    case TipoUtente::COMPRATORE->value:
+    case UserType::BUYER->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Compratore C ON (U.email = C.emailUtente)
             WHERE U.email = ?
         ";
         break;
-    case TipoUtente::VENDITORE->value:
+    case UserType::SELLER->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Venditore V ON (U.email = V.emailUtente)
             WHERE U.email = ?
         ";
         break;
-    case TipoUtente::ADMIN->value:
+    case UserType::ADMIN->value:
         $query = "SELECT U.email, U.password FROM Utente U
             JOIN Admin A ON (U.email = A.emailUtente)
             WHERE U.email = ?
@@ -62,13 +62,13 @@ if(isset($rows[0])){
         //set session token
 
         switch($type){
-            case TipoUtente::COMPRATORE->value:
+            case UserType::BUYER->value:
                 header("Location:".REDIRECT_COMPRATORE);
                 exit();
-            case TipoUtente::VENDITORE->value:
+            case UserType::SELLER->value:
                 header("Location:".REDIRECT_VENDITORE);
                 exit();
-            case TipoUtente::ADMIN->value:
+            case UserType::ADMIN->value:
                 header("Location:".REDIRECT_ADMIN);
                 exit();
         }

@@ -21,7 +21,7 @@ function ridirezionaSeNonLoggato($url){
 }
 #restituisce true se la richiesta avviene da parte di un utente loggato come amministratore,false altrimenti
 function isUserOf($type) {
-    return getTipoUtente() === $type;
+    return getUserType() === $type;
 }
 
 #restituisce l'email di session se l'utente è loggato,o una stringa vuota se l'utente non è loggato.
@@ -40,13 +40,13 @@ function setSession($email,$type) {
 # restituisce il tipo utente dalla sessione
 function getUserType() {
     include 'constants.php';
-    return isset($_SESSION[$TIPO_UTENTE]) ? $_SESSION[$TIPO_UTENTE] : TipoUtente::NOT_LOGGED->value;
+    return isset($_SESSION[$TIPO_UTENTE]) ? $_SESSION[$TIPO_UTENTE] : UserType::NOT_LOGGED->value;
 }
 
 # setta il tipo utente nella sessione
 function setUserType($type) {
     include 'constants.php';
-    if($type>=TipoUtente::COMPRATORE->value && $type<=TipoUtente::ADMIN->value){
+    if($type>=UserType::BUYER->value && $type<=UserType::ADMIN->value){
         $_SESSION[$TIPO_UTENTE] = $type;
     }
 }
