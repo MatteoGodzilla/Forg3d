@@ -8,16 +8,6 @@ if (!isset($_GET) || !isset($_GET['id'])) {
     die("");// Modifica all pagina home
 }
 
-if (!$prodotto['visibile']) {
-    $emailUtente = getSessionEmail();
-    $tipoUtente = getUserType();
-
-    // Se non è admin e non è il venditore stesso
-    if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
-        die("");// Modifica all pagina home
-    }
-}
-
 //Prendo l'Id del prodotto cliccato
 $idProdotto = $_GET['id'];
 
@@ -44,6 +34,16 @@ if ($result->num_rows === 0) {
 //Ottengo il risultato
 $prodotto = mysqli_fetch_assoc($result);
 
+if (!$prodotto['visibile']) {
+    $emailUtente = getSessionEmail();
+    $tipoUtente = getUserType();
+
+    // Se non è admin e non è il venditore stesso
+    if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
+        die("");// Modifica all pagina home
+    }
+}
+
 // Query per ottenere le varianti del prodotto
 $query_varianti =  "SELECT v.id, m.tipologia, m.nomeColore, m.hexColore, v.prezzo
                     FROM Variante v
@@ -55,6 +55,7 @@ $stmt = mysqli_prepare($connection, $query_varianti);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);
 $varianti = mysqli_stmt_get_result($stmt);
+
 ?>
 
 <!DOCTYPE html>

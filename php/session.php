@@ -1,5 +1,5 @@
 <?php
-require_once("./constants");
+require_once("constants.php");
 
 #WARNING: queste funzioni aiutano per lo scripting della sezione,assicurarsi di richiamare nella propria pagina session_start() prima di usarle!
 #https://www.w3schools.com/php/php_sessions.asp
