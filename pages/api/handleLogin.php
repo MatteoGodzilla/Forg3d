@@ -2,7 +2,7 @@
 require_once("../../php/db.php");
 require_once("../../php/constants.php");
 
-const REDIRECT_FAILED = "../index.php";
+const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../page2.php";
 const REDIRECT_VENDITORE = "../page3.php";
 const REDIRECT_ADMIN = "../page4.php";

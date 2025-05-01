@@ -8,7 +8,7 @@
 	<body>
 		<header>
 			<h1>Forg3d</h1>
-			<a href="#">Login</a>
+			<a href="./login.php">Login</a>
 		</header>
 		<input type="search" name="search" id="search" placeholder="Ricerca">
 		<?php

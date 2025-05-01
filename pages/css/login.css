@@ -1,0 +1,110 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+
+body > h2 {
+    text-align: center;
+    padding:var(--padding-large);
+}
+
+form {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--padding-small);
+}
+
+form > * {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding:var(--padding-small);
+}
+
+form > label{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+form > button {
+    --height:2em;
+    position:relative;
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
+    overflow-x:clip;
+    background-color: var(--light-container);
+}
+
+form > button::before, form > button::after {
+    position:absolute;
+    width:100%;
+    transition: left 1s;
+}
+
+form > button::before{
+    content: "Venditore";
+    color: var(--light-primary-venditore);
+    top:calc(var(--height)/2);
+}
+
+form > button::after{
+    content: "Compratore";
+    color: var(--light-primary-compratore);
+    top:calc(var(--height)/2);
+}
+
+form > button.buyer::after{
+    left:0%;
+}
+form > button.seller::after{
+    left:100%;
+}
+
+form > button.buyer::before{
+    left:-100%;
+}
+form > button.seller::before{
+    left:0%;
+}
+
+form > button > div {
+    position:relative;
+    height:var(--height);
+    aspect-ratio:1/1;
+    background-color:var(--light-background);
+    border-radius:100px;
+    transition: left 1s, background-color 1s;
+}
+
+form > button.buyer > div {
+    left:0%;
+    background-color: var(--light-primary-venditore);
+}
+
+form > button.seller > div {
+    left:calc(100% - var(--height));
+    background-color: var(--light-primary-compratore);
+}
+
+form > input[type="submit"] {
+    margin-top: var(--padding-large);
+    margin-bottom: var(--padding-large);
+    border-radius:100px;
+    border-style: solid;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition:background-color 1s, border-color 1s;
+}
+
+form > input[type="submit"].buyer {
+    background-color: var(--light-primary-compratore);
+    border-color: var(--light-primary-compratore);
+}
+
+form > input[type="submit"].seller {
+    background-color: var(--light-primary-venditore);
+    border-color: var(--light-primary-venditore);
+}
+body > a {
+    display: block;
+    text-align: center;
+}
