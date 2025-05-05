@@ -17,13 +17,14 @@
         <label for="token">Registration token</label>
         <input type="text" name="admin_token" id="token">
         <input type="hidden" name="type" id="type" value="2"/> 
+        <input type="submit" value="Registrazione" class="admin" disabled>
     <?php } else { ?>
         <button id="typeSwitcher" type="button">
             <div></div>
         </button>
         <input type="hidden" name="type" value="0" />
+        <input type="submit" value="Registrazione" disabled>
     <?php } ?>
-    <input type="submit" value="Registrazione" disabled>
 </form>
 
 <?php } ?>

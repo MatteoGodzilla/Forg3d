@@ -16,10 +16,11 @@
             <div></div>
         </button>
         <input type="hidden" name="type" value="0" />
+        <input type="submit" value="Login" />
     <?php } else { ?>
         <input type="hidden" name="type" value="2" />
+        <input type="submit" value="Login" class="admin" />
     <?php } ?>
-    <input type="submit" value="Login">
 </form>
 
 <?php } ?>

@@ -9,20 +9,32 @@
         <header>
             <h1>Forg3d</h1>
         </header>
-        <h2>Registrazione</h2>
-		<?php
-			//require_once("../php/db.php");
-			require_once("components/register.php");
-
-            generateRegisterForm(false);
-			//if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
-			//	generateRegisterForm(true);
-			//} else {
-			//	generateRegisterForm(false);
-			//}
+        <?php 
+			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
+                $isAdmin = true;
+			} else {
+                $isAdmin = false;
+			}
         ?>
-        <a href="login.php">Login</a>
-        <script src="./js/chooserButton.js" ></script>
+
+        <?php if($isAdmin){ ?>
+            <h2>Registrazione Admin</h2>
+        <?php } else { ?>
+            <h2>Registrazione</h2>
+        <?php } ?>
+
+		<?php
+			require_once("components/register.php");
+            generateRegisterForm($isAdmin);
+        ?>
+
+        <?php if($isAdmin){ ?>
+            <a href="login.php?isAdmin=true">Login</a>
+        <?php } else { ?>
+            <a href="login.php">Login</a>
+            <script src="./js/chooserButton.js" ></script>
+        <?php } ?>
+
         <script src="./js/validateRegistration.js" ></script>
 	</body>
 </html>

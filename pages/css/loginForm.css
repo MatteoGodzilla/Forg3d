@@ -44,6 +44,11 @@ form > input[type="submit"].seller {
     border-color: var(--light-primary-venditore);
 }
 
+form > input[type="submit"].admin {
+    background-color: var(--light-primary-admin);
+    border-color: var(--light-primary-admin);
+}
+
 form > input[type="submit"][disabled] {
     background-color: var(--light-container);
     border-color: var(--light-container);

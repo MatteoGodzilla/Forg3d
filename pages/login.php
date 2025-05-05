@@ -9,19 +9,32 @@
         <header>
             <h1>Forg3d</h1>
         </header>
-        <h2>Login</h2>
+        <?php 
+			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
+                $isAdmin = true;
+			} else {
+                $isAdmin = false;
+			}
+        ?>
+        
+        <?php if($isAdmin){ ?>
+            <h2>Login admin</h2>
+        <?php } else { ?>
+            <h2>Login</h2>
+        <?php } ?>
+
 		<?php
 			require_once("components/login.php");
-
-			generateLoginForm(false);
-			//if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
-			//	generateLoginForm(true);
-			//} else {
-			//	generateLoginForm(false);
-			//}
+			generateLoginForm($isAdmin);
         ?>
-        <a href="./register.php">Registrati</a>
-        <script src="./js/chooserButton.js"></script>
+
+        
+        <?php if($isAdmin){ ?>
+            <a href="./register.php?isAdmin=true">Registrati</a>
+        <?php } else { ?>
+            <a href="./register.php">Registrati</a>
+            <script src="./js/chooserButton.js"></script>
+        <?php } ?>
         <script src="./js/validateLogin.js"></script>
 	</body>
 </html>
