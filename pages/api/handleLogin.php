@@ -1,11 +1,17 @@
 <?php
 require_once("../../php/db.php");
 require_once("../../php/constants.php");
+require_once("../../php/utils/session.php");
 
 const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../page2.php";
 const REDIRECT_VENDITORE = "../page3.php";
 const REDIRECT_ADMIN = "../page4.php";
+
+if(utenteLoggato()){
+    header("Location: /");
+    exit();
+}
 
 if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
     header("Location:".$redirectFailed);
@@ -64,12 +70,15 @@ if(isset($rows[0])){
         switch($type){
             case UserType::BUYER->value:
                 header("Location:".REDIRECT_COMPRATORE);
+                setSession($email,UserType::BUYER->value);
                 exit();
             case UserType::SELLER->value:
                 header("Location:".REDIRECT_VENDITORE);
+                setSession($email,UserType::SELLER->value);
                 exit();
             case UserType::ADMIN->value:
                 header("Location:".REDIRECT_ADMIN);
+                setSession($email,UserType::ADMIN->value);
                 exit();
         }
     }

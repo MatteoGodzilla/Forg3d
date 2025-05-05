@@ -4,6 +4,15 @@ require_once("constants.php");
 #WARNING: queste funzioni aiutano per lo scripting della sezione,assicurarsi di richiamare nella propria pagina session_start() prima di usarle!
 #https://www.w3schools.com/php/php_sessions.asp
 
+#wrapper per iniziare e terminare la sezione
+function caricaSessione(){
+    session_start();
+}
+
+function terminaSessione(){
+    session_unset();
+}
+
 #restituisce true se la richiesta avviene da parte di un utente loggato,false altrimenti
 function utenteLoggato() {
     include 'constants.php';
