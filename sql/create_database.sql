@@ -12,21 +12,20 @@ CREATE TABLE IF NOT EXISTS Utente (
 );
 
 CREATE TABLE IF NOT EXISTS Compratore (
-    emailUtente VARCHAR(254) NOT NULL,
+    emailUtente VARCHAR(254) NOT NULL PRIMARY KEY,
     FOREIGN KEY (emailUtente) REFERENCES Utente(email) ON DELETE CASCADE
 );
 
 /* TODO: aggiungere verifica del venditore */
 CREATE TABLE IF NOT EXISTS Venditore (
-    emailUtente VARCHAR(254) NOT NULL,
-    stato TINYINT DEFAULT 0 COMMENT "0: In attesa, 1: Verificato, 2: Bannato",
+    emailUtente VARCHAR(254) NOT NULL PRIMARY KEY,
     motivoBan VARCHAR(1024),
     FOREIGN KEY (emailUtente) REFERENCES Utente(email) ON DELETE CASCADE
 );
 
 
 CREATE TABLE IF NOT EXISTS Admin (
-    emailUtente VARCHAR(254) NOT NULL,
+    emailUtente VARCHAR(254) NOT NULL PRIMARY KEY,
     FOREIGN KEY (emailUtente) REFERENCES Utente(email) ON DELETE CASCADE
 );
 
@@ -72,6 +71,8 @@ CREATE TABLE IF NOT EXISTS Materiale (
     tipologia VARCHAR(32) NOT NULL,
     nomeColore VARCHAR(64) NOT NULL,
     hexColore CHAR(6) NOT NULL COMMENT "codice esadecimale senza # (es. ff3433)"
+    emailVenditore VARCHAR(254) NOT NULL,
+    FOREIGN KEY (emailVenditore) REFERENCES Venditore(emailUtente)
 );
 
 CREATE TABLE IF NOT EXISTS Variante (

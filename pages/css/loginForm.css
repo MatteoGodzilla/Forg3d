@@ -1,14 +1,5 @@
-@import url(./variables.css);
-@import url(./styleReference.css);
-@import url(./chooserButton.css); 
-@import url(./loginForm.css);
+@import url(./chooserButton.css);
 
-body > h2 {
-    text-align: center;
-    padding:var(--padding-large);
-}
-
-/*
 form {
     display: block;
     box-sizing: border-box;
@@ -28,6 +19,11 @@ form > label{
     padding-right: 0px;
 }
 
+form > input {
+    background-color: var(--light-container);
+    border-style: none;
+    font-size: 1.2em;
+}
 form > input[type="submit"] {
     margin-top: var(--padding-large);
     margin-bottom: var(--padding-large);
@@ -36,7 +32,6 @@ form > input[type="submit"] {
     font-size: 1.5em;
     font-weight: bold;
     transition:background-color 1s, border-color 1s;
-    cursor: pointer;
 }
 
 form > input[type="submit"].buyer {
@@ -49,9 +44,7 @@ form > input[type="submit"].seller {
     border-color: var(--light-primary-venditore);
 }
 
-*/
-
-body > a {
-    display: block;
-    text-align: center;
+form > input[type="submit"][disabled] {
+    background-color: var(--light-container);
+    border-color: var(--light-container);
 }

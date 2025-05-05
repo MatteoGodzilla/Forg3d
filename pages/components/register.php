@@ -1,22 +1,29 @@
-<?php function generateRegisterForm(int $userType): void{ ?>
+<?php function generateRegisterForm(bool $isAdmin): void{ ?>
 
 <form action="./api/handleRegister.php" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name" />
-    <label for="surname">Surname</label>
-    <input type="text" name="surname" id="surname" />
     <label for="email">Email</label>
-    <input type="text" name="email" id="email" />
+    <input type="email" name="email" id="email" />
+    <label for="name">Nome</label>
+    <input type="text" name="name" id="name" />
+    <label for="surname">Cognome</label>
+    <input type="text" name="surname" id="surname" />
     <label for="cellphone">Telefono</label>
-    <input type="text" name="cellphone" id="cellphone" />
+    <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" id="cellphone" />
     <label for="password">Password</label>
     <input type="password" name="password" id="password" />
-    <input type= "hidden" name="type" id="type" value="<?php echo $userType?>"/> 
-    <?php if($userType==2){?>
+    <label for="passwordConfirm">Conferma Password</label>
+    <input type="password" name="" id="passwordConfirm" />
+    <?php if($isAdmin){?>
         <label for="token">Registration token</label>
-        <input type = "text" name="admin_token" id="token">
+        <input type="text" name="admin_token" id="token">
+        <input type="hidden" name="type" id="type" value="2"/> 
+    <?php } else { ?>
+        <button id="typeSwitcher" type="button">
+            <div></div>
+        </button>
+        <input type="hidden" name="type" value="0" />
     <?php } ?>
-    <input type="submit" value="Login">
+    <input type="submit" value="Registrazione" disabled>
 </form>
 
 <?php } ?>

@@ -1,0 +1,62 @@
+@import url(./variables.css);
+
+form > button {
+    --height:2em;
+    position:relative;
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
+    overflow-x:clip;
+    background-color: var(--light-container);
+    cursor: pointer;
+}
+
+form > button::before, form > button::after {
+    position:absolute;
+    width:100%;
+    transition: left 1s;
+}
+
+form > button::before{
+    content: "Venditore";
+    color: var(--light-primary-venditore);
+    top:calc(var(--height)/2);
+}
+
+form > button::after{
+    content: "Compratore";
+    color: var(--light-primary-compratore);
+    top:calc(var(--height)/2);
+}
+
+form > button.buyer::after{
+    left:0%;
+}
+form > button.seller::after{
+    left:100%;
+}
+
+form > button.buyer::before{
+    left:-100%;
+}
+form > button.seller::before{
+    left:0%;
+}
+
+form > button > div {
+    position:relative;
+    height:var(--height);
+    aspect-ratio:1/1;
+    background-color:var(--light-background);
+    border-radius:100px;
+    transition: left 1s, background-color 1s;
+}
+
+form > button.buyer > div {
+    left:0%;
+    background-color: var(--light-primary-venditore);
+}
+
+form > button.seller > div {
+    left:calc(100% - var(--height));
+    background-color: var(--light-primary-compratore);
+}

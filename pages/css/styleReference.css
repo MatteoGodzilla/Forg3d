@@ -51,12 +51,6 @@ a {
     text-decoration: none;
 }
 
-input[type="text"], input[type="password"] {
-    background-color: var(--light-container);
-    border-style: none;
-    font-size: 1.2em;
-}
-
 .compratore {
     background-color: var(--light-primary-compratore);
 }
