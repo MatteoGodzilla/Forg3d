@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once("../../php/db.php");
-require_once("../../php/constants.php");
-require_once("../../php/utils/session.php");
+require_once("../../php/session.php");
 
 const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../page2.php";
@@ -69,16 +69,16 @@ if(isset($rows[0])){
 
         switch($type){
             case UserType::BUYER->value:
-                header("Location:".REDIRECT_COMPRATORE);
                 setSession($email,UserType::BUYER->value);
+                header("Location:".REDIRECT_COMPRATORE);
                 exit();
             case UserType::SELLER->value:
-                header("Location:".REDIRECT_VENDITORE);
                 setSession($email,UserType::SELLER->value);
+                header("Location:".REDIRECT_VENDITORE);
                 exit();
             case UserType::ADMIN->value:
-                header("Location:".REDIRECT_ADMIN);
                 setSession($email,UserType::ADMIN->value);
+                header("Location:".REDIRECT_ADMIN);
                 exit();
         }
     }
