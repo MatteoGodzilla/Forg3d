@@ -4,9 +4,9 @@ require_once("../../php/db.php");
 require_once("../../php/session.php");
 
 const REDIRECT_FAILED = "../login.php";
-const REDIRECT_COMPRATORE = "../page2.php";
-const REDIRECT_VENDITORE = "../page3.php";
-const REDIRECT_ADMIN = "../page4.php";
+const REDIRECT_COMPRATORE = "../index.php";
+const REDIRECT_VENDITORE = "../sellerHome.php";
+const REDIRECT_ADMIN = "../adminHome.php";
 
 if(utenteLoggato()){
     header("Location: /");

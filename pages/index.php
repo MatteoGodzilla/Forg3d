@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once("../php/constants.php");
+require_once("../php/session.php");
+?>
 <!DOCTYPE html>
 <html lang="it">
 	<head>
@@ -8,7 +13,17 @@
 	<body>
 		<header>
 			<h1>Forg3d</h1>
-			<a href="./login.php">Login</a>
+			<?php if (utenteLoggato()): ?>
+				<span>
+					<?php
+						$email = getSessionEmail();
+						echo htmlspecialchars($email);
+					?>
+					<a href="./logout.php">Logout</a>
+				</span>
+			<?php else: ?>
+				<a href="./login.php">Login</a>
+			<?php endif; ?>
 		</header>
 		<input type="search" name="search" id="search" placeholder="Ricerca">
 		<?php
