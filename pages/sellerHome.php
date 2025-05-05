@@ -42,20 +42,30 @@
 <html lang="it">
 <head>
     <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./css/sellerHome.css" />
 </head>
 <body>
-    <h1><?php echo ("Ciao ".$nome); ?></h1>
-    <h2>I tuoi Prodotti</h2>
-    <?php foreach ($products as $prodotto): ?>
-        <p><strong>Nome:</strong> <?php echo ($prodotto['nome']); ?></p>
-        <p><strong>Pubblico:</strong> <?php echo (($prodotto['visibile']) ? "Si":"No") ?> </p>
-    <?php endforeach; ?>
+    <header>
+        <h1>Forg3d</h1>
+    </header>
+    <h2><?php echo ("Ciao ".$nome); ?></h2>
+    <h3>Listino prodotti</h3>
+    <a href="#">Aggiungi prodotto</a>
+    <?php 
+        require_once("components/sellerHomeProduct.php");
+        foreach($products as $prodotto){
+            sellerHomeProduct($prodotto);
+        }
+    ?>
 
-    <h2>I tuoi Materiali</h2>
-    <?php foreach ($materials as $materiale): ?>
-        <p><strong>Nome:</strong> <?php echo ($materiale['nomeColore']); ?></p>
-        <p><strong>Tipo:</strong> <?php echo ($materiale['tipologia']); ?></p>
-        <p><strong>Hex code:</strong> <?php echo ($materiale['hexColore']); ?></p>
-        <?php endforeach; ?>
+    <h3>Listino materiali</h3>
+    <a href="#">Aggiungi materiale</a>
+    <?php 
+        require_once("components/sellerHomeMaterial.php");
+        foreach($materials as $material){
+            sellerHomeMaterial($material);
+        }
+    ?>
 </body>
 </html>
