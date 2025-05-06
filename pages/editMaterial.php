@@ -36,11 +36,10 @@ if(isset($_GET["id"])){
 <body>
     <h1>Forg3d</h1>
     <h2>Modifica Materiale</h2>
-    <form action="/api/handleMaterial.php"<?php echo isset($_GET["id"]) ?  '?id='.$_GET["id"] : ''?> method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="<?= $idProduct ?>"/>
+    <form action="/api/handleMaterial.php<?php echo isset($_GET["id"]) ?  '?id='.$_GET["id"] : ''?>" method="POST" enctype="multipart/form-data">
 
     <label for="nome">Nome Materiale*</label><br>
-    <input type="text" id="nome" name="nome" value="<?= isset($materiale) ? htmlspecialchars($materiale['nome']) :'' ?>" required/>
+    <input type="text" id="nome" name="nome" value="<?= isset($materiale) ? htmlspecialchars($materiale['nomeColore']) :'' ?>" required/>
     <hr>
 
     <label for="tipo">Tipologia Materiale*</label><br>
@@ -48,7 +47,7 @@ if(isset($_GET["id"])){
     <hr>
 
     <label for="tipo">Colore*</label><br>
-    <input type="color" id="colore" name="colore" value="<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
+    <input type="color" id="colore" name="colore" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
     <hr>
 
     <button type="submit"><?= isset($_GET["id"]) ? "Salva modifiche":"Crea nuovo materiale"?></button>

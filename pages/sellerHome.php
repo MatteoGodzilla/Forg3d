@@ -60,7 +60,7 @@
     ?>
 
     <h3>Listino materiali</h3>
-    <a href="#">Aggiungi materiale</a>
+    <a href="editMaterial.php">Aggiungi materiale</a>
     <?php 
         require_once("components/sellerHomeMaterial.php");
         foreach($materials as $material){
