@@ -45,7 +45,7 @@
 <body>
     <h1>Bentornato</h1>
     <p><?php echo "Richieste di approvazione in sospeso:".$pendingRequests ?></p>
-    <a>Placeholder</a><br>
+    <a href="checkAdmissionRequests.php">Vai alle richieste</a><br>
     <p><?php echo "Nuove segnalazioni di venditori:".$sellerReports ?></p>
     <a>Placeholder</a><br>
     <p><?php echo "Nuove segnalazioni di prodotti:".$productReports ?></p>
