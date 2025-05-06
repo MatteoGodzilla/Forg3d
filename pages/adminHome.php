@@ -9,23 +9,30 @@
 
 
     #Query Approvazioni
-    $query_segnalazioni_venditore = "SELECT COUNT(id) AS total FROM Venditore WHERE stato=0";
-    $result = $conn->query($query_segnalazioni_venditore);
-    $row = $result->fetch_assoc();
-    $pendingRequests = $row["total"];
+    $query_richieste = "SELECT COUNT(emailUtente) AS total FROM Venditore WHERE stato=0";
+    $stmt = mysqli_prepare($connection, $query_richieste);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $pendingRequests = $row[0]["total"]; 
 
     #Query Segnalazione venditori
     $query_segnalazioni_venditore = "SELECT COUNT(id) AS total FROM Segnalazione INNER JOIN SegnalazioneVenditore 
-    ON Segnalazione.Id= SegnalazioneVenditore.idSegnalazione Where ispezionata = 0";
-    $result = $conn->query($query_segnalazioni_venditore);
-    $row = $result->fetch_assoc();
-    $sellerReports =  $row["total"];
+    ON Segnalazione.id= SegnalazioneVenditore.idSegnalazione Where ispezionata = 0";
+    $stmt = mysqli_prepare($connection, $query_segnalazioni_venditore);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $sellerReports = $row[0]["total"]; 
 
     #Segnalazione prodotti
     $query_segnalazioni_venditore = "SELECT COUNT(id) AS total FROM Segnalazione INNER JOIN SegnalazioneProdotto
-    ON Segnalazione.Id= SegnalazioneProdotto.idSegnalazione Where ispezionata = 0";    $result = $conn->query($query_segnalazioni_prodotto);
-    $row = $result->fetch_assoc();
-    $productReports =  $row["total"];
+    ON Segnalazione.id= SegnalazioneProdotto.idSegnalazione Where ispezionata = 0";   
+    $stmt = mysqli_prepare($connection, $query_segnalazioni_venditore);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $productReports = $row[0]["total"]; 
 
 ?>
 
@@ -41,7 +48,7 @@
     <a>Placeholder</a><br>
     <p><?php echo "Nuove segnalazioni di venditori:".$sellerReports ?></p>
     <a>Placeholder</a><br>
-    <p><?php echo "Nuvoe segnalazioni di prodotti:".$productReports ?></p>
+    <p><?php echo "Nuove segnalazioni di prodotti:".$productReports ?></p>
     <a>Placeholder</a><br>
 </body>
 </html>
