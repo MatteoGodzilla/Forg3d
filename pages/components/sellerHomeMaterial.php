@@ -12,7 +12,7 @@
         <p>#<?php echo ($materiale['hexColore']); ?></p>
         <div>
             <a href="editMaterial.php?id=<?= $materiale['id']?>"> Modifica</a>
-            <a href="/api/DeleteMaterial.php?id=<?= $materiale['id']?>">Elimina</a>
+            <a href="/api/deleteMaterial.php?id=<?= $materiale['id']?>">Elimina</a>
         </div>
     </div>
 </article>

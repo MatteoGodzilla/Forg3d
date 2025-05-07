@@ -8,49 +8,6 @@ body > h2 {
     padding:var(--padding-large);
 }
 
-/*
-form {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding: var(--padding-small);
-}
-
-form > * {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    padding:var(--padding-small);
-}
-
-form > label{
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-form > input[type="submit"] {
-    margin-top: var(--padding-large);
-    margin-bottom: var(--padding-large);
-    border-radius:100px;
-    border-style: solid;
-    font-size: 1.5em;
-    font-weight: bold;
-    transition:background-color 1s, border-color 1s;
-    cursor: pointer;
-}
-
-form > input[type="submit"].buyer {
-    background-color: var(--light-primary-compratore);
-    border-color: var(--light-primary-compratore);
-}
-
-form > input[type="submit"].seller {
-    background-color: var(--light-primary-venditore);
-    border-color: var(--light-primary-venditore);
-}
-
-*/
-
 body > a {
     display: block;
     text-align: center;

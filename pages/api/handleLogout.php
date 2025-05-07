@@ -1,5 +1,5 @@
 <?php
-    require_once("../../php/utils/session.php");
+    require_once("../../php/session.php");
     caricaSessione();
     if(!utenteLoggato()){
         header("Location: /");

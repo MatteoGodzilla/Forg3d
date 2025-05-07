@@ -1,0 +1,12 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+@import url(./form.css);
+
+form > input[type="color"] {
+    align-self: right;
+}
+
+form > input[type="submit"] {
+    background-color: var(--light-primary-venditore);
+    border-color: var(--light-primary-venditore);
+}

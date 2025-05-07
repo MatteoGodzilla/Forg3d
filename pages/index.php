@@ -19,7 +19,7 @@ require_once("../php/session.php");
 						$email = getSessionEmail();
 						echo htmlspecialchars($email);
 					?>
-					<a href="./logout.php">Logout</a>
+					<a href="./api/handleLogout.php">Logout</a>
 				</span>
 			<?php else: ?>
 				<a href="./login.php">Login</a>
