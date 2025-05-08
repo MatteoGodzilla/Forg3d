@@ -1,0 +1,57 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+
+p {
+    margin-bottom: var(--padding-small);
+    margin-left: var(--padding-large);
+    margin-top: var(--padding-small);
+}
+
+h2,h3{
+    margin-top:var(--padding-large) ;
+    margin-bottom:var(--padding-large) ;
+    margin-left: var(--padding-large);
+}
+
+#banSeller{
+    display:block;
+    background-color: var(--light-danger);
+    margin:var(--padding-medium);
+    padding:var(--padding-medium);
+    color: var(--light-text);
+    border-radius: 70px;
+    text-align: center;
+    font-size:1.5em;
+}
+
+#deleteAll{
+    display:block;
+    background-color: var(--light-ok);
+    margin:var(--padding-medium);
+    padding:var(--padding-medium);
+    color: var(--light-text);sasa
+    border-radius: 70px;
+    text-align: center;
+    font-size:1.5em;
+}
+
+
+textarea{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: var(--padding-large);
+    outline: none; /* Optional: removes blue border on focus */
+}
+
+div {
+    font-size:1.5em;
+    margin: var(--padding-large);
+    color: var(--light-container);
+}
+
+b{
+    padding-left: var(--padding-large);
+}

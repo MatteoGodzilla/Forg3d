@@ -4,6 +4,7 @@
 
 :root{
     --padding-small: 10px;
+    --padding-medium: 15px;
     --padding-large: 20px;
     /*light mode*/
     --light-background: #F2F2F2;

@@ -5,7 +5,7 @@
         <small><?php echo ($report['emailVenditore']); ?></small><br>
         <small><?php echo ($report['telefono']); ?></small>
         <div>
-            <a href="<?= "../api/acceptRequest.php?email=".$request["emailUtente"]."&accept=true" ?>">Vai A segnalazioni <?="(".$report["totalReports"].")" ?></a>
+            <a href="<?= "/checkSellerReportDetail.php?email=".$report["emailVenditore"]?>">Vai A segnalazioni <?="(".$report["totalReports"].")" ?></a>
         </div>
     </div>
 </article>
