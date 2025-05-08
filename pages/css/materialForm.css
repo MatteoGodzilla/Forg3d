@@ -12,7 +12,7 @@ header {
 
 header h1 {
     display: inline-block;
-    padding: 0px
+    padding: 0px;
 }
 
 header a {
@@ -23,8 +23,29 @@ header a {
     font-size: 1.2em;
 }
 
-form > input[type="color"] {
-    align-self: right;
+body > h2 {
+    text-align: center;
+    margin: var(--padding-large);
+}
+
+form input[type="color"] {
+    width:75px;
+    height:75px;
+    border-color:black;
+    border-style:solid;
+    border-radius:50px;
+}
+
+form > div {
+    display:flex;
+    align-items:center;
+
+}
+
+form > div > input[type="text"] {
+    margin-left: var(--padding-small);
+    font-size: 1.2em;
+    flex-grow: 1;
 }
 
 form > input[type="submit"] {
