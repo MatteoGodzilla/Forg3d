@@ -2,9 +2,9 @@
 
 <form action="./api/handleLogin.php" method="POST">
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" />
+    <input type="email" name="email" id="email" required />
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
+    <input type="password" name="password" id="password" required/>
     <?php if(!$isAdmin){ ?>
 <!--        
         <select name="type" id="type">

@@ -2,17 +2,17 @@
 
 <form action="./api/handleRegister.php" method="POST">
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" />
+    <input type="email" name="email" id="email" required />
     <label for="name">Nome</label>
-    <input type="text" name="name" id="name" />
+    <input type="text" name="name" id="name" required />
     <label for="surname">Cognome</label>
-    <input type="text" name="surname" id="surname" />
+    <input type="text" name="surname" id="surname" required />
     <label for="cellphone">Telefono</label>
-    <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" id="cellphone" />
+    <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" id="cellphone" required />
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
+    <input type="password" name="password" id="password" required />
     <label for="passwordConfirm">Conferma Password</label>
-    <input type="password" name="" id="passwordConfirm" />
+    <input type="password" name="" id="passwordConfirm" required />
     <?php if($isAdmin){?>
         <label for="token">Registration token</label>
         <input type="text" name="admin_token" id="token">
