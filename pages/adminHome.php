@@ -41,14 +41,19 @@
 <head>
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/adminHome.css" />
+
 </head>
 <body>
-    <h1>Bentornato</h1>
-    <p><?php echo "Richieste di approvazione in sospeso:".$pendingRequests ?></p>
-    <a href="checkAdmissionRequests.php">Vai alle richieste</a><br>
-    <p><?php echo "Nuove segnalazioni di venditori:".$sellerReports ?></p>
-    <a href="checkSellerReports.php">Segnalazioni Venditori</a><br>
-    <p><?php echo "Nuove segnalazioni di prodotti:".$productReports ?></p>
-    <a>Placeholder</a><br>
+    <header>
+    <h1>Forg3d</h1>
+    </header>
+    <h2>Bentornato</h2>
+        <p><?php echo "Richieste di approvazione in sospeso:".$pendingRequests ?></p>
+        <a href="checkAdmissionRequests.php">Vai alle richieste</a><br>
+        <p><?php echo "Nuove segnalazioni di venditori:".$sellerReports ?></p>
+        <a href="checkSellerReports.php">Segnalazioni Venditori</a><br>
+        <p><?php echo "Nuove segnalazioni di prodotti:".$productReports ?></p>
+        <a href="checkProductsReports.php">Segnalazioni Prodotti</a><br>
 </body>
 </html>

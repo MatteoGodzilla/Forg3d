@@ -20,4 +20,7 @@
     /* Fonts */
     --font-family-header: "Merriweather Sans", sans-serif;
     --font-family-paragraph: "Roboto Flex", sans-serif;
+    /*Font sizes*/
+    --font-small: 1.5em;
+    --font-big: 3em;
 }

@@ -10,11 +10,34 @@ if(!utenteLoggato() || getUserType()!=UserType::ADMIN->value){
 }
 
 #query (seleziona reports non ispezionati non verificati, stato = 0)
-$query = "SELECT id,emailSegnalatore,motivo,emailVenditore FROM Segnalazione INNER JOIN SegnalazioneVenditore ON
-Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE ispezionata=0";
+$query = "SELECT idProdotto,nome,emailVenditore,COUNT(idProdotto) as totalReports FROM Segnalazione INNER JOIN SegnalazioneProdotto ON
+Segnalazione.id = SegnalazioneProdotto.idSegnalazione INNER JOIN Prodotto ON
+Prodotto.id = SegnalazioneProdotto.idProdotto  WHERE ispezionata=0 GROUP BY idProdotto";
+
 $stmt = mysqli_prepare($connection, $query);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-$sellers = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./css/sellerHome.css" />
+</head>
+<body>
+    <header>
+        <h1>Forg3d</h1>
+    </header>
+    <h2>Segnalazione prodotti</h2>
+    <?php 
+        require_once("components/productReport.php");
+        foreach($products as $product){
+            productReport($product);
+        }
+    ?>
+</body>
+</html>
