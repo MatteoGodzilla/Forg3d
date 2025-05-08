@@ -5,8 +5,8 @@
     <div>
         <p><?php echo ($product['nome']); ?> <?php echo (($product['visibile']) ? "":"(Nascosto)") ?></p>
         <div>
-            <a href="#">Modifica</a>
-            <a href="#">Elimina</a>
+            <a href="editProduct.php?id=<?php echo ($product['id']); ?>">Modifica</a>
+            <a href="./api/deleteProduct.php?id=<?php echo ($product['id']); ?>">Elimina</a>
         </div>
     </div>
 </article>

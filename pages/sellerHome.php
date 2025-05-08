@@ -54,7 +54,7 @@
     </header>
     <h2><?php echo ("Ciao ".$nome); ?></h2>
     <h3>Listino prodotti</h3>
-    <a href="#">Aggiungi prodotto</a>
+    <a href="editProduct.php">Aggiungi prodotto</a>
     <?php 
         require_once("components/sellerHomeProduct.php");
         foreach($products as $prodotto){

@@ -9,14 +9,11 @@ if(!utenteLoggato() || getUserType()!=UserType::SELLER->value){
     exit();
 }
 
-
-
 #campi mancanti
 if(!isset($_POST["nome"]) || !isset($_POST["tipo"]) || !isset($_POST["colore"])){
     header("Location: /sellerHome.php");
     exit();
 }
-
 
 #fields
 $email = getSessionEmail();

@@ -32,7 +32,7 @@ if(isset($_GET["id"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/materialForm.css" />
-    <title>Modifica prodotto</title>
+    <title>Modifica materiale</title>
 </head>
 <body>
     <header>
@@ -49,15 +49,6 @@ if(isset($_GET["id"])){
         <input type="text" id="tipo" name="tipo" value="<?= isset($materiale) ? htmlspecialchars($materiale['tipologia']) :'' ?>" required/>
         <label for="tipo">Colore*</label>
         <div>
-            <!--
-            <svg width="100px "height="100px"> 
-                <title>Indicatore Colore</title>
-                <ellipse id ="color-indicator" rx="46px" ry="46px" cx="50px" cy="50px" 
-                    stroke="black" stroke-width="4"
-                    fill="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" 
-                /> 
-            </svg>
-            -->
             <input type="color" id="colore" name="colore" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
             <input type="text" maxlength="7" id="colore-manuale" name="colore-manuale" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
         </div>
