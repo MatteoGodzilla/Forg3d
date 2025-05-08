@@ -1,10 +1,10 @@
 <?php
 require_once("../../php/db.php");
 
-const REDIRECT_FAILED = "../index.php";
-const REDIRECT_COMPRATORE = "../page2.php";
-const REDIRECT_VENDITORE = "../page3.php";
-const REDIRECT_ADMIN = "../page4.php";
+const REDIRECT_FAILED = "../login.php";
+const REDIRECT_COMPRATORE = "../index.php";
+const REDIRECT_VENDITORE = "../sellerHome.php";
+const REDIRECT_ADMIN = "../adminHome.php";
 
 if(!isset($_POST) || !isset($_POST["name"]) || !isset($_POST["surname"]) || !isset($_POST["cellphone"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
     header("Location:".$redirectFailed);

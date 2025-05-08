@@ -48,6 +48,9 @@
 <body>
     <header>
         <h1>Forg3d</h1>
+        <?php if (utenteLoggato()): ?>
+				<a href="./api/handleLogout.php">Logout</a>
+			<?php endif; ?>
     </header>
     <h2><?php echo ("Ciao ".$nome); ?></h2>
     <h3>Listino prodotti</h3>

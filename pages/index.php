@@ -1,7 +1,22 @@
 <?php
 session_start();
+require_once("../php/db.php");
 require_once("../php/constants.php");
 require_once("../php/session.php");
+
+$email = getSessionEmail();
+
+#Query Nome utente 
+$query_nome = "SELECT * FROM Utente Where email = ?";
+$stmt = mysqli_prepare($connection, $query_nome);
+mysqli_stmt_bind_param($stmt,"s",$email );
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$nome = "";
+foreach ($rows as $row) {
+    $nome = $row["nome"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -14,13 +29,8 @@ require_once("../php/session.php");
 		<header>
 			<h1>Forg3d</h1>
 			<?php if (utenteLoggato()): ?>
-				<span>
-					<?php
-						$email = getSessionEmail();
-						echo htmlspecialchars($email);
-					?>
-					<a href="./api/handleLogout.php">Logout</a>
-				</span>
+				<p href="./api/handleLogout.php">carrello</p>
+				<a href="./api/handleLogout.php">Logout</a>
 			<?php else: ?>
 				<a href="./login.php">Login</a>
 			<?php endif; ?>

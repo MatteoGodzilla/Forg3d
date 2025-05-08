@@ -35,7 +35,12 @@ if(isset($_GET["id"])){
     <title>Modifica prodotto</title>
 </head>
 <body>
-    <h1>Forg3d</h1>
+    <header>
+        <h1>Forg3d</h1>
+        <?php if (utenteLoggato()): ?>
+				<a href="./api/handleLogout.php">Logout</a>
+			<?php endif; ?>
+    </header>
     <h2>Modifica Materiale</h2>
     <form action="/api/handleMaterial.php<?php echo isset($_GET["id"]) ?  '?id='.$_GET["id"] : ''?>" method="POST" enctype="multipart/form-data">
 
