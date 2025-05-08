@@ -45,9 +45,7 @@
 
 </head>
 <body>
-    <header>
-    <h1>Forg3d</h1>
-    </header>
+
     <h2>Bentornato</h2>
         <p><?php echo "Richieste di approvazione in sospeso:".$pendingRequests ?></p>
         <a href="checkAdmissionRequests.php">Vai alle richieste</a><br>

@@ -26,15 +26,10 @@ foreach ($rows as $row) {
 		<link rel="stylesheet" href="./css/home.css">
 	</head>
 	<body>
-		<header>
-			<h1>Forg3d</h1>
-			<?php if (utenteLoggato()): ?>
-				<p href="./api/handleLogout.php">carrello</p>
-				<a href="./api/handleLogout.php">Logout</a>
-			<?php else: ?>
-				<a href="./login.php">Login</a>
-			<?php endif; ?>
-		</header>
+		<?php 
+			include_once("./components/header.php");
+			create_header();
+		?>
 		<input type="search" name="search" id="search" placeholder="Ricerca">
 		<?php
 			require_once("./components/homeProductPlaceholder.php");
