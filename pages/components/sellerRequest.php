@@ -5,8 +5,8 @@
         <small><?php echo ($request['emailUtente']); ?></small><br>
         <small><?php echo ($request['telefono']); ?></small>
         <div>
-            <a href="<?= "../api/acceptRequest.php?email=".$request["emailUtente"] ?>">Accetta</a>
-            <a href="#">Rifiuta</a>
+            <a href="<?= "../api/acceptRequest.php?email=".$request["emailUtente"]."&accept=true" ?>">Accetta</a>
+            <a href="<?= "../api/acceptRequest.php?email=".$request["emailUtente"]."&accept=false" ?>">Rifiuta</a>
         </div>
     </div>
 </article>

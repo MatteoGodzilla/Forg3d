@@ -10,13 +10,15 @@ if(!utenteLoggato() || getUserType()!=UserType::ADMIN->value){
 }
 
 #id non dato
-if(!isset($_GET["email"])){
+if(!isset($_GET["email"]) || !isset($_GET["accept"])){
     header("Location: /adminHome.php");
     exit();
 }
 
+
+
 $email = getSessionEmail();
-$query = "UPDATE Venditore SET stato=1 WHERE emailUtente=? AND stato=0";
+$query = "UPDATE Venditore SET stato=".($_GET["accept"]=="true"? "1":"2")." WHERE emailUtente=? AND stato=0";
 #execute
 $stmt = mysqli_prepare($connection, $query);
 mysqli_stmt_bind_param($stmt,"s", $_GET["email"]);
