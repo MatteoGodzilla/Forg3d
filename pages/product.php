@@ -33,11 +33,10 @@ if ($result->num_rows === 0) {
 
 //Ottengo il risultato
 $prodotto = mysqli_fetch_assoc($result);
+$tipoUtente = getUserType();
+$emailUtente = getSessionEmail();
 
 if (!$prodotto['visibile']) {
-    $emailUtente = getSessionEmail();
-    $tipoUtente = getUserType();
-
     // Se non è admin e non è il venditore stesso
     if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
         die("");// Modifica all pagina home

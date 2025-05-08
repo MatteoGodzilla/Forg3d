@@ -1,22 +1,12 @@
 <?php
 session_start();
 require_once("../php/db.php");
+require_once("./api/homeProduct.php");
+include_once("./components/productList.php");
 require_once("../php/constants.php");
 require_once("../php/session.php");
 
 $email = getSessionEmail();
-
-#Query Nome utente 
-$query_nome = "SELECT * FROM Utente Where email = ?";
-$stmt = mysqli_prepare($connection, $query_nome);
-mysqli_stmt_bind_param($stmt,"s",$email );
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-$nome = "";
-foreach ($rows as $row) {
-    $nome = $row["nome"];
-}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -31,11 +21,10 @@ foreach ($rows as $row) {
 			create_header();
 		?>
 		<input type="search" name="search" id="search" placeholder="Ricerca">
-		<?php
-			require_once("./components/homeProductPlaceholder.php");
-			for ($i=1; $i <= 100; $i++) {
-				generateProductPlaceholder($i);
-			}
-		?>
+        <?php
+        foreach ($prodotti as $product) {
+            generateProductList($product);
+        }
+        ?>
 	</body>
 </html>
