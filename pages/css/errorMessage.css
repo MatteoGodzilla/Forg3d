@@ -1,0 +1,9 @@
+@import url(./variables.css);
+
+div#error-popup{
+    background-color: var(--light-danger);
+    font-size: var(--font-small);
+    margin: var(--padding-large);
+    padding: var(--padding-large);
+    display: block;
+}

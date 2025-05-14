@@ -4,6 +4,7 @@
         <title>Forg3d Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./css/login.css" />
+        <link rel="stylesheet" href="./css/errorMessage.css" />
     </head>
     <body>
         <header>
@@ -36,5 +37,13 @@
             <script src="./js/chooserButton.js"></script>
         <?php } ?>
         <script src="./js/validateLogin.js"></script>
+
+        <?php if(isset($_GET["error"])){ 
+                include_once("./components/error_message.php");
+                create_error_message($_GET["error"]);
+            } 
+         ?>
 	</body>
+
+
 </html>

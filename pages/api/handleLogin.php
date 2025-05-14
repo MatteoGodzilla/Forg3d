@@ -2,6 +2,7 @@
 session_start();
 require_once("../../php/db.php");
 require_once("../../php/session.php");
+require_once("../../php/error.php");
 
 const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../index.php";
@@ -14,7 +15,7 @@ if(utenteLoggato()){
 }
 
 if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
-    header("Location:".$redirectFailed);
+    header("Location:".error($redirectFailed,"Errore durante il login,i dati forniti erano incompleti"));
     exit();
 }
 
@@ -85,7 +86,7 @@ if(isset($rows[0])){
 }
 
 //Redirect back
-header("Location:".REDIRECT_FAILED);
+header("Location:".error(REDIRECT_FAILED,"email o password errati!"));
 exit();
 
 ?>
