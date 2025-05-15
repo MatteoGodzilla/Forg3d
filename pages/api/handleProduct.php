@@ -11,50 +11,96 @@ if(!utenteLoggato() || getUserType() != UserType::SELLER->value ){
 
 $emailVenditore = getSessionEmail(); 
 
-if(!isset($_POST["productName"]) || !isset($_FILES["3dPreview"])){
+if(!isset($_POST["productName"])){
     header("Location: /sellerHome.php");
     exit();
 }
 
 $name = $_POST["productName"];
+$visible = 1;
+if(isset($_POST["visible"])){
+    $visible = 2;
+}
 
 if(isset($_POST["id"]) && !empty($_POST["id"])){
-    //update existing product
+    //try to update existing product
+    $id = $_POST["id"];
+    $query = "UPDATE Prodotto SET nome=?, visibile=? WHERE id=?";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "sii", $name, $visible, $id);
+    mysqli_stmt_execute($stmt);
+    
 } else {
-    //add new product
-    $query = "INSERT INTO Prodotto(emailVenditore, nome, fileModello, visibile) VALUES (?,?,?,?)";
-    $newPath = store_file($_FILES["3dPreview"]["name"],$_FILES["3dPreview"]["tmp_name"], Constants::$ALLOWED_3DFILE_EXTENSIONS);
-    //Upload file for 3d preview
+    //add new product 
+    
+    $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile) VALUES (?,?,?)";
     $stmt = mysqli_prepare($connection, $query);
 
-    $visible = 0;
-    if(isset($_POST["visible"])){
-        $visible = 1;
-    }
-    mysqli_stmt_bind_param($stmt, "sssi", $emailVenditore, $name, $newPath, $visible);
+    mysqli_stmt_bind_param($stmt, "ssi", $emailVenditore, $name, $visible);
     mysqli_stmt_execute($stmt);
 
-    //var_dump($_FILES["images"]);
+    $id = mysqli_insert_id($connection);
+}
 
-    if(isset($_FILES["images"])){
-        $query = "INSERT INTO ImmaginiProdotto(idProdotto, nomeFile) VALUES (?,?)";
-        $prodId = mysqli_insert_id($connection);
-        $stmt = mysqli_prepare($connection, $query);
-        for($i = 0; $i < count($_FILES["images"]["name"]); $i++){
-            $image = $_FILES["images"]["name"][$i];
-            $tmpImage = $_FILES["images"]["tmp_name"][$i];
+//Set 3d Preview file
+if(isset($_FILES["3dPreview"]) && filesize($_FILES["3dPreview"]["tmp_name"]) > 0){
+    $query = "UPDATE Prodotto SET fileModello = ? WHERE id = ?";
+    $newPath = store_file($_FILES["3dPreview"]["name"],$_FILES["3dPreview"]["tmp_name"], Constants::$ALLOWED_3DFILE_EXTENSIONS);
+    //Upload file for 3d preview 
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "si", $newPath, $id);
+    mysqli_stmt_execute($stmt);
+}
+
+//Remove marked images
+if(isset($_POST["deletedImages"])){
+    $query = "DELETE FROM ImmaginiProdotto WHERE id = ?";
+    $stmt = mysqli_prepare($connection, $query);
+    for($i = 0; $i < count($_POST["deletedImages"]); $i++ ){
+        $imageId = intval($_POST["deletedImages"][$i]); 
+        mysqli_stmt_bind_param($stmt, "i", $imageId); 
+        mysqli_stmt_execute($stmt);
+    }
+}
+
+//Add new images
+if(isset($_FILES["images"])){
+    $query = "INSERT INTO ImmaginiProdotto(idProdotto, nomeFile) VALUES (?,?)";
+    $stmt = mysqli_prepare($connection, $query);
+    for($i = 0; $i < count($_FILES["images"]["name"]); $i++){
+        $image = $_FILES["images"]["name"][$i];
+        $tmpImage = $_FILES["images"]["tmp_name"][$i];
+        if(filesize($tmpImage) > 0){
             $newPath = store_file($image, $tmpImage, Constants::$ALLOWED_IMAGE_EXTENSIONS);
             if(!empty($newPath)){
                 //update reference in db
-                mysqli_stmt_bind_param($stmt, "is", $prodId, $newPath);
+                mysqli_stmt_bind_param($stmt, "is", $id, $newPath);
                 mysqli_stmt_execute($stmt);
             }
         }
     }
 }
 
+//Handle Variants
+if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
+    $query_remove = "DELETE FROM Variante WHERE idProdotto = ?";
+    $stmt = mysqli_prepare($connection, $query_remove);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt); 
 
 
+    $query_add = "INSERT INTO Variante(idProdotto, idMateriale, prezzo) VALUES (?,?,?)";
+    $stmt = mysqli_prepare($connection, $query_add);
+    for($i = 0; $i < count($_POST["materialIds"]); $i++){
+        $materialId = $_POST["materialIds"][$i];
+        $variantCost = $_POST["variantCosts"][$i];
+
+        if(!isset($_POST["removeVariant"]) || !in_array($materialId, $_POST["removeVariant"])){
+            mysqli_stmt_bind_param($stmt, "iii", $id, $materialId, $variantCost);
+            mysqli_stmt_execute($stmt);
+        }
+    }
+}
 
 header("Location: /sellerHome.php");
 

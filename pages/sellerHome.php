@@ -9,7 +9,7 @@
     $email = getSessionEmail();
 
     #Query Prodotti
-    $query_products = "SELECT * FROM Prodotto Where emailVenditore = ?";
+    $query_products = "SELECT * FROM Prodotto Where emailVenditore = ? AND visibile > 0";
     $stmt = mysqli_prepare($connection, $query_products);
     mysqli_stmt_bind_param($stmt,"s",$email );
     mysqli_stmt_execute($stmt);

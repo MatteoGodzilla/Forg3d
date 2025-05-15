@@ -14,7 +14,9 @@ if(!isset($_GET) || !isset($_GET["id"])){
     header("Location: /sellerHome.php");
     exit();
 }
- 
+
+//TODO: cambia questa query perchè non si possono veramente togliere i prodotti dal db
+
 $id = $_GET["id"];
 $email = getSessionEmail();
 $query = "DELETE FROM Prodotto WHERE id = ? AND emailVenditore = ?";
