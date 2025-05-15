@@ -42,6 +42,7 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/adminHome.css" />
+    <link ref="stylesheet"  href="./css/header.css">
 
 </head>
 <body>
@@ -63,7 +64,7 @@
     <a href="checkProductsReports.php">Utenti Banditi</a><br>
     <a href="checkProductsReports.php">Prodotti Banditi</a><br>
     <h2>Storico segnalazioni</h2>
-    <a href="checkProductsReports.php">Storico Venditori</a><br>
-    <a href="checkProductsReports.php">Storico Prodotti</a><br>
+    <a href="reportsHistory.php?Sellers">Storico Venditori</a><br>
+    <a href="reportsHistory.php?Products">Storico Prodotti</a><br>
 </body>
 </html>

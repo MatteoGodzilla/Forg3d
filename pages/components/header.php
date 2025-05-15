@@ -3,7 +3,7 @@
     <h1>Forg3d</h1>,
     <?php if (utenteLoggato()): ?>
                 <p>Ciao <?= getSessionEmail(); ?> </p>
-				<a href="./api/handleLogout.php">Logout</a>
+				<a id="logout" href="./api/handleLogout.php">Logout</a>
 				<?php if(getUserType() == UserType::SELLER->value){?>
 					<a href="./api/handleLogout.php">carrello</a>	
 				<?php } ?>
