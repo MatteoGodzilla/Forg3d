@@ -50,19 +50,16 @@ $user = $rows[0];
     <link rel="stylesheet" href="./css/reportDetail.css" />
 </head>
 <body>
-    <header>
-        <h1>Forg3d</h1>
-    </header>
-    <h2>Elenco segnalazioni</h2>
-    <h3>Venditore:</h3>
-    <p>Nome:<?= htmlspecialchars($user["nome"]) ?></p>
-    <p>Cognome: <?= htmlspecialchars($user["cognome"]) ?></p>
-    <p>email: <?= htmlspecialchars($user["email"]) ?></p>
-    <p>Telefono: <?= htmlspecialchars($user["telefono"]) ?></p>
-    <?= $user["stato"]==3? "<p>L'utente è attualmente bandito</p>":""?>
-    <a href="/api/updateSellerStatus.php?email=<?= htmlspecialchars($user["email"]) ?>&newStatus=3" id="banSeller">Bandisci</a>
-    <h3>Segnalazioni:</h3>
-    <a href="/api/clearReports.php?email=<?= htmlspecialchars($user["email"])?>" id="deleteAll">Elimina segnalazioni</a>
+    <?php
+        require_once("components/header.php");
+        create_header();
+    ?>
+
+    <?php 
+        require_once("components/sellerInfo.php");
+        sellerInfo($user);
+    ?>
+
     <?php 
         require_once("components/sellerReportDetail.php");
         foreach($reports as $report){

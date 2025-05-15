@@ -46,6 +46,12 @@
 </head>
 <body>
 
+<?php
+        require_once("components/header.php");
+        create_header();
+    ?>
+
+
     <h2>Bentornato</h2>
         <p><?php echo "Richieste di approvazione in sospeso:".$pendingRequests ?></p>
         <a href="checkAdmissionRequests.php">Vai alle richieste</a><br>
@@ -53,5 +59,11 @@
         <a href="checkSellerReports.php">Segnalazioni Venditori</a><br>
         <p><?php echo "Nuove segnalazioni di prodotti:".$productReports ?></p>
         <a href="checkProductsReports.php">Segnalazioni Prodotti</a><br>
+    <h2>Ban attivi</h2>
+    <a href="checkProductsReports.php">Utenti Banditi</a><br>
+    <a href="checkProductsReports.php">Prodotti Banditi</a><br>
+    <h2>Storico segnalazioni</h2>
+    <a href="checkProductsReports.php">Storico Venditori</a><br>
+    <a href="checkProductsReports.php">Storico Prodotti</a><br>
 </body>
 </html>
