@@ -33,13 +33,13 @@ switch ($type) {
         ";
         break;
     case UserType::SELLER->value:
-        $query = "SELECT U.email, U.password FROM Utente U
+        $query = "SELECT U.email, V.stato, U.password FROM Utente U
             JOIN Venditore V ON (U.email = V.emailUtente)
             WHERE U.email = ?
         ";
         break;
     case UserType::ADMIN->value:
-        $query = "SELECT U.email, U.password FROM Utente U
+        $query = "SELECT U.email , U.password FROM Utente U
             JOIN Admin A ON (U.email = A.emailUtente)
             WHERE U.email = ?
         ";
@@ -56,12 +56,10 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-if(isset($rows[0])){
-    //it exists
 
-    // To generate the password, run
-    // php -a
-    // echo(password_hash(<password>,PASSWORD_DEFAULT));
+
+if(isset($rows[0])){
+
 
     $dbPassword = $rows[0]["password"];
     if(password_verify($clearPassword, $dbPassword)){
@@ -74,8 +72,15 @@ if(isset($rows[0])){
                 header("Location:".REDIRECT_COMPRATORE);
                 exit();
             case UserType::SELLER->value:
-                setSession($email,UserType::SELLER->value);
-                header("Location:".REDIRECT_VENDITORE);
+                if($rows[0]["stato"]!=3){
+                    setSession($email,UserType::SELLER->value);
+                    header("Location:".REDIRECT_VENDITORE);
+                }
+                else{
+                    //banned
+                    header("Location:".error(REDIRECT_FAILED,"L'utente con cui stai provando a loggarti è stato bannato"));
+                }
+
                 exit();
             case UserType::ADMIN->value:
                 setSession($email,UserType::ADMIN->value);
