@@ -21,7 +21,10 @@ header a {
     border-radius: 70px;
     font-size: 1.2em;
 }
-
+form {
+    position: sticky;
+    top: 100px;
+}
 input[name="search"] {
     position: sticky;
     top: 100px;
