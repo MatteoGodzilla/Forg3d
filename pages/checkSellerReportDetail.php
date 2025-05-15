@@ -17,7 +17,7 @@ $email=$_GET["email"];
 
 #query (seleziona reports non ispezionati sullo specifico venditore, stato = 0)
 $query = "SELECT id,emailSegnalatore,motivo,ultimaModifica FROM Segnalazione INNER JOIN SegnalazioneVenditore ON 
-Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE emailVenditore=? ORDER BY ultimaModifica LIMIT 50";
+Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE emailVenditore=? AND ispezionata = 0 ORDER BY ultimaModifica LIMIT 50";
 
 
 $stmt = mysqli_prepare($connection, $query);
@@ -59,9 +59,10 @@ $user = $rows[0];
     <p>Cognome: <?= htmlspecialchars($user["cognome"]) ?></p>
     <p>email: <?= htmlspecialchars($user["email"]) ?></p>
     <p>Telefono: <?= htmlspecialchars($user["telefono"]) ?></p>
-    <a href="#" id="banSeller">Bandisci</a>
+    <?= $user["stato"]==3? "<p>L'utente è attualmente bandito</p>":""?>
+    <a href="/api/updateSellerStatus.php?email=<?= htmlspecialchars($user["email"]) ?>&newStatus=3" id="banSeller">Bandisci</a>
     <h3>Segnalazioni:</h3>
-    <a href="#" id="deleteAll">Elimina segnalazioni</a>
+    <a href="/api/clearReports.php?email=<?= htmlspecialchars($user["email"])?>" id="deleteAll">Elimina segnalazioni</a>
     <?php 
         require_once("components/sellerReportDetail.php");
         foreach($reports as $report){
