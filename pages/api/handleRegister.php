@@ -1,5 +1,7 @@
 <?php
 require_once("../../php/db.php");
+require_once("../../php/session.php");
+require_once("../../php/feedback.php");
 
 const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../index.php";
@@ -7,7 +9,7 @@ const REDIRECT_VENDITORE = "../sellerHome.php";
 const REDIRECT_ADMIN = "../adminHome.php";
 
 if(!isset($_POST) || !isset($_POST["name"]) || !isset($_POST["surname"]) || !isset($_POST["cellphone"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
-    header("Location:".$redirectFailed);
+    header("Location:".REDIRECT_FAILED);
     exit();
 }
 
@@ -32,7 +34,7 @@ switch ($type) {
         break;
     case "2":
         if(!isset($_POST["admin_token"])){;
-            header("Location:".REDIRECT_FAILED);
+            header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Token non fornito."));
             exit();
         }
         $token = $_POST["admin_token"];
@@ -59,7 +61,8 @@ if($type!="2"){
         mysqli_stmt_bind_param($stmt,"s", $email);
         mysqli_stmt_execute($stmt);
         $connection->commit();
-        header("Location:".REDIRECT_COMPRATORE);
+        header("Location:".feedback(REDIRECT_FAILED,AlertType::SUCCESS->value,"registrazione completata!Se sei venditore,attendi prima di loggarti cosi che possiamo verificare il tuo account"));
+        exit();
     }catch (mysqli_sql_exception $exception) {
         $connection->rollback();
     }
@@ -73,7 +76,7 @@ if($type!="2"){
 
     if(!isset($rows[0])){
         //invalid token
-        header("Location:".$redirectFailed);
+        header("Location:".REDIRECT_FAILED."?isAdmin=true");
         exit();
     }
 

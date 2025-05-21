@@ -15,7 +15,7 @@ if(utenteLoggato()){
 }
 
 if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
-    header("Location:".feedback($redirectFailed,AlertType::ERROR->value,"durante il login,i dati forniti erano incompleti"));
+    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"durante il login,i dati forniti erano incompleti"));
     exit();
 }
 
@@ -76,7 +76,7 @@ if(isset($rows[0])){
                         exit();
                     case 1:
                         setSession($email,UserType::SELLER->value);
-                        header("Location:".REDIRECT_FAILED);
+                        header("Location:".REDIRECT_VENDITORE);
                         exit();
                     case 2:
                         header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Il tuo account è venditore è stato rifiutato,crea un nuovo account o contatta un amministratore."));
@@ -94,7 +94,13 @@ if(isset($rows[0])){
 }
 
 //Redirect back
-header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"email o password errati!"));
+if($_POST["type"]==2){
+    header("Location:".feedback(REDIRECT_FAILED."?isAdmin=true",AlertType::ERROR->value,"email o password errati!",TRUE));
+}
+else{
+    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"email o password errati!"));
+}
+
 exit();
 
 ?>
