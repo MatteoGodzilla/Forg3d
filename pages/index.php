@@ -58,6 +58,7 @@ if(isset($_GET['search'])){
 	<head>
 		<title>Forg3d Home</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./css/header.css">
 		<link rel="stylesheet" href="./css/home.css">
 	</head>
 	<body>

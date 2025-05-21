@@ -41,7 +41,7 @@ try{
         exit();
     }
     $connection->commit();
-    header("Location: ../sellerRequest.php");
+    header("Location: ../checkAdmissionRequests.php");
     exit();
     
 }catch(mysqli_sql_exception $exception){

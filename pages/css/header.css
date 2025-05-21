@@ -6,9 +6,31 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: sticky;
+    box-sizing: border-box;
+    flex-wrap: wrap;
     top: 0px;
+    min-height: 80px;
+    padding: var(--padding-large);
 }
+
+div#userProfile{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #ccc; /* fallback background */
+    background-image: 
+    radial-gradient(circle at 50% 40%, #999 20%, transparent 21%),
+    radial-gradient(circle at 50% 75%, #999 30%, transparent 31%);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div#interactibles{
+    display: flex;
+    gap: 1rem;
+}
+
+
 
 a#logout{
     background-image: linear-gradient(to bottom right, var(--light-primary-compratore), var(--light-primary-venditore));
@@ -17,3 +39,5 @@ a#logout{
     border-radius: 70px;
     font-size: 1.2em;
 }
+
+

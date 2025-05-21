@@ -6,6 +6,8 @@ div#error-popup{
     margin: var(--padding-large);
     padding: var(--padding-large);
     display: block;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 div#warning-popup{
@@ -14,6 +16,8 @@ div#warning-popup{
     margin: var(--padding-large);
     padding: var(--padding-large);
     display: block;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 div#success-popup{
@@ -22,4 +26,6 @@ div#success-popup{
     margin: var(--padding-large);
     padding: var(--padding-large);
     display: block;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }

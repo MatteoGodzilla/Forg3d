@@ -2,19 +2,19 @@
 
 <?php function create_error_message(String $message){ ?>
     <div id="error-popup">
-       <?= $message ?>
+    <p><?= $message ?></p>
     </div>
 <?php } ?>
 
 <?php function create_success_message(String $message){ ?>
     <div id="success-popup">
-       <?= $message ?>
+       <p><?= $message ?></p>
     </div>
 <?php } ?>
 
 <?php function create_warning_message(String $message){ ?>
     <div id="warning-popup">
-       <?= $message ?>
+    <p><?= $message ?></p>
     </div>
 <?php } ?>
 
