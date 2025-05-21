@@ -3,7 +3,7 @@
     
  ?> 
     <div>
-    <b>Revisionata il <?=$report["ultimaModifica"]?> da:</b>
+    <b>Revisionata il <?=$report["lastEdit"]?> da:</b>
     <?php if($isProduct): ?>
         <p>Prodotto Segnalato: <?=$report["nome"]?></p>
         <p>Venditore del prodotto: <?=$report["emailVenditore"]?></p>

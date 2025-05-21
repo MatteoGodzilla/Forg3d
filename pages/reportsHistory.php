@@ -16,7 +16,7 @@ if(isset($_GET["Products"])){
 }
 
 #query (seleziona reports ispezionati)
-$query = "SELECT * FROM Segnalazione ".$join." WHERE ispezionata=1 ORDER BY Segnalazione.ultimaModifica";
+$query = "SELECT *,Segnalazione.ultimaModifica as lastEdit FROM Segnalazione ".$join." WHERE ispezionata=1 ORDER BY lastEdit";
 $stmt = mysqli_prepare($connection, $query);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);

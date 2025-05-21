@@ -2,8 +2,10 @@
 <article class="product">
     <div>
         <small><?php echo ($product['emailVenditore']); ?></small><br>
-        <small><?php echo ($product['totalReports']); ?> segnalazioni</small><br>
         <p><?php echo ($product['nome'])?></p>
+        <div>
+            <a href="<?= "/checkProductReportDetail.php?id=".$product["idProdotto"]?>">Vai A segnalazioni <?="(".$product["totalReports"].")" ?></a>
+    </div>
     </div>
 </article>
 <?php } ?>
