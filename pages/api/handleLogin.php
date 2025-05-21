@@ -70,16 +70,21 @@ if(isset($rows[0])){
                 header("Location:".REDIRECT_COMPRATORE);
                 exit();
             case UserType::SELLER->value:
-                if($rows[0]["stato"]!=3){
-                    setSession($email,UserType::SELLER->value);
-                    header("Location:".REDIRECT_VENDITORE);
+                switch($rows[0]["stato"]){
+                    case 0:
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::WARNING->value,"Il tuo account è attualmente in esaminazione per essere approvato,riporva più tardi."));
+                        exit();
+                    case 1:
+                        setSession($email,UserType::SELLER->value);
+                        header("Location:".REDIRECT_FAILED);
+                        exit();
+                    case 2:
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Il tuo account è venditore è stato rifiutato,crea un nuovo account o contatta un amministratore."));
+                        exit();
+                    case 3:
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Questo account è stato bandito,perfavore contatta un amministratore."));
+                        exit();
                 }
-                else{
-                    //banned
-                    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"L'utente con cui stai provando a loggarti è stato bannato"));
-                }
-
-                exit();
             case UserType::ADMIN->value:
                 setSession($email,UserType::ADMIN->value);
                 header("Location:".REDIRECT_ADMIN);

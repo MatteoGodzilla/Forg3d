@@ -9,10 +9,10 @@ div#error-popup{
 }
 
 div#warning-popup{
-    background-color: var(--light-danger);
+    background-color: var(--light-warning);
     font-size: var(--font-small);
     margin: var(--padding-large);
-    padding: var(--light-warning);
+    padding: var(--padding-large);
     display: block;
 }
 
