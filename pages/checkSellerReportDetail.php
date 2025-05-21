@@ -16,7 +16,7 @@ if(!isset($_GET["email"])){
 $email=$_GET["email"];
 
 #query (seleziona reports non ispezionati sullo specifico venditore, stato = 0)
-$query = "SELECT id,emailSegnalatore,motivo,ultimaModifica FROM Segnalazione INNER JOIN SegnalazioneVenditore ON 
+$query = "SELECT id,emailSegnalatore,emailVenditore,motivo,ultimaModifica FROM Segnalazione INNER JOIN SegnalazioneVenditore ON 
 Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE emailVenditore=? AND ispezionata = 0 ORDER BY ultimaModifica LIMIT 50";
 
 
