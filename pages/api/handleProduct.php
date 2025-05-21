@@ -26,8 +26,22 @@ $defaultVariant = $_POST["defaultVariant"];
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     //try to update existing product
     $id = $_POST["id"];
-    $query = "UPDATE Prodotto SET nome=?, visibile=?, varianteDefault=? WHERE id=?";
-    $stmt = mysqli_prepare($connection, $query);
+    //Check that the product is not banned
+    $query_check = "SELECT visibile FROM Prodotto WHERE id = ?";
+    $stmt = mysqli_prepare($connection, $query_check);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $check = mysqli_fetch_assoc($result);
+
+    if($check["visibile"] == 0){
+        //echo("No edit priviledges for you, dear seller");
+        header("Location: /sellerHome.php");
+        exit();
+    }
+
+    $query_update = "UPDATE Prodotto SET nome=?, visibile=?, varianteDefault=? WHERE id=?";
+    $stmt = mysqli_prepare($connection, $query_update);
     mysqli_stmt_bind_param($stmt, "siii", $name, $visible, $defaultVariant, $id);
     mysqli_stmt_execute($stmt);
     
