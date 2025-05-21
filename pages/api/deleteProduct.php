@@ -15,14 +15,26 @@ if(!isset($_GET) || !isset($_GET["id"])){
     exit();
 }
 
-//TODO: cambia questa query perchè non si possono veramente togliere i prodotti dal db
 
 $id = $_GET["id"];
 $email = getSessionEmail();
-$query = "DELETE FROM Prodotto WHERE id = ? AND emailVenditore = ?";
-$stmt = mysqli_prepare($connection, $query);
-mysqli_stmt_bind_param($stmt, "is", $id, $email);
+
+//Check that the product is not banned
+$query_check = "SELECT visibile FROM Prodotto WHERE id = ?";
+$stmt = mysqli_prepare($connection, $query_check);
+mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$check = mysqli_fetch_assoc($result);
+
+if($check["visibile"] != 0){
+    //Fake removal in database
+    $query_remove = "UPDATE Prodotto SET visibile=0 WHERE id = ? AND emailVenditore = ?";
+    $stmt = mysqli_prepare($connection, $query_remove);
+    mysqli_stmt_bind_param($stmt, "is", $id, $email);
+    mysqli_stmt_execute($stmt);
+}
+
 header("Location: /sellerHome.php");
 
 

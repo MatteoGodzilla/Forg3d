@@ -3,6 +3,7 @@ session_start();
 require_once("../../php/db.php");
 require_once("../../php/session.php");
 require_once("../../php/file_utils.php");
+require_once("sendSellerNotification.php");
 
 if(!utenteLoggato() || getUserType() != UserType::SELLER->value ){
     header("Location: /");
