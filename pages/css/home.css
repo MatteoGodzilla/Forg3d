@@ -24,6 +24,11 @@ header a {
 form {
     position: sticky;
     top: 100px;
+    justify-content: space-between;
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    display: flex;
+    box-sizing: border-box;
 }
 input[name="search"] {
     position: sticky;

@@ -61,10 +61,12 @@ if(isset($_GET['search'])){
 		<link rel="stylesheet" href="./css/home.css">
 	</head>
 	<body>
-		<?php 
+		<header>
+			<?php 
 			include_once("./components/header.php");
 			create_header();
-		?>
+			?>
+		</header>
 		<form method="GET" action="index.php">
   			<input type="search" name="search" placeholder="<?php if(!isset($_GET['search'])) echo 'Cerca prodotti o venditori...'; else echo($query) ?>"/>
 		</form>
