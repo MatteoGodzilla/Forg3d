@@ -1,6 +1,7 @@
 <?php 
 require_once("../../php/db.php");
 require_once("../../php/session.php");
+require_once("sendSellerNotification.php");
 session_start();
 
 //Reindirizza se l'utente non è loggato
@@ -33,6 +34,8 @@ if($check["visibile"] != 0){
     $stmt = mysqli_prepare($connection, $query_remove);
     mysqli_stmt_bind_param($stmt, "is", $id, $email);
     mysqli_stmt_execute($stmt);
+    //Send notification of removal
+    sendRemovedProduct($connection, $email);
 }
 
 header("Location: /sellerHome.php");
