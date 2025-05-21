@@ -1,7 +1,10 @@
 <?php
+//TODO: check that at least a variant is present before submitting
 require_once("../php/db.php");
 require_once("../php/session.php");
 require_once("./components/productVariant.php");
+require_once("./components/sellerEditProductImage.php");
+require_once("./components/sellerEditProductMaterial.php");
 session_start();
 
 if(!utenteLoggato() || getUserType() != UserType::SELLER->value){
@@ -9,11 +12,13 @@ if(!utenteLoggato() || getUserType() != UserType::SELLER->value){
     exit();
 }
 
+$email = getSessionEmail();
+
 if(isset($_GET) && isset($_GET['id'])){
     $idProduct = $_GET['id'];
 
     //Query per cercare le informazioni da mostrare nella pagina del prodotto
-    $query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, v.emailUtente AS venditoreEmail,
+    $query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, p.varianteDefault, v.emailUtente AS venditoreEmail,
                 u.nome AS venditoreNome, u.cognome AS venditoreCognome
                 FROM Prodotto p
                 JOIN Venditore v ON p.emailVenditore = v.emailUtente
@@ -24,10 +29,6 @@ if(isset($_GET) && isset($_GET['id'])){
     mysqli_stmt_bind_param($stmt,"i", $idProduct);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-
-    if($result->num_rows === 0){
-        die("Prodotto mancante.");
-    }
 
     $product = mysqli_fetch_assoc($result);
 
@@ -40,10 +41,11 @@ if(isset($_GET) && isset($_GET['id'])){
                              WHERE v.idProdotto = ?
                          ) 
                          AND m.visibile = 1
+                         AND m.idVenditore = ?
                          ";
 
     $stmt = mysqli_prepare($connection, $query_materiali);
-    mysqli_stmt_bind_param($stmt, "i", $idProduct);
+    mysqli_stmt_bind_param($stmt, "is", $idProduct, $email);
     mysqli_stmt_execute($stmt);
     $materiali = mysqli_stmt_get_result($stmt);
 
@@ -64,6 +66,17 @@ if(isset($_GET) && isset($_GET['id'])){
     mysqli_stmt_bind_param($stmt, "i", $idProduct);
     mysqli_stmt_execute($stmt);
     $immagini = mysqli_stmt_get_result($stmt);
+} else {
+    //Nuovo prodotto
+    //Query per ottenere tutte le varianti 
+    $query_materiali = "SELECT m.id, m.tipologia, m.nomeColore, m.hexColore 
+                        FROM Materiale m 
+                        WHERE m.visibile = 1
+                        AND m.idVenditore = ?";
+    $stmt = mysqli_prepare($connection, $query_materiali);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $materiali = mysqli_stmt_get_result($stmt);
 }
 
 ?>
@@ -111,12 +124,7 @@ if(isset($_GET) && isset($_GET['id'])){
             <?php 
                 if(isset($immagini)){ 
                     while ($img = mysqli_fetch_assoc($immagini)){ 
-            ?>
-                        <div class="immagine-preview">
-                            <img src="<?= htmlspecialchars($img['nomeFile']) ?>" alt="immagine prodotto"/>
-                            <input type="checkbox" name="deletedImages[]" value="<?= $img['id'] ?>"/> Elimina
-                        </div>
-            <?php
+                        generateEditImage($img);
                     }
                 }
             ?>
@@ -132,6 +140,7 @@ if(isset($_GET) && isset($_GET['id'])){
         <?php 
             if(isset($materiali)){ 
                 while($m = mysqli_fetch_assoc($materiali)){
+                    //Not enough to make a component for it
         ?>
             <option value="<?= $m["id"]?>"><?= $m["nomeColore"]?> (<?= $m["tipologia"]?>)</option>
         <?php
@@ -144,15 +153,7 @@ if(isset($_GET) && isset($_GET['id'])){
         <?php 
             if(isset($varianti)){
                 while ($variant = mysqli_fetch_assoc($varianti)){
-        ?>
-            <input type="hidden" name="materialIds[]" value="<?= $variant["id"] ?>" multiple/>
-            <label><?= $variant["nomeColore"]?> (<?= $variant["tipologia"]?>)</label>
-            <label><?= $variant["hexColore"]?></label>
-            <input type=number" name="variantCosts[]" value="<?= $variant["prezzo"] ?>" multiple/>
-            <label for="removeVariant[]">Rimuovi</label>
-            <input type="checkbox" name="removeVariant[]" value="<?= $variant["id"] ?>" multiple/>
-            <br>
-        <?php 
+                    generateEditVariant($variant);
                 }
             }
         ?> 
@@ -166,6 +167,7 @@ if(isset($_GET) && isset($_GET['id'])){
         const addVariantButton = document.querySelector("#addVariant");
         const variantContainer = document.querySelector("#variantContainer");
         const selectBox = document.querySelector("#selectBox");
+        let defaultRadioButtons = document.querySelectorAll("input[type='radio']");
 
         addVariantButton.onclick = () => {
             if(selectBox.selectedIndex >= 0){
@@ -177,13 +179,33 @@ if(isset($_GET) && isset($_GET['id'])){
                         hiddenId.setAttribute("name","materialIds[]");
                         hiddenId.setAttribute("value",selectBox.value);
                         variantContainer.appendChild(hiddenId);
+                        
+                        const defaultButton = document.createElement("input");
+                        defaultButton.setAttribute("type", "radio");
+                        defaultButton.setAttribute("name", "defaultVariant");
+                        defaultButton.setAttribute("value", selectBox.value);
+                        defaultButton.setAttribute("id", selectBox.value);
+                        let alreadyPresent = false;
+                        for(let button of defaultRadioButtons){
+                            alreadyPresent = alreadyPresent || button.checked;
+                        }
+                        if(!alreadyPresent){
+                            defaultButton.setAttribute("checked", "checked");
+                        }
+                        variantContainer.appendChild(defaultButton);
 
-                        const label1 = document.createElement("label");
-                        label1.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
-                        variantContainer.appendChild(label1);
-                        const label2 = document.createElement("label");
-                        label2.innerText = obj["hexColore"];
-                        variantContainer.appendChild(label2);
+                        const labelDefault = document.createElement("label");
+                        labelDefault.setAttribute("for", selectBox.value);
+                        labelDefault.innerText = "Default";
+                        variantContainer.appendChild(labelDefault);
+
+                        const labelName = document.createElement("label");
+                        labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
+                        variantContainer.appendChild(labelName);
+
+                        const labelColor = document.createElement("label");
+                        labelColor.innerText = obj["hexColore"];
+                        variantContainer.appendChild(labelColor);
 
                         const variantCost = document.createElement("input");
                         variantCost.setAttribute("type","number");
@@ -191,18 +213,21 @@ if(isset($_GET) && isset($_GET['id'])){
                         variantCost.setAttribute("value","00");
                         variantContainer.appendChild(variantCost);
 
-                        const label3 = document.createElement("label");
-                        label2.innerText = "Rimuovi"; 
-                        variantContainer.appendChild(label2);
+                        const labelRemove = document.createElement("label");
+                        labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
+                        labelRemove.innerText = "Rimuovi"; 
+                        variantContainer.appendChild(labelRemove);
 
                         const removeVariant = document.createElement("input");
                         removeVariant.setAttribute("type","checkbox");
-                        removeVariant.setAttribute("name","removeVariant[]");
+                        removeVariant.setAttribute("name",`removeVariant[${selectBox.value}]`);
+                        removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
                         removeVariant.setAttribute("value",selectBox.value);
                         variantContainer.appendChild(removeVariant);
 
                         selectBox.options.remove(selectBox.selectedIndex);
                         console.log(selectBox.options);
+                        defaultRadioButtons = document.querySelectorAll("input[type='radio']");
                     })
             }
         }  

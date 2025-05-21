@@ -11,7 +11,7 @@ if(!utenteLoggato() || getUserType() != UserType::SELLER->value ){
 
 $emailVenditore = getSessionEmail(); 
 
-if(!isset($_POST["productName"])){
+if(!isset($_POST["productName"]) || !isset($_POST["defaultVariant"])){
     header("Location: /sellerHome.php");
     exit();
 }
@@ -21,22 +21,23 @@ $visible = 1;
 if(isset($_POST["visible"])){
     $visible = 2;
 }
+$defaultVariant = $_POST["defaultVariant"];
 
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     //try to update existing product
     $id = $_POST["id"];
-    $query = "UPDATE Prodotto SET nome=?, visibile=? WHERE id=?";
+    $query = "UPDATE Prodotto SET nome=?, visibile=?, varianteDefault=? WHERE id=?";
     $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, "sii", $name, $visible, $id);
+    mysqli_stmt_bind_param($stmt, "siii", $name, $visible, $defaultVariant, $id);
     mysqli_stmt_execute($stmt);
     
 } else {
     //add new product 
     
-    $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile) VALUES (?,?,?)";
+    $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile, varianteDefault) VALUES (?,?,?,?)";
     $stmt = mysqli_prepare($connection, $query);
 
-    mysqli_stmt_bind_param($stmt, "ssi", $emailVenditore, $name, $visible);
+    mysqli_stmt_bind_param($stmt, "ssii", $emailVenditore, $name, $visible, $defaultVariant);
     mysqli_stmt_execute($stmt);
 
     $id = mysqli_insert_id($connection);
@@ -91,6 +92,8 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
 
     $query_add = "INSERT INTO Variante(idProdotto, idMateriale, prezzo) VALUES (?,?,?)";
     $stmt = mysqli_prepare($connection, $query_add);
+    $defaultReadded = false;
+    $lastMaterialId = -1;
     for($i = 0; $i < count($_POST["materialIds"]); $i++){
         $materialId = $_POST["materialIds"][$i];
         $variantCost = $_POST["variantCosts"][$i];
@@ -98,7 +101,21 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
         if(!isset($_POST["removeVariant"]) || !in_array($materialId, $_POST["removeVariant"])){
             mysqli_stmt_bind_param($stmt, "iii", $id, $materialId, $variantCost);
             mysqli_stmt_execute($stmt);
+
+            if($materialId === $defaultVariant){
+                $defaultReadded = true;
+            }
+
+            $lastMaterialId = $materialId;
         }
+    }
+
+    if(!$defaultReadded){
+        //User has decided to remove the default variant, so we set it to the last variant by default
+        $query_readd_default = "UPDATE Prodotto SET varianteDefault = ? WHERE id = ?";   
+        $stmt = mysqli_prepare($connection, $query_readd_default);
+        mysqli_stmt_bind_param($stmt, "ii", $lastMaterialId, $id);
+        mysqli_stmt_execute($stmt);
     }
 }
 

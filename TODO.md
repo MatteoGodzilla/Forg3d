@@ -8,21 +8,21 @@ Registrazione autonoma, acquisto di uno o più prodotti, scrive recensioni, foll
 
 # Funzionalità Sito
 ## Admin
-- [ ] Operazioni CRUD sulle richieste di registrazione dei venditori
-- [ ] Lettura segnalazioni
-- [ ] Ban venditore/compratore
+- [x] Operazioni CRUD sulle richieste di registrazione dei venditori
+- [x] Lettura segnalazioni
+- [x] Ban venditore
 - [ ] Rimozione recensioni
 - [ ] Rimozione prodotto su listino
 - [ ] Notifiche generali di tipo broadcast
 ## Venditore
-- [ ] Lettura e scrittura del proprio listino (1 venditore = 1 listino)
-- [ ] Operazioni CRUD di prodotti all'interno del listino
-  - [ ] Il prodotto può non essere visibile al compratore
+- [x] Lettura e scrittura del proprio listino (1 venditore = 1 listino)
+- [x] Operazioni CRUD di prodotti all'interno del listino
+  - [x] Il prodotto può non essere visibile al compratore
 - [ ] Invio di notifiche
 - [ ] Richiesta di iscrizione agli admin
 - [ ] Segnalazione di tutto
 ## Compratore
-- [ ] Registrazione autonoma
+- [x] Registrazione autonoma
 - [ ] Lettura/pulizia notifiche
 - [ ] Visualizzazione listini
 - [ ] Gestione carrello
@@ -57,5 +57,5 @@ Registrazione autonoma, acquisto di uno o più prodotti, scrive recensioni, foll
 - [ ] Pagamento del carrello
 - [ ] Elenco storico degli ordini
 - [ ] Elenco dettagliato di un ordine (con tutti i prodotti comprati)
-- [ ] Homepage
+- [x] Homepage
 
