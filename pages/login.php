@@ -4,7 +4,7 @@
         <title>Forg3d Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./css/login.css" />
-        <link rel="stylesheet" href="./css/errorMessage.css" />
+        <link rel="stylesheet" href="./css/popups.css" />
     </head>
     <body>
         <header>
@@ -38,9 +38,10 @@
         <?php } ?>
         <script src="./js/validateLogin.js"></script>
 
-        <?php if(isset($_GET["error"])){ 
-                include_once("./components/error_message.php");
-                create_error_message($_GET["error"]);
+        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+                include_once("./components/popups.php");
+                include_once("./../php/constants.php");
+                create_popup($_GET["message"],$_GET["messageType"]);
             } 
          ?>
 	</body>

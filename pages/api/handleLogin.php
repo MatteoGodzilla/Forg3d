@@ -2,7 +2,7 @@
 session_start();
 require_once("../../php/db.php");
 require_once("../../php/session.php");
-require_once("../../php/error.php");
+require_once("../../php/feedback.php");
 
 const REDIRECT_FAILED = "../login.php";
 const REDIRECT_COMPRATORE = "../index.php";
@@ -15,7 +15,7 @@ if(utenteLoggato()){
 }
 
 if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
-    header("Location:".error($redirectFailed,"Errore durante il login,i dati forniti erano incompleti"));
+    header("Location:".feedback($redirectFailed,AlertType::ERROR->value,"durante il login,i dati forniti erano incompleti"));
     exit();
 }
 
@@ -76,7 +76,7 @@ if(isset($rows[0])){
                 }
                 else{
                     //banned
-                    header("Location:".error(REDIRECT_FAILED,"L'utente con cui stai provando a loggarti è stato bannato"));
+                    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"L'utente con cui stai provando a loggarti è stato bannato"));
                 }
 
                 exit();
@@ -89,7 +89,7 @@ if(isset($rows[0])){
 }
 
 //Redirect back
-header("Location:".error(REDIRECT_FAILED,"email o password errati!"));
+header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"email o password errati!"));
 exit();
 
 ?>
