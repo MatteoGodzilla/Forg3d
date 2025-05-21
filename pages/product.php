@@ -3,6 +3,8 @@ require_once("../php/db.php"); // Connessione al database
 require_once("../php/session.php"); // Gestione sessione
 session_start();
 
+$varianti = [];
+
 // Controlla se l'ID del prodotto è stato passato
 if (!isset($_GET) || !isset($_GET['id'])) {
     die("");// Modifica all pagina home
@@ -53,7 +55,11 @@ $query_varianti =  "SELECT v.id, m.tipologia, m.nomeColore, m.hexColore, v.prezz
 $stmt = mysqli_prepare($connection, $query_varianti);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);
-$varianti = mysqli_stmt_get_result($stmt);
+$resultvarianti = mysqli_stmt_get_result($stmt);
+
+while ($row = mysqli_fetch_assoc($resultvarianti)) {
+			$varianti[] = $row;
+		}
 
 ?>
 
@@ -67,14 +73,14 @@ $varianti = mysqli_stmt_get_result($stmt);
     <p><strong>Venditore:</strong> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>)</p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
     <h2>Varianti disponibili</h2>
-    <?php while ($variante = $varianti->fetch_assoc()): ?>
+    <?php foreach($varianti as $variante): ?>
         <p><strong>Materiale:</strong> <?php echo ($variante['tipologia']); ?></p>
         <p><strong>Colore:</strong> <?php echo $variante['nomeColore']; ?> (#<?php echo $variante['hexColore']; ?>)</p>
         <p><strong>Prezzo:</strong> €<?php echo number_format($variante['prezzo'] / 100, 2, ',', '.'); ?></p>
         <hr>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 
-    <?php if ($tipoUtente==UserType::BUYER): ?>
+    <?php if ($tipoUtente==UserType::BUYER->value): ?>
         <form action="aggiungi_carrello.php" method="POST">
             <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
             <button type="submit">Aggiungi al Carrello</button>
