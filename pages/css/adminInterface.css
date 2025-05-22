@@ -1,0 +1,28 @@
+@import url(./variables.css);
+
+h1,h2{
+    text-align: center;
+    padding-top: var(--padding-small);
+}
+
+a{
+    text-align: center;
+}
+
+div.user-info{
+    all: unset;
+    display: block;
+    padding-bottom: var(--padding-small);
+}
+
+div.user-info > p,
+div.user-info > h1,
+div.user-info > h2,
+div.user-info > h3{
+    text-align: center;
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+
+
+

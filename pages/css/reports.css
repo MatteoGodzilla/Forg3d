@@ -24,7 +24,7 @@ div.report > textarea{
     background-color: transparent;
     font-family: inherit;
     font-size: inherit;
-    padding-left: var(--padding-large);
+    padding-left: var(--padding-small);
     outline: none; /* Optional: removes blue border on focus */
 }
 
@@ -39,4 +39,8 @@ div.report > small{
     padding-left: var(--padding-small);
     padding-right: var(--padding-small);
 }
+
+
+
+
 

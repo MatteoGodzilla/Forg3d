@@ -26,7 +26,9 @@ $reports = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/reports.css" />
+    <link rel="stylesheet" href="./css/buttons.css" />
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/adminInterface.css" />
 </head>
 <body>
 	<?php 

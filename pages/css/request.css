@@ -3,15 +3,13 @@
 @import url(./buttons.css);
 
 div.request {
-    font-size:1.5em;
     margin: var(--padding-large);
     color: var(--light-container);
-    padding: var(--padding-small);
+    padding-top: var(--padding-small);
     text-wrap: wrap;
 }
 div.request > div {
     flex-grow: 1;
-    padding: var(--padding-small);
 }
 
 div.request >  p {
@@ -25,7 +23,7 @@ div.request > div {
 }
 
 
-div.ban-element > small{
+div.request> small{
     display:inline-block;
     padding-left: var(--padding-small);
 }

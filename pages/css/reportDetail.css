@@ -2,13 +2,6 @@
 @import url(./styleReference.css);
 
 
-
-h2,h3{
-    margin-top:var(--padding-large) ;
-    margin-bottom:var(--padding-large) ;
-    margin-left: var(--padding-large);
-}
-
 #banSeller{
     display:block;
     background-color: var(--light-danger);

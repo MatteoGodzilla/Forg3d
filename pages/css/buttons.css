@@ -79,14 +79,12 @@ a.button-delete {
 
 /*Buttons for accepting and deniying requests*/
 a.button-accept {
-    font-size:1.5em;
-    margin: var(--padding-small);
+    padding: var(--padding-small);
     color: var(--light-ok);
 }
 
 a.button-deny {
-    font-size:1.5em;
-    margin: var(--padding-small);
+    padding: var(--padding-small);
     color: var(--light-primary-admin);
 }
 
@@ -101,3 +99,13 @@ a.functional{
     text-align: center;
     font-size:1.5em;
 }
+
+/*Button for checking details of reports*/
+a.detail{
+    display: block;
+    padding-bottom: var(--padding-small);
+    color: var(--light-primary-admin);
+    text-align: center;
+}
+
+
