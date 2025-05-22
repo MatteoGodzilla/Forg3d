@@ -19,7 +19,7 @@ if(isset($_GET['search'])){
 	$query_venditori = "SELECT v.emailUtente, u.nome, u.cognome
 						FROM Venditore v
 						JOIN Utente u ON u.email = v.emailUtente
-						WHERE u.nome LIKE ? OR u.cognome LIKE ?";
+						WHERE v.stato!=3 AND (u.nome LIKE ? OR u.cognome LIKE ?)";
 
 	$stmt_seller = mysqli_prepare($connection, $query_venditori);
 	mysqli_stmt_bind_param($stmt_seller, "ss", $like, $like);
@@ -32,12 +32,12 @@ if(isset($_GET['search'])){
     	}
 	}
 
-	$query_prodotti = "SELECT p.id, p.nome, p.fileModello, p.visibile,
+	$query_prodotti = "SELEC-T p.id, p.nome, p.fileModello, p.visibile,
 						u.nome AS venditoreNome, u.cognome AS venditoreCognome
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
 						JOIN Utente u ON u.email = v.emailUtente
-						WHERE p.visibile = 1 AND p.nome LIKE ?";
+						WHERE v.stato!=3 AND p.visibile = 1 AND p.nome LIKE ?";
 
 	$stmt = mysqli_prepare($connection, $query_prodotti);
 	mysqli_stmt_bind_param($stmt, "s", $like);
@@ -57,7 +57,7 @@ if(isset($_GET['search'])){
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
 						JOIN Utente u ON u.email = v.emailUtente
-						WHERE p.visibile = 1";
+						WHERE p.visibile = 1 AND NOT stato=3";
 
     $result = mysqli_query($connection, $query_prodotti);
 
