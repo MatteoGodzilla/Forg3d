@@ -105,26 +105,23 @@ if(isset($_GET) && isset($_GET['id'])){
             }
         ?>
 
-        <label for="productName">Nome prodotto*</label><br>
+        <label for="productName">Nome prodotto*</label>
         <input type="text" id="productName" name="productName" required
             <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
         />
 
-
+        <label for="visible">Visibile</label>
         <input type="checkbox" name="visible" id="visible" 
             <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
-        <label for="visible">Visibile</label>
 
-
-        <label>Preview 3D esistente:</label><br>
+        <label>Preview 3D esistente:</label>
         <?php if (isset($product['fileModello'])){ ?>
-            <a href="<?= htmlspecialchars($product['fileModello']) ?>" target="_blank">Visualizza file</a><br>
+            <a href="<?= htmlspecialchars($product['fileModello']) ?>" target="_blank">Visualizza file</a>
         <?php } ?>
-        <label for="3dPreview">Sostituisci file 3D</label><br>
+        <label for="3dPreview">Sostituisci file 3D</label>
         <input type="file" name="3dPreview" id="3dPreview"/>
 
-
-        <label>Immagini esistenti:</label><br>
+        <label>Immagini esistenti:</label>
         <div id="immaginiEsistenti">
             <?php 
                 if(isset($immagini)){ 
@@ -135,11 +132,10 @@ if(isset($_GET) && isset($_GET['id'])){
             ?>
         </div>
 
-        <label for="addImage">Aggiungi nuove immagini</label><br>
+        <label for="addImage">Aggiungi nuove immagini</label>
         <input type="file" name="images[]" id="addImage" multiple />
 
-
-        <label>Varianti</label><br>
+        <label>Varianti</label>
 
         <select id="selectBox">
         <?php 
@@ -186,7 +182,7 @@ if(isset($_GET) && isset($_GET['id'])){
                         hiddenId.setAttribute("type","hidden");
                         hiddenId.setAttribute("name","materialIds[]");
                         hiddenId.setAttribute("value",selectBox.value);
-                        variantContainer.appendChild(hiddenId);
+                        hiddenDiv.appendChild(hiddenId);
                         
                         const defaultButton = document.createElement("input");
                         defaultButton.setAttribute("type", "radio");
@@ -200,38 +196,55 @@ if(isset($_GET) && isset($_GET['id'])){
                         if(!alreadyPresent){
                             defaultButton.setAttribute("checked", "checked");
                         }
-                        variantContainer.appendChild(defaultButton);
+                        hiddenDiv.appendChild(defaultButton);
 
                         const labelDefault = document.createElement("label");
                         labelDefault.setAttribute("for", selectBox.value);
                         labelDefault.innerText = "Default";
-                        variantContainer.appendChild(labelDefault);
+                        hiddenDiv.appendChild(labelDefault);
 
                         const labelName = document.createElement("label");
                         labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
-                        variantContainer.appendChild(labelName);
-
+                        hiddenDiv.appendChild(labelName);
+                        
+                        /*
                         const labelColor = document.createElement("label");
                         labelColor.innerText = obj["hexColore"];
-                        variantContainer.appendChild(labelColor);
+                        hiddenDiv.appendChild(labelColor);
+                        */
+                        //colore
 
                         const variantCost = document.createElement("input");
                         variantCost.setAttribute("type","number");
                         variantCost.setAttribute("name","variantCosts[]");
                         variantCost.setAttribute("value","00");
-                        variantContainer.appendChild(variantCost);
+                        hiddenDiv.appendChild(variantCost);
 
                         const labelRemove = document.createElement("label");
                         labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
                         labelRemove.innerText = "Rimuovi"; 
-                        variantContainer.appendChild(labelRemove);
+                        hiddenDiv.appendChild(labelRemove);
 
                         const removeVariant = document.createElement("input");
                         removeVariant.setAttribute("type","checkbox");
                         removeVariant.setAttribute("name",`removeVariant[${selectBox.value}]`);
                         removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
                         removeVariant.setAttribute("value",selectBox.value);
-                        variantContainer.appendChild(removeVariant);
+                        hiddenDiv.appendChild(removeVariant);
+
+                        const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+                        svg.setAttribute("width","40");
+                        svg.setAttribute("height","40px");
+                        const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+                        ellipse.setAttribute("stroke","black");
+                        ellipse.setAttribute("fill","#"+obj["hexColore"]);
+                        ellipse.setAttribute("stroke-width","2");
+                        ellipse.setAttribute("rx","18");
+                        ellipse.setAttribute("ry","18");
+                        ellipse.setAttribute("cx","18");
+                        ellipse.setAttribute("cy","18");
+                        svg.appendChild(ellipse);
+                        hiddenDiv.appendChild(svg);
 
                         selectBox.options.remove(selectBox.selectedIndex);
                         console.log(selectBox.options);

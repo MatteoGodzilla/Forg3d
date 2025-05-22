@@ -5,7 +5,7 @@
 
 body > h2 {
     text-align: center;
-    margin: var(--padding-large);
+    margin-top: var(--padding-small);
 }
 
 form input[type="color"] {
@@ -41,7 +41,7 @@ form > input#addVariant{
 }
 
 form > div#variantContainer{
-
+    flex-direction: column;
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
 }
@@ -51,15 +51,43 @@ form > button[type="submit"] {
     border-color: var(--light-primary-venditore);
 }
 
-div.variantInfo  {
-    display:flex;
-    align-items:center;
+#visible{
+    display: flex;
+    align-items: center;
+    font-size: var(--font-large);
 }
 
-
 div.variantInfo{
-    align-items: block;
-    margin-left: var(--padding-small);
-    font-size: 1.2em;
-    flex-grow: 1;
+    display: block;
+    margin-left: var(--padding-large);
+    margin-right: var(--padding-large);
+    padding: var(--padding-small);
+    width: 100%;
+}
+
+div.variantInfo > p{
+    font-size: var(--font-small);
+    gap: var(--padding-small);
+}
+
+div.variantInfo > label{
+    font-size: var(--font-small);
+    gap: var(--padding-small);
+    padding-right: var(--padding-small);
+    padding-bottom: var(--padding-small);
+    padding-top: var(--padding-small);
+}
+
+div.variantInfo > input[type="number"]{
+    background-color: var(--light-background);
+    border-style: none;
+    border-radius: 20px;
+    font-size: var(--font-small);
+}
+
+div.variantInfo > svg{
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+    position: absolute;
+    align-items: right;
 }
