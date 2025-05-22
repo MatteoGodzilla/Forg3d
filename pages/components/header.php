@@ -1,13 +1,13 @@
 <?php function create_header(){ ?>
 <header>
-	<h1>Forg3d</h1>
-    <?php if (utenteLoggato()){ ?>
-				<div id="interactibles">
+	<div class="header-content">
+		<h1>Forg3d</h1>
+			<?php if (utenteLoggato()){ ?>
 					<div id="userProfile"></div>
 					<a id="logout" href="./api/handleLogout.php">Logout</a>
-				</div>
-			<?php }else{ ?>
-				<a href="./login.php">Login</a>
-	<?php } ?>
+					<?php }else{ ?>
+						<a id="login" href="./login.php">Login</a>
+			<?php } ?>
+	</div>
 </header>
 <?php } ?>

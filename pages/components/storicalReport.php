@@ -2,7 +2,7 @@
     function storicalReport($report,$isProduct=false){
     
  ?> 
-    <div>
+    <div class="report">
     <b>Revisionata il <?=$report["lastEdit"]?> da:</b>
     <?php if($isProduct): ?>
         <p>Prodotto Segnalato: <?=$report["nome"]?></p>

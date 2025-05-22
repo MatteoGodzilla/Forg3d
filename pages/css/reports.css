@@ -1,0 +1,42 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+
+
+div.report {
+    font-size:1.5em;
+    margin: var(--padding-large);
+    color: var(--light-container);
+    word-wrap: wrap;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+div.report > p {
+    margin-bottom: var(--padding-small);
+    margin-top: var(--padding-small);
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+
+div.report > textarea{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: var(--padding-large);
+    outline: none; /* Optional: removes blue border on focus */
+}
+
+div.report > b{
+    display: block;
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+
+div.report > small{
+    display: block;
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+

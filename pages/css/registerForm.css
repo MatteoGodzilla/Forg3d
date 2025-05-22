@@ -1,8 +1,7 @@
-@import url(./chooserButton.css);
+@import url(./variables.css);
+@import url(./styleReference.css);
 @import url(./form.css);
 @import url(./buttons.css);
-@import url(./styleReference.css);
-
 
 form > input[type="submit"].buyer {
     background-color: var(--light-primary-compratore);

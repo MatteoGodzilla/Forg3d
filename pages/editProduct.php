@@ -86,10 +86,14 @@ if(isset($_GET) && isset($_GET['id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/header.css" />
     <title>Modifica prodotto</title>
 </head>
 <body>
-    <h1>Forg3d</h1>
+	<?php 
+		include_once("./components/header.php");
+		create_header();
+	?>
     <h2>Modifica Prodotto</h2>
     <form action="api/handleProduct.php" method="POST" enctype="multipart/form-data">
         <?php 

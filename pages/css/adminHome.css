@@ -1,6 +1,7 @@
 @import url(./variables.css);
 @import url(./styleReference.css);
 @import url(./home.css);
+@import url(./buttons.css);
 
 h1,h2,p,a{
     text-align: center;
@@ -17,13 +18,3 @@ p {
     font-size: var(--font-small);
 }
 
-a{
-    display:block;
-    background-color: var(--light-danger);
-    margin:var(--padding-medium);
-    padding:var(--padding-medium);
-    color: var(--light-text);
-    border-radius: 70px;
-    text-align: center;
-    font-size:1.5em;
-}

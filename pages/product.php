@@ -67,6 +67,7 @@ while ($row = mysqli_fetch_assoc($resultvarianti)) {
 <html lang="it">
 <head>
     <title>Dettaglio Prodotto</title>
+    <link rel="stylesheet" href="./css/header.css" />
 </head>
 <body>
     <h1><?php echo ($prodotto['nome']); ?></h1>

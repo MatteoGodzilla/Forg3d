@@ -2,7 +2,7 @@
     function showBan($banned,$isProduct=false){
     
  ?> 
-    <div>
+    <div class = "ban-element">
     <?php if($isProduct){ ?>
         <p>Prodotto Bandito: <?=$banned["nome"]?></p>
         <p>Venditore del prodotto: <?=$banned["emailVenditore"]?></p>

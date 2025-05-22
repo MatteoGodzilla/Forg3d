@@ -44,15 +44,15 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/sellerHome.css" />
+    <link rel="stylesheet" href="./css/header.css" />
 </head>
 <body>
-    <header>
-        <h1>Forg3d</h1>
-        <?php if (utenteLoggato()): ?>
-				<a href="./api/handleLogout.php">Logout</a>
-			<?php endif; ?>
-    </header>
-    <h2><?php echo ("Ciao ".$nome); ?></h2>
+    
+    <?php
+        require_once("components/header.php");
+        create_header();
+    ?>
+
     <h3>Listino prodotti</h3>
     <a href="editProduct.php">Aggiungi prodotto</a>
     <?php 

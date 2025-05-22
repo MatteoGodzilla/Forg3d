@@ -1,0 +1,103 @@
+@import url(./variables.css);
+
+/*switch type in login and register forms*/
+form > button#typeSwitcher {
+    --height:2em;
+    position:relative;
+    margin-top: var(--padding-large);
+    margin-bottom: var(--padding-large);
+    padding: var(--padding-small);
+    overflow-x:clip;
+    background-color: var(--light-container);
+    cursor: pointer;
+}
+
+form > button#typeSwitcher::before, form > button#typeSwitcher::after {
+    position:absolute;
+    width:100%;
+    transition: left 1s;
+}
+
+form > button#typeSwitcher::before{
+    content: "Venditore";
+    color: var(--light-primary-venditore);
+    top:calc(var(--height)/2);
+}
+
+form > button#typeSwitcher::after{
+    content: "Compratore";
+    color: var(--light-primary-compratore);
+    top:calc(var(--height)/2);
+}
+
+form > button#typeSwitcher.buyer::after{
+    left:0%;
+}
+form > button#typeSwitcher.seller::after{
+    left:100%;
+}
+
+form > button#typeSwitcher.buyer::before{
+    left:-100%;
+}
+form > button#typeSwitcher.seller::before{
+    left:0%;
+}
+
+form > button#typeSwitcher > div {
+    position:relative;
+    height:var(--height);
+    aspect-ratio:1/1;
+    background-color:var(--light-background);
+    border-radius:100px;
+    transition: left 1s, background-color 1s;
+}
+
+form > button#typeSwitcher.buyer > div {
+    left:0%;
+    background-color: var(--light-primary-venditore);
+}
+
+form > button#typeSwitcher.seller > div {
+    left:calc(100% - var(--height));
+    background-color: var(--light-primary-compratore);
+}
+
+/*Buttons for creation and deletion*/
+
+a.button-create {
+    font-size:1.5em;
+    margin: var(--padding-small);
+    color: var(--light-ok);
+}
+
+a.button-delete {
+    font-size:1.5em;
+    margin: var(--padding-small);
+    color: var(--light-primary-admin);
+}
+
+/*Buttons for accepting and deniying requests*/
+a.button-accept {
+    font-size:1.5em;
+    margin: var(--padding-small);
+    color: var(--light-ok);
+}
+
+a.button-deny {
+    font-size:1.5em;
+    margin: var(--padding-small);
+    color: var(--light-primary-admin);
+}
+
+/*Admin buttons for functionalities*/
+a.functional{
+    display:block;
+    background-color: var(--light-danger);
+    margin:var(--padding-medium);
+    padding:var(--padding-medium);
+    color: var(--light-text);
+    border-radius: 70px;
+    text-align: center;
+    font-size:1.5em;
+}

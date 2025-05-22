@@ -2,26 +2,6 @@
 @import url(./styleReference.css);
 @import url(./form.css);
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0px;
-}
-
-header h1 {
-    display: inline-block;
-    padding: 0px;
-}
-
-header a {
-    background-image: linear-gradient(to bottom right, var(--light-primary-compratore), var(--light-primary-venditore));
-    color: var(--light-text);
-    padding: var(--padding-small) var(--padding-large);
-    border-radius: 70px;
-    font-size: 1.2em;
-}
 
 body > h2 {
     text-align: center;

@@ -11,8 +11,8 @@
         <p><?php echo ($materiale['nomeColore']); ?> (<?php echo ($materiale['tipologia']); ?>) </p>
         <p>#<?php echo ($materiale['hexColore']); ?></p>
         <div>
-            <a href="editMaterial.php?id=<?= $materiale['id']?>"> Modifica</a>
-            <a href="/api/deleteMaterial.php?id=<?= $materiale['id']?>">Elimina</a>
+            <a class ="button-create" href="editMaterial.php?id=<?= $materiale['id']?>"> Modifica</a>
+            <a class ="button-delete" href="/api/deleteMaterial.php?id=<?= $materiale['id']?>">Elimina</a>
         </div>
     </div>
 </article>

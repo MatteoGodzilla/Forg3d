@@ -1,0 +1,33 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+@import url(./buttons.css);
+
+div.request {
+    font-size:1.5em;
+    margin: var(--padding-large);
+    color: var(--light-container);
+    padding: var(--padding-small);
+    text-wrap: wrap;
+}
+div.request > div {
+    flex-grow: 1;
+    padding: var(--padding-small);
+}
+
+div.request >  p {
+    margin-left: var(--padding-small);
+}
+
+div.request > div {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+
+div.ban-element > small{
+    display:inline-block;
+    padding-left: var(--padding-small);
+}
+
+

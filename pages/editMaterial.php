@@ -32,15 +32,14 @@ if(isset($_GET["id"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/materialForm.css" />
+    <link rel="stylesheet" href="./css/header.css" />
     <title>Modifica materiale</title>
 </head>
 <body>
-    <header>
-        <h1>Forg3d</h1>
-        <?php if (utenteLoggato()): ?>
-				<a href="./api/handleLogout.php">Logout</a>
-			<?php endif; ?>
-    </header>
+	<?php 
+		include_once("./components/header.php");
+		create_header();
+	?>
     <h2>Modifica Materiale</h2>
     <form action="/api/handleMaterial.php<?php echo isset($_GET["id"]) ?  '?id='.$_GET["id"] : ''?>" method="POST" enctype="multipart/form-data">
         <label for="nome">Nome Materiale*</label>

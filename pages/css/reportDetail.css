@@ -1,11 +1,7 @@
 @import url(./variables.css);
 @import url(./styleReference.css);
 
-p {
-    margin-bottom: var(--padding-small);
-    margin-left: var(--padding-large);
-    margin-top: var(--padding-small);
-}
+
 
 h2,h3{
     margin-top:var(--padding-large) ;
@@ -36,22 +32,4 @@ h2,h3{
 }
 
 
-textarea{
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    padding-left: var(--padding-large);
-    outline: none; /* Optional: removes blue border on focus */
-}
 
-div {
-    font-size:1.5em;
-    margin: var(--padding-large);
-    color: var(--light-container);
-}
-
-b{
-    padding-left: var(--padding-large);
-}

@@ -1,0 +1,29 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+
+/*For ban history*/
+div.ban-element {
+    font-size:1.5em;
+    margin: var(--padding-large);
+    color: var(--light-container);
+    padding: var(--padding-small);
+    text-wrap: wrap;
+}
+
+div.ban-element > p {
+    margin-left: var(--padding-small);
+}
+
+div.ban-element > textarea{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: var(--padding-large);
+    outline: none; /* Optional: removes blue border on focus */
+}
+
+div.ban-element > b{
+    padding-left: var(--padding-large);
+}

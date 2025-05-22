@@ -49,6 +49,7 @@ $product = $rows[0];
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="./css/reportDetail.css" />
+    <link rel="stylesheet" href="./css/header.css" />
 </head>
 <body>
     <?php

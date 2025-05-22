@@ -3,13 +3,16 @@
     <head>
         <title>Forg3d Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/login.css" />
+        <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/popups.css" />
+        <link rel="stylesheet" href="./css/loginForm.css" />
     </head>
     <body>
-        <header>
-            <h1>Forg3d</h1>
-        </header>
+        	<?php 
+				include_once("./components/header.php");
+                include_once("./../php/session.php");
+				create_header();
+			?>
         <?php 
 			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
                 $isAdmin = true;

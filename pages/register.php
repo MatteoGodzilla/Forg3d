@@ -3,12 +3,16 @@
     <head>
         <title>Forg3d Registrazione</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/register.css" />
+        <link rel="stylesheet" href="./css/registerForm.css" />
+        <link rel="stylesheet" href="./css/header.css" />
     </head>
 	<body>
-        <header>
-            <h1>Forg3d</h1>
-        </header>
+        <?php
+            require_once("components/header.php");
+            require_once("../php/session.php");
+            create_header();
+        ?>
+
         <?php 
 			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
                 $isAdmin = true;
