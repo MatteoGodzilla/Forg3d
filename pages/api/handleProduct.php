@@ -49,15 +49,14 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     sendModifiedProduct($connection, $emailVenditore, $name);
 } else {
     //add new product 
-    
     $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile, varianteDefault) VALUES (?,?,?,?)";
     $stmt = mysqli_prepare($connection, $query);
 
     mysqli_stmt_bind_param($stmt, "ssii", $emailVenditore, $name, $visible, $defaultVariant);
     mysqli_stmt_execute($stmt);
-
-    sendAddedProduct($connection, $emailVenditore, $name);
     $id = mysqli_insert_id($connection);
+    sendAddedProduct($connection, $emailVenditore, $name);
+    
 }
 
 //Set 3d Preview file
@@ -104,7 +103,7 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
     $query_remove = "DELETE FROM Variante WHERE idProdotto = ?";
     $stmt = mysqli_prepare($connection, $query_remove);
     mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt); 
+    mysqli_stmt_execute($stmt);
 
 
     $query_add = "INSERT INTO Variante(idProdotto, idMateriale, prezzo) VALUES (?,?,?)";
