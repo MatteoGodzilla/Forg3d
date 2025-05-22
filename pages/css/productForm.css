@@ -1,0 +1,65 @@
+@import url(./variables.css);
+@import url(./styleReference.css);
+@import url(./form.css);
+
+
+body > h2 {
+    text-align: center;
+    margin: var(--padding-large);
+}
+
+form input[type="color"] {
+    width:75px;
+    height:75px;
+    border-color:black;
+    border-style:solid;
+    border-radius:50px;
+}
+
+form > div {
+    display:flex;
+    align-items:center;
+}
+
+form > div > input[type="text"] {
+    margin-left: var(--padding-small);
+    font-size: 1.2em;
+    flex-grow: 1;
+}
+
+form > input[type="checkbox"] {
+    all:unset;
+    appearance: checkbox;
+  }
+
+form > input#addVariant{
+    border-radius: 70px;
+    background-color: var(--light-primary-ausiliar);
+    border-color: var(--light-primary-ausiliar);
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
+}
+
+form > div#variantContainer{
+
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
+}
+
+form > button[type="submit"] {
+    background-color: var(--light-primary-venditore);
+    border-color: var(--light-primary-venditore);
+}
+
+div.variantInfo  {
+    display:flex;
+    align-items:center;
+}
+
+
+div.variantInfo{
+    align-items: block;
+    margin-left: var(--padding-small);
+    font-size: 1.2em;
+    flex-grow: 1;
+}

@@ -87,6 +87,7 @@ if(isset($_GET) && isset($_GET['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/productForm.css" />
     <title>Modifica prodotto</title>
 </head>
 <body>
@@ -108,12 +109,12 @@ if(isset($_GET) && isset($_GET['id'])){
         <input type="text" id="productName" name="productName" required
             <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
         />
-        <hr>
+
 
         <input type="checkbox" name="visible" id="visible" 
             <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
         <label for="visible">Visibile</label>
-        <hr>
+
 
         <label>Preview 3D esistente:</label><br>
         <?php if (isset($product['fileModello'])){ ?>
@@ -121,7 +122,7 @@ if(isset($_GET) && isset($_GET['id'])){
         <?php } ?>
         <label for="3dPreview">Sostituisci file 3D</label><br>
         <input type="file" name="3dPreview" id="3dPreview"/>
-        <hr>
+
 
         <label>Immagini esistenti:</label><br>
         <div id="immaginiEsistenti">
@@ -133,10 +134,10 @@ if(isset($_GET) && isset($_GET['id'])){
                 }
             ?>
         </div>
-        <br>
+
         <label for="addImage">Aggiungi nuove immagini</label><br>
         <input type="file" name="images[]" id="addImage" multiple />
-        <hr>
+
 
         <label>Varianti</label><br>
 
@@ -162,7 +163,6 @@ if(isset($_GET) && isset($_GET['id'])){
             }
         ?> 
         </div>
-        <hr>
 
         <button type="submit">Salva modifiche</button>
     </form>
@@ -178,6 +178,10 @@ if(isset($_GET) && isset($_GET['id'])){
                 fetch(`/api/getMaterial.php?id=${selectBox.value}`)
                     .then(res => res.json())
                     .then(obj => {
+                        const hiddenDiv = document.createElement("div");
+                        hiddenDiv.setAttribute("class","variantInfo");
+                        variantContainer.appendChild(hiddenDiv);
+
                         const hiddenId = document.createElement("input");
                         hiddenId.setAttribute("type","hidden");
                         hiddenId.setAttribute("name","materialIds[]");
