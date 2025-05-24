@@ -32,7 +32,7 @@ if(isset($_GET['search'])){
     	}
 	}
 
-	$query_prodotti = "SELEC-T p.id, p.nome, p.fileModello, p.visibile,
+	$query_prodotti = "SELECT p.id, p.nome, p.fileModello, p.visibile,
 						u.nome AS venditoreNome, u.cognome AS venditoreCognome
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
