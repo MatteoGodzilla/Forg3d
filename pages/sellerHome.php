@@ -17,7 +17,7 @@
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     #Query Materiali
-    $query_materials = "SELECT * FROM Materiale Where idVenditore = ?";
+    $query_materials = "SELECT * FROM Materiale Where idVenditore = ? AND visibile > 0";
     $stmt = mysqli_prepare($connection, $query_materials);
     mysqli_stmt_bind_param($stmt,"s",$email );
     mysqli_stmt_execute($stmt);
