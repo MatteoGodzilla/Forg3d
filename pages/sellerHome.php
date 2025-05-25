@@ -36,6 +36,14 @@
         $nome = $row["nome"];
     }
 
+    //Query Notifiche
+    $query_notifiche = "SELECT titolo, descrizione FROM Notifica WHERE emailVenditore = ? ORDER BY creazione DESC";
+    $stmt = mysqli_prepare($connection, $query_notifiche);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +76,15 @@
         require_once("components/sellerHomeMaterial.php");
         foreach($materials as $material){
             sellerHomeMaterial($material);
+        }
+    ?>
+
+    <h3>Notifiche</h3>
+    <a href="sellerNotification.php">Invia Notifica</a>
+    <?php 
+        require_once("components/sellerHomeNotif.php");
+        foreach($notifs as $notification){
+            sellerHomeNotification($notification);
         }
     ?>
 </body>
