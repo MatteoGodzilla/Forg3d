@@ -28,14 +28,18 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $check = mysqli_fetch_assoc($result);
 
+//TODO: Product removal if it was never bought in the first place
+
 if($check["visibile"] != 0){
     //Fake removal in database
     $query_remove = "UPDATE Prodotto SET visibile=0 WHERE id = ? AND emailVenditore = ?";
     $stmt = mysqli_prepare($connection, $query_remove);
     mysqli_stmt_bind_param($stmt, "is", $id, $email);
     mysqli_stmt_execute($stmt);
-    //Send notification of removal
-    sendRemovedProduct($connection, $email);
+    //Send notification of removal, if it was visible
+    if($visible == 2){ 
+        sendRemovedProduct($connection, $email);
+    }
 }
 
 header("Location: /sellerHome.php");

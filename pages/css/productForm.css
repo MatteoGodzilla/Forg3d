@@ -2,7 +2,6 @@
 @import url(./styleReference.css);
 @import url(./form.css);
 
-
 body > h2 {
     text-align: center;
     margin-top: var(--padding-small);
@@ -30,7 +29,11 @@ form > div > input[type="text"] {
 form > input[type="checkbox"] {
     all:unset;
     appearance: checkbox;
-  }
+}
+
+form > label[for="visible"] {
+    display: inline;
+}
 
 form > input#addVariant{
     border-radius: 70px;
@@ -38,6 +41,7 @@ form > input#addVariant{
     border-color: var(--light-primary-ausiliar);
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
+    cursor: pointer;
 }
 
 form > div#variantContainer{
@@ -46,48 +50,40 @@ form > div#variantContainer{
     margin-bottom: var(--padding-small);
 }
 
-form > button[type="submit"] {
-    background-color: var(--light-primary-venditore);
-    border-color: var(--light-primary-venditore);
-}
-
-#visible{
-    display: flex;
-    align-items: center;
-    font-size: var(--font-large);
-}
-
 div.variantInfo{
-    display: block;
-    margin-left: var(--padding-large);
-    margin-right: var(--padding-large);
     padding: var(--padding-small);
     width: 100%;
 }
 
+div.variantInfo > svg{
+    vertical-align: middle;
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+
 div.variantInfo > p{
     font-size: var(--font-small);
-    gap: var(--padding-small);
 }
 
 div.variantInfo > label{
+    vertical-align: middle;
     font-size: var(--font-small);
-    gap: var(--padding-small);
     padding-right: var(--padding-small);
-    padding-bottom: var(--padding-small);
-    padding-top: var(--padding-small);
-}
+} 
 
 div.variantInfo > input[type="number"]{
+    display: block;
+    width:100%;
     background-color: var(--light-background);
     border-style: none;
     border-radius: 20px;
     font-size: var(--font-small);
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
 }
 
-div.variantInfo > svg{
-    padding-left: var(--padding-small);
-    padding-right: var(--padding-small);
-    position: absolute;
-    align-items: right;
+form > input[type="submit"] {
+    background-color: var(--light-primary-venditore);
+    border-color: var(--light-primary-venditore);
+    cursor: pointer;
 }

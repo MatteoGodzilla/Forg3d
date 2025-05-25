@@ -45,8 +45,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $stmt = mysqli_prepare($connection, $query_update);
     mysqli_stmt_bind_param($stmt, "siii", $name, $visible, $defaultVariant, $id);
     mysqli_stmt_execute($stmt);
-    
-    sendModifiedProduct($connection, $emailVenditore, $name);
+
+    //Notification should only be sent for buyer-visible products
+    if($visible == 2){
+        sendModifiedProduct($connection, $emailVenditore, $name);
+    }
 } else {
     //add new product 
     $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile, varianteDefault) VALUES (?,?,?,?)";
@@ -55,8 +58,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     mysqli_stmt_bind_param($stmt, "ssii", $emailVenditore, $name, $visible, $defaultVariant);
     mysqli_stmt_execute($stmt);
     $id = mysqli_insert_id($connection);
-    sendAddedProduct($connection, $emailVenditore, $name);
-    
+
+    //Notification should only be sent for buyer-visible products
+    if($visible == 2){
+        sendAddedProduct($connection, $emailVenditore, $name);
+    }
 }
 
 //Set 3d Preview file

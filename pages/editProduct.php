@@ -110,9 +110,9 @@ if(isset($_GET) && isset($_GET['id'])){
             <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
         />
 
-        <label for="visible">Visibile</label>
         <input type="checkbox" name="visible" id="visible" 
             <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
+        <label for="visible">Visibile</label>
 
         <label>Preview 3D esistente:</label>
         <?php if (isset($product['fileModello'])){ ?>
@@ -152,22 +152,35 @@ if(isset($_GET) && isset($_GET['id'])){
         <input type="button" id="addVariant" value="Aggiungi Variante"/>
         <div id="variantContainer">
         <?php 
+            $defaultVariant = 0;
+            if(isset($product["varianteDefault"])){
+                $defaultVariant = $product["varianteDefault"];
+            }
             if(isset($varianti)){
                 while ($variant = mysqli_fetch_assoc($varianti)){
-                    generateEditVariant($variant);
+                    generateEditVariant($variant, $defaultVariant);
                 }
             }
         ?> 
         </div>
 
-        <button type="submit">Salva modifiche</button>
+        <input type="submit" value="Salva modifiche" />
     </form>
 
     <script>
         const addVariantButton = document.querySelector("#addVariant");
         const variantContainer = document.querySelector("#variantContainer");
         const selectBox = document.querySelector("#selectBox");
+        const submitButton = document.querySelector("input[type='submit']");
         let defaultRadioButtons = document.querySelectorAll("input[type='radio']");
+
+        function defaultVariantPresent(){
+            let alreadyPresent = false;
+            for(let button of defaultRadioButtons){
+                alreadyPresent = alreadyPresent || button.checked;
+            }
+            return alreadyPresent;
+        }
 
         addVariantButton.onclick = () => {
             if(selectBox.selectedIndex >= 0){
@@ -189,11 +202,7 @@ if(isset($_GET) && isset($_GET['id'])){
                         defaultButton.setAttribute("name", "defaultVariant");
                         defaultButton.setAttribute("value", selectBox.value);
                         defaultButton.setAttribute("id", selectBox.value);
-                        let alreadyPresent = false;
-                        for(let button of defaultRadioButtons){
-                            alreadyPresent = alreadyPresent || button.checked;
-                        }
-                        if(!alreadyPresent){
+                        if(!defaultVariantPresent()){
                             defaultButton.setAttribute("checked", "checked");
                         }
                         hiddenDiv.appendChild(defaultButton);
@@ -207,13 +216,6 @@ if(isset($_GET) && isset($_GET['id'])){
                         labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
                         hiddenDiv.appendChild(labelName);
                         
-                        /*
-                        const labelColor = document.createElement("label");
-                        labelColor.innerText = obj["hexColore"];
-                        hiddenDiv.appendChild(labelColor);
-                        */
-                        //colore
-
                         const variantCost = document.createElement("input");
                         variantCost.setAttribute("type","number");
                         variantCost.setAttribute("name","variantCosts[]");
@@ -251,7 +253,15 @@ if(isset($_GET) && isset($_GET['id'])){
                         defaultRadioButtons = document.querySelectorAll("input[type='radio']");
                     })
             }
-        }  
+        }
+
+        submitButton.onclick = (ev) => {
+            if(!defaultVariantPresent()){
+                console.log("CLICK");
+                console.log(ev);
+                ev.preventDefault();
+            }
+        }
     </script>
 </body>
 </html>
