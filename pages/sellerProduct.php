@@ -4,6 +4,8 @@ include_once("../php/db.php");
 include_once("./components/productList.php");
 include_once("../php/constants.php");
 include_once("../php/session.php");
+include_once("../php/feedback.php");
+
 
 if (!isset($_GET['email']) || empty($_GET['email'])) {
 	exit;
@@ -61,6 +63,13 @@ mysqli_stmt_store_result($stmt);
 $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    //controlla se utente è loggato
+    if(!utenteLoggato()){
+        header("Location:".feedback("./sellerProduct.php?email=".$emailVenditore,AlertType::ERROR->value,"Devi essere loggato con un account per seguire un venditore!",true));
+        exit();
+    }
+
     if (isset($_POST["follow"])) {
         $stmt = mysqli_prepare($connection, "INSERT IGNORE INTO Follow (emailCompratore, emailVenditore) VALUES (?, ?)");
         mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
@@ -84,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="./css/home.css">
 		<link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/popups.css">
 	</head>
 	<body>
 			<?php 
@@ -114,5 +124,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php else: ?>
             <p>Nessun prodotto trovato.</p>
         <?php endif; ?>
+
+        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+                include_once("./components/popups.php");
+                include_once("./../php/constants.php");
+                create_popup($_GET["message"],$_GET["messageType"]);
+            } 
+         ?>
 	</body>
 </html>

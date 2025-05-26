@@ -1,6 +1,8 @@
 @import url(./variables.css);
 
 div#error-popup{
+    all : unset;
+    height: auto;
     background-color: var(--light-danger);
     font-size: var(--font-small);
     margin: var(--padding-large);
@@ -8,9 +10,12 @@ div#error-popup{
     display: block;
     box-sizing: border-box;
     word-wrap: break-word;
+    text-align: center;
 }
 
 div#warning-popup{
+    all : unset;
+    height: auto;
     background-color: var(--light-warning);
     font-size: var(--font-small);
     margin: var(--padding-large);
@@ -18,9 +23,12 @@ div#warning-popup{
     display: block;
     box-sizing: border-box;
     word-wrap: break-word;
+    text-align: center;
 }
 
 div#success-popup{
+    all : unset;
+    height: auto;
     background-color: var(--light-ok);
     font-size: var(--font-small);
     margin: var(--padding-large);
@@ -28,4 +36,5 @@ div#success-popup{
     display: block;
     box-sizing: border-box;
     word-wrap: break-word;
+     text-align: center;
 }
