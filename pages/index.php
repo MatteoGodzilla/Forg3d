@@ -57,7 +57,7 @@ if(isset($_GET['search'])){
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
 						JOIN Utente u ON u.email = v.emailUtente
-						WHERE p.visibile = 1 AND NOT stato=3";
+						WHERE p.visibile = 2 AND NOT stato=3";
 
     $result = mysqli_query($connection, $query_prodotti);
 

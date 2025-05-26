@@ -52,14 +52,13 @@ while ($row = mysqli_fetch_assoc($result_p)) {
 		<title>Forg3d Home</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="./css/home.css">
+		<link rel="stylesheet" href="./css/header.css">
 	</head>
 	<body>
-		<header>
 			<?php 
-			include_once("./components/header.php");
-			create_header();
+				include_once("./components/header.php");
+				create_header();
 			?>
-		</header>
         <h2>Prodotti di <?= $seller['nome'] . ' ' . $seller['cognome'] ?></h2>
 		<?php if (count($products) > 0): ?>
 			<section class="product-list">
