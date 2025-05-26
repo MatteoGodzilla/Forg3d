@@ -40,7 +40,7 @@ $emailUtente = getSessionEmail();
 
 if (!$prodotto['visibile']) {
     // Se non è admin e non è il venditore stesso
-    if ($tipoUtente !== 'admin' && $emailUtente !== $prodotto['venditoreEmail']) {
+    if ($tipoUtente != UserType::ADMIN->value && $emailUtente !== $prodotto['venditoreEmail']) {
         die("");// Modifica all pagina home
     }
 }
@@ -61,6 +61,13 @@ while ($row = mysqli_fetch_assoc($resultvarianti)) {
 			$varianti[] = $row;
 		}
 
+
+//Query delle immagini
+$quey_immagini = "SELECT id,nomeFile FROM ImmaginiProdotto WHERE idProdotto= ?";
+$stmt = mysqli_prepare($connection, $quey_immagini);
+mysqli_stmt_bind_param($stmt,"i", $idProdotto);
+mysqli_stmt_execute($stmt);
+$resultImmagini = mysqli_stmt_get_result($stmt);
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +77,17 @@ while ($row = mysqli_fetch_assoc($resultvarianti)) {
     <link rel="stylesheet" href="./css/header.css" />
 </head>
 <body>
-    <h1><?php echo ($prodotto['nome']); ?></h1>
+
+    <?php
+        include_once("./components/header.php");
+        create_header();
+    ?>
+
+<?php foreach($resultImmagini as $immagini): ?>
+    <img href=<?= $immagini["nomeFile"]?>> </img>
+<?php endforeach ?>
+
+    <h2><?php echo ($prodotto['nome']); ?></h2>
     <p><strong>Venditore:</strong> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>)</p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
     <h2>Varianti disponibili</h2>
