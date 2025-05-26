@@ -8,7 +8,9 @@
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>
         <?php } else { ?>
+            <div id="userProfile">
             <a id="login" href="./login.php">Login</a>
+            </div>
         <?php } ?>
 	</div>
 </header>
