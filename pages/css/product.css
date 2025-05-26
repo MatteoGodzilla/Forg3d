@@ -25,21 +25,33 @@ small{
     text-align: center;
 }
 
-img{
-    justify-content: center;
-    max-height: 400px;
-    max-width: 400px;
-    object-fit:cover;
+div.image-container,div.image-button{
+    background-color: var(--light-background);
     margin: var(--padding-small);
 }
 
+
 div.image-container,div.image-button{
-    background-color: var(--light-background);
     text-align: center;
+    justify-content: center;
+}
+
+div.image{
+ display: flex;
+ background-color: var(--light-image-container);
 }
 
 div.image-button{
     width: 100%;
+}
+
+div.image > img{
+
+    max-height: 30%;
+    max-width: 40%;
+    aspect-ratio: 4/3;
+    object-fit:fill;
+    margin: var(--padding-small);
 }
 
 

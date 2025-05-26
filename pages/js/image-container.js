@@ -1,26 +1,27 @@
 let current = 0;
 activeImage(current);
 
-function activeImage(n){
+function activeImage(){
+    console.log(current);
     let immagini = document.getElementsByClassName("image");
     for(let i =0; i< immagini.length;i++){
         immagini[i].style.display="none";
     }
-    if(n<0){
-        n = immagini.length-1;
+    if(current<0){
+        current = immagini.length-1;
     }
-    else if(n>=immagini.length){
-        n = 0;
+    else if(current>=immagini.length){
+        current = 0;
     }
-    immagini[n].style.display="block"; 
+    immagini[current].style.display="block"; 
 }
 
 function previousImage(){
     current--;
-    activeImage(current);
+    activeImage();
 }
 
 function nextImage(){
     current++;
-    activeImage(current);
+    activeImage();
 }
