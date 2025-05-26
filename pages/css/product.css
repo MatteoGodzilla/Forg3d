@@ -21,3 +21,10 @@ small{
     display: block;
 }
 
+img{
+    max-height:256px;
+    width: 95%;
+    object-fit: cover;
+    margin: var(--padding-small);
+}
+

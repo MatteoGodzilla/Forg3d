@@ -73,6 +73,7 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dettaglio Prodotto</title>
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/product.css" />
@@ -85,18 +86,19 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     ?>
 
 <?php foreach($resultImmagini as $immagini): ?>
-    <img href=<?= $immagini["nomeFile"]?>> </img>
+    <img src="<?= $immagini["nomeFile"]?>"> </img>
 <?php endforeach ?>
 
     <h2><?php echo ($prodotto['nome']); ?></h2>
     <p><strong>Venditore:</strong> <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo ($prodotto['venditoreEmail']); ?>)</a></p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
     <h3>Varianti</h3>
+
     <?php 
-    include_once("./components/varianteOption.php");
-    foreach($varianti as $variante){
-        varianteOption($variante);
-    }
+        include_once("./components/varianteOption.php");
+        foreach($varianti as $variante){
+            varianteOption($variante);
+        }
     ?>
 
     <?php if ($tipoUtente==UserType::BUYER->value): ?>
@@ -112,5 +114,7 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
             <button type="submit">Invia Recensione</button>
         </form>
     <?php endif; ?>
+
+
 </body>
 </html>
