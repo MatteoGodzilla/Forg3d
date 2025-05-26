@@ -19,4 +19,11 @@ function sendSellerNotification($connection, string $sellerEmail, string $title,
     mysqli_stmt_execute($stmt);
 }
 
+function sendAdminNotification($connection, string $title, string $description){
+    $query_add_notification = "INSERT INTO Notifica(titolo, descrizione) VALUES (?,?)";
+    $stmt = mysqli_prepare($connection, $query_add_notification);
+    mysqli_stmt_bind_param($stmt, "ss", $title, $description);
+    mysqli_stmt_execute($stmt);
+}
+
 ?>
