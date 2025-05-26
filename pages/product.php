@@ -89,7 +89,7 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
 <?php endforeach ?>
 
     <h2><?php echo ($prodotto['nome']); ?></h2>
-    <p><strong>Venditore:</strong> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>)</p>
+    <p><strong>Venditore:</strong> <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo ($prodotto['venditoreEmail']); ?>)</a></p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
     <h3>Varianti</h3>
     <?php 
