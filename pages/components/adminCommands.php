@@ -12,4 +12,6 @@
         <h2>Storico segnalazioni</h2>
         <a class="functional" href="reportsHistory.php?Sellers">Storico Venditori</a><br>
         <a class="functional" href="reportsHistory.php?Products">Storico Prodotti</a><br>
+        <h2>Notifiche</h2>
+        <a class="functional" href="adminNotification.php">Invia notifica</a><br>
 <?php }?>

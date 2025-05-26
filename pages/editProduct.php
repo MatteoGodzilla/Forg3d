@@ -197,6 +197,30 @@ if(isset($_GET) && isset($_GET['id'])){
                         hiddenId.setAttribute("value",selectBox.value);
                         hiddenDiv.appendChild(hiddenId);
                         
+                        const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+                        svg.setAttribute("width","40");
+                        svg.setAttribute("height","40px");
+                        const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+                        ellipse.setAttribute("stroke","black");
+                        ellipse.setAttribute("fill","#"+obj["hexColore"]);
+                        ellipse.setAttribute("stroke-width","2");
+                        ellipse.setAttribute("rx","16");
+                        ellipse.setAttribute("ry","16");
+                        ellipse.setAttribute("cx","20");
+                        ellipse.setAttribute("cy","20");
+                        svg.appendChild(ellipse);
+                        hiddenDiv.appendChild(svg);
+
+                        const labelName = document.createElement("label");
+                        labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
+                        hiddenDiv.appendChild(labelName);
+                        
+                        const variantCost = document.createElement("input");
+                        variantCost.setAttribute("type","number");
+                        variantCost.setAttribute("name","variantCosts[]");
+                        variantCost.setAttribute("value","00");
+                        hiddenDiv.appendChild(variantCost);
+
                         const defaultButton = document.createElement("input");
                         defaultButton.setAttribute("type", "radio");
                         defaultButton.setAttribute("name", "defaultVariant");
@@ -212,16 +236,6 @@ if(isset($_GET) && isset($_GET['id'])){
                         labelDefault.innerText = "Default";
                         hiddenDiv.appendChild(labelDefault);
 
-                        const labelName = document.createElement("label");
-                        labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
-                        hiddenDiv.appendChild(labelName);
-                        
-                        const variantCost = document.createElement("input");
-                        variantCost.setAttribute("type","number");
-                        variantCost.setAttribute("name","variantCosts[]");
-                        variantCost.setAttribute("value","00");
-                        hiddenDiv.appendChild(variantCost);
-
                         const labelRemove = document.createElement("label");
                         labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
                         labelRemove.innerText = "Rimuovi"; 
@@ -233,20 +247,6 @@ if(isset($_GET) && isset($_GET['id'])){
                         removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
                         removeVariant.setAttribute("value",selectBox.value);
                         hiddenDiv.appendChild(removeVariant);
-
-                        const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
-                        svg.setAttribute("width","40");
-                        svg.setAttribute("height","40px");
-                        const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
-                        ellipse.setAttribute("stroke","black");
-                        ellipse.setAttribute("fill","#"+obj["hexColore"]);
-                        ellipse.setAttribute("stroke-width","2");
-                        ellipse.setAttribute("rx","18");
-                        ellipse.setAttribute("ry","18");
-                        ellipse.setAttribute("cx","18");
-                        ellipse.setAttribute("cy","18");
-                        svg.appendChild(ellipse);
-                        hiddenDiv.appendChild(svg);
 
                         selectBox.options.remove(selectBox.selectedIndex);
                         console.log(selectBox.options);
