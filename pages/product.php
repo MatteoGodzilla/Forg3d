@@ -83,12 +83,11 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     <?php
         include_once("./components/header.php");
         create_header();
+        include_once("./components/image-container.php");
+        create_image_container($resultImmagini);
     ?>
 
-<?php foreach($resultImmagini as $immagini): ?>
-    <img src="<?= $immagini["nomeFile"]?>"> </img>
-<?php endforeach ?>
-
+    <script src="./js/image-container.js"></script>
     <h2><?php echo ($prodotto['nome']); ?></h2>
     <p><strong>Venditore:</strong> <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo ($prodotto['venditoreEmail']); ?>)</a></p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
