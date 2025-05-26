@@ -5,38 +5,41 @@ div.variantOption{
     margin-left: var(--padding-small);
     padding: var(--padding-small);
     background-color: var(--light-background);
+    text-align: center;
 }
 
 p,h2{
     margin: var(--padding-small);
+    text-align: center;
 }
 
 h3{
     margin-left: var(--padding-small);
     margin-top: var(--padding-small);
+    text-align: center;
 }
 
 small{
     color: gray;
     display: block;
+    text-align: center;
 }
 
 img{
-    height: 100%;
-    width: 100%;
-    max-height: 512px;
-    max-width: 512px;
-    object-fit:contain;
+    justify-content: center;
+    max-height: 400px;
+    max-width: 400px;
+    object-fit:cover;
+    margin: var(--padding-small);
 }
 
 div.image-container,div.image-button{
     background-color: var(--light-background);
-    position: relative;
+    text-align: center;
 }
 
 div.image-button{
     width: 100%;
-    align-items: center;
 }
 
 
