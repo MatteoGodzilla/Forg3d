@@ -10,6 +10,8 @@ if (!isset($_GET['email']) || empty($_GET['email'])) {
 }
 
 $emailVenditore = $_GET['email'];
+$emailUtente = getSessionEmail();
+$isFollowing = false;
 
 $queryInfo = "SELECT u.nome, u.cognome
                 FROM Venditore v
@@ -44,6 +46,35 @@ $result_p = mysqli_stmt_get_result($stmtProduct);
 while ($row = mysqli_fetch_assoc($result_p)) {
 	$products[] = $row;
 }
+
+$queryFollowers = "SELECT COUNT(*) as followers FROM Follow WHERE emailVenditore = ?";
+$stmtFollowers = mysqli_prepare($connection, $queryFollowers);
+mysqli_stmt_bind_param($stmtFollowers, "s", $emailVenditore);
+mysqli_stmt_execute($stmtFollowers);
+$resultFollowers = mysqli_stmt_get_result($stmtFollowers);
+$followersCount = mysqli_fetch_assoc($resultFollowers)['followers'] ?? 0;
+
+$stmt = mysqli_prepare($connection, "SELECT 1 FROM Follow WHERE emailCompratore = ? AND emailVenditore = ?");
+mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+$isFollowing = mysqli_stmt_num_rows($stmt) > 0;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["follow"])) {
+        $stmt = mysqli_prepare($connection, "INSERT IGNORE INTO Follow (emailCompratore, emailVenditore) VALUES (?, ?)");
+        mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
+        mysqli_stmt_execute($stmt);
+        $isFollowing = true;
+        $followersCount++;
+    } elseif (isset($_POST["unfollow"])) {
+        $stmt = mysqli_prepare($connection, "DELETE FROM Follow WHERE emailCompratore = ? AND emailVenditore = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
+        mysqli_stmt_execute($stmt);
+        $isFollowing = false;
+        $followersCount = max(0, $followersCount - 1);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,15 +90,24 @@ while ($row = mysqli_fetch_assoc($result_p)) {
 				include_once("./components/header.php");
 				create_header();
 			?>
-        <h2>Prodotti di <?= $seller['nome'] . ' ' . $seller['cognome'] ?></h2>
+        <section class="seller-info">
+        <h2><?= ($seller['nome'] . ' ' . $seller['cognome']) ?></h2>
+        <p>Email: <?= ($emailVenditore) ?></p>
+        <p>Follower: <?= $followersCount ?></p>
+        <form method="POST" class="follow-btn">
+                <?php if ($isFollowing): ?>
+                    <button type="submit" name="unfollow">Unfollow</button>
+                <?php else: ?>
+                    <button type="submit" name="follow">Segui</button>
+                <?php endif; ?>
+            </form>
+    	</section>
 		<?php if (count($products) > 0): ?>
-			<section class="product-list">
-				<?php foreach ($products as $product): ?>
-					<?php generateProductList($product); ?>
-				<?php endforeach; ?>
-			</section>
-		<?php else: ?>
-			<p>Nessun prodotto trovato.</p>
-		<?php endif; ?>
+            <?php foreach ($products as $product): ?>
+                <?php generateProductList($product); ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Nessun prodotto trovato.</p>
+        <?php endif; ?>
 	</body>
 </html>
