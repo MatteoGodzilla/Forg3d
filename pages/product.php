@@ -75,6 +75,7 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
 <head>
     <title>Dettaglio Prodotto</title>
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/product.css" />
 </head>
 <body>
 
@@ -90,13 +91,13 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     <h2><?php echo ($prodotto['nome']); ?></h2>
     <p><strong>Venditore:</strong> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>)</p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
-    <h2>Varianti disponibili</h2>
-    <?php foreach($varianti as $variante): ?>
-        <p><strong>Materiale:</strong> <?php echo ($variante['tipologia']); ?></p>
-        <p><strong>Colore:</strong> <?php echo $variante['nomeColore']; ?> (#<?php echo $variante['hexColore']; ?>)</p>
-        <p><strong>Prezzo:</strong> €<?php echo number_format($variante['prezzo'] / 100, 2, ',', '.'); ?></p>
-        <hr>
-    <?php endforeach; ?>
+    <h3>Varianti</h3>
+    <?php 
+    include_once("./components/varianteOption.php");
+    foreach($varianti as $variante){
+        varianteOption($variante);
+    }
+    ?>
 
     <?php if ($tipoUtente==UserType::BUYER->value): ?>
         <form action="aggiungi_carrello.php" method="POST">

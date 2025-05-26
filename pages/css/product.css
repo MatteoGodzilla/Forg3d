@@ -1,0 +1,23 @@
+@import url(./styleReference.css);
+@import url(./variables.css);
+
+div.variantOption{
+    margin-left: var(--padding-small);
+    padding: var(--padding-small);
+    background-color: var(--light-background);
+}
+
+p,h2{
+    margin: var(--padding-small);
+}
+
+h3{
+    margin-left: var(--padding-small);
+    margin-top: var(--padding-small);
+}
+
+small{
+    color: gray;
+    display: block;
+}
+
