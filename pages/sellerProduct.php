@@ -100,7 +100,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php else: ?>
                     <button type="submit" name="follow">Segui</button>
                 <?php endif; ?>
-            </form>
+        </form>
+		<form method="POST" action="/api/report.php">
+			<input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+			<input type="hidden" name="tipo" value="venditore">	
+			<button type="submit">Segnala venditore</button>
+    	</form>
     	</section>
 		<?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
