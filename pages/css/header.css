@@ -1,18 +1,13 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=notifications");
 
 .header-content{
     display: flex;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
     flex-wrap: wrap;
-    top: 0px;
-    height: 100%;
-    min-height: 60px;
-    max-height: 12%;
     padding: var(--padding-small);
-    background-color: var(--light-container);
 }
 
 .header-content > h1{
@@ -20,30 +15,32 @@
     padding: 0px;
 }
 
-.header-content#userProfile{
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-color: #ccc; /* fallback background */
-    background-image: 
-    radial-gradient(circle at 50% 40%, #999 20%, transparent 21%),
-    radial-gradient(circle at 50% 75%, #999 30%, transparent 31%);
-    background-repeat: no-repeat;
-    background-position: center;
+/* For Notification icon, copy and pasted from official site*/
+.header-content .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 32
 }
 
-.header-content#interactibles{
-    display: flex;
-    gap: 1rem;
+.header-content #userProfile {
+    margin-left: auto; /*used to force the element on the end of the flexbox */
 }
 
-.header-content>#logout,.header-content>#login{
+.header-content .material-symbols-outlined {
+    vertical-align: middle;
+    font-size: 2em;
+    margin-right: var(--padding-small);
+}
+
+.header-content #logout, .header-content #login{
     background-image: linear-gradient(to bottom right, var(--light-primary-compratore), var(--light-primary-venditore));
     color: var(--light-text);
     padding: var(--padding-small) var(--padding-large);
     border-radius: 70px;
     border: 0;
     font-size: 1.2em;
+    vertical-align: middle;
 }
-
 
