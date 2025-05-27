@@ -4,7 +4,8 @@
 		<a href="/"><h1>Forg3d</h1></a>
         <?php if (utenteLoggato()){ ?>
             <div id="userProfile">
-                <span class="material-symbols-outlined">notifications</span>
+                <?php generateSymbol(); ?>
+                <span id="notifications" class="material-symbols-outlined">notifications</span>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>
         <?php } else { ?>
@@ -14,4 +15,16 @@
         <?php } ?>
 	</div>
 </header>
+<?php } ?>
+
+<?php function generateSymbol(){ ?>
+    <?php if (getUserType()==UserType::BUYER->value){ ?>
+        <a><span class="material-symbols-outlined">shopping_cart_checkout</span></a>
+    <?php }?>
+     <?php if (getUserType()==UserType::SELLER->value){ ?>
+        <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>
+    <?php }?>
+    <?php if (getUserType()==UserType::ADMIN->value){ ?>
+        <a href="./../adminHome.php"><span class="material-symbols-outlined">home</span></a>
+    <?php }?>
 <?php } ?>
