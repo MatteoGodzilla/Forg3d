@@ -1,3 +1,14 @@
+<?php
+//nessun motivo per cui un utente loggato dovrebbe finire qui
+session_start();
+require_once("../php/db.php");
+require_once("../php/session.php");
+if(utenteLoggato()){
+    header("Location: /");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it">
     <head>
