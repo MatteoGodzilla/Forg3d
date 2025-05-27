@@ -63,10 +63,15 @@ mysqli_stmt_store_result($stmt);
 $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+<<<<<<< HEAD
 
     //controlla se utente è loggato
     if(!utenteLoggato()){
         header("Location:".feedback("./sellerProduct.php?email=".$emailVenditore,AlertType::ERROR->value,"Devi essere loggato con un account per seguire un venditore!",true));
+=======
+    if(!utenteLoggato()){
+        header("Location:".feedback("./sellerProduct.php?email=".$emailVenditore));
+>>>>>>> fe1da9ad564c1c021f35deca12ffbe67774a19f9
         exit();
     }
 
@@ -111,12 +116,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <button type="submit" name="follow">Segui</button>
                 <?php endif; ?>
         </form>
+        <h3>Segnala venditore</h3>
 		<form method="POST" action="/api/report.php">
 			<input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
 			<input type="hidden" name="tipo" value="venditore">	
-			<button type="submit">Segnala venditore</button>
+            <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
+			<button type="submit">Invia segnalazione</button>
     	</form>
     	</section>
+        <h3>Prodotti</h3>
 		<?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
                 <?php generateProductList($product); ?>
