@@ -61,6 +61,11 @@ mysqli_stmt_store_result($stmt);
 $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(!utenteLoggato()){
+        header("Location:".feedback("./sellerProduct.php?email=".$emailVenditore));
+        exit();
+    }
+
     if (isset($_POST["follow"])) {
         $stmt = mysqli_prepare($connection, "INSERT IGNORE INTO Follow (emailCompratore, emailVenditore) VALUES (?, ?)");
         mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
@@ -101,12 +106,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <button type="submit" name="follow">Segui</button>
                 <?php endif; ?>
         </form>
+        <h3>Segnala venditore</h3>
 		<form method="POST" action="/api/report.php">
 			<input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
 			<input type="hidden" name="tipo" value="venditore">	
-			<button type="submit">Segnala venditore</button>
+            <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
+			<button type="submit">Invia segnalazione</button>
     	</form>
     	</section>
+        <h3>Prodotti</h3>
 		<?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
                 <?php generateProductList($product); ?>

@@ -112,6 +112,14 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
             <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
             <button type="submit">Invia Recensione</button>
         </form>
+
+        <h3>Segnala prodotto</h3>
+        <form method="POST" action="/api/report.php">
+			<input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+			<input type="hidden" name="tipo" value="prodotto">	
+            <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
+			<button type="submit">Invia segnalazione</button>
+    	</form>
     <?php endif; ?>
 
 
