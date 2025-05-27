@@ -16,9 +16,9 @@ if(isset($_GET['search'])){
 
 	$like = '%' . $query . '%';
 
-	$query_venditori = "SELECT v.emailUtente, u.nome, u.cognome
+	$query_venditori = "SELECT DISTINCT v.emailUtente, u.nome, u.cognome
 						FROM Venditore v
-						JOIN Utente u ON u.email = v.emailUtente
+						LEFT JOIN Utente u ON u.email = v.emailUtente
 						WHERE v.stato!=3 AND (u.nome LIKE ? OR u.cognome LIKE ?)";
 
 	$stmt_seller = mysqli_prepare($connection, $query_venditori);
@@ -32,12 +32,14 @@ if(isset($_GET['search'])){
     	}
 	}
 
-	$query_prodotti = "SELECT p.id, p.nome, p.fileModello, p.visibile,
-						u.nome AS venditoreNome, u.cognome AS venditoreCognome
+	$query_prodotti = "SELECT DISTINCT p.id, p.nome, p.fileModello, p.visibile,
+						u.nome AS venditoreNome, u.cognome AS venditoreCognome, FIRST_VALUE(I.nomeFile)
+						OVER (PARTITION BY  p.id, p.nome, p.fileModello, p.visibile,u.nome,u.cognome) AS immagine
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
 						JOIN Utente u ON u.email = v.emailUtente
-						WHERE v.stato!=3 AND p.visibile = 1 AND p.nome LIKE ?";
+						LEFT JOIN ImmaginiProdotto I ON I.idProdotto=p.id
+						WHERE v.stato!=3 AND p.visibile = 2 AND p.nome LIKE ?";
 
 	$stmt = mysqli_prepare($connection, $query_prodotti);
 	mysqli_stmt_bind_param($stmt, "s", $like);
@@ -52,11 +54,13 @@ if(isset($_GET['search'])){
 
 }else {
 	// Query di default (tutti i prodotti visibili)
-    $query_prodotti = 	"SELECT p.id, p.nome, p.fileModello, p.visibile,
-		       			u.nome AS venditoreNome, u.cognome AS venditoreCognome
+    $query_prodotti = 	"SELECT DISTINCT p.id, p.nome, p.fileModello, p.visibile,
+		       			u.nome AS venditoreNome, u.cognome AS venditoreCognome, FIRST_VALUE(I.nomeFile)
+						OVER (PARTITION BY  p.id, p.nome, p.fileModello, p.visibile,u.nome,u.cognome) AS immagine
 						FROM Prodotto p
 						JOIN Venditore v ON p.emailVenditore = v.emailUtente
 						JOIN Utente u ON u.email = v.emailUtente
+						LEFT JOIN ImmaginiProdotto I ON I.idProdotto=p.id
 						WHERE p.visibile = 2 AND NOT stato=3";
 
     $result = mysqli_query($connection, $query_prodotti);

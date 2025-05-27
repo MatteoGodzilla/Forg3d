@@ -19,7 +19,7 @@ class Constants {
     public const TIPO_UTENTE = "tipo_utente";
 
     #ESTENSIONI FILE AMMESSE
-    public static array $ALLOWED_IMAGE_EXTENSIONS = ["png", "jpeg", "webp"];
+    public static array $ALLOWED_IMAGE_EXTENSIONS = ["png", "jpeg", "webp","jpg"];
     public static array $ALLOWED_3DFILE_EXTENSIONS = ["stl"];
 }
 
