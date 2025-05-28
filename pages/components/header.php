@@ -20,7 +20,7 @@
 
 <?php function generateSymbol(){ ?>
     <?php if (getUserType()==UserType::BUYER->value){ ?>
-        <a><span class="material-symbols-outlined">shopping_cart</span></a>
+        <a href="../cart.php"><span class="material-symbols-outlined">shopping_cart</span></a>
     <?php }?>
      <?php if (getUserType()==UserType::SELLER->value){ ?>
         <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>

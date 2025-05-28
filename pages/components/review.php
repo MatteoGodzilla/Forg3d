@@ -1,9 +1,8 @@
 <?php function createReview($review) { ?>
 <div>
-    <p>Id: <?= $review["id"] ?></p>
-    <p>Email: <?= $review["email"] ?></p>
+    <p>Utente: <?= $review["email"] ?></p>
     <p>Valutazione: <?= $review["valutazione"] ?></p>
-    <p>Titolo: <?= $review["titolo"] ?></p>
-    <p>Testo: <?= $review["testo"] ?></p>
+    <h3><?= $review["titolo"] ?></h3>
+    <p><?= $review["testo"] ?></p>
 </div>
 <?php } ?>

@@ -6,7 +6,7 @@ function generateProductList($product) {
 <article class="product">
     <a href="../product.php?id=<?php echo $product['id']; ?>">
         <div>
-            <?php if($product["immagine"]!=null && file_exists($rootDir.$product["immagine"])) {?>
+            <?php if(isset($product["immagine"]) && $product["immagine"]!=null && file_exists($rootDir.$product["immagine"])) {?>
                 <img  src="<?= $product["immagine"]?>"> </img>
             <?php }else{?>
                 <img  alt = "immagine non trovata" src="https://placehold.co/800x600"> </img>

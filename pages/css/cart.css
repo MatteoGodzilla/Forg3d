@@ -1,0 +1,11 @@
+@import url(./styleReference.css);
+@import url(./variables.css);
+
+h2,h3,h4,p{
+    text-align: center;
+}
+
+.cart-row{
+    text-align: center;
+    margin: var(--padding-large);
+}
