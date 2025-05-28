@@ -58,8 +58,8 @@ mysqli_stmt_execute($stmt);
 $resultvarianti = mysqli_stmt_get_result($stmt);
 
 while ($row = mysqli_fetch_assoc($resultvarianti)) {
-			$varianti[] = $row;
-		}
+    $varianti[] = $row;
+}
 
 
 //Query delle immagini
@@ -68,6 +68,18 @@ $stmt = mysqli_prepare($connection, $quey_immagini);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);
 $resultImmagini = mysqli_stmt_get_result($stmt);
+
+//Query delle recensioni
+$query_recensioni = "SELECT id, email, valutazione, titolo, testo FROM Recensione WHERE idProdotto = ?";
+$stmt = mysqli_prepare($connection, $query_recensioni);
+mysqli_stmt_bind_param($stmt,"i", $idProdotto);
+mysqli_stmt_execute($stmt);
+$resultRecensioni = mysqli_stmt_get_result($stmt);
+$reviews = [];
+
+while ($review = mysqli_fetch_assoc($resultRecensioni)) {
+    $reviews[] = $review;
+}
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +88,7 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dettaglio Prodotto</title>
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/form.css" />
     <link rel="stylesheet" href="./css/product.css" />
 </head>
 <body>
@@ -101,20 +114,30 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     ?>
 
     <?php if ($tipoUtente==UserType::BUYER->value): ?>
-        <form action="aggiungi_carrello.php" method="POST">
+        <form action="/api/addToCart.php" method="POST">
             <input type="hidden" name="idVariant" value="<?php echo $idProdotto; ?>">
             <input type="submit" value="Aggiungi al Carrello" />
         </form>
 
         <h3>Scrivi una recensione</h3>
-        <form action="salva_recensione.php" method="POST">
+        <form action="/api/addReview.php" method="POST">
             <input type="hidden" name="idProduct" value="<?php echo $idProdotto; ?>">
             <!-- TODO: replace text display to star display -->
-            <label for:"" >Valutazione: <span>4</span>/5</label> 
+            <label for="score" >Valutazione: <span>4</span>/5</label> 
             <input name="score" type="range" min=0 max=5 step=1 value=4 />
+            <label for="reviewTitle">Titolo:</label>
+            <input name="title" type="text" />
+            <label for="review">Descrizione:</label>
             <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
             <input type="submit" value="Invia Recensione"/>
         </form>
+
+        <?php 
+            require_once("./components/review.php");
+            foreach($reviews as $review){
+                createReview($review);
+            }
+        ?>
 
         <script>
             const variant = document.querySelectorAll("div.variantOption");
