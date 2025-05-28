@@ -1,13 +1,6 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
 
-div.variantOption{
-    margin-left: var(--padding-small);
-    padding: var(--padding-small);
-    background-color: var(--light-background);
-    text-align: center;
-}
-
 p,h2{
     margin: var(--padding-small);
     text-align: center;
@@ -19,53 +12,95 @@ h3{
     text-align: center;
 }
 
-small{
-    color: gray;
-    display: block;
+div.variantOption{
+    display: flex;
+    /*margin-left: var(--padding-small);*/
+    padding: var(--padding-small);
+    background-color:var(--light-background);
     text-align: center;
 }
 
-div.image-container,div.image-button{
+div.variantOption > div {
+    margin-left: var(--padding-small);
+    background-color: transparent;
+    flex-grow:1;
+}
+
+div.variantOption span {
+    display: block;
+    text-align: left;
+}
+
+div.variantOption small{
+    color: gray;
+    display: block;
+    text-align: left;
+}
+
+div.image-container{
+    position: relative;
     background-color: var(--light-background);
     margin: var(--padding-small);
 }
 
-
-div.image-container,div.image-button{
+div.image-container{
     text-align: center;
-    justify-content: center;
 }
 
 div.image{
- display: flex;
- background-color: var(--light-image-container);
-}
-
-div.image-button{
-    width: 100%;
+    background-color: var(--light-image-container);
 }
 
 div.image > img{
-
-    max-height: 30%;
-    max-width: 40%;
+    max-width: 100%;
     aspect-ratio: 4/3;
     object-fit:fill;
-    margin: var(--padding-small);
 }
 
-
-div.image-button > #prev{
-    background-color: var(--light-primary-compratore);
-    color: var(--light-text);
-    padding: var(--padding-small) var(--padding-large);
-    border-radius: 3px 0 0 3px;
+div.image-button{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    width: 100%;
 }
 
-div.image-button > #next{
-    position: relative;
-    background-color: var(--light-primary-compratore);
+div.image-button > button{
+    width: 25%;
+    background-color: transparent;
     color: var(--light-text);
-    padding: var(--padding-small) var(--padding-large);
     border-radius: 3px 0 0 3px;
+    transition: background-color 1s;
+}
+
+div.image-button > button:hover {
+    background-color: var(--light-primary-compratore);
+}
+
+form {
+    padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
+}
+
+/* Copied from form.css */
+form > input[type="submit"] {
+    margin-top: var(--padding-small);
+    width:100%;
+    background-color: var(--light-primary-compratore);
+    padding: var(--padding-small);
+    border-radius:100px;
+    border-style: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+form > textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+form > input[type="range"] {
+    width: 100%;
 }

@@ -79,7 +79,6 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
     <link rel="stylesheet" href="./css/product.css" />
 </head>
 <body>
-
     <?php
         include_once("./components/header.php");
         create_header();
@@ -89,31 +88,54 @@ $resultImmagini = mysqli_stmt_get_result($stmt);
 
     <script src="./js/image-container.js"></script>
     <h2><?php echo ($prodotto['nome']); ?></h2>
-    <p><strong>Venditore:</strong> <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?> (<?php echo ($prodotto['venditoreEmail']); ?>)</a></p>
+    <p><strong>Venditore:</strong> 
+        <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?></a></p>
     <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
     <h3>Varianti</h3>
 
     <?php 
         include_once("./components/varianteOption.php");
         foreach($varianti as $variante){
-            varianteOption($variante);
+            varianteOption($variante, $tipoUtente==UserType::BUYER->value);
         }
     ?>
 
     <?php if ($tipoUtente==UserType::BUYER->value): ?>
         <form action="aggiungi_carrello.php" method="POST">
-            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
-            <button type="submit">Aggiungi al Carrello</button>
+            <input type="hidden" name="idVariant" value="<?php echo $idProdotto; ?>">
+            <input type="submit" value="Aggiungi al Carrello" />
         </form>
 
         <h3>Scrivi una recensione</h3>
         <form action="salva_recensione.php" method="POST">
-            <textarea name="recensione" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
-            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto; ?>">
-            <button type="submit">Invia Recensione</button>
+            <input type="hidden" name="idProduct" value="<?php echo $idProdotto; ?>">
+            <!-- TODO: replace text display to star display -->
+            <label for:"" >Valutazione: <span>4</span>/5</label> 
+            <input name="score" type="range" min=0 max=5 step=1 value=4 />
+            <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
+            <input type="submit" value="Invia Recensione"/>
         </form>
+
+        <script>
+            const variant = document.querySelectorAll("div.variantOption");
+            const addToCard = document.querySelector("input[name='idVariant']");
+            variant.forEach(v => {
+                const radioButton = v.querySelector("input[type='radio']");
+                v.onclick = () => {
+                    radioButton.click();
+                    addToCard.value = radioButton.id;    
+                }
+            });
+            //Automatically select the first variant
+            variant[0].click();
+
+            //Review stuff
+            const slider = document.querySelector("input[type='range']");
+            const scoreDisplay = document.querySelector("form span");
+            console.log(scoreDisplay);
+            slider.oninput = (ev) => scoreDisplay.innerText = ev.srcElement.value;
+
+        </script>
     <?php endif; ?>
-
-
 </body>
 </html>

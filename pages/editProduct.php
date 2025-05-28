@@ -1,5 +1,4 @@
 <?php
-//TODO: check that at least a variant is present before submitting
 require_once("../php/db.php");
 require_once("../php/session.php");
 require_once("./components/productVariant.php");

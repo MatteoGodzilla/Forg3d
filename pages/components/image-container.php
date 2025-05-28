@@ -15,8 +15,8 @@
             <?php }?>
         <?php } ?>
         <div class="image-button">
-            <button id="prev" onclick="previousImage()"><-</button>
-            <button id="next" onclick="nextImage()">-></button>
+            <button id="prev" onclick="previousImage()">&lt</button>
+            <button id="next" onclick="nextImage()">&gt</button>
         </div>
     </div>
 <?php }}?>

@@ -35,6 +35,12 @@ form > label[for="visible"] {
     display: inline;
 }
 
+form > select {
+    background-color: var(--light-container);
+    border: none;
+    font-size: var(--font-small);
+}
+
 form > input#addVariant{
     border-radius: 70px;
     background-color: var(--light-primary-ausiliar);
@@ -55,31 +61,39 @@ div.variantInfo{
     width: 100%;
 }
 
-div.variantInfo > svg{
-    vertical-align: middle;
-    padding-left: var(--padding-small);
+div.variantInfo > div {
+    display:flex;
+    align-items: center;
+    margin-bottom: var(--padding-small);
+}
+
+div.variantInfo > div:last-of-type {
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div.variantInfo svg{
     padding-right: var(--padding-small);
 }
 
-div.variantInfo > p{
+div.variantInfo p{
     font-size: var(--font-small);
 }
 
-div.variantInfo > label{
-    vertical-align: middle;
+div.variantInfo label{
     font-size: var(--font-small);
     padding-right: var(--padding-small);
 } 
 
-div.variantInfo > input[type="number"]{
-    display: block;
+div.variantInfo input[type="number"]{
     width:100%;
+    flex-grow:1;
     background-color: var(--light-background);
     border-style: none;
     border-radius: 20px;
     font-size: var(--font-small);
-    margin-top: var(--padding-small);
-    margin-bottom: var(--padding-small);
+    padding-left: var(--padding-small);
 }
 
 form > input[type="submit"] {
