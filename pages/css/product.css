@@ -1,5 +1,6 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 p,h2{
     margin: var(--padding-small);
@@ -79,9 +80,21 @@ div.image-button > button:hover {
     background-color: var(--light-primary-compratore);
 }
 
-form {
-    padding-left: var(--padding-small);
-    padding-right: var(--padding-small);
+#toggleReviewForm {
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    width: calc(100% - var(--padding-small) * 2 );
+    box-sizing: border-box;
+    background-color: var(--light-primary-compratore); 
+    padding: var(--padding-small);
+}
+
+#toggleReviewForm > *{
+    vertical-align: middle;
+}
+
+form.hidden {
+    display: none;
 }
 
 /* Copied from form.css */
@@ -92,4 +105,8 @@ form > input[type="submit"] {
 
 form > textarea {
     resize: vertical;
+    background-color: var(--light-container);
+    border-color: transparent;
+    border-width: 0px;
+    font-family: var(--font-family-paragraph);
 }

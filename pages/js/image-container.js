@@ -2,9 +2,11 @@ let current = 0;
 activeImage(current);
 
 function activeImage(){
-    console.log(current);
+    //console.log(current);
     let immagini = document.getElementsByClassName("image");
-    for(let i =0; i< immagini.length;i++){
+    if(immagini.length <= 0)
+        return;
+    for(let i = 0; i < immagini.length; i++){
         immagini[i].style.display="none";
     }
     if(current<0){

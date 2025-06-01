@@ -3,18 +3,11 @@
 
 form {
     position: sticky;
-    top: 100px;
-    justify-content: space-between;
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
-    display: flex;
-    box-sizing: border-box;
+    top: 0px;
 }
+
 input[name="search"] {
-    position: sticky;
-    top: 100px;
     background-color: var(--light-container);
-    box-sizing: border-box;
     width: 100%;
     padding: var(--padding-large);
     border-width: var(--padding-small);
@@ -51,7 +44,7 @@ article {
 }
 
 article.product > a > div  > img {
-    max-height:128px;
+    width:100%;
     aspect-ratio:4/3;
     object-fit: cover;
 }

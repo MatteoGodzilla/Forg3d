@@ -90,6 +90,7 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/form.css" />
     <link rel="stylesheet" href="./css/product.css" />
+    <link rel="stylesheet" href="./css/review.css" />
 </head>
 <body>
     <?php
@@ -119,12 +120,16 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
             <input type="submit" value="Aggiungi al Carrello" />
         </form>
 
-        <h3>Scrivi una recensione</h3>
-        <form action="/api/addReview.php" method="POST">
+        <button id="toggleReviewForm"> 
+            Scrivi una recensione
+            <span class="material-symbols-outlined">arrow_drop_down</span>
+        </button>
+        <!--<h3>Scrivi una recensione</h3>-->
+        <form class="hidden" action="/api/addReview.php" method="POST">
             <input type="hidden" name="idProduct" value="<?php echo $idProdotto; ?>">
             <!-- TODO: replace text display to star display -->
             <label for="score" >Valutazione: <span>4</span>/5</label> 
-            <input name="score" type="range" min=0 max=5 step=1 value=4 />
+            <input name="score" type="range" min=0 max=5 step=1 value=3 />
             <label for="reviewTitle">Titolo:</label>
             <input name="title" type="text" />
             <label for="review">Descrizione:</label>
@@ -146,21 +151,30 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
             variant[0].click();
 
             //Review stuff
+            const toggleButton = document.querySelector("#toggleReviewForm");
+            const form = document.querySelector("form.hidden");
             const slider = document.querySelector("input[type='range']");
             const scoreDisplay = document.querySelector("form span");
             console.log(scoreDisplay);
             slider.oninput = (ev) => scoreDisplay.innerText = ev.srcElement.value;
 
+            toggleButton.onclick = () => {
+                if(form.classList.contains("hidden")){
+                    form.classList.remove("hidden");
+                } else {
+                    form.classList.add("hidden");
+                }
+            }
+
         </script>
     <?php endif; ?>
-    <?php if($tipoUtente==UserType::BUYER->value || getSessionEmail()==$prodotto['venditoreEmail']) { ?>
-        <h3>Recensioni di altri utenti:</h3>
-       <?php 
-            require_once("./components/review.php");
-            foreach($reviews as $review){
-                createReview($review);
-            }
-        ?>
-    <?php } ?>
+
+    <h3>Recensioni di altri utenti:</h3>
+    <?php 
+        require_once("./components/review.php");
+        foreach($reviews as $review){
+            createReview($review);
+        }
+    ?>  
 </body>
 </html>

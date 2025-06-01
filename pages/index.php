@@ -79,27 +79,28 @@ if(isset($_GET['search'])){
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="./css/header.css">
 		<link rel="stylesheet" href="./css/home.css">
+		<link rel="stylesheet" href="./css/home_wide.css">
 	</head>
 	<body>
-			<?php 
-				include_once("./components/header.php");
-				create_header();
-			?>
+        <?php 
+            include_once("./components/header.php");
+            create_header();
+        ?>
 		<form method="GET" action="index.php">
   			<input type="search" name="search" placeholder="<?php if(!isset($_GET['search'])) echo 'Cerca prodotti o venditori...'; else echo($query) ?>"/>
 		</form>
 		<?php if (isset($_GET['search'])): ?>
-				<h2>Venditori</h2>
-				<?php if (count($sellers) > 0): ?>
-					<section class="seller-list">
-					<?php foreach ($sellers as $seller): ?>
-						<?php generateSellerList($seller); ?>
-					<?php endforeach; ?>
-					</section>
+            <h2>Venditori</h2>
+            <?php if (count($sellers) > 0): ?>
+                <section class="seller-list">
+                <?php foreach ($sellers as $seller): ?>
+                    <?php generateSellerList($seller); ?>
+                <?php endforeach; ?>
+                </section>
 			<?php else: ?>
 				<p>Nessun venditore trovato.</p>
 			<?php endif; ?>
-		<h2>Prodotti</h2>
+            <h2>Prodotti</h2>
 		<?php if (count($products) > 0): ?>
 			<section class="product-list">
 				<?php foreach ($products as $product): ?>
