@@ -21,5 +21,8 @@
     </div>
     <p><?= $review["testo"] ?></p>
     <p><?= $review["email"] ?></p>
+    <?php if(getUserType()===UserType::ADMIN->value){?>
+        <a href="./api/hideReview.php?id=<?=$review["id"]?>">Elimina questa recensione</a>
+    <?php } ?>
 </div>
 <?php } ?>

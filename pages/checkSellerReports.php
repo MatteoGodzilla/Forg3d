@@ -35,7 +35,7 @@ $reports = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		include_once("./components/header.php");
 		create_header();
 	?>
-    <h2>Richieste in attesa</h2>
+    <h2>Segnalazioni Venditori</h2>
     <?php 
         require_once("components/sellerReport.php");
         foreach($reports as $report){

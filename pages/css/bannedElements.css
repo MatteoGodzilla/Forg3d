@@ -2,6 +2,8 @@
 @import url(./styleReference.css);
 
 /*For ban history*/
+h2{text-align: center;}
+
 div.ban-element {
     font-size:1.5em;
     margin: var(--padding-large);
