@@ -2,6 +2,7 @@
 session_start();
 include_once("../../php/db.php");
 include_once("../../php/session.php");
+require_once("../../php/feedback.php");
 
 $emailUtente = getSessionEmail();
 $tipo = $_POST['tipo'];
@@ -30,7 +31,7 @@ try{
         mysqli_stmt_execute($stmtProdotto);
     }
     mysqli_commit($connection);
-    header("Location: " . $_SERVER["HTTP_REFERER"]);
+    header("Location:".feedback($_SERVER["HTTP_REFERER"], AlertType::SUCCESS->value,"Segnalazione effettuata in modo corretto", true));
 } catch(e){
     mysqli_rollback($connection);
 }

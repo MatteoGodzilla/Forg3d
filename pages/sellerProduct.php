@@ -93,31 +93,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		<link rel="stylesheet" href="./css/home.css">
 		<link rel="stylesheet" href="./css/header.css">
         <link rel="stylesheet" href="./css/popups.css">
+        <link rel="stylesheet" href="./css/sellerProduct.css">
 	</head>
 	<body>
 			<?php 
 				include_once("./components/header.php");
 				create_header();
 			?>
-        <section class="seller-info">
-        <h2><?= ($seller['nome'] . ' ' . $seller['cognome']) ?></h2>
-        <p>Email: <?= ($emailVenditore) ?></p>
-        <p>Follower: <?= $followersCount ?></p>
-        <form method="POST" class="follow-btn">
-                <?php if ($isFollowing): ?>
-                    <button type="submit" name="unfollow">Unfollow</button>
-                <?php else: ?>
-                    <button type="submit" name="follow">Segui</button>
-                <?php endif; ?>
-        </form>
-        <h3>Segnala venditore</h3>
-		<form method="POST" action="/api/report.php">
-			<input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
-			<input type="hidden" name="tipo" value="venditore">	
-            <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
-			<button type="submit">Invia segnalazione</button>
-    	</form>
-    	</section>
+        <div class="seller-info">
+            <div class="seller-details">
+                <h2><?= ($seller['nome'] . ' ' . $seller['cognome']) ?></h2>
+                <p>Email: <?= ($emailVenditore) ?></p>
+                <p>Follower: <?= $followersCount ?></p>
+            </div>
+            <div class="seller-actions">
+            <form method="POST" class="follow-btn">
+                    <?php if ($isFollowing): ?>
+                        <button type="submit" name="unfollow">Unfollow</button>
+                    <?php else: ?>
+                        <button type="submit" name="follow">Segui</button>
+                    <?php endif; ?>
+            </form>
+            <h3>Segnala venditore</h3>
+            <form method="POST" action="/api/report.php" class="report-form">
+                <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+                <input type="hidden" name="tipo" value="venditore">	
+                <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
+                <button type="submit">Invia segnalazione</button>
+            </form>
+            <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+                include_once("./components/popups.php");
+                include_once("./../php/constants.php");
+                create_popup($_GET["message"],$_GET["messageType"]);
+            } 
+            ?>
+            </div>
+        </div>
         <h3>Prodotti</h3>
 		<?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
@@ -126,12 +137,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php else: ?>
             <p>Nessun prodotto trovato.</p>
         <?php endif; ?>
-
-        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
-                include_once("./components/popups.php");
-                include_once("./../php/constants.php");
-                create_popup($_GET["message"],$_GET["messageType"]);
-            } 
-         ?>
 	</body>
 </html>
