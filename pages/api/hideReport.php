@@ -16,12 +16,12 @@ if(!isset($_GET["id"])){
 }
 
 //rollback URL
-$rollback="adminHome.php";
+$rollback="/adminHome.php";
 if(isset($_GET["product"])){
-    $rollback="checkProductReportDetail.php?id=".$_GET["product"];
+    $rollback="/checkProductReportDetail.php?id=".$_GET["product"];
 }
-if(isset($_GET["email"])){
-    $rollback="checkSellerReportDetail.php?email=".$_GET["email"];
+if(isset($_GET["seller"])){
+    $rollback="/checkSellerReportDetail.php?email=".$_GET["seller"];
 }
 
 
