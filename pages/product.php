@@ -90,6 +90,7 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/form.css" />
     <link rel="stylesheet" href="./css/product.css" />
+    <link rel="stylesheet" href="./css/popups.css">
     <link rel="stylesheet" href="./css/review.css" />
 </head>
 <body>
@@ -135,7 +136,21 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
             <label for="review">Descrizione:</label>
             <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
             <input type="submit" value="Invia Recensione"/>
+        </form><br><br>
+        <!--<h3>Segnala prodotto</h3>-->
+        <form class="form-report" action="/api/report.php" method="POST">
+            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto ?>">
+            <input type="hidden" name="tipo" value="prodotto">
+            <label for="review">Descrizione segnalazione:</label>
+            <textarea name="motivo" rows="4" cols="50" required placeholder="Motivo della segnalazione"></textarea>
+            <button type="submit">Invia segnalazione</button>
         </form>
+        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+                include_once("./components/popups.php");
+                include_once("./../php/constants.php");
+                create_popup($_GET["message"],$_GET["messageType"]);
+            } 
+        ?>
 
         <script>
             const variant = document.querySelectorAll("div.variantOption");
