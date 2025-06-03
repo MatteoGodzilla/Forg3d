@@ -113,9 +113,10 @@ if(isset($_GET) && isset($_GET['id'])){
             <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
         <label for="visible">Visibile</label>
 
-        <label>Preview 3D esistente:</label>
+        <label>Preview 3D</label>
         <?php if (isset($product['fileModello'])){ ?>
-            <a href="<?= htmlspecialchars($product['fileModello']) ?>" target="_blank">Visualizza file</a>
+            <button id="showModel">Mostra modello 3D caricato</button>
+            <div class="hidden" id="model-viewer"></div>
         <?php } ?>
         <label for="3dPreview">Sostituisci file 3D</label>
         <input type="file" name="3dPreview" id="3dPreview"/>
@@ -152,12 +153,16 @@ if(isset($_GET) && isset($_GET['id'])){
         <div id="variantContainer">
         <?php 
             $defaultVariant = 0;
+            $defaultVariantColor = "";
             if(isset($product["varianteDefault"])){
                 $defaultVariant = $product["varianteDefault"];
             }
             if(isset($varianti)){
                 while ($variant = mysqli_fetch_assoc($varianti)){
                     generateEditVariant($variant, $defaultVariant);
+                    if($variant["id"] === $defaultVariant){
+                        $defaultVariantColor = $variant["hexColore"];
+                    }
                 }
             }
         ?> 
@@ -166,6 +171,29 @@ if(isset($_GET) && isset($_GET['id'])){
         <input type="submit" value="Salva modifiche" />
     </form>
 
+    <?php if (isset($product['fileModello'])){ ?>
+        <script src="stl_viewer/stl_viewer.min.js"></script>
+        <script>
+            const showButton = document.querySelector("#showModel");
+            const container = document.querySelector("#model-viewer");
+            const chosenColor = "#<?= $defaultVariantColor ?>";
+
+            showButton.onclick = (ev) => {
+                container.classList.remove("hidden");
+                stlViewer = new StlViewer(container, {
+                    auto_resize: false,
+                    models:[ { id: 0, filename:"<?= $product['fileModello'] ?>"} ],
+                    allow_drag_and_drop: false,
+                    all_loaded_callback: () => {
+                        //Just to set the initial color
+                        stlViewer.set_color(0, chosenColor);
+                    }
+                }); 
+                showButton.style.display = "none";
+                ev.preventDefault();
+            }
+        </script>
+    <?php } ?>
     <script>
         const addVariantButton = document.querySelector("#addVariant");
         const variantContainer = document.querySelector("#variantContainer");
@@ -256,8 +284,6 @@ if(isset($_GET) && isset($_GET['id'])){
 
         submitButton.onclick = (ev) => {
             if(!defaultVariantPresent()){
-                console.log("CLICK");
-                console.log(ev);
                 ev.preventDefault();
             }
         }

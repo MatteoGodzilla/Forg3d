@@ -81,11 +81,13 @@
 
     <h3>Notifiche</h3>
     <a href="sellerNotification.php">Invia Notifica</a>
+    <div class="notifContainer">
     <?php 
         require_once("components/sellerHomeNotif.php");
         foreach($notifs as $notification){
             sellerHomeNotification($notification);
         }
     ?>
+    </div>
 </body>
 </html>

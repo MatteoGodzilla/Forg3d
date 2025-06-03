@@ -57,3 +57,11 @@ article.material > svg {
     margin:var(--padding-small);
 }
 
+div.notifContainer {
+    padding: var(--padding-small);
+    background-color: var(--light-background);
+}
+
+div.notifContainer p {
+    display: inline-block;
+}

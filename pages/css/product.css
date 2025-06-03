@@ -1,6 +1,6 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+@import url(./materialIcons.css);
 
 p,h2{
     margin: var(--padding-small);
@@ -13,9 +13,24 @@ h3{
     text-align: center;
 }
 
+#showModel {
+    width: calc(100% - var(--padding-small) * 2);
+    margin-left: var(--padding-small);
+    margin-left: var(--padding-small);
+    background-color: var(--light-primary-compratore);
+}
+
+#model-viewer.hidden {
+    display:none; 
+}
+#model-viewer {
+    display: block;
+    aspect-ratio: 4/3;
+    margin: var(--padding-small);
+}
+
 div.variantOption{
     display: flex;
-    /*margin-left: var(--padding-small);*/
     padding: var(--padding-small);
     background-color:var(--light-background);
     text-align: center;

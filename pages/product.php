@@ -105,13 +105,16 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     <h2><?php echo ($prodotto['nome']); ?></h2>
     <p><strong>Venditore:</strong> 
         <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?></a></p>
-    <p><strong>File Modello:</strong> <a href="/<?php echo ($prodotto['fileModello']); ?>" download>Scarica</a></p>
+    <?php if(isset($prodotto['fileModello'])){ ?>
+        <button id="showModel">Mostra modello 3D</button>
+        <div class="hidden" id="model-viewer"></div>
+    <?php } ?>
     <h3>Varianti</h3>
 
     <?php 
         include_once("./components/varianteOption.php");
         foreach($varianti as $variante){
-            varianteOption($variante, $tipoUtente==UserType::BUYER->value);
+            varianteOption($variante, true);
         }
     ?>
 
@@ -153,17 +156,6 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
         ?>
 
         <script>
-            const variant = document.querySelectorAll("div.variantOption");
-            const addToCard = document.querySelector("input[name='idVariant']");
-            variant.forEach(v => {
-                const radioButton = v.querySelector("input[type='radio']");
-                v.onclick = () => {
-                    radioButton.click();
-                    addToCard.value = radioButton.id;    
-                }
-            });
-            //Automatically select the first variant
-            variant[0].click();
 
             //Review stuff
             const toggleButton = document.querySelector("#toggleReviewForm");
@@ -184,12 +176,78 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
         </script>
     <?php endif; ?>
 
+    <?php if(isset($prodotto['fileModello'])){ ?>
+        <script src="stl_viewer/stl_viewer.min.js"></script>
+        <script>
+            let chosenColor = "";
+            let stlViewer;
+            //Create stl viewer
+            const showButton = document.querySelector("#showModel");
+            const container = document.querySelector("#model-viewer");
+            //console.log(container);
+
+            showButton.onclick = () => {
+                container.classList.remove("hidden");
+                stlViewer = new StlViewer(container, {
+                    auto_resize: false,
+                    models:[ { id: 0, filename:"..<?= $prodotto['fileModello'] ?>"} ],
+                    allow_drag_and_drop: false,
+                    all_loaded_callback: () => {
+                        //Just to set the initial color
+                        stlViewer.set_color(0, chosenColor);
+                    }
+                }); 
+                showButton.style.display = "none";
+            }
+            //Variant selection
+            const variant = document.querySelectorAll("div.variantOption");
+            const addToCart = document.querySelector("input[name='idVariant']");
+            variant.forEach(v => {
+                const radioButton = v.querySelector("input[type='radio']");
+                const variantColor = v.querySelector("input[type='hidden']");
+                v.onclick = () => {
+                    radioButton.click();
+                    //Set id for shopping cart
+                    if(addToCart)
+                        addToCard.value = radioButton.id;    
+                    
+                    chosenColor = variantColor.value;
+                    //Set model color
+                    if (stlViewer)
+                        stlViewer.set_color(0, chosenColor);
+                }
+            });
+            //Automatically select the first variant
+            variant[0].click();
+        </script>
+    <?php } else { ?>
+        <script>
+            //Variant selection
+            const variant = document.querySelectorAll("div.variantOption");
+            const addToCart = document.querySelector("input[name='idVariant']");
+            variant.forEach(v => {
+                const radioButton = v.querySelector("input[type='radio']");
+                const variantColor = v.querySelector("input[type='hidden']");
+                v.onclick = () => {
+                    radioButton.click();
+                    //Set id for shopping cart
+                    if(addToCart){
+                        addToCard.value = radioButton.id;    
+                    }
+                }
+            });
+            //Automatically select the first variant
+            variant[0].click();
+        </script>
+    <?php } ?>
     <h3>Recensioni di altri utenti:</h3>
     <?php 
         require_once("./components/review.php");
         foreach($reviews as $review){
             createReview($review);
         }
-    ?>  
+    ?> 
+    
+     
 </body>
 </html>
