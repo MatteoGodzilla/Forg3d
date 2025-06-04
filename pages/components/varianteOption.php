@@ -1,7 +1,7 @@
 <?php function varianteOption($variante, bool $showVariant = true){ ?>
 <div class="variantOption">
     <?php if($showVariant){ ?>
-        <input name="choice" type="radio" id="<?=$variante["id"]?>"/>
+        <input name="choice" type="radio" value="<?=$variante["id"]?>"/>
     <?php } ?>
     <div>
         <span><?php echo $variante['nomeColore']." ( ".number_format($variante["prezzo"]/100, 2)."€ )"; ?></span>

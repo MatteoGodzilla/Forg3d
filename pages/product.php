@@ -111,16 +111,24 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     <?php } ?>
     <h3>Varianti</h3>
 
-    <?php 
-        include_once("./components/varianteOption.php");
-        foreach($varianti as $variante){
-            varianteOption($variante, true);
-        }
-    ?>
+    <?php if ($tipoUtente==UserType::NOT_LOGGED): ?>
+        <?php 
+            include_once("./components/varianteOption.php");
+            foreach($varianti as $variante){
+                varianteOption($variante, true);
+            }
+        ?>
+    <?php endif?>
 
     <?php if ($tipoUtente==UserType::BUYER->value): ?>
         <form action="/api/addToCart.php" method="POST">
             <input type="hidden" name="idVariant" value="<?php echo $idProdotto; ?>">
+        <?php 
+            include_once("./components/varianteOption.php");
+            foreach($varianti as $variante){
+                varianteOption($variante, true);
+            }
+        ?>
             <input type="submit" value="Aggiungi al Carrello" />
         </form>
 

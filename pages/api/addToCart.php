@@ -7,7 +7,7 @@ if(!utenteLoggato() || getUserType()!=UserType::BUYER->value){
     header("Location: /");
 }
 
-if(!isset($_POST["idVariant"])){
+if(!isset($_POST["choice"])){
     header("Location: /");
 }
 
@@ -17,7 +17,7 @@ if(isset($_POST["quantity"])){
 }
 
 
-$idVariante = $_POST["idVariant"];
+$idVariante = $_POST["choice"];
 
 
 //ottieni la variante
@@ -30,6 +30,8 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 if(sizeof($rows)==0){
     //variante inesistente, annullare
+    header("Location: ");
+    exit();
 }
 
 $variant = $rows[0];
