@@ -1,9 +1,10 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
 
-h2,h3,h4,p{
+h3,h2,p{
     text-align: center;
     padding-top: var(--padding-small);
+    font-size: var(--font-small);
 }
 
 .cart-row{
@@ -29,7 +30,7 @@ div.cart-row > div  {
 }
 
 
-div.cart-row > div > a{
+div.cart-row > div > a :not(.button-delete){
     margin: var(--padding-small);
     text-align: left;
     display: block;
@@ -61,4 +62,15 @@ div.subtotal {
     margin-left: var(--padding-small);
     margin-right: var(--padding-small);
     margin-bottom: var(--padding-small);
+}
+
+input{
+    width: 50%;
+    font-size: var(--font-small);
+    margin-top: var(--padding-small);
+}
+
+div.cart-row > div > a.button-delete{
+    text-align: center;
+    font-size: var(--font-small);
 }

@@ -15,14 +15,19 @@
         <div>
             <h3><?=$row["nome"]?></h3>
             <p>Variante:<?=$row["variante"]?></p>
-            <p>Quantità:</p> <input type="number" value=<?=$row["quantita"]?>>
-        </div>
-    </div>
-    <div class="subtotal">
+            <label>Quantità:</p> <input type="number" value=<?=$row["quantita"]?>>
             <h3>Subtotale:</h3>
             <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
+        </div>
     </div>
+
 <?php 
     }
 ?>
 
+<!--
+    <div class="subtotal">
+            <h3>Subtotale:</h3>
+            <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
+    </div>
+-->

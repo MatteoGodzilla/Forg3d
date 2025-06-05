@@ -2,11 +2,17 @@
 <header>
 	<div class="header-content">
 		<a href="/"><h1>Forg3d</h1></a>
-        <?php if (utenteLoggato()){ ?>
+        <?php if (utenteLoggato()){?>
             <div id="userProfile">
-                <span class="material-symbols-outlined">person</span>
                 <?php generateSymbol(); ?>
-                <span id="notifications" class="material-symbols-outlined">notifications</span>
+                <a href="/notifications.php">
+                    <div id="notifications">
+                        <span id="notifications" class="material-symbols-outlined">notifications</span>
+                        <?php if(($notifCount = getNotificationsCount()) > 0){ ?>
+                            <span class="notification-badge"><?=$notifCount?></span>
+                        <?php }?>
+                    </div>
+                </a>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>
         <?php } else { ?>
@@ -29,3 +35,24 @@
         <a href="./../adminHome.php"><span class="material-symbols-outlined">home</span></a>
     <?php }?>
 <?php } ?>
+
+
+<?php
+    function getNotificationsCount(){
+        require_once("../php/db.php");
+        global $connection;
+
+        $email = getSessionEmail();
+
+        if(getUserType()==UserType::SELLER->value){
+            $query = "SELECT COUNT(id) as tot FROM Notifica WHERE emailVenditore = ?";
+            $stmt = mysqli_prepare($connection, $query);
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            return $notifs[0]["tot"];
+        }
+        return 0;
+    }
+?>
