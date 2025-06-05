@@ -64,7 +64,7 @@ div.subtotal {
     margin-bottom: var(--padding-small);
 }
 
-input{
+input:not(input[type="submit"]){
     width: 50%;
     font-size: var(--font-small);
     margin-top: var(--padding-small);
@@ -73,4 +73,19 @@ input{
 div.cart-row > div > a.button-delete{
     text-align: center;
     font-size: var(--font-small);
+}
+
+input[type="submit"]{
+    background-color: var(--light-primary-compratore);
+    margin: var(--padding-large);
+    padding: var(--padding-small);
+    border-radius: 100px;
+    border-style: none;
+    font-size: 1.5em;
+    font-weight: bold;
+
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+
 }

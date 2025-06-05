@@ -45,7 +45,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <script src="./js/updateQuantities.js"></script>
 </head>
 <body>
-    <form>
+    <form action="./api/convertToOrder.php" method="POST">
         <?php
             require_once("components/header.php");
             create_header();
@@ -53,6 +53,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <h2>Il tuo carrello</h2>
             
         <?php if(sizeof($rows)!=0){ ?>
+            <input type="submit" value="Paga e completa l'ordine">
             <?php
             include_once("./components/cart_row.php");
             foreach($rows as $cart_row){ 

@@ -79,6 +79,7 @@
         }
     ?>
 
+<!--
     <h3>Notifiche</h3>
     <a href="sellerNotification.php">Invia Notifica</a>
     <div class="notifContainer">
@@ -89,5 +90,6 @@
         }
     ?>
     </div>
+-->
 </body>
 </html>

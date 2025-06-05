@@ -26,6 +26,7 @@
 
 <?php function generateSymbol(){ ?>
     <?php if (getUserType()==UserType::BUYER->value){ ?>
+        <span class="material-symbols-outlined">receipt_long</span>
         <a href="../cart.php"><span class="material-symbols-outlined">shopping_cart</span></a>
     <?php }?>
      <?php if (getUserType()==UserType::SELLER->value){ ?>
