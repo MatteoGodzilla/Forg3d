@@ -1,5 +1,6 @@
 <?php
     function cart_row($row){
+        $rootDir = realpath($_SERVER["DOCUMENT_ROOT"]);
 ?>
     <div class="cart-row">
         <div>
