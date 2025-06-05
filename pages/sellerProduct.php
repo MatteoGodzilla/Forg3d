@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	<head>
 		<title>Forg3d Home</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="./css/home.css">
+
 		<link rel="stylesheet" href="./css/header.css">
         <link rel="stylesheet" href="./css/popups.css">
         <link rel="stylesheet" href="./css/sellerProduct.css">
@@ -114,7 +114,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <button type="submit" name="follow">Segui</button>
                     <?php endif; ?>
             </form>
-            <h3>Segnala venditore</h3>
+            </div>
+        </div>
+        <div class ="report-form-container">
+        <h3>Segnala venditore</h3>
             <form method="POST" action="/api/report.php" class="report-form">
                 <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
                 <input type="hidden" name="tipo" value="venditore">	
@@ -127,7 +130,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 create_popup($_GET["message"],$_GET["messageType"]);
             } 
             ?>
-            </div>
         </div>
         <h3>Prodotti</h3>
 		<?php if (count($products) > 0): ?>

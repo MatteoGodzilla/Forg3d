@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--padding-medium);
+    margin: var(--padding-medium);
     padding: var(--padding-small);
     background-color: var(--light-container);
     border-radius: 10px;
@@ -73,7 +73,7 @@ button.report-btn:hover {
 }
 
 .report-form-container textarea {
-    width: 100%;
+    width: 90%;
     height: 100px;
     padding: var(--padding-small);
     border-radius: 10px;
