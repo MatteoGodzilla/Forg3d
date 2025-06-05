@@ -3,6 +3,7 @@
 
 h2,h3,h4,p{
     text-align: center;
+    padding-top: var(--padding-small);
 }
 
 .cart-row{
@@ -12,35 +13,52 @@ h2,h3,h4,p{
 
 div.cart-row {
     background-color: var(--light-container);
-    margin: var(--padding-large);
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    margin-bottom: 0;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
+    flex-direction: row;
+}
+
+
+div.cart-row > div  {
+    flex : 1 1 50%;
 
 }
 
-div.cart-row > a{
+
+div.cart-row > div > a{
+    margin: var(--padding-small);
     text-align: left;
-    width: 50%;
+    display: block;
+    width: 95%;
 }
 
-div.cart-row > a > div{
-    display: flex;
-}
 
-div.cart-row > a > div  > img {
+
+div.cart-row > div > a   > img {
     position: relative;
     left: 0;
     width:100%;
     aspect-ratio:4/3;
     object-fit: cover;
-    margin-bottom: var(--padding-small);
 }
 
-div.cart-row > div {
+div.cart-row > div > div {
     display: block;
     text-align: center;
     align-items: center;
     object-fit: cover;
     width:100%;
+}
+
+
+div.subtotal {
+    background-color: var(--light-container);
+    text-align: center;
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    margin-bottom: var(--padding-small);
 }

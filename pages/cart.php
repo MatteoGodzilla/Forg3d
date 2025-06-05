@@ -38,6 +38,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <title>Carrello</title>
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/cart.css" />
+    <link rel="stylesheet" href="./css/buttons.css" />
 </head>
 <body>
     <?php

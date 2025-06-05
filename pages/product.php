@@ -111,7 +111,7 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     <?php } ?>
     <h3>Varianti</h3>
 
-    <?php if ($tipoUtente==UserType::NOT_LOGGED): ?>
+    <?php if ($tipoUtente!=UserType::BUYER->value): ?>
         <?php 
             include_once("./components/varianteOption.php");
             foreach($varianti as $variante){
