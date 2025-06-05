@@ -15,10 +15,11 @@
         <div>
             <input name="ids[]" type="hidden" value=<?=$row["idVariante"]?>>
             <input name="rows[]" type="hidden" value=<?=$row["id"]?>>
+            <input name="costs[]" type="hidden" value=<?=$row["prezzo"]?>>
             <h3><?=$row["nome"]?></h3>
             <p>Variante:<?=$row["variante"]?></p>
-            <p>Quantità:</p> <input name="quantity[]" type="number" value=<?=$row["quantita"]?>>
-            <h3>Subtotale:</h3>
+            <p>Quantità:</p> <input name="quantity[]" type="number" min="1" value=<?=$row["quantita"]?>>
+            <h3 name="total[]"><?=$row["quantita"]*$row["prezzo"]?>$</h3>
             <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
         </div>
     </div>

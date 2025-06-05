@@ -5,8 +5,10 @@ $(document).ready(function() {
          var variantId =$('input[name^="ids["]')[index].value;
          var productId =$('input[name^="rows["]')[index].value;
         if(!isNaN(quantita) && !isNaN(variantId) && !isNaN(productId)){
-            var orderId = 1;
             fetch("/api/updateCartQuantity.php?id="+productId+"&variante="+variantId+"&quantita="+quantita);
+            var cost = $('input[name^="costs["]')[index].value;
+            var subtotal = (parseInt(quantita)*parseInt(cost));
+            $('h3[name^="total["]').eq(index).text("Subtotale: "+subtotal+"$");
         }
 
     });
