@@ -17,7 +17,7 @@ $email=$_GET["email"];
 
 #query (seleziona reports non ispezionati sullo specifico venditore, stato = 0)
 $query = "SELECT id,emailSegnalatore,emailVenditore,motivo,ultimaModifica FROM Segnalazione INNER JOIN SegnalazioneVenditore ON 
-Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE emailVenditore=? AND ispezionata = 0 ORDER BY ultimaModifica LIMIT 50";
+Segnalazione.id = SegnalazioneVenditore.idSegnalazione WHERE emailVenditore=? AND ispezionata = 0 ORDER BY ultimaModifica";
 
 
 $stmt = mysqli_prepare($connection, $query);

@@ -15,10 +15,13 @@ if(getUserType()!=UserType::BUYER->value){
 
 $email = getSessionEmail();
 
-$query_cart = "SELECT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita FROM Carrello C
+$query_cart = "SELECT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita, P.id as idProdotto,
+    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  C.id, M.nomeColore, P.nome, C.quantita,P.id) AS immagine
+    FROM Carrello C 
     INNER JOIN Variante V ON C.idVariante = V.id
     INNER JOIN Prodotto P ON V.idProdotto = P.id
     INNER JOIN Materiale M ON M.id = V.idMateriale
+    LEFT JOIN ImmaginiProdotto I ON I.idProdotto=P.id 
     WHERE emailCompratore = ?";
 
 $stmt = mysqli_prepare($connection, $query_cart);
