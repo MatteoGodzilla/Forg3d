@@ -34,7 +34,9 @@
         create_header();
     ?>
     <h3>Notifiche nuove</h3>
-    <a href="sellerNotification.php">Invia Notifica</a>
+    <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
+        <a href="sellerNotification.php">Invia Notifica</a>
+    <?php }?>
     <div class="notifContainer">
     <?php 
         require_once("components/sellerHomeNotif.php");
