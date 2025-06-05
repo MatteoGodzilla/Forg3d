@@ -15,8 +15,8 @@ if(getUserType()!=UserType::BUYER->value){
 
 $email = getSessionEmail();
 
-$query_cart = "SELECT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita, P.id as idProdotto,
-    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  C.id, M.nomeColore, P.nome, C.quantita,P.id) AS immagine
+$query_cart = "SELECT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita, V.id as idVariante,P.id as idProdotto,
+    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  C.id, M.nomeColore, P.nome, C.quantita,P.id,V.id) AS immagine
     FROM Carrello C 
     INNER JOIN Variante V ON C.idVariante = V.id
     INNER JOIN Prodotto P ON V.idProdotto = P.id
@@ -39,23 +39,26 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/cart.css" />
     <link rel="stylesheet" href="./css/buttons.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/updateQuantities.js"></script>
 </head>
 <body>
-    <?php
-        require_once("components/header.php");
-        create_header();
-    ?>
-    <h2>Il tuo carrello</h2>
-        
-    <?php if(sizeof($rows)!=0){ ?>
+    <form>
         <?php
-        include_once("./components/cart_row.php");
-        foreach($rows as $cart_row){ 
-            cart_row($cart_row);
-        } ?>
-    <?php } else { ?>
-        <h3>(Nessun item in carrello,vai a fare shopping!)</h3>
-    <?php }?>
-
+            require_once("components/header.php");
+            create_header();
+        ?>
+        <h2>Il tuo carrello</h2>
+            
+        <?php if(sizeof($rows)!=0){ ?>
+            <?php
+            include_once("./components/cart_row.php");
+            foreach($rows as $cart_row){ 
+                cart_row($cart_row);
+            } ?>
+        <?php } else { ?>
+            <h3>(Nessun item in carrello,vai a fare shopping!)</h3>
+        <?php }?>
+    </form>
 </body>
 </html>

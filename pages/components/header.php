@@ -29,6 +29,7 @@
         <a href="../cart.php"><span class="material-symbols-outlined">shopping_cart</span></a>
     <?php }?>
      <?php if (getUserType()==UserType::SELLER->value){ ?>
+        <a href="./../orders.php"><span class="material-symbols-outlined">receipt_long</span></a>
         <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
@@ -39,20 +40,36 @@
 
 <?php
     function getNotificationsCount(){
-        require_once("../php/db.php");
-        global $connection;
-
-        $email = getSessionEmail();
-
-        if(getUserType()==UserType::SELLER->value){
-            $query = "SELECT COUNT(id) as tot FROM Notifica WHERE emailVenditore = ?";
-            $stmt = mysqli_prepare($connection, $query);
+    require_once("../php/db.php");
+    global $connection;
+    $email = getSessionEmail();
+    switch(getUserType()){
+        case UserType::BUYER->value:
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore in 
+            (SELECT emailVenditore FROM Follow WHERE emailCompratore=?)
+            ORDER BY creazione DESC";
+            $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            return $notifs[0]["tot"];
+            break;
+        case UserType::SELLER->value:
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore is null AND id NOT in
+            (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            ORDER BY creazione DESC";
+            $stmt = mysqli_prepare($connection, $query_notifiche);
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            break;
+        case UserType::ADMIN->value:
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore is null AND id NOT in
+            (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            ORDER BY creazione DESC";
+            $stmt = mysqli_prepare($connection, $query_notifiche);
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            break;
         }
-        return 0;
+
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $notifs[0]["tot"];
     }
 ?>

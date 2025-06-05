@@ -13,9 +13,11 @@
             </a>
         </div>
         <div>
+            <input name="ids[]" type="hidden" value=<?=$row["idVariante"]?>>
+            <input name="rows[]" type="hidden" value=<?=$row["id"]?>>
             <h3><?=$row["nome"]?></h3>
             <p>Variante:<?=$row["variante"]?></p>
-            <label>Quantità:</p> <input type="number" value=<?=$row["quantita"]?>>
+            <p>Quantità:</p> <input name="quantity[]" type="number" value=<?=$row["quantita"]?>>
             <h3>Subtotale:</h3>
             <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
         </div>
@@ -25,9 +27,4 @@
     }
 ?>
 
-<!--
-    <div class="subtotal">
-            <h3>Subtotale:</h3>
-            <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
-    </div>
--->
+
