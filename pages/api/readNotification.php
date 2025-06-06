@@ -23,7 +23,7 @@ if(!isset($_GET["id"])){
     //global wipe
     $query = "SELECT id FROM Notifica 
     WHERE id NOT IN (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore = ?) 
-    AND (emailVenditore is NULL) OR emailVenditore IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?)";
+    AND ((emailVenditore is NULL) OR emailVenditore IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?))";
     $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt,"ss", $email,$email);
     mysqli_stmt_execute($stmt);
