@@ -9,3 +9,12 @@
     </a>
 </div>
 <?php } ?>
+
+<?php function createNotificationAsRead($notif){ ?>
+<div class="notification" >
+    <h3><?= htmlspecialchars($notif["titolo"]); ?></h3>
+    <p><?= htmlspecialchars($notif["descrizione"]); ?></p>
+    <p>Creata da: <?= $notif["emailVenditore"]!=null ? htmlspecialchars($notif["emailVenditore"]) : "Amministratori"; ?>(<?= htmlspecialchars($notif["creazione"]) ?>)</p>
+</div>
+<?php } ?>
+

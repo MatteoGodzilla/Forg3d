@@ -37,6 +37,14 @@
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    //repeat per le lette
+    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE emailCompratore = ?";
+    $stmt = mysqli_prepare($connection, $query_lette);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $notifs_read = mysqli_fetch_all($result, MYSQLI_ASSOC);
     
 ?>
 
@@ -58,8 +66,10 @@
     <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
         <a href="sellerNotification.php">Invia Notifica</a>
     <?php }?>
-    <h2>Notifiche nuove</h2>
-    <a href="./api/readNotification.php">Segna tutte come lette</a>
+    <?php if(sizeof($notifs)>0) {?>
+        <h2>Notifiche nuove</h2>
+        <a href="./api/readNotification.php">Segna tutte come lette</a>
+    <?php } ?>
     <?php 
         require_once("components/notification.php");
         foreach($notifs as $notification){
@@ -67,5 +77,11 @@
         }
     ?>
     <h2>Notifiche lette</h2>
+        <?php 
+        require_once("components/notification.php");
+        foreach($notifs_read as $notification){
+            createNotificationAsRead($notification);
+        }
+    ?>
 </body>
 </html>
