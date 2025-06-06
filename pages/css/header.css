@@ -41,6 +41,11 @@
   display: inline-block;
 }
 
+#orders{
+  position: relative;
+  display: inline-block;
+}
+
 .notification-badge {
   position: absolute;
   

@@ -55,15 +55,6 @@ div.cart-row > div > div {
     width:100%;
 }
 
-
-div.subtotal {
-    background-color: var(--light-container);
-    text-align: center;
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
-    margin-bottom: var(--padding-small);
-}
-
 input:not(input[type="submit"]){
     width: 50%;
     font-size: var(--font-small);
