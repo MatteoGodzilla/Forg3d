@@ -60,28 +60,6 @@ mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_store_result($stmt);
 $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    //controlla se utente è loggato
-    if(!utenteLoggato()){
-        header("Location:".feedback("./sellerProduct.php?email=".$emailVenditore,AlertType::ERROR->value,"Devi essere loggato con un account per seguire un venditore!",true));
-        exit();
-    }
-
-    if (isset($_POST["follow"])) {
-        $stmt = mysqli_prepare($connection, "INSERT IGNORE INTO Follow (emailCompratore, emailVenditore) VALUES (?, ?)");
-        mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
-        mysqli_stmt_execute($stmt);
-        $isFollowing = true;
-        $followersCount++;
-    } elseif (isset($_POST["unfollow"])) {
-        $stmt = mysqli_prepare($connection, "DELETE FROM Follow WHERE emailCompratore = ? AND emailVenditore = ?");
-        mysqli_stmt_bind_param($stmt, "ss", $emailUtente, $emailVenditore);
-        mysqli_stmt_execute($stmt);
-        $isFollowing = false;
-        $followersCount = max(0, $followersCount - 1);
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -108,12 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p>Follower: <?= $followersCount ?></p>
             </div>
             <div class="seller-actions">
-            <form method="POST" class="follow-btn">
-                    <?php if ($isFollowing): ?>
-                        <button type="submit" name="unfollow">Unfollow</button>
-                    <?php else: ?>
-                        <button type="submit" name="follow">Segui</button>
-                    <?php endif; ?>
+            <form method="GET" action="/api/followUnfollow.php" class="follow-btn">
+                <?php if (utenteLoggato() && $emailUtente !== $emailVenditore): ?>
+                    <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+                    <input type="hidden" name="azione" value="<?= $isFollowing ? 'unfollow' : 'follow' ?>">
+                    <button type="submit">
+                        <?= $isFollowing ? 'Unfollow' : 'follow' ?>
+                    </button>
+                <?php endif; ?>
             </form>
             </div>
         </div>
