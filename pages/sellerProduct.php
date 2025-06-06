@@ -6,7 +6,6 @@ include_once("../php/constants.php");
 include_once("../php/session.php");
 include_once("../php/feedback.php");
 
-
 if (!isset($_GET['email']) || empty($_GET['email'])) {
 	exit;
 }
@@ -89,11 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="it">
 	<head>
 		<title>Forg3d Home</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-		<link rel="stylesheet" href="./css/header.css">
-        <link rel="stylesheet" href="./css/popups.css">
-        <link rel="stylesheet" href="./css/sellerProduct.css">
+		<link rel="stylesheet" href="./css/header.css"/>
+        <link rel="stylesheet" href="./css/popups.css"/>
+        <link rel="stylesheet" href="./css/form.css"/>
+        <link rel="stylesheet" href="./css/sellerProduct.css"/>
+        <link rel="stylesheet" href="./css/productList.css" />
 	</head>
 	<body>
 			<?php 
@@ -116,23 +117,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
             </div>
         </div>
-        <div class ="report-form-container">
-        <h3>Segnala venditore</h3>
-            <form method="POST" action="/api/report.php" class="report-form">
-                <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
-                <input type="hidden" name="tipo" value="venditore">	
-                <textarea name="motivo" required placeholder="Motivo della segnalazione"></textarea>
-                <button type="submit">Invia segnalazione</button>
-            </form>
-            <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
-                include_once("./components/popups.php");
-                include_once("./../php/constants.php");
-                create_popup($_GET["message"],$_GET["messageType"]);
-            } 
-            ?>
-        </div>
-        <h3>Prodotti</h3>
-		<?php if (count($products) > 0): ?>
+        <form method="POST" action="/api/report.php" class="report-form">
+            <h2>Segnala venditore</h2>
+            <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+            <input type="hidden" name="tipo" value="venditore">	
+            <label for="motivo">Motivo della segnalazione</label>
+            <textarea name="motivo" id="motivo" required></textarea>
+            <button type="submit">Invia segnalazione</button>
+        </form>
+        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+            include_once("./components/popups.php");
+            include_once("./../php/constants.php");
+            create_popup($_GET["message"],$_GET["messageType"]);
+        } 
+        ?>
+        <h2>Prodotti</h2>
+        <?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
                 <?php generateProductList($product); ?>
             <?php endforeach; ?>

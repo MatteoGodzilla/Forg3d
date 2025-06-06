@@ -76,10 +76,10 @@ if(isset($_GET['search'])){
 <html lang="it">
 	<head>
 		<title>Forg3d Home</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="./css/header.css">
-		<link rel="stylesheet" href="./css/home.css">
-		<link rel="stylesheet" href="./css/home_wide.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/home.css" />
+        <link rel="stylesheet" href="./css/productList.css" />
 	</head>
 	<body>
         <?php 
@@ -92,31 +92,25 @@ if(isset($_GET['search'])){
 		<?php if (isset($_GET['search'])): ?>
             <h2>Venditori</h2>
             <?php if (count($sellers) > 0): ?>
-                <section class="seller-list">
                 <?php foreach ($sellers as $seller): ?>
                     <?php generateSellerList($seller); ?>
                 <?php endforeach; ?>
-                </section>
 			<?php else: ?>
 				<p>Nessun venditore trovato.</p>
 			<?php endif; ?>
             <h2>Prodotti</h2>
 		<?php if (count($products) > 0): ?>
-			<section class="product-list">
 				<?php foreach ($products as $product): ?>
 					<?php generateProductList($product); ?>
 				<?php endforeach; ?>
-			</section>
 		<?php else: ?>
 			<p>Nessun prodotto trovato.</p>
 		<?php endif; ?>
 		<?php else: ?>
 			<h2>Prodotti</h2>
-			<section class="product-list">
 				<?php foreach ($products as $product): ?>
 					<?php generateProductList($product); ?>
 				<?php endforeach; ?>
-			</section>
 		<?php endif; ?>
 	</body>
 </html>

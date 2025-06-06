@@ -1,0 +1,6 @@
+@import url("./css/variables.css");
+
+h2 {
+    margin-top: var(--padding-large);
+    text-align: center;
+}

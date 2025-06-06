@@ -1,9 +1,7 @@
-
-<?php
-function generateProductList($product) {
-    $rootDir = realpath($_SERVER["DOCUMENT_ROOT"]);
-    ?>
-<article class="product">
+<?php function generateProductList($product) { 
+    $rootDir = realpath($_SERVER["DOCUMENT_ROOT"]); 
+?>
+    <article class="product">
     <a href="../product.php?id=<?php echo $product['id']; ?>">
         <div>
             <?php if(isset($product["immagine"]) && $product["immagine"]!=null && file_exists($rootDir.$product["immagine"])) {?>
@@ -11,11 +9,9 @@ function generateProductList($product) {
             <?php }else{?>
                 <img  alt = "immagine non trovata" src="https://placehold.co/800x600"> </img>
             <?php }?>
-        <h3><?php  echo $product['nome'] ?> </h3>
+        <h3><?php echo $product['nome'] ?></h3>
         <?php echo '<p>Venditore: ' . $product['venditoreNome'] . ' ' . $product['venditoreCognome'] . '</p>'?>
         </div>
     </a>
 </article>
-<?php
-}
-?>
+<?php } ?>

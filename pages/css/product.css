@@ -118,10 +118,3 @@ form > input[type="submit"] {
     border-style: none;
 }
 
-form > textarea {
-    resize: vertical;
-    background-color: var(--light-container);
-    border-color: transparent;
-    border-width: 0px;
-    font-family: var(--font-family-paragraph);
-}

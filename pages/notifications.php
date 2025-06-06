@@ -11,21 +11,21 @@
     global $stmt;
     switch(getUserType()){
         case UserType::BUYER->value:
-            $query_notifiche = "SELECT emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore in 
+            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore in 
             (SELECT emailVenditore FROM Follow WHERE emailCompratore=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
             break;
         case UserType::SELLER->value:
-            $query_notifiche = "SELECT emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
+            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
             (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
             break;
         case UserType::ADMIN->value:
-            $query_notifiche = "SELECT emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
+            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
             (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
@@ -45,11 +45,12 @@
 <head>
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="./css/sellerHome.css" />
+    <!--<link rel="stylesheet" href="./css/sellerHome.css" />-->
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/notifications.css" />
+    <link rel="stylesheet" href="./css/form.css" />
 </head>
 <body>
-    
     <?php
         require_once("components/header.php");
         create_header();
@@ -57,15 +58,14 @@
     <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
         <a href="sellerNotification.php">Invia Notifica</a>
     <?php }?>
-    <h3>Notifiche nuove</h3>
-    <div class="notifContainer">
+    <h2>Notifiche nuove</h2>
+    <a href="./api/readNotification.php">Segna tutte come lette</a>
     <?php 
-        require_once("components/sellerHomeNotif.php");
+        require_once("components/notification.php");
         foreach($notifs as $notification){
-            sellerHomeNotification($notification);
+            createNotification($notification);
         }
     ?>
-    </div>
-    <h3>Notifiche lette</h3>
+    <h2>Notifiche lette</h2>
 </body>
 </html>

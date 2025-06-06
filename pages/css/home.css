@@ -16,6 +16,11 @@ input[name="search"] {
     border-radius: 100px;
 }
 
+h2 {
+    text-align: center;
+}
+
+/*
 body > div {
     background-color: var(--light-container);
     display: flex;
@@ -35,24 +40,4 @@ body > div > div > p:last-child{
     font-weight: bolder;
 }
 
-article {
-    background-color: var(--light-container);
-    margin: var(--padding-small);
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-}
-
-article.product > a > div  > img {
-    width:100%;
-    aspect-ratio:4/3;
-    object-fit: cover;
-}
-
-article.product > div {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+*/

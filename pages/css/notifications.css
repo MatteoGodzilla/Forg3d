@@ -1,0 +1,52 @@
+@import url("./css/variables.css");
+
+body > h2 {
+    text-align: center;
+    margin: var(--padding-large);
+}
+
+body > h3 {
+    text-align: center;
+    margin: var(--padding-small);
+    margin-top: var(--padding-large);
+}
+
+body > a {
+    display:block;
+    background-color: var(--light-primary-venditore);
+    margin:var(--padding-small);
+    padding:var(--padding-small);
+    color: var(--light-text);
+    border-radius: 70px;
+    text-align: center;
+    font-size:1.5em;
+}
+
+/* Single notifications */
+div.notification  {
+    margin: var(--padding-small); 
+    padding: var(--padding-small);
+    background-color: var(--light-container);
+}
+
+div.notification > h3, div.notifContainer > form > p{
+    padding: 0px;
+}
+
+div.notification > p:last-of-type {
+    padding-top: var(--padding-small);
+}
+
+div.notification > a {
+    display: block;
+    margin-top: var(--padding-small); 
+    margin-bottom: 0px; 
+    color: var(--light-ok);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+div.notification span {
+    color: var(--light-ok);
+    vertical-align: middle;
+}
