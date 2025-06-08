@@ -4,7 +4,6 @@
 h3,h2,p{
     text-align: center;
     padding-top: var(--padding-small);
-    font-size: var(--font-small);
 }
 
 .cart-row{
@@ -23,12 +22,10 @@ div.cart-row {
     flex-direction: row;
 }
 
-
 div.cart-row > div  {
     flex : 1 1 50%;
 
 }
-
 
 div.cart-row > div > a :not(.button-delete){
     margin: var(--padding-small);
@@ -36,8 +33,6 @@ div.cart-row > div > a :not(.button-delete){
     display: block;
     width: 95%;
 }
-
-
 
 div.cart-row > div > a   > img {
     position: relative;
@@ -68,15 +63,12 @@ div.cart-row > div > a.button-delete{
 
 input[type="submit"]{
     background-color: var(--light-primary-compratore);
-    margin: var(--padding-large);
+    margin-top: var(--padding-large);
+    margin-left: var(--padding-small);
+    width: calc(100% - var(--padding-small) * 2);
     padding: var(--padding-small);
     border-radius: 100px;
     border-style: none;
     font-size: 1.5em;
     font-weight: bold;
-
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-
 }

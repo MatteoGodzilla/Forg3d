@@ -1,41 +1,49 @@
 @import url(./materialIcons.css);
 
 div.review {
-    display:flex;
-    flex-direction: column;
-    margin: var(--padding-small);
+    padding-bottom: var(--padding-small);
 }
 
-div.review > * {
-    width: 100%;
-}
+/*Review info (only used for reviews) */
 
-/* Title and review score */
-div.review > div {
+div.reviewInfo {
     display: flex;
     align-items: center;
 }
 
-div.review h3 {
+div.reviewInfo > h3 {
     display: inline-block;
 }
 
-div.review span:first-of-type{
+div.reviewInfo >  span:first-of-type{
     margin-left: auto;
 }
 
-div.review span:last-of-type{
+div.reviewInfo span:last-of-type{
     margin-right: var(--padding-small);
 }
 
-/* Review description */
+/* Description (both used for review and replies) */
 
-div.review p {
+div.review > p {
     text-align: justify;
 }
 
 /* Review author */
-div.review p:last-of-type {
+div.review > p:last-of-type {
     vertical-align: justified;
     font-size: 0.8em;
+}
+
+div.replies {
+    margin-left: calc(var(--padding-small) / 2);
+    border-left: calc(var(--padding-small) / 2) var(--light-background) solid;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+/*top level reviews */
+body > div.review {
+    margin: var(--padding-small);
 }

@@ -1,6 +1,7 @@
 <?php
 require_once("../php/db.php"); // Connessione al database
 require_once("../php/session.php"); // Gestione sessione
+require_once("../php/replyUtils.php");
 session_start();
 
 $varianti = [];
@@ -70,16 +71,25 @@ mysqli_stmt_execute($stmt);
 $resultImmagini = mysqli_stmt_get_result($stmt);
 
 //Query delle recensioni
-$query_recensioni = "SELECT id, email, valutazione, titolo, testo FROM Recensione WHERE idProdotto = ? ORDER BY dataCreazione";
+$query_recensioni = "SELECT id, email, valutazione, titolo, testo, inRispostaA FROM Recensione WHERE idProdotto = ? ORDER BY dataCreazione";
 $stmt = mysqli_prepare($connection, $query_recensioni);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);
 $resultRecensioni = mysqli_stmt_get_result($stmt);
-$reviews = [];
 
+$reviews = [];
 while ($review = mysqli_fetch_assoc($resultRecensioni)) {
     $reviews[] = $review;
 }
+//Crea l'albero delle recensioni
+$graph = createReviewTree($reviews);
+//debug
+/*
+echo("<pre>");
+var_dump($graph);
+echo("</pre>");
+ */
+
 ?>
 
 <!DOCTYPE html>
@@ -138,7 +148,7 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
         </button>
         <!--<h3>Scrivi una recensione</h3>-->
         <form class="hidden" action="/api/addReview.php" method="POST">
-            <input type="hidden" name="idProduct" value="<?php echo $idProdotto; ?>">
+            <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
             <!-- TODO: replace text display to star display -->
             <label for="score" >Valutazione: <span>4</span>/5</label> 
             <input name="score" type="range" min=0 max=5 step=1 value=3 />
@@ -163,99 +173,29 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
             } 
         ?>
 
-        <script>
-
-            //Review stuff
-            const toggleButton = document.querySelector("#toggleReviewForm");
-            const form = document.querySelector("form.hidden");
-            const slider = document.querySelector("input[type='range']");
-            const scoreDisplay = document.querySelector("form span");
-            console.log(scoreDisplay);
-            slider.oninput = (ev) => scoreDisplay.innerText = ev.srcElement.value;
-
-            toggleButton.onclick = () => {
-                if(form.classList.contains("hidden")){
-                    form.classList.remove("hidden");
-                } else {
-                    form.classList.add("hidden");
-                }
-            }
-
-        </script>
+        <script src="./js/productReview.js"></script>
     <?php endif; ?>
 
     <?php if(isset($prodotto['fileModello'])){ ?>
         <script src="stl_viewer/stl_viewer.min.js"></script>
         <script>
-            let chosenColor = "";
-            let stlViewer;
-            //Create stl viewer
-            const showButton = document.querySelector("#showModel");
-            const container = document.querySelector("#model-viewer");
-            //console.log(container);
-
-            showButton.onclick = () => {
-                container.classList.remove("hidden");
-                stlViewer = new StlViewer(container, {
-                    auto_resize: false,
-                    models:[ { id: 0, filename:"..<?= $prodotto['fileModello'] ?>"} ],
-                    allow_drag_and_drop: false,
-                    all_loaded_callback: () => {
-                        //Just to set the initial color
-                        stlViewer.set_color(0, chosenColor);
-                    }
-                }); 
-                showButton.style.display = "none";
-            }
-            //Variant selection
-            const variant = document.querySelectorAll("div.variantOption");
-            const addToCart = document.querySelector("input[name='idVariant']");
-            variant.forEach(v => {
-                const radioButton = v.querySelector("input[type='radio']");
-                const variantColor = v.querySelector("input[type='hidden']");
-                v.onclick = () => {
-                    radioButton.click();
-                    //Set id for shopping cart
-                    if(addToCart)
-                        addToCard.value = radioButton.id;    
-                    
-                    chosenColor = variantColor.value;
-                    //Set model color
-                    if (stlViewer)
-                        stlViewer.set_color(0, chosenColor);
-                }
-            });
-            //Automatically select the first variant
-            variant[0].click();
+            //This variable is used inside productWithModel, but it needs the path from php
+            //it is meant to be a global variable
+            modelPath = "..<?= $prodotto['fileModello'] ?>";
         </script>
+        <script src="js/productWithModel.js"></script>
     <?php } else { ?>
-        <script>
-            //Variant selection
-            const variant = document.querySelectorAll("div.variantOption");
-            const addToCart = document.querySelector("input[name='idVariant']");
-            variant.forEach(v => {
-                const radioButton = v.querySelector("input[type='radio']");
-                const variantColor = v.querySelector("input[type='hidden']");
-                v.onclick = () => {
-                    radioButton.click();
-                    //Set id for shopping cart
-                    if(addToCart){
-                        addToCard.value = radioButton.id;    
-                    }
-                }
-            });
-            //Automatically select the first variant
-            variant[0].click();
-        </script>
+        <script src="js/productWithoutModel.js"></script>
     <?php } ?>
+
     <h3>Recensioni di altri utenti:</h3>
     <?php 
         require_once("./components/review.php");
-        foreach($reviews as $review){
-            createReview($review);
+        foreach($graph->children as $review){
+            createReview($review, $idProdotto, 0);
         }
     ?> 
-    
      
+    <script src="js/replyToReview.js"></script>
 </body>
 </html>

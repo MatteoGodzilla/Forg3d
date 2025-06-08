@@ -95,6 +95,8 @@ div.image-button > button:hover {
     background-color: var(--light-primary-compratore);
 }
 
+/* Review form */
+
 #toggleReviewForm {
     margin-left: var(--padding-small);
     margin-right: var(--padding-small);
@@ -116,5 +118,23 @@ form.hidden {
 form > input[type="submit"] {
     background-color: var(--light-primary-compratore);
     border-style: none;
+}
+
+/* Review reply stuff */
+button.showReplyForm {
+    background-color: var(--light-container);
+    color: var(--light-ok);
+    padding: var(--padding-small);
+}
+
+form.reply > textarea {
+    background-color: var(--light-background);
+}
+
+form.reply > input[type="submit"] {
+    margin-top: var(--padding-small);
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 
