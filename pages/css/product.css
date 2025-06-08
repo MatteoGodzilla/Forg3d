@@ -23,6 +23,10 @@ h3{
 #model-viewer.hidden {
     display:none; 
 }
+
+#model-viewer.hidden2 {
+    display:none; 
+}
 #model-viewer {
     display: block;
     aspect-ratio: 4/3;
@@ -106,11 +110,28 @@ div.image-button > button:hover {
     padding: var(--padding-small);
 }
 
+#toggleReportForm {
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    width: calc(100% - var(--padding-small) * 2 );
+    box-sizing: border-box;
+    background-color: var(--light-primary-compratore); 
+    padding: var(--padding-small);
+}
+
 #toggleReviewForm > *{
     vertical-align: middle;
 }
 
+#toggleReportForm > *{
+    vertical-align: middle;
+}
+
 form.hidden {
+    display: none;
+}
+
+form.hidden2 {
     display: none;
 }
 

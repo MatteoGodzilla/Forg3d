@@ -158,8 +158,14 @@ echo("</pre>");
             <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
             <input type="submit" value="Invia Recensione"/>
         </form><br><br>
+        <script src="./js/productReview.js"></script>
+
+        <button id="toggleReportForm"> 
+            Reporta il prodotto
+            <span class="material-symbols-outlined">arrow_drop_down</span>
+        </button>
         <!--<h3>Segnala prodotto</h3>-->
-        <form class="form-report" action="/api/report.php" method="POST">
+        <form class="hidden2" action="/api/report.php" method="POST">
             <input type="hidden" name="idProdotto" value="<?php echo $idProdotto ?>">
             <input type="hidden" name="tipo" value="prodotto">
             <label for="review">Descrizione segnalazione:</label>
@@ -172,8 +178,7 @@ echo("</pre>");
                 create_popup($_GET["message"],$_GET["messageType"]);
             } 
         ?>
-
-        <script src="./js/productReview.js"></script>
+        <script src="./js/report.js"></script>
     <?php endif; ?>
 
     <?php if(isset($prodotto['fileModello'])){ ?>
