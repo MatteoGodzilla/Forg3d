@@ -5,45 +5,50 @@
 h3,h2,p{
     text-align: center;
     padding-top: var(--padding-small);
+}
+
+p{
     font-size: var(--font-small);
 }
 
 div.order{
     text-align: center;
-    margin: var(--padding-large);
     background-color: var(--light-container);
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
-    margin-bottom: 0;
+    margin: var(--padding-small);
+    padding: var(--padding-small);
+
     display:flex;
     flex-wrap:wrap;
     align-items:center;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+div.order  > a{
+    display: block;
+    flex : 1 1 42%;
+}
+
+div.order >  a   > img {
+    object-fit:cover;
+    width: 100%;
+    display: block;
 }
 
 div.order> div  {
-    flex : 1 1 50%;
-}
-
-div.order > div > a   > img {
-    position: relative;
-    left: 0;
-    width:100%;
-    aspect-ratio:4/3;
-    object-fit: cover;
-}
-
-div.order> div > div {
     display: block;
     text-align: center;
     align-items: center;
     object-fit: cover;
     width:100%;
+    flex : 1 1 42%;
 }
 
-div.order > div > a{
-    margin: var(--padding-small);
-    font-size: var(--padding-large);
-    display: block;
-    width: 95%;
+@media (min-width: 40em){
+    div.order {
+        flex-direction: row;
+    }
+    
+    div.order  *{
+        max-height: 30em;
+    }
 }

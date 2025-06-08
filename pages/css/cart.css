@@ -24,7 +24,6 @@ div.cart-row {
 
 div.cart-row > div  {
     flex : 1 1 50%;
-
 }
 
 div.cart-row > div > a :not(.button-delete){

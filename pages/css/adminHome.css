@@ -19,3 +19,16 @@ p {
     font-size: var(--font-small);
 }
 
+
+@media (min-width: 55em){
+
+    body{
+        flex-direction: row;
+    }
+
+    section {
+        width: 33%;
+        display: inline-block;
+        vertical-align: top;
+    }
+}
