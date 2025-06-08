@@ -16,8 +16,8 @@ if(getUserType()!=UserType::BUYER->value){
 
 $email = getSessionEmail();
 $query_orders = "SELECT P.id as idProdotto,M.nomeColore as variante, P.nome as nome ,
-O.emailVenditore as seller ,O.stato as stato,OI.quantita as quantita,OI.prezzo as prezzo,
-FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  P.id, P.nome, O.emailVenditore, OI.quantita,O.stato,M.nomeColore,OI.prezzo) AS immagine 
+O.emailVenditore as seller ,O.id as OrderId, O.stato as stato,OI.quantita as quantita,OI.prezzo as prezzo,
+FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  O.id, P.id, P.nome, O.emailVenditore, OI.quantita,O.stato,M.nomeColore,OI.prezzo) AS immagine 
 FROM Ordine O INNER JOIN InfoOrdine OI ON OI.idOrdine = O.id
 INNER JOIN Variante V on V.id = OI.idVariante INNER JOIN Prodotto P ON V.idProdotto = P.id
 LEFT JOIN ImmaginiProdotto I ON P.id = I.idProdotto INNER JOIN Materiale M ON M.id = V.idMateriale
@@ -29,7 +29,15 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-?>
+$paidOrders = 0;
+$shippedOrders = 0;
+$completedOrders = 0;
+foreach($rows as $order){ 
+    if($order["stato"] == 0)$paidOrders++;
+    if($order["stato"] == 1)$shippedOrders++;
+    if($order["stato"] == 2)$completedOrders++;
+} ?>
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -41,7 +49,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="./css/buttons.css" />
 </head>
 <body>
-    <form action="./api/convertToOrder.php" method="POST">
+
         <?php
             require_once("components/header.php");
             create_header();
@@ -49,12 +57,17 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <h2>Ordini pagati</h2>
             <?php
             include_once("./components/order.php");
-            foreach($rows as $order){ 
-                order($order);
+            for($i = 0;$i<$paidOrders;$i++){ 
+                order($rows[$i]);
             } ?>
         <h2>In spedizione:</h2>
+            <?php for($i = 0;$i<$shippedOrders;$i++){ 
+                order($rows[$paidOrders+$i]);
+            } ?>
         <h2>Ricevuti</h2>
+            <?php for($i = 0;$i<$completedOrders;$i++){ 
+                order($rows[$paidOrders+$shippedOrders+$i]);
+            } ?>
 
-    </form>
 </body>
 </html>

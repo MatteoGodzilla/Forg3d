@@ -77,5 +77,5 @@ catch(mysqli_sql_exception $exception){
     exit();
 }
 
-header("Location: /orders.php")
+header("Location: /buyersOrders.php")
 ?>
