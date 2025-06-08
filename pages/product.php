@@ -50,8 +50,8 @@ if (!$prodotto['visibile']) {
 $query_varianti =  "SELECT v.id, m.tipologia, m.nomeColore, m.hexColore, v.prezzo
                     FROM Variante v
                     JOIN Materiale m ON v.idMateriale = m.id
-                    WHERE v.idProdotto = ?"
-;
+                    WHERE v.idProdotto = ?
+                    AND v.visibile = 1" ;
 
 $stmt = mysqli_prepare($connection, $query_varianti);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);

@@ -113,9 +113,11 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
         ?>
         <h2>Prodotti</h2>
         <?php if (count($products) > 0): ?>
+            <div class="products">
             <?php foreach ($products as $product): ?>
                 <?php generateProductList($product); ?>
             <?php endforeach; ?>
+            </div>
         <?php else: ?>
             <p>Nessun prodotto trovato.</p>
         <?php endif; ?>

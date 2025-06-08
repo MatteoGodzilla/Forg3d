@@ -7,72 +7,83 @@ body > h2 {
     margin-top: var(--padding-small);
 }
 
-form input[type="color"] {
-    width:75px;
-    height:75px;
-    border-color:black;
-    border-style:solid;
-    border-radius:50px;
-}
-
-form > div {
-    display:flex;
-    align-items:center;
-}
-
-form > div > input[type="text"] {
-    margin-left: var(--padding-small);
+form legend {
+    font-family: var(--font-family-header);
     font-size: 1.2em;
-    flex-grow: 1;
 }
 
-form > input[type="checkbox"] {
-    all:unset;
-    appearance: checkbox;
+/* General product info */
+
+form input[type="text"]{
+    font-size: 1.2em;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: var(--padding-small);
 }
 
-form > label[for="visible"] {
-    display: inline;
+form input[type="file"]{
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
 }
 
-form > select {
-    background-color: var(--light-container);
-    border: none;
-    font-size: var(--font-small);
+div#immaginiEsistenti {
+    padding: var(--padding-small);
 }
 
-form > button#showModel {
+div#immaginiEsistenti img{
+    width: 100%;
+}
+
+form button#showModel {
+    display:block;
+    width: 100%;
     background-color: var(--light-primary-ausiliar);
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
 }
 
-form > div#model-viewer.hidden {
+form div#model-viewer.hidden {
     display: none;
 }
 
-form > div#model-viewer {
+form div#model-viewer {
     display: block;
     aspect-ratio: 4/3;
     padding: 0px;
 }
 
-form > input#addVariant{
+/* Variant stuff */
+
+form select {
+    width: 100%;
+    background-color: var(--light-container);
+    border: none;
+    font-size: var(--font-small);
+}
+
+form input#addVariant{
     border-radius: 70px;
+    width: 100%;
     background-color: var(--light-primary-ausiliar);
-    border-color: var(--light-primary-ausiliar);
+    border: none;
+    padding: var(--padding-small);
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
     cursor: pointer;
+    font-size: 1em;
 }
 
-form > div#variantContainer{
-    flex-direction: column;
-    margin-top: var(--padding-small);
-    margin-bottom: var(--padding-small);
+form div#variantContainer{
+    background-color: var(--light-background);
 }
 
 div.variantInfo{
     padding: var(--padding-small);
-    width: 100%;
+    margin-bottom: var(--padding-small);
+}
+
+div.variantInfo:last-of-type {
+    margin-bottom: 0px;
 }
 
 div.variantInfo > div {
@@ -110,8 +121,17 @@ div.variantInfo input[type="number"]{
     padding-left: var(--padding-small);
 }
 
-form > input[type="submit"] {
+form input[type="submit"] {
     background-color: var(--light-primary-venditore);
     border-color: var(--light-primary-venditore);
     cursor: pointer;
+}
+
+@media (min-width: 82em){
+    form fieldset {
+        display: inline-block;
+        width: 33%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
 }

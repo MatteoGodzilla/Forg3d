@@ -106,11 +106,10 @@ if(isset($_FILES["images"])){
 
 //Handle Variants
 if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
-    $query_remove = "DELETE FROM Variante WHERE idProdotto = ?";
-    $stmt = mysqli_prepare($connection, $query_remove);
-    mysqli_stmt_bind_param($stmt, "i", $id);
+    $query_hide = "UPDATE Variante SET visibile = 0 WHERE idProdotto = ? "; 
+    $stmt = mysqli_prepare($connection, $query_hide);
+    mysqli_stmt_bind_param($stmt,"i", $id);
     mysqli_stmt_execute($stmt);
-
 
     $query_add = "INSERT INTO Variante(idProdotto, idMateriale, prezzo) VALUES (?,?,?)";
     $stmt = mysqli_prepare($connection, $query_add);
@@ -118,7 +117,7 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
     $lastMaterialId = -1;
     for($i = 0; $i < count($_POST["materialIds"]); $i++){
         $materialId = $_POST["materialIds"][$i];
-        $variantCost = $_POST["variantCosts"][$i];
+        $variantCost = $_POST["variantCosts"][$materialId];
 
         if(!isset($_POST["removeVariant"]) || !in_array($materialId, $_POST["removeVariant"])){
             mysqli_stmt_bind_param($stmt, "iii", $id, $materialId, $variantCost);

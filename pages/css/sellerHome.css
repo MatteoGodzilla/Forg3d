@@ -2,18 +2,18 @@
 @import url(./styleReference.css);
 @import url(./buttons.css);
 
-body > h2 {
+main > h2, aside > h2 {
     text-align: center;
     margin: var(--padding-large);
 }
 
-body > h3 {
+main > h3, aside > h3 {
     text-align: center;
     margin: var(--padding-small);
     margin-top: var(--padding-large);
 }
 
-body > a {
+main > a, aside > a{
     display:block;
     background-color: var(--light-primary-venditore);
     margin:var(--padding-small);
@@ -57,3 +57,11 @@ article.material > svg {
     margin:var(--padding-small);
 }
 
+@media (min-width: 60em){
+    main, aside {
+        display: inline-block;
+        width:50%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+}

@@ -1,7 +1,13 @@
-<?php function sellerHomeProduct($product){ ?>
+<?php function sellerHomeProduct($product){ 
+    $rootDir = realpath($_SERVER["DOCUMENT_ROOT"]); 
+?>
 <article class="product">
     <!--TODO: add image in list -->
-    <img src="https://placehold.co/800x600" alt="" />
+    <?php if(isset($product["immagine"]) && $product["immagine"] != null && file_exists($rootDir.$product["immagine"])){ ?>
+        <img src="<?= $product["immagine"] ?>" alt="immagine prodotto" />
+    <?php } else { ?>
+        <img src="https://placehold.co/800x600?text=Immagine+non+trovata" alt="immagine non trovata" />
+    <?php } ?>
     <div>
         <p><?php echo ($product['nome']); ?> <?php echo ($product['visibile'] == 2 ? "":"(Nascosto)") ?></p>
         <div>

@@ -9,9 +9,13 @@
     $email = getSessionEmail();
 
     #Query Prodotti
-    $query_products = "SELECT * FROM Prodotto Where emailVenditore = ? AND visibile > 0";
+    $query_products = "SELECT DISTINCT P.*, FIRST_VALUE(I.nomeFile) 
+                        OVER (PARTITION BY P.id, P.nome, P.fileModello, P.visibile) AS immagine 
+                        FROM Prodotto P 
+                        LEFT JOIN ImmaginiProdotto I on I.idProdotto = P.id
+                        Where emailVenditore = ? AND visibile > 0";
     $stmt = mysqli_prepare($connection, $query_products);
-    mysqli_stmt_bind_param($stmt,"s",$email );
+    mysqli_stmt_bind_param($stmt,"s", $email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -61,15 +65,16 @@
         create_header();
     ?>
 
-    <h3>Listino prodotti</h3>
-    <a href="editProduct.php">Aggiungi prodotto</a>
-    <?php 
-        require_once("components/sellerHomeProduct.php");
-        foreach($products as $prodotto){
-            sellerHomeProduct($prodotto);
-        }
-    ?>
-
+    <main>
+        <h3>Listino prodotti</h3>
+        <a href="editProduct.php">Aggiungi prodotto</a>
+        <?php 
+            require_once("components/sellerHomeProduct.php");
+            foreach($products as $prodotto){
+                sellerHomeProduct($prodotto);
+            }
+        ?>
+    </main><aside>
     <h3>Listino materiali</h3>
     <a href="editMaterial.php">Aggiungi materiale</a>
     <?php 
@@ -78,18 +83,6 @@
             sellerHomeMaterial($material);
         }
     ?>
-
-<!--
-    <h3>Notifiche</h3>
-    <a href="sellerNotification.php">Invia Notifica</a>
-    <div class="notifContainer">
-    <?php 
-        require_once("components/sellerHomeNotif.php");
-        foreach($notifs as $notification){
-            sellerHomeNotification($notification);
-        }
-    ?>
-    </div>
--->
+    </aside>
 </body>
 </html>

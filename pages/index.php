@@ -100,17 +100,19 @@ if(isset($_GET['search'])){
 			<?php endif; ?>
             <h2>Prodotti</h2>
 		<?php if (count($products) > 0): ?>
-				<?php foreach ($products as $product): ?>
-					<?php generateProductList($product); ?>
-				<?php endforeach; ?>
+            <?php foreach ($products as $product): ?>
+                <?php generateProductList($product); ?>
+            <?php endforeach; ?>
 		<?php else: ?>
 			<p>Nessun prodotto trovato.</p>
 		<?php endif; ?>
 		<?php else: ?>
-			<h2>Prodotti</h2>
-				<?php foreach ($products as $product): ?>
-					<?php generateProductList($product); ?>
-				<?php endforeach; ?>
+            <h2>Prodotti</h2>
+            <div class="products" >
+            <?php foreach ($products as $product): ?>
+                <?php generateProductList($product); ?>
+            <?php endforeach; ?>
+            </div>
 		<?php endif; ?>
 	</body>
 </html>

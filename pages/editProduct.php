@@ -28,7 +28,6 @@ if(isset($_GET) && isset($_GET['id'])){
     mysqli_stmt_bind_param($stmt,"i", $idProduct);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-
     $product = mysqli_fetch_assoc($result);
 
     //Query per ottenere le varianti che si possono aggiungere nel prodotto
@@ -52,7 +51,8 @@ if(isset($_GET) && isset($_GET['id'])){
     $query_varianti =  "SELECT m.id, m.tipologia, m.nomeColore, m.hexColore, v.prezzo
                         FROM Variante v
                         JOIN Materiale m ON v.idMateriale = m.id
-                        WHERE v.idProdotto = ?";
+                        WHERE v.idProdotto = ?
+                        AND v.visibile = 1";
 
     $stmt = mysqli_prepare($connection, $query_varianti);
     mysqli_stmt_bind_param($stmt,"i", $idProduct);
@@ -96,82 +96,83 @@ if(isset($_GET) && isset($_GET['id'])){
 	?>
     <h2>Modifica Prodotto</h2>
     <form action="api/handleProduct.php" method="POST" enctype="multipart/form-data">
-        <?php 
-            if(isset($idProduct)){
-        ?>
-                <input type="hidden" name="id" <?php echo("value=".$idProduct) ?> />
-        <?php 
-            }
-        ?>
-
-        <label for="productName">Nome prodotto*</label>
-        <input type="text" id="productName" name="productName" required
-            <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
-        />
-
-        <input type="checkbox" name="visible" id="visible" 
-            <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
-        <label for="visible">Visibile</label>
-
-        <label>Preview 3D</label>
-        <?php if (isset($product['fileModello'])){ ?>
-            <button id="showModel">Mostra modello 3D caricato</button>
-            <div class="hidden" id="model-viewer"></div>
-        <?php } ?>
-        <label for="3dPreview">Sostituisci file 3D</label>
-        <input type="file" name="3dPreview" id="3dPreview"/>
-
-        <label>Immagini esistenti:</label>
-        <div id="immaginiEsistenti">
+        <fieldset>
+            <legend align="center">Informazioni generali</legend>
             <?php 
-                if(isset($immagini)){ 
-                    while ($img = mysqli_fetch_assoc($immagini)){ 
-                        generateEditImage($img);
-                    }
+                if(isset($idProduct)){
+            ?>
+                    <input type="hidden" name="id" <?php echo("value=".$idProduct) ?> />
+            <?php 
                 }
             ?>
-        </div>
+            <label for="productName">Nome prodotto*</label>
+            <input type="text" id="productName" name="productName" required
+                <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
+            />
 
-        <label for="addImage">Aggiungi nuove immagini</label>
-        <input type="file" name="images[]" id="addImage" multiple />
+            <label for="visible">Visibile</label>
+            <input type="checkbox" name="visible" id="visible" 
+                <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
 
-        <label>Varianti</label>
+            <?php if (isset($product['fileModello']) && $product["fileModello"] != ""){ ?>
+                <button id="showModel">Mostra modello 3D caricato</button>
+                <div class="hidden" id="model-viewer"></div>
+            <?php } ?>
+            <label for="3dPreview">Sostituisci file 3D</label>
+            <input type="file" name="3dPreview" id="3dPreview"/>
+        </fieldset>
+        <fieldset>
+            <legend align="center">Immagini</legend>
+            <label for="addImage">Aggiungi nuove immagini</label>
+            <input type="file" name="images[]" id="addImage" multiple/>
+            <div id="immaginiEsistenti">
+                <?php 
+                    if(isset($immagini)){ 
+                        while ($img = mysqli_fetch_assoc($immagini)){ 
+                            generateEditImage($img);
+                        }
+                    }
+                ?>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend align="center">Varianti</legend>
 
-        <select id="selectBox">
-        <?php 
-            if(isset($materiali)){ 
-                while($m = mysqli_fetch_assoc($materiali)){
-                    //Not enough to make a component for it
-        ?>
-            <option value="<?= $m["id"]?>"><?= $m["nomeColore"]?> (<?= $m["tipologia"]?>)</option>
-        <?php
-                }
-            }
-        ?> 
-        </select>
-        <input type="button" id="addVariant" value="Aggiungi Variante"/>
-        <div id="variantContainer">
-        <?php 
-            $defaultVariant = 0;
-            $defaultVariantColor = "";
-            if(isset($product["varianteDefault"])){
-                $defaultVariant = $product["varianteDefault"];
-            }
-            if(isset($varianti)){
-                while ($variant = mysqli_fetch_assoc($varianti)){
-                    generateEditVariant($variant, $defaultVariant);
-                    if($variant["id"] === $defaultVariant){
-                        $defaultVariantColor = $variant["hexColore"];
+            <select id="selectBox">
+            <?php 
+                if(isset($materiali)){ 
+                    while($m = mysqli_fetch_assoc($materiali)){
+                        //Not enough to make a component for it
+            ?>
+                <option value="<?= $m["id"]?>"><?= $m["nomeColore"]?> (<?= $m["tipologia"]?>)</option>
+            <?php
                     }
                 }
-            }
-        ?> 
-        </div>
-
+            ?> 
+            </select>
+            <input type="button" id="addVariant" value="Aggiungi Variante"/>
+            <div id="variantContainer">
+            <?php 
+                $defaultVariant = 0;
+                $defaultVariantColor = "";
+                if(isset($product["varianteDefault"])){
+                    $defaultVariant = $product["varianteDefault"];
+                }
+                if(isset($varianti)){
+                    while ($variant = mysqli_fetch_assoc($varianti)){
+                        generateEditVariant($variant, $defaultVariant);
+                        if($variant["id"] === $defaultVariant){
+                            $defaultVariantColor = $variant["hexColore"];
+                        }
+                    }
+                }
+            ?> 
+            </div>
+        </fieldset>
         <input type="submit" value="Salva modifiche" />
     </form>
 
-    <?php if (isset($product['fileModello'])){ ?>
+    <?php if (isset($product['fileModello']) && $product["fileModello"] != ""){ ?>
         <script src="stl_viewer/stl_viewer.min.js"></script>
         <script>
             const showButton = document.querySelector("#showModel");
@@ -194,99 +195,6 @@ if(isset($_GET) && isset($_GET['id'])){
             }
         </script>
     <?php } ?>
-    <script>
-        const addVariantButton = document.querySelector("#addVariant");
-        const variantContainer = document.querySelector("#variantContainer");
-        const selectBox = document.querySelector("#selectBox");
-        const submitButton = document.querySelector("input[type='submit']");
-        let defaultRadioButtons = document.querySelectorAll("input[type='radio']");
-
-        function defaultVariantPresent(){
-            let alreadyPresent = false;
-            for(let button of defaultRadioButtons){
-                alreadyPresent = alreadyPresent || button.checked;
-            }
-            return alreadyPresent;
-        }
-
-        addVariantButton.onclick = () => {
-            if(selectBox.selectedIndex >= 0){
-                fetch(`/api/getMaterial.php?id=${selectBox.value}`)
-                    .then(res => res.json())
-                    .then(obj => {
-                        const hiddenDiv = document.createElement("div");
-                        hiddenDiv.setAttribute("class","variantInfo");
-                        variantContainer.appendChild(hiddenDiv);
-
-                        const hiddenId = document.createElement("input");
-                        hiddenId.setAttribute("type","hidden");
-                        hiddenId.setAttribute("name","materialIds[]");
-                        hiddenId.setAttribute("value",selectBox.value);
-                        hiddenDiv.appendChild(hiddenId);
-                        
-                        const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
-                        svg.setAttribute("width","40");
-                        svg.setAttribute("height","40px");
-                        const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
-                        ellipse.setAttribute("stroke","black");
-                        ellipse.setAttribute("fill","#"+obj["hexColore"]);
-                        ellipse.setAttribute("stroke-width","2");
-                        ellipse.setAttribute("rx","16");
-                        ellipse.setAttribute("ry","16");
-                        ellipse.setAttribute("cx","20");
-                        ellipse.setAttribute("cy","20");
-                        svg.appendChild(ellipse);
-                        hiddenDiv.appendChild(svg);
-
-                        const labelName = document.createElement("label");
-                        labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
-                        hiddenDiv.appendChild(labelName);
-                        
-                        const variantCost = document.createElement("input");
-                        variantCost.setAttribute("type","number");
-                        variantCost.setAttribute("name","variantCosts[]");
-                        variantCost.setAttribute("value","00");
-                        hiddenDiv.appendChild(variantCost);
-
-                        const defaultButton = document.createElement("input");
-                        defaultButton.setAttribute("type", "radio");
-                        defaultButton.setAttribute("name", "defaultVariant");
-                        defaultButton.setAttribute("value", selectBox.value);
-                        defaultButton.setAttribute("id", selectBox.value);
-                        if(!defaultVariantPresent()){
-                            defaultButton.setAttribute("checked", "checked");
-                        }
-                        hiddenDiv.appendChild(defaultButton);
-
-                        const labelDefault = document.createElement("label");
-                        labelDefault.setAttribute("for", selectBox.value);
-                        labelDefault.innerText = "Default";
-                        hiddenDiv.appendChild(labelDefault);
-
-                        const labelRemove = document.createElement("label");
-                        labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
-                        labelRemove.innerText = "Rimuovi"; 
-                        hiddenDiv.appendChild(labelRemove);
-
-                        const removeVariant = document.createElement("input");
-                        removeVariant.setAttribute("type","checkbox");
-                        removeVariant.setAttribute("name",`removeVariant[${selectBox.value}]`);
-                        removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
-                        removeVariant.setAttribute("value",selectBox.value);
-                        hiddenDiv.appendChild(removeVariant);
-
-                        selectBox.options.remove(selectBox.selectedIndex);
-                        console.log(selectBox.options);
-                        defaultRadioButtons = document.querySelectorAll("input[type='radio']");
-                    })
-            }
-        }
-
-        submitButton.onclick = (ev) => {
-            if(!defaultVariantPresent()){
-                ev.preventDefault();
-            }
-        }
-    </script>
+    <script src="./js/editProduct.js"> </script>
 </body>
 </html>

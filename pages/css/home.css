@@ -20,24 +20,3 @@ h2 {
     text-align: center;
 }
 
-/*
-body > div {
-    background-color: var(--light-container);
-    display: flex;
-    align-items: end;
-    aspect-ratio: 4 / 3;
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
-    margin-bottom: var(--padding-small);
-}
-
-body > div > div {
-    padding: var(--padding-small);
-}
-
-body > div > div > p:last-child{
-    font-size: 1.2em;
-    font-weight: bolder;
-}
-
-*/
