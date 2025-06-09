@@ -65,11 +65,11 @@
         create_header();
     ?>
     <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
-        <a href="sellerNotification.php">Invia Notifica</a>
+        <a href="<?=getUserType()==UserType::ADMIN->value? "adminNotification.php" : "sellerNotification.php" ?>" id ="<?=getUserType()==UserType::ADMIN->value? "admin" : "seller" ?>">Invia Notifica</a>
     <?php }?>
     <?php if(sizeof($notifs)>0) {?>
         <h2>Notifiche nuove</h2>
-        <a href="./api/readNotification.php">Segna tutte come lette</a>
+        <a href="./api/readNotification.php" id ="readAll">Segna tutte come lette</a>
     <?php } ?>
     <?php 
         require_once("components/notification.php");
