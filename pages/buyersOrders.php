@@ -49,25 +49,41 @@ foreach($rows as $order){
     <link rel="stylesheet" href="./css/buttons.css" />
 </head>
 <body>
+    <?php
+        require_once("components/header.php");
+        create_header();
+    ?>
+    <button class="buyer">
+        Ordini pagati (<?= $paidOrders ?>)
+        <span class="material-symbols-outlined">arrow_drop_down</span>
+    </button>
+    <section class="hidden">
+    <?php
+    include_once("./components/order.php");
+    for($i = 0;$i<$paidOrders;$i++){ 
+        order($rows[$i]);
+    } ?>
+    </section>
 
-        <?php
-            require_once("components/header.php");
-            create_header();
-        ?>
-        <h2>Ordini pagati</h2>
-            <?php
-            include_once("./components/order.php");
-            for($i = 0;$i<$paidOrders;$i++){ 
-                order($rows[$i]);
-            } ?>
-        <h2>In spedizione:</h2>
-            <?php for($i = 0;$i<$shippedOrders;$i++){ 
-                order($rows[$paidOrders+$i]);
-            } ?>
-        <h2>Ricevuti</h2>
-            <?php for($i = 0;$i<$completedOrders;$i++){ 
-                order($rows[$paidOrders+$shippedOrders+$i]);
-            } ?>
+    <button class="buyer">
+        In spedizione (<?= $shippedOrders ?>)
+        <span class="material-symbols-outlined">arrow_drop_down</span>
+    </button>
+    <section class="hidden">
+    <?php for($i = 0;$i<$shippedOrders;$i++){ 
+        order($rows[$paidOrders+$i]);
+    } ?>
+    </section>
 
+    <button class="buyer">
+        Ricevuti (<?= $completedOrders ?>)
+        <span class="material-symbols-outlined">arrow_drop_down</span>
+    </button>
+    <section class="hidden">
+    <?php for($i = 0;$i<$completedOrders;$i++){ 
+        order($rows[$paidOrders+$shippedOrders+$i]);
+        } ?>
+    </section>
+    <script src="./js/toggleOrders.js"></script>
 </body>
 </html>

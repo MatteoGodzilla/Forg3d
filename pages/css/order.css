@@ -2,7 +2,7 @@
 @import url(./variables.css);
 
 
-h3,h2,p{
+h3,p{
     text-align: center;
     padding-top: var(--padding-small);
 }
@@ -10,6 +10,29 @@ h3,h2,p{
 p{
     font-size: var(--font-small);
 }
+
+button {
+    display:block;
+    width: calc(100% - var(--padding-small) * 2);
+    margin: var(--padding-small);
+    vertical-align: middle;
+}
+
+button > span {
+    vertical-align: middle;
+}
+
+button.buyer {
+    background-color: var(--light-primary-compratore);
+}
+button.seller {
+    background-color: var(--light-primary-venditore);
+}
+section.hidden {
+    display:none;
+}
+
+/* Single order row */
 
 div.order{
     text-align: center;
