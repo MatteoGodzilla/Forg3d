@@ -1,13 +1,11 @@
 @import url("./css/variables.css");
 
-body > h2 {
+body > h2 , body > h3{
     text-align: center;
     margin: var(--padding-large);
 }
 
-body > h3 {
-    text-align: center;
-    margin: var(--padding-small);
+body > h3, body> h4 {
     margin-top: var(--padding-large);
 }
 
@@ -25,9 +23,19 @@ body > a#seller, body> a#readAll{
     background-color: var(--light-primary-venditore);
 }
 
-body > a#admin{
+body > a#admin, body>a#deleteAll{
     background-color: var(--light-primary-admin);
 }
+
+a.delete,a.delete > *{
+    color: var(--light-primary-admin)
+}
+
+
+a.read, a.read > *{
+    color: var(--light-ok)
+}
+
 
 /* Single notifications */
 div.notification  {
@@ -48,12 +56,11 @@ div.notification > a {
     display: block;
     margin-top: var(--padding-small); 
     margin-bottom: 0px; 
-    color: var(--light-ok);
+
     font-size: 1.5em;
     text-align: center;
 }
 
 div.notification span {
-    color: var(--light-ok);
     vertical-align: middle;
 }

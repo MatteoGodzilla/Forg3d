@@ -44,7 +44,7 @@
     $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     //repeat per le lette
-    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE destinatario = ?";
+    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE destinatario = ? AND visibile=1";
     $stmt = mysqli_prepare($connection, $query_lette);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
@@ -71,22 +71,29 @@
     <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
         <a href="<?=getUserType()==UserType::ADMIN->value? "adminNotification.php" : "sellerNotification.php" ?>" id ="<?=getUserType()==UserType::ADMIN->value? "admin" : "seller" ?>">Invia Notifica</a>
     <?php }?>
-    <?php if(sizeof($notifs)>0) {?>
-        <h2>Notifiche nuove</h2>
-        <a href="./api/readNotification.php" id ="readAll">Segna tutte come lette</a>
-    <?php } ?>
+        <?php if(sizeof($notifs)>0) {?>
+            <h2>Notifiche nuove</h2>
+            <a href="./api/readNotification.php" id ="readAll">Segna tutte come lette</a>
+        <?php } ?>
     <?php 
         require_once("components/notification.php");
         foreach($notifs as $notification){
             createNotification($notification);
         }
     ?>
-    <h2>Notifiche lette</h2>
-        <?php 
+    <?php if(sizeof($notifs_read)>0) {?>
+        <h2>Notifiche lette</h2>
+        <a href="./api/hideNotification.php" id ="deleteAll">Cancella tutte</a>
+    <?php } ?>
+    <?php 
         require_once("components/notification.php");
         foreach($notifs_read as $notification){
             createNotificationAsRead($notification);
         }
     ?>
+    
+    <?php if(sizeof($notifs_read)==0 && sizeof($notifs) ==0){?>
+        <h4>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi,lo vedrai dalla campanella nella parte alta dello schermo!</h4>
+    <?php } ?>
 </body>
 </html>

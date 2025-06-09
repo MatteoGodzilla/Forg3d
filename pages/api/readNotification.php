@@ -5,7 +5,6 @@ include_once("../../php/session.php");
 require_once("../../php/feedback.php");
 
 function read($id,$user,$conn){
-    echo $user;
     $query = "INSERT INTO NotificaLetta(idNotifica,destinatario) VALUES(?,?)";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt,"is", $id,$user);
