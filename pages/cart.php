@@ -16,7 +16,7 @@ if(getUserType()!=UserType::BUYER->value){
 $email = getSessionEmail();
 
 
-$query_cart = "SELECT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita, V.id as idVariante,
+$query_cart = "SELECT DISTINCT C.id as id,M.nomeColore as variante,P.nome as nome,C.quantita as quantita, V.id as idVariante,
     P.id as idProdotto, V.prezzo as prezzo,
     FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  C.id, M.nomeColore, P.nome, C.quantita,P.id, V.id, V.prezzo) AS immagine
     FROM Carrello C 
@@ -31,6 +31,7 @@ mysqli_stmt_bind_param($stmt,"s",$email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>

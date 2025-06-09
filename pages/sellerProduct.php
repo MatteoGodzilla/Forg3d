@@ -75,10 +75,10 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
         <link rel="stylesheet" href="./css/productList.css" />
 	</head>
 	<body>
-			<?php 
-				include_once("./components/header.php");
-				create_header();
-			?>
+        <?php 
+            include_once("./components/header.php");
+            create_header();
+        ?>
         <div class="seller-info">
             <div class="seller-details">
                 <h2><?= ($seller['nome'] . ' ' . $seller['cognome']) ?></h2>
@@ -86,18 +86,17 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
                 <p>Follower: <?= $followersCount ?></p>
             </div>
             <div class="seller-actions">
-            <form method="GET" action="/api/followUnfollow.php" class="follow-btn">
-                <?php if (utenteLoggato() && $emailUtente !== $emailVenditore): ?>
-                    <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
-                    <input type="hidden" name="azione" value="<?= $isFollowing ? 'unfollow' : 'follow' ?>">
-                    <button type="submit">
-                        <?= $isFollowing ? 'Unfollow' : 'follow' ?>
-                    </button>
-                <?php endif; ?>
-            </form>
+                <form method="GET" action="/api/followUnfollow.php" class="follow-btn">
+                    <?php if (utenteLoggato() && $emailUtente !== $emailVenditore): ?>
+                        <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
+                        <input type="hidden" name="azione" value="<?= $isFollowing ? 'unfollow' : 'follow' ?>">
+                        <input type="submit" value="<?= $isFollowing ? 'Unfollow' : 'Follow' ?>"/>
+                    <?php endif; ?>
+                </form>
+                <button id="toggleReportForm">Segnala<span class="material-symbols-outlined">warning</span></button>
             </div>
         </div>
-        <form method="POST" action="/api/report.php" class="report-form">
+        <form class="hidden2 report-form" method="POST" action="/api/report.php">
             <h2>Segnala venditore</h2>
             <input type="hidden" name="emailVenditore" value="<?= $emailVenditore ?>">
             <input type="hidden" name="tipo" value="venditore">	
@@ -121,5 +120,6 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
         <?php else: ?>
             <p>Nessun prodotto trovato.</p>
         <?php endif; ?>
+        <script src="./js/report.js"></script>
 	</body>
 </html>

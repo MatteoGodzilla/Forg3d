@@ -6,15 +6,15 @@ body > h2, form > h2 {
 
 .seller-info {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
-    margin: var(--padding-small);
     padding: var(--padding-small);
-    background-color: var(--light-container);
+    background-color: var(--light-background);
 }
 
 .seller-details {
     flex: 1;
+    padding: var(--padding-small);
 }
 
 .seller-details h2 {
@@ -23,6 +23,27 @@ body > h2, form > h2 {
 
 .seller-details p {
     margin: var(--padding-small) 0;
+}
+
+.seller-actions {
+    display: flex;
+    align-items: center;
+    padding: var(--padding-small);
+}
+
+.seller-actions > button {
+    padding: var(--padding-small);
+    font-size: 1.5em;
+    background-color: var(--light-danger);
+}
+
+.seller-actions > button > span {
+    display: inline;
+    vertical-align: middle;
+}
+
+.report-form.hidden2 {
+    display: none;
 }
 
 .report-form > textarea {
@@ -35,5 +56,12 @@ body > h2, form > h2 {
     background-color: var(--light-danger);
     cursor: pointer;
     width: 100%;
+}
+
+form.follow-btn > input[type="submit"]{
+    width: auto;
+    background-color: var(--light-primary-compratore);
+    transition: none;
+    border:none;
 }
 

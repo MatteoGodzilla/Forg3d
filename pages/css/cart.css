@@ -17,9 +17,10 @@ div.cart-row {
     margin-right: var(--padding-small);
     margin-bottom: 0;
     display:flex;
+    
     flex-wrap:wrap;
     align-items:center;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 div.cart-row > div  {
@@ -70,4 +71,10 @@ input[type="submit"]{
     border-style: none;
     font-size: 1.5em;
     font-weight: bold;
+}
+
+@media(min-width: 35em){
+    div.cart-row{
+        flex-direction: row;
+    }
 }

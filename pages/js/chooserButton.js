@@ -1,7 +1,7 @@
 const toggleButton = document.querySelector("#typeSwitcher");
 const submitButton = document.querySelector("input[type='submit']");
 const formType = document.querySelector("input[name='type']");
-let type = 0;
+let type = 1;
 
 toggleButton.onclick = (evt) => {
     if(type == 0){

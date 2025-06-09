@@ -1,10 +1,10 @@
-const toggleButton = document.querySelector("toggleReportForm");
-const form = document.querySelector("form.hidden2");
+const toggleReportButton = document.querySelector("#toggleReportForm");
+const reportForm = document.querySelector("form.hidden2");
 
-toggleButton.onclick = () => {
-    if(form.classList.contains("hidden2")){
-        form.classList.remove("hidden2");
+toggleReportButton.onclick = () => {
+    if(reportForm.classList.contains("hidden2")){
+        reportForm.classList.remove("hidden2");
     } else {
-        form.classList.add("hidden2");
+        reportForm.classList.add("hidden2");
     }
 }

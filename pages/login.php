@@ -19,11 +19,11 @@ if(utenteLoggato()){
         <link rel="stylesheet" href="./css/loginForm.css" />
     </head>
     <body>
-        	<?php 
-				include_once("./components/header.php");
-                include_once("./../php/session.php");
-				create_header();
-			?>
+        <?php 
+            include_once("./components/header.php");
+            include_once("./../php/session.php");
+            create_header();
+        ?>
         <?php 
 			if(isset($_GET) && isset($_GET["isAdmin"]) && $_GET["isAdmin"] == "true"){
                 $isAdmin = true;

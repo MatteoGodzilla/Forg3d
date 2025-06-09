@@ -83,12 +83,6 @@ while ($review = mysqli_fetch_assoc($resultRecensioni)) {
 }
 //Crea l'albero delle recensioni
 $graph = createReviewTree($reviews);
-//debug
-/*
-echo("<pre>");
-var_dump($graph);
-echo("</pre>");
- */
 
 ?>
 
@@ -107,99 +101,107 @@ echo("</pre>");
     <?php
         include_once("./components/header.php");
         create_header();
-        include_once("./components/image-container.php");
-        create_image_container($resultImmagini);
     ?>
-
-    <script src="./js/image-container.js"></script>
-    <h2><?php echo ($prodotto['nome']); ?></h2>
-    <p><strong>Venditore:</strong> 
-        <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?></a></p>
-    <?php if(isset($prodotto['fileModello'])){ ?>
-        <button id="showModel">Mostra modello 3D</button>
-        <div class="hidden" id="model-viewer"></div>
-    <?php } ?>
-    <h3>Varianti</h3>
-
-    <?php if ($tipoUtente!=UserType::BUYER->value): ?>
+    
+    <main>
         <?php 
-            include_once("./components/varianteOption.php");
-            foreach($varianti as $variante){
-                varianteOption($variante, true);
-            }
+            include_once("./components/image-container.php");
+            create_image_container($resultImmagini);
         ?>
-    <?php endif?>
+        <script src="./js/image-container.js"></script>
+        <h2><?php echo ($prodotto['nome']); ?></h2>
+        <p><strong>Venditore:</strong> 
+            <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?></a></p>
+        <?php if(isset($prodotto['fileModello'])){ ?>
+            <button id="showModel">Mostra modello 3D</button>
+            <div class="hidden" id="model-viewer"></div>
+        <?php } ?>
+        <h3>Varianti</h3>
 
-    <?php if ($tipoUtente==UserType::BUYER->value): ?>
-        <form action="/api/addToCart.php" method="POST">
-            <input type="hidden" name="idVariant" value="<?php echo $idProdotto; ?>">
+        <?php if ($tipoUtente!=UserType::BUYER->value): ?>
+            <?php 
+                include_once("./components/varianteOption.php");
+                foreach($varianti as $variante){
+                    varianteOption($variante, true);
+                }
+            ?>
+        <?php endif?>
+
+        <?php if ($tipoUtente==UserType::BUYER->value): ?>
+            <form action="/api/addToCart.php" method="POST">
+                <input type="hidden" name="idVariant" value="<?php echo $idProdotto; ?>">
+            <?php 
+                include_once("./components/varianteOption.php");
+                foreach($varianti as $variante){
+                    varianteOption($variante, true);
+                }
+            ?>
+                <input type="submit" value="Aggiungi al Carrello" />
+            </form>
+
+
+            <button id="toggleReportForm"> 
+                Segnala il prodotto
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </button>
+            <!--<h3>Segnala prodotto</h3>-->
+            <form id="reportForm" class="hidden2" action="/api/report.php" method="POST">
+                <input type="hidden" name="idProdotto" value="<?php echo $idProdotto ?>">
+                <input type="hidden" name="tipo" value="prodotto">
+                <label for="review">Descrizione segnalazione:</label>
+                <textarea name="motivo" rows="4" cols="50" required placeholder="Motivo della segnalazione"></textarea>
+                <input type="submit" value="Invia segnalazione"/>
+            </form>
+            <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
+                    include_once("./components/popups.php");
+                    include_once("./../php/constants.php");
+                    create_popup($_GET["message"],$_GET["messageType"]);
+                } 
+            ?>
+            <script src="./js/report.js"></script>
+        <?php endif; ?>
+
+        <?php if(isset($prodotto['fileModello'])){ ?>
+            <script src="stl_viewer/stl_viewer.min.js"></script>
+            <script>
+                //This variable is used inside productWithModel, but it needs the path from php
+                //it is meant to be a global variable
+                modelPath = "..<?= $prodotto['fileModello'] ?>";
+            </script>
+            <script src="js/productWithModel.js"></script>
+        <?php } else { ?>
+            <script src="js/productWithoutModel.js"></script>
+        <?php } ?>
+    </main>
+
+    <aside>
+        <h3>Recensioni</h3>
+        <?php if ($tipoUtente==UserType::BUYER->value){ ?>
+            <button id="toggleReviewForm"> 
+                Scrivi una recensione
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </button>
+            <!--<h3>Scrivi una recensione</h3>-->
+            <form id="reviewForm" class="hidden" action="/api/addReview.php" method="POST">
+                <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
+                <!-- TODO: replace text display to star display -->
+                <label for="score" >Valutazione: <span>4</span>/5</label> 
+                <input name="score" type="range" min=0 max=5 step=1 value=3 />
+                <label for="reviewTitle">Titolo:</label>
+                <input name="title" type="text" />
+                <label for="review">Descrizione:</label>
+                <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
+                <input type="submit" value="Invia Recensione"/>
+            </form>
+            <script src="./js/productReview.js"></script>
+        <?php } ?>
         <?php 
-            include_once("./components/varianteOption.php");
-            foreach($varianti as $variante){
-                varianteOption($variante, true);
+            require_once("./components/review.php");
+            foreach($graph->children as $review){
+                createReview($review, $idProdotto, 0);
             }
-        ?>
-            <input type="submit" value="Aggiungi al Carrello" />
-        </form>
-
-        <button id="toggleReviewForm"> 
-            Scrivi una recensione
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-        </button>
-        <!--<h3>Scrivi una recensione</h3>-->
-        <form class="hidden" action="/api/addReview.php" method="POST">
-            <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
-            <!-- TODO: replace text display to star display -->
-            <label for="score" >Valutazione: <span>4</span>/5</label> 
-            <input name="score" type="range" min=0 max=5 step=1 value=3 />
-            <label for="reviewTitle">Titolo:</label>
-            <input name="title" type="text" />
-            <label for="review">Descrizione:</label>
-            <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
-            <input type="submit" value="Invia Recensione"/>
-        </form><br><br>
-        <script src="./js/productReview.js"></script>
-
-        <button id="toggleReportForm"> 
-            Reporta il prodotto
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-        </button>
-        <!--<h3>Segnala prodotto</h3>-->
-        <form class="hidden2" action="/api/report.php" method="POST">
-            <input type="hidden" name="idProdotto" value="<?php echo $idProdotto ?>">
-            <input type="hidden" name="tipo" value="prodotto">
-            <label for="review">Descrizione segnalazione:</label>
-            <textarea name="motivo" rows="4" cols="50" required placeholder="Motivo della segnalazione"></textarea>
-            <button type="submit">Invia segnalazione</button>
-        </form>
-        <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
-                include_once("./components/popups.php");
-                include_once("./../php/constants.php");
-                create_popup($_GET["message"],$_GET["messageType"]);
-            } 
-        ?>
-        <script src="./js/report.js"></script>
-    <?php endif; ?>
-
-    <?php if(isset($prodotto['fileModello'])){ ?>
-        <script src="stl_viewer/stl_viewer.min.js"></script>
-        <script>
-            //This variable is used inside productWithModel, but it needs the path from php
-            //it is meant to be a global variable
-            modelPath = "..<?= $prodotto['fileModello'] ?>";
-        </script>
-        <script src="js/productWithModel.js"></script>
-    <?php } else { ?>
-        <script src="js/productWithoutModel.js"></script>
-    <?php } ?>
-
-    <h3>Recensioni di altri utenti:</h3>
-    <?php 
-        require_once("./components/review.php");
-        foreach($graph->children as $review){
-            createReview($review, $idProdotto, 0);
-        }
-    ?> 
+        ?> 
+    </aside>
      
     <script src="js/replyToReview.js"></script>
 </body>

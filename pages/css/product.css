@@ -102,36 +102,20 @@ div.image-button > button:hover {
 /* Review form */
 
 #toggleReviewForm {
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
+    margin: var(--padding-small);
     width: calc(100% - var(--padding-small) * 2 );
     box-sizing: border-box;
     background-color: var(--light-primary-compratore); 
     padding: var(--padding-small);
+    font-size: 1.5em;
 }
 
-#toggleReportForm {
-    margin-left: var(--padding-small);
-    margin-right: var(--padding-small);
-    width: calc(100% - var(--padding-small) * 2 );
-    box-sizing: border-box;
-    background-color: var(--light-primary-compratore); 
-    padding: var(--padding-small);
-}
 
 #toggleReviewForm > *{
     vertical-align: middle;
 }
 
-#toggleReportForm > *{
-    vertical-align: middle;
-}
-
 form.hidden {
-    display: none;
-}
-
-form.hidden2 {
     display: none;
 }
 
@@ -159,3 +143,39 @@ form.reply > input[type="submit"] {
     margin-bottom: 0;
 }
 
+/* Report form */
+#toggleReportForm {
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
+    width: calc(100% - var(--padding-small) * 2 );
+    box-sizing: border-box;
+    background-color: var(--light-danger); 
+    padding: var(--padding-small);
+}
+
+#toggleReportForm > *{
+    vertical-align: middle;
+}
+
+form#reportForm > input[type="submit"] {
+    background-color: var(--light-danger);
+}
+
+form.hidden2 {
+    display: none;
+}
+
+@media (min-width: 40em){
+    main {
+        display: inline-block;
+        width: 66%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+    aside {
+        display: inline-block;
+        width: 33%;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+}
