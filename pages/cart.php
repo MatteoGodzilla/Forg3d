@@ -42,8 +42,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/cart.css" />
     <link rel="stylesheet" href="./css/buttons.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./js/updateQuantities.js"></script>
 </head>
 <body>
     <form action="./api/convertToOrder.php" method="POST">
@@ -63,6 +61,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <?php } else { ?>
             <h3>(Nessun item in carrello,vai a fare shopping!)</h3>
         <?php }?>
+        <script src="./js/updateQuantities.js"></script>
     </form>
 </body>
 </html>

@@ -1,15 +1,28 @@
-$(document).ready(function() {
-    $('input[name^="quantity["]').on('change', function() {
-         var quantita = $(this).val();
-         var index = ($('input[name^="quantity["]').index(this));
-         var variantId =$('input[name^="ids["]')[index].value;
-         var productId =$('input[name^="rows["]')[index].value;
-        if(!isNaN(quantita) && !isNaN(variantId) && !isNaN(productId)){
-            fetch("/api/updateCartQuantity.php?id="+productId+"&variante="+variantId+"&quantita="+quantita);
-            var cost = $('input[name^="costs["]')[index].value;
-            var subtotal = (parseInt(quantita)*parseInt(cost));
-            $('h3[name^="total["]').eq(index).text("Subtotale: "+subtotal+"$");
-        }
+window.onload = () => {
+    const inputQuantities = document.querySelectorAll('input[name="quantity[]"]');
+    const variantIds = document.querySelectorAll("input[name='ids[]']");
+    const rows = document.querySelectorAll("input[name='rows[]']");
+    const costs = document.querySelectorAll("input[name='costs[]']");
+    const totals = document.querySelectorAll("h3[name='total[]']");
 
-    });
-});
+    for(let i = 0; i < inputQuantities.length; i++){
+        inputQuantities[i].onchange = () => {
+            const quantita = inputQuantities[i].value;
+            const variantId = variantIds[i].value;
+            const productId = rows[i].value;
+            const cost = costs[i].value;
+            const totalElm = totals[i];
+            if(!isNaN(quantita) && !isNaN(variantId) && !isNaN(productId)){
+                fetch("/api/updateCartQuantity.php?" + new URLSearchParams({
+                    "id": productId, 
+                    "variante": variantId, 
+                    "quantita": quantita 
+                }).toString())
+                var subtotal = (parseInt(quantita)*parseInt(cost));
+                totalElm.innerText = `Subtotale: €${subtotal}`;
+            }
+        }
+    }
+}
+
+

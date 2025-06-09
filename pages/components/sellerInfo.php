@@ -1,8 +1,6 @@
 <?php function sellerInfo($user){ ?>
     <div class="user-info">
-        <h3>Venditore:</h3>
-        <p>Nome:<?= htmlspecialchars($user["nome"]) ?></p>
-        <p>Cognome: <?= htmlspecialchars($user["cognome"]) ?></p>
+        <h2><?= htmlspecialchars($user["nome"]) ?> <?= htmlspecialchars($user["cognome"]) ?></h2>
         <p>email: <?= htmlspecialchars($user["email"]) ?></p>
         <p>Telefono: <?= htmlspecialchars($user["telefono"]) ?></p>
         <?= $user["stato"]==3? "<p>L'utente è attualmente bandito</p>":""?>

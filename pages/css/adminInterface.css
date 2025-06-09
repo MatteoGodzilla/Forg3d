@@ -1,8 +1,9 @@
 @import url(./variables.css);
+@import url(./styleReference.css);
 
-h1,h2{
+h2{
     text-align: center;
-    padding-top: var(--padding-small);
+    margin-top: var(--padding-large);
 }
 
 a{

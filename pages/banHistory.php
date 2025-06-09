@@ -34,7 +34,7 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <link rel="stylesheet"  href="./css/reportDetail.css" />
     <link rel="stylesheet"  href="./css/bannedElements.css" />
     <link rel="stylesheet"  href="./css/header.css" />
-
+    <link rel="stylesheet"  href="./css/adminInterface.css" />
 </head>
 <body>
     <?php

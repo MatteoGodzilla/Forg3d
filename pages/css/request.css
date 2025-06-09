@@ -3,10 +3,10 @@
 @import url(./buttons.css);
 
 div.request {
-    margin: var(--padding-large);
-    color: var(--light-container);
-    padding-top: var(--padding-small);
+    margin: var(--padding-small);
+    padding: var(--padding-small);
     text-wrap: wrap;
+    font-size: 1.5em;
 }
 div.request > div {
     flex-grow: 1;

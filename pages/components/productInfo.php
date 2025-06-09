@@ -1,7 +1,6 @@
 <?php function productInfo($product){ ?>
     <div class="user-info">
-        <h3>Prodotto</h3>
-        <p>Nome Prodotto:<?= htmlspecialchars($product["nome"]) ?></p>
+        <h2><?= htmlspecialchars($product["nome"]) ?></h2>
         <p>Venditore del prodotto: <?= htmlspecialchars($product["emailVenditore"]) ?></p>
         <?= $product["visibile"]==0? "<p>Il prodotto è stato rimosso dal pubblico</p>":""?>
         <a href="/api/updateSellerStatus.php?email=<?= htmlspecialchars($product["emailVenditore"]) ?>&newStatus=3" id="banSeller">Nascondi prodotto</a>
