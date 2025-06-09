@@ -6,7 +6,7 @@ require_once("../../php/feedback.php");
 
 function read($id,$user,$conn){
     echo $user;
-    $query = "INSERT INTO NotificaLetta(idNotifica,emailCompratore) VALUES(?,?)";
+    $query = "INSERT INTO NotificaLetta(idNotifica,destinatario) VALUES(?,?)";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt,"is", $id,$user);
     mysqli_stmt_execute($stmt);
@@ -22,8 +22,8 @@ $email = getSessionEmail();
 if(!isset($_GET["id"])){
     //global wipe
     $query = "SELECT id FROM Notifica 
-    WHERE id NOT IN (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore = ?) 
-    AND ((emailVenditore is NULL) OR emailVenditore IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?))";
+    WHERE id NOT IN (SELECT idNotifica FROM NotificaLetta WHERE destinatario = ?) 
+    AND ((emailMittente is NULL) OR emailMittente IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?))";
     $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt,"ss", $email,$email);
     mysqli_stmt_execute($stmt);

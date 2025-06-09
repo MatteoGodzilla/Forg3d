@@ -14,7 +14,7 @@
             $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
             (emailMittente in (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) OR emailMittente is NULL) AND
             (emailDestinatario is NULL OR emailDestinatario = ?)
-            AND id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            AND id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "sss", $email,$email,$email);
@@ -22,7 +22,7 @@
         case UserType::SELLER->value:
             $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
             (emailMittente is null) AND 
-            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailDestinatario=?)
+            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -30,7 +30,7 @@
         case UserType::ADMIN->value:
             $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
             (emailMittente is null) AND 
-            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailDestinatario=?)
+            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
@@ -43,7 +43,7 @@
     $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     //repeat per le lette
-    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE emailCompratore = ?";
+    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE destinatario = ?";
     $stmt = mysqli_prepare($connection, $query_lette);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
