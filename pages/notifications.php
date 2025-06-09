@@ -11,23 +11,26 @@
     global $stmt;
     switch(getUserType()){
         case UserType::BUYER->value:
-            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE (emailVenditore in 
-            (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) OR emailVenditore is NULL) AND id NOT in
-            (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
+            (emailMittente in (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) OR emailMittente is NULL) AND
+            (emailDestinatario is NULL OR emailDestinatario = ?)
+            AND id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
-            mysqli_stmt_bind_param($stmt, "ss", $email,$email);
+            mysqli_stmt_bind_param($stmt, "sss", $email,$email,$email);
             break;
         case UserType::SELLER->value:
-            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
-            (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
+            (emailMittente is null) AND 
+            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailDestinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
             break;
         case UserType::ADMIN->value:
-            $query_notifiche = "SELECT id, emailVenditore,creazione,titolo, descrizione FROM Notifica WHERE emailVenditore is null AND id NOT in
-            (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)
+            $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
+            (emailMittente is null) AND 
+            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE emailDestinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);

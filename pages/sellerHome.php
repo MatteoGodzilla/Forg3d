@@ -39,14 +39,6 @@
     foreach ($rows as $row) {
         $nome = $row["nome"];
     }
-
-    //Query Notifiche
-    $query_notifiche = "SELECT titolo, descrizione FROM Notifica WHERE emailVenditore = ? ORDER BY creazione DESC";
-    $stmt = mysqli_prepare($connection, $query_notifiche);
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     
 ?>
 

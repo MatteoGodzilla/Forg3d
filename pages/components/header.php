@@ -56,20 +56,20 @@
     $email = getSessionEmail();
     switch(getUserType()){
         case UserType::BUYER->value:
-            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore in 
-            (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) AND id NOT in
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE (
+            emailMittente in (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) OR emailMittente is NULL) AND id NOT in
             (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "ss", $email,$email);
             break;
         case UserType::SELLER->value:
-            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore is null AND id NOT in
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailMittente is null AND id NOT in
             (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
             break;
         case UserType::ADMIN->value:
-            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailVenditore is null AND id NOT in
+            $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE emailMittente is null AND id NOT in
             (SELECT idNotifica FROM NotificaLetta WHERE emailCompratore=?)";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "s", $email);
