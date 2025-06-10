@@ -2,6 +2,7 @@
 
 div.review {
     padding-bottom: var(--padding-small);
+    margin: var(--padding-small);
 }
 
 /*Review info (only used for reviews) */

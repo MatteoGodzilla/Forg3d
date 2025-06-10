@@ -7,7 +7,7 @@
                 <?php generateSymbol(); ?>
                 <a href="/notifications.php">
                     <div id="notifications">
-                        <span id="notifications" class="material-symbols-outlined">notifications</span>
+                        <span class="material-symbols-outlined">notifications</span>
                         <?php if(($notifCount = getNotificationsCount()) > 0){ ?>
                             <span class="notification-badge"><?=$notifCount?></span>
                         <?php }?>

@@ -148,8 +148,8 @@ $graph = createReviewTree($reviews);
             <form id="reportForm" class="hidden2" action="/api/report.php" method="POST">
                 <input type="hidden" name="idProdotto" value="<?php echo $idProdotto ?>">
                 <input type="hidden" name="tipo" value="prodotto">
-                <label for="review">Descrizione segnalazione:</label>
-                <textarea name="motivo" rows="4" cols="50" required placeholder="Motivo della segnalazione"></textarea>
+                <label for="motivo">Descrizione segnalazione:</label>
+                <textarea id="motivo" name="motivo" rows="4" cols="50" required placeholder="Motivo della segnalazione"></textarea>
                 <input type="submit" value="Invia segnalazione"/>
             </form>
             <?php if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
@@ -186,11 +186,11 @@ $graph = createReviewTree($reviews);
                 <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
                 <!-- TODO: replace text display to star display -->
                 <label for="score" >Valutazione: <span>4</span>/5</label> 
-                <input name="score" type="range" min=0 max=5 step=1 value=3 />
+                <input id="score" name="score" type="range" min=0 max=5 step=1 value=3 />
                 <label for="reviewTitle">Titolo:</label>
-                <input name="title" type="text" />
+                <input id ="reviewTitle" name="title" type="text" />
                 <label for="review">Descrizione:</label>
-                <textarea name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
+                <textarea id="review" name="review" rows="4" cols="50" placeholder="Scrivi la tua recensione..."></textarea><br>
                 <input type="submit" value="Invia Recensione"/>
             </form>
             <script src="./js/productReview.js"></script>
