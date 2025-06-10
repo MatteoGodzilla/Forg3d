@@ -1,0 +1,15 @@
+@import url("variables.css");
+
+div.sellers {
+    background-color: var(--light-background);
+    display: grid;
+    gap: var(--padding-small);
+    padding: var(--padding-small);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+div.seller-card {
+    padding: var(--padding-small);
+    text-align: center;
+}
+

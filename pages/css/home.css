@@ -16,7 +16,7 @@ input[name="search"] {
     border-radius: 100px;
 }
 
-h2 {
+h2, p.not-found {
     text-align: center;
 }
 

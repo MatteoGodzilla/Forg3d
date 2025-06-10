@@ -80,6 +80,7 @@ if(isset($_GET['search'])){
 		<link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/home.css" />
         <link rel="stylesheet" href="./css/productList.css" />
+        <link rel="stylesheet" href="./css/sellerList.css" />
 	</head>
 	<body>
         <?php 
@@ -89,29 +90,38 @@ if(isset($_GET['search'])){
 		<form method="GET" action="index.php">
   			<input type="search" name="search" placeholder="<?php if(!isset($_GET['search'])) echo 'Cerca prodotti o venditori...'; else echo htmlspecialchars($query) ?>"/>
 		</form>
+
 		<?php if (isset($_GET['search'])): ?>
             <h2>Venditori</h2>
             <?php if (count($sellers) > 0): ?>
+                <div class="sellers">
                 <?php foreach ($sellers as $seller): ?>
                     <?php generateSellerList($seller); ?>
                 <?php endforeach; ?>
+                </div>
 			<?php else: ?>
-				<p>Nessun venditore trovato.</p>
+				<p class="not-found">Nessun venditore trovato.</p>
 			<?php endif; ?>
+            
             <h2>Prodotti</h2>
-		<?php if (count($products) > 0): ?>
-            <?php foreach ($products as $product): ?>
-                <?php generateProductList($product); ?>
-            <?php endforeach; ?>
-		<?php else: ?>
-			<p>Nessun prodotto trovato.</p>
-		<?php endif; ?>
+            <?php if (count($products) > 0): ?>
+                <div class="products">
+                <?php foreach ($products as $product): ?>
+                    <?php generateProductList($product); ?>
+                <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="not-found">Nessun prodotto trovato.</p>
+            <?php endif; ?>
+
 		<?php else: ?>
             <h2>Prodotti</h2>
-            <div class="products" >
-            <?php foreach ($products as $product): ?>
-                <?php generateProductList($product); ?>
-            <?php endforeach; ?>
+            <div class="products">
+            <?php 
+                foreach($products as $product){
+                    generateProductList($product);
+                }
+            ?>
             </div>
 		<?php endif; ?>
 	</body>
