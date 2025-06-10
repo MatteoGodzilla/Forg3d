@@ -93,7 +93,9 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
                         <input type="submit" value="<?= $isFollowing ? 'Unfollow' : 'Follow' ?>"/>
                     <?php endif; ?>
                 </form>
-                <button id="toggleReportForm">Segnala<span class="material-symbols-outlined">warning</span></button>
+                <?php if (utenteLoggato() && $emailUtente !== $emailVenditore): ?>
+                    <button id="toggleReportForm">Segnala<span class="material-symbols-outlined">warning</span></button>
+                <?php endif; ?>
             </div>
         </div>
         <form class="hidden2 report-form" method="POST" action="/api/report.php">
