@@ -23,7 +23,7 @@ addVariantButton.onclick = () => {
 
                 const hiddenId = document.createElement("input");
                 hiddenId.setAttribute("type","hidden");
-                hiddenId.setAttribute("name","materialIds[]");
+                hiddenId.setAttribute("name",`materialIds[${selectBox.value}]`);
                 hiddenId.setAttribute("value",selectBox.value);
                 hiddenDiv.appendChild(hiddenId);
                 
@@ -47,7 +47,7 @@ addVariantButton.onclick = () => {
                 
                 const variantCost = document.createElement("input");
                 variantCost.setAttribute("type","number");
-                variantCost.setAttribute("name","variantCosts[]");
+                variantCost.setAttribute("name",`variantCosts[${selectBox.value}]`);
                 variantCost.setAttribute("value","00");
                 hiddenDiv.appendChild(variantCost);
 
