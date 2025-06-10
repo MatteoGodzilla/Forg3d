@@ -37,10 +37,10 @@ if(isset($_GET) && isset($_GET['id'])){
                              SELECT v.idMateriale
                              FROM Variante v 
                              WHERE v.idProdotto = ?
+                             AND v.visibile = 1
                          ) 
                          AND m.visibile = 1
-                         AND m.idVenditore = ?
-                         ";
+                         AND m.idVenditore = ? ";
 
     $stmt = mysqli_prepare($connection, $query_materiali);
     mysqli_stmt_bind_param($stmt, "is", $idProduct, $email);

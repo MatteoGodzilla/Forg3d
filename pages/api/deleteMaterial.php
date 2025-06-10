@@ -24,7 +24,6 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $count = mysqli_fetch_assoc($result);
 
-
 if($count["total"]==0){
     $query = "DELETE FROM Materiale WHERE id=? AND idVenditore=?";
     #execute
@@ -39,6 +38,11 @@ else{
     mysqli_stmt_bind_param($stmt,"i", $_GET["id"]);
     mysqli_stmt_execute($stmt);
 }
+
+$query = "UPDATE Variante SET visibile = 0 WHERE idMateriale = ?";
+$stmt = mysqli_prepare($connection, $query);
+mysqli_stmt_bind_param($stmt, "i", $_GET["id"]);
+mysqli_stmt_execute($stmt);
 
 header("Location: /sellerHome.php");
 
