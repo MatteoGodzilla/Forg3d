@@ -14,7 +14,7 @@ function sendRemovedProduct($connection, string $sellerEmail){
 
 
 function sendSellerNotification($connection, string $sellerEmail, string $title, string $description){
-    $query_add_notification = "INSERT INTO Notifica(titolo, descrizione, emailDestinatario) VALUES (?,?,?)";
+    $query_add_notification = "INSERT INTO Notifica(titolo, descrizione, emailMittente) VALUES (?,?,?)";
     $stmt = mysqli_prepare($connection, $query_add_notification);
     mysqli_stmt_bind_param($stmt, "sss", $title, $description, $sellerEmail);
     mysqli_stmt_execute($stmt);
@@ -36,7 +36,7 @@ function sendAdminNotification($connection, string $title, string $description){
 }
 
 function sendAdminNotificationSpecific($connection, string $title, string $description,string $Buyer){
-    $query_add_notification = "INSERT INTO Notifica(titolo, descrizione,emailDestinatario) VALUES (?,?,?)";
+    $query_add_notification = "INSERT INTO Notifica(titolo, descrizione, emailDestinatario) VALUES (?,?,?)";
     $stmt = mysqli_prepare($connection, $query_add_notification);
     mysqli_stmt_bind_param($stmt, "sss", $title, $description,$Buyer);
     mysqli_stmt_execute($stmt);
