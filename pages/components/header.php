@@ -57,8 +57,9 @@
     switch(getUserType()){
         case UserType::BUYER->value:
             $query_notifiche = "SELECT COUNT(id) AS tot FROM Notifica WHERE 
-            ((emailMittente in (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) AND emailDestinatario is NULL) OR emailMittente is NULL OR emailDestinatario = ?)  AND
-            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)";
+            ((emailMittente in (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) AND emailDestinatario is NULL) OR ( emailMittente is NULL AND emailDestinatario is NULL) OR emailDestinatario = ?)  AND
+            id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)
+            ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
             mysqli_stmt_bind_param($stmt, "sss", $email,$email,$email);
             break;
