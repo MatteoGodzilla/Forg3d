@@ -20,7 +20,7 @@
                 <p>Comprato da: <?=$order["seller"]?></p>
             <?php }?>
             <p>Quantità richiesta:<?=$order["quantita"]?></p>
-            <h3 name="total[]">Pagamento ricevuto: <?=$order["quantita"]*$order["prezzo"]?>$</h3>
+            <h3>Pagamento ricevuto: <?=$order["quantita"]*$order["prezzo"]?>$</h3>
             <?php if($order["stato"]==0 && getUserType()==UserType::SELLER->value){?>
                 <a class="button-accept"  href="../api/advanceOrder.php?id=<?=$order["OrderId"]?>">Conferma spedizione</a>
             <?php }?>
