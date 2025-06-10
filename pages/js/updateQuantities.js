@@ -3,7 +3,7 @@ window.onload = () => {
     const variantIds = document.querySelectorAll("input[name='ids[]']");
     const rows = document.querySelectorAll("input[name='rows[]']");
     const costs = document.querySelectorAll("input[name='costs[]']");
-    const totals = document.querySelectorAll("h3[name='total[]']");
+    const totals = document.querySelectorAll("h3[id='subtotale']");
 
     for(let i = 0; i < inputQuantities.length; i++){
         inputQuantities[i].onchange = () => {

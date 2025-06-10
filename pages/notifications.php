@@ -44,7 +44,7 @@
     $notifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     //repeat per le lette
-    $query_lette = "SELECT * FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE destinatario = ? AND visibile=1";
+    $query_lette = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica INNER JOIN NotificaLetta ON Notifica.id = NotificaLetta.idNotifica WHERE destinatario = ? AND visibile=1";
     $stmt = mysqli_prepare($connection, $query_lette);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
