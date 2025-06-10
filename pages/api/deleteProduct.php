@@ -1,7 +1,7 @@
 <?php 
 require_once("../../php/db.php");
 require_once("../../php/session.php");
-require_once("sendSellerNotification.php");
+require_once("notificationUtils.php");
 session_start();
 
 //Reindirizza se l'utente non è loggato
