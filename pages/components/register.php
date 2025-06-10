@@ -12,7 +12,7 @@
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required />
     <label for="passwordConfirm">Conferma Password</label>
-    <input type="password" name="" id="passwordConfirm" required />
+    <input type="password" name="password" id="passwordConfirm" required />
     <?php if($isAdmin){?>
         <label for="token">Registration token</label>
         <input type="text" name="admin_token" id="token">
@@ -20,7 +20,7 @@
         <input type="submit" value="Registrazione" class="admin" disabled>
     <?php } else { ?>
         <button id="typeSwitcher" type="button">
-            <div></div>
+            <span></span>
         </button>
         <input type="hidden" name="type" value="0" />
         <input type="submit" value="Registrazione" disabled>

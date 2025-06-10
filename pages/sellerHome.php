@@ -58,7 +58,7 @@
     ?>
 
     <main>
-        <h3>Listino prodotti</h3>
+        <h2>Listino prodotti</h2>
         <a href="editProduct.php">Aggiungi prodotto</a>
         <?php 
             require_once("components/sellerHomeProduct.php");
@@ -67,7 +67,7 @@
             }
         ?>
     </main><aside>
-    <h3>Listino materiali</h3>
+    <h2>Listino materiali</h2>
     <a href="editMaterial.php">Aggiungi materiale</a>
     <?php 
         require_once("components/sellerHomeMaterial.php");

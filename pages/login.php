@@ -17,6 +17,7 @@ if(utenteLoggato()){
         <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/popups.css" />
         <link rel="stylesheet" href="./css/loginForm.css" />
+        <link rel="stylesheet" href="./css/chooserButton.css" />
     </head>
     <body>
         <?php 

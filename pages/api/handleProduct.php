@@ -115,8 +115,7 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
     $stmt = mysqli_prepare($connection, $query_add);
     $defaultReadded = false;
     $lastMaterialId = -1;
-    for($i = 0; $i < count($_POST["materialIds"]); $i++){
-        $materialId = $_POST["materialIds"][$i];
+    foreach($_POST["materialIds"] as $materialId){
         $variantCost = $_POST["variantCosts"][$materialId];
 
         if(!isset($_POST["removeVariant"]) || !in_array($materialId, $_POST["removeVariant"])){

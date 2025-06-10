@@ -18,6 +18,7 @@ if(!utenteLoggato() || getUserType()!=UserType::ADMIN->value){
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/form.css" />
+        <link rel="stylesheet" href="./css/adminNotification.css" />
     </head>
     <body>
         <?php 
@@ -26,7 +27,7 @@ if(!utenteLoggato() || getUserType()!=UserType::ADMIN->value){
 ?>
         <h2>Invia notifica</h2>
         <form action="/api/handleAdminNotification.php" method="POST">
-            <label for"title">Titolo</label>
+            <label for="title">Titolo</label>
             <input type="text" name="title" id="title" required /> 
             <label for="description">Descrizione</label>
             <textarea name="description" id="description" required></textarea> 

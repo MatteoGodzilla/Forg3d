@@ -52,9 +52,10 @@ foreach($rows as $order){
     <?php
         require_once("components/header.php");
         create_header();
-    ?>
+?>
+    <h2>Ordini pagati</h2>
     <button class="buyer">
-        Ordini pagati (<?= $paidOrders ?>)
+        Mostra ordini (<?= $paidOrders ?>)
         <span class="material-symbols-outlined">arrow_drop_down</span>
     </button>
     <section class="hidden">
@@ -65,8 +66,9 @@ foreach($rows as $order){
     } ?>
     </section>
 
+    <h2> Ordini spediti </h2>
     <button class="buyer">
-        In spedizione (<?= $shippedOrders ?>)
+        Mostra ordini (<?= $shippedOrders ?>)
         <span class="material-symbols-outlined">arrow_drop_down</span>
     </button>
     <section class="hidden">
@@ -75,8 +77,9 @@ foreach($rows as $order){
     } ?>
     </section>
 
+    <h2> Ordini in spedizione </h2>
     <button class="buyer">
-        Ricevuti (<?= $completedOrders ?>)
+        Mostra ordini (<?= $completedOrders ?>)
         <span class="material-symbols-outlined">arrow_drop_down</span>
     </button>
     <section class="hidden">

@@ -8,7 +8,7 @@
         /> 
     </svg>
     <div>
-        <p><?php echo ($materiale['nomeColore']); ?> (<?php echo ($materiale['tipologia']); ?>) </p>
+        <h3><?php echo ($materiale['nomeColore']); ?> (<?php echo ($materiale['tipologia']); ?>) </h3>
         <p>#<?php echo ($materiale['hexColore']); ?></p>
         <div>
             <a class ="button-create" href="editMaterial.php?id=<?= $materiale['id']?>"> Modifica</a>

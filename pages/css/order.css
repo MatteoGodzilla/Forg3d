@@ -7,6 +7,11 @@ h3,p{
     padding-top: var(--padding-small);
 }
 
+h2 {
+    text-align: center;
+    margin: var(--padding-large);
+}
+
 p{
     font-size: var(--font-small);
 }

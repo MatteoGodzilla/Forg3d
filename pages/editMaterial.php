@@ -48,7 +48,7 @@ if(isset($_GET["id"])){
         <input type="text" id="tipo" name="tipo" value="<?= isset($materiale) ? htmlspecialchars($materiale['tipologia']) :'' ?>" required/>
         <label for="tipo">Colore*</label>
         <div>
-            <input type="color" id="colore" name="colore" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
+            <input type="color" id="colore" name="colore" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>"/>
             <input type="text" maxlength="7" id="colore-manuale" name="colore-manuale" value="#<?= isset($materiale) ? htmlspecialchars($materiale['hexColore']) :'' ?>" required/>
         </div>
         <input type="submit" value="<?= isset($_GET["id"]) ? "Salva modifiche":"Crea nuovo materiale"?>">

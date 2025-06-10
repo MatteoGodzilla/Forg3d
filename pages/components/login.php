@@ -13,7 +13,7 @@
         </select>
 --!>
         <button id="typeSwitcher" type="button">
-            <div></div>
+            <span></span>
         </button>
         <input type="hidden" name="type" value="0" />
         <input type="submit" value="Login" />

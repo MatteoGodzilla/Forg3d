@@ -97,7 +97,7 @@ if(isset($_GET) && isset($_GET['id'])){
     <h2>Modifica Prodotto</h2>
     <form action="api/handleProduct.php" method="POST" enctype="multipart/form-data">
         <fieldset>
-            <legend align="center">Informazioni generali</legend>
+            <legend>Informazioni generali</legend>
             <?php 
                 if(isset($idProduct)){
             ?>
@@ -122,7 +122,7 @@ if(isset($_GET) && isset($_GET['id'])){
             <input type="file" name="3dPreview" id="3dPreview"/>
         </fieldset>
         <fieldset>
-            <legend align="center">Immagini</legend>
+            <legend>Immagini</legend>
             <label for="addImage">Aggiungi nuove immagini</label>
             <input type="file" name="images[]" id="addImage" multiple/>
             <div id="immaginiEsistenti">
@@ -136,7 +136,7 @@ if(isset($_GET) && isset($_GET['id'])){
             </div>
         </fieldset>
         <fieldset>
-            <legend align="center">Varianti</legend>
+            <legend>Varianti</legend>
 
             <select id="selectBox">
             <?php 

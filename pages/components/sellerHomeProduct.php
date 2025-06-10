@@ -9,7 +9,7 @@
         <img alt="immagine non trovata" src="https://placehold.co/800x600?text=Immagine+non+trovata"  />
     <?php } ?>
     <div>
-        <p><?php echo ($product['nome']); ?> <?php echo ($product['visibile'] == 2 ? "":"(Nascosto)") ?></p>
+        <h3><?php echo ($product['nome']); ?> <?php echo ($product['visibile'] == 2 ? "":"(Nascosto)") ?></h3>
         <div>
             <a  class ="button-create" href="editProduct.php?id=<?php echo ($product['id']); ?>">Modifica</a>
             <a class ="button-delete" href="./api/deleteProduct.php?id=<?php echo ($product['id']); ?>">Elimina</a>

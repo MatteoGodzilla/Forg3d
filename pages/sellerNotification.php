@@ -26,7 +26,7 @@ if(!utenteLoggato() || getUserType()!=UserType::SELLER->value){
         ?>
         <h2>Invia notifica</h2>
         <form action="/api/handleSellerNotification.php" method="POST">
-            <label for"title">Titolo</label>
+            <label for="title">Titolo</label>
             <input type="text" name="title" id="title" required /> 
             <label for="description">Descrizione</label>
             <textarea name="description" id="description" required></textarea> 

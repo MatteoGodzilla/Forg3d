@@ -2,6 +2,10 @@
 @import url(./styleReference.css);
 @import url(./buttons.css);
 
+small {
+    font-family: var(--font-family-paragraph);
+}
+
 div.request {
     margin: var(--padding-small);
     padding: var(--padding-small);

@@ -1,0 +1,12 @@
+@import url("./css/variables.css");
+
+h2 {
+    margin-top: var(--padding-large);
+    text-align: center;
+}
+
+form > input[type="submit"] {
+    background-color: var(--light-danger);
+    transition: none;
+    border: none;
+}
