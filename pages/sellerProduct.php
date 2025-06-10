@@ -82,8 +82,8 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
         <div class="seller-info">
             <div class="seller-details">
                 <h2><?= ($seller['nome'] . ' ' . $seller['cognome']) ?></h2>
-                <p>Email: <?= ($emailVenditore) ?></p>
-                <p>Follower: <?= $followersCount ?></p>
+                <p>Email: <?= htmlspecialchars($emailVenditore) ?></p>
+                <p>Follower: <?= ($followersCount) ?></p>
             </div>
             <div class="seller-actions">
                 <form method="GET" action="/api/followUnfollow.php" class="follow-btn">

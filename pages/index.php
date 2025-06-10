@@ -87,7 +87,7 @@ if(isset($_GET['search'])){
             create_header();
         ?>
 		<form method="GET" action="index.php">
-  			<input type="search" name="search" placeholder="<?php if(!isset($_GET['search'])) echo 'Cerca prodotti o venditori...'; else echo($query) ?>"/>
+  			<input type="search" name="search" placeholder="<?php if(!isset($_GET['search'])) echo 'Cerca prodotti o venditori...'; else echo htmlspecialchars($query) ?>"/>
 		</form>
 		<?php if (isset($_GET['search'])): ?>
             <h2>Venditori</h2>

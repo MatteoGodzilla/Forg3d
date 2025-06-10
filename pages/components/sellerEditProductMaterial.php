@@ -5,7 +5,7 @@
         <svg width="40" height="40px">
             <ellipse stroke="black" fill="#<?= $variant["hexColore"]?>" stroke-width="2" rx="16" ry="16" cx="20" cy="20"></ellipse>
         </svg>
-        <label><?= $variant["nomeColore"]?> (<?= $variant["tipologia"]?>)</label>
+        <label><?= htmlspecialchars($variant["nomeColore"])?> (<?= htmlspecialchars($variant["tipologia"]) ?>)</label>
     </div>
     <div>
         <label for="variantCosts[<?= $variant["id"] ?>]">Centesimi:</label>

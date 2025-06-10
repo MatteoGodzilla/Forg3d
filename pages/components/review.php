@@ -29,8 +29,8 @@ function createReview($review, $productId, $depth) {
         ?>
     </div>
     <?php } ?>
-    <p><?= $review->review["testo"] ?></p>
-    <p><?= $review->review["email"] ?></p>
+    <p><?= htmlspecialchars($review->review["testo"]) ?></p>
+    <p><?= htmlspecialchars($review->review["email"]) ?></p>
 
     <div class="replies">
         <?php 

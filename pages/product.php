@@ -109,9 +109,9 @@ $graph = createReviewTree($reviews);
             create_image_container($resultImmagini);
         ?>
         <script src="./js/image-container.js"></script>
-        <h2><?php echo ($prodotto['nome']); ?></h2>
+        <h2><?php echo htmlspecialchars($prodotto['nome']); ?></h2>
         <p><strong>Venditore:</strong> 
-            <a href="../sellerProduct.php?email=<?php echo $prodotto['venditoreEmail']; ?>"> <?php echo ($prodotto['venditoreNome'] . ' ' . $prodotto['venditoreCognome']); ?></a></p>
+            <a href="../sellerProduct.php?email=<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>"> <?php echo htmlspecialchars($prodotto['venditoreNome']) . ' ' . htmlspecialchars($prodotto['venditoreCognome']); ?></a></p>
         <?php if(isset($prodotto['fileModello'])){ ?>
             <button id="showModel">Mostra modello 3D</button>
             <div class="hidden" id="model-viewer"></div>

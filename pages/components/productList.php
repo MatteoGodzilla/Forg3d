@@ -9,8 +9,8 @@
             <?php } else { ?>
                 <img alt="immagine non trovata" src="https://placehold.co/800x600?text=Immagine+non+trovata"></img>
             <?php } ?>
-        <h3><?php echo $product['nome'] ?></h3>
-        <?php echo '<p>Venditore: ' . $product['venditoreNome'] . ' ' . $product['venditoreCognome'] . '</p>'?>
+        <h3><?php echo htmlspecialchars($product['nome']) ?></h3>
+        <?php echo '<p>Venditore: ' . htmlspecialchars($product['venditoreNome']) . ' ' . htmlspecialchars($product['venditoreCognome']) . '</p>'?>
         </div>
     </a>
 </article>
