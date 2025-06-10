@@ -17,70 +17,90 @@ addVariantButton.onclick = () => {
         fetch(`/api/getMaterial.php?id=${selectBox.value}`)
             .then(res => res.json())
             .then(obj => {
-                const hiddenDiv = document.createElement("div");
-                hiddenDiv.setAttribute("class","variantInfo");
-                variantContainer.appendChild(hiddenDiv);
+                const rootDiv = document.createElement("div");
+                rootDiv.classList.add("variantInfo");
 
+                //id 
                 const hiddenId = document.createElement("input");
-                hiddenId.setAttribute("type","hidden");
-                hiddenId.setAttribute("name",`materialIds[${selectBox.value}]`);
-                hiddenId.setAttribute("value",selectBox.value);
-                hiddenDiv.appendChild(hiddenId);
-                
-                const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
-                svg.setAttribute("width","40");
-                svg.setAttribute("height","40px");
-                const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
-                ellipse.setAttribute("stroke","black");
-                ellipse.setAttribute("fill","#"+obj["hexColore"]);
-                ellipse.setAttribute("stroke-width","2");
-                ellipse.setAttribute("rx","16");
-                ellipse.setAttribute("ry","16");
-                ellipse.setAttribute("cx","20");
-                ellipse.setAttribute("cy","20");
-                svg.appendChild(ellipse);
-                hiddenDiv.appendChild(svg);
+                    hiddenId.setAttribute("type","hidden");
+                    hiddenId.setAttribute("name",`materialIds[${selectBox.value}]`);
+                    hiddenId.setAttribute("value",selectBox.value);
+                rootDiv.appendChild(hiddenId);
 
-                const labelName = document.createElement("label");
-                labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
-                hiddenDiv.appendChild(labelName);
-                
-                const variantCost = document.createElement("input");
-                variantCost.setAttribute("type","number");
-                variantCost.setAttribute("name",`variantCosts[${selectBox.value}]`);
-                variantCost.setAttribute("value","00");
-                hiddenDiv.appendChild(variantCost);
+                //svg
+                const innerDiv = document.createElement("div");
+                    const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+                        svg.setAttribute("width","40");
+                        svg.setAttribute("height","40px");
+                    const ellipse = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+                        ellipse.setAttribute("stroke","black");
+                        ellipse.setAttribute("fill","#"+obj["hexColore"]);
+                        ellipse.setAttribute("stroke-width","2");
+                        ellipse.setAttribute("rx","16");
+                        ellipse.setAttribute("ry","16");
+                        ellipse.setAttribute("cx","20");
+                        ellipse.setAttribute("cy","20");
+                    svg.appendChild(ellipse);
+                    const labelName = document.createElement("label");
+                        labelName.innerText = `${obj["nomeColore"]} (${obj["tipologia"]})`;
 
-                const defaultButton = document.createElement("input");
-                defaultButton.setAttribute("type", "radio");
-                defaultButton.setAttribute("name", "defaultVariant");
-                defaultButton.setAttribute("value", selectBox.value);
-                defaultButton.setAttribute("id", selectBox.value);
-                if(!defaultVariantPresent()){
-                    defaultButton.setAttribute("checked", "checked");
-                }
-                hiddenDiv.appendChild(defaultButton);
+                    innerDiv.appendChild(svg);
+                    innerDiv.appendChild(labelName);
+                rootDiv.appendChild(innerDiv);
 
-                const labelDefault = document.createElement("label");
-                labelDefault.setAttribute("for", selectBox.value);
-                labelDefault.innerText = "Default";
-                hiddenDiv.appendChild(labelDefault);
+                //Variant cost
+                const innerDiv2 = document.createElement("div");
+                    const labelName2 = document.createElement("label");
+                        labelName2.setAttribute("for", `variantCosts[${selectBox.value}]`);
+                        labelName2.innerText = "Centesimi:";
 
-                const labelRemove = document.createElement("label");
-                labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
-                labelRemove.innerText = "Rimuovi"; 
-                hiddenDiv.appendChild(labelRemove);
+                    const variantCost = document.createElement("input");
+                        variantCost.setAttribute("type","number");
+                        variantCost.setAttribute("name",`variantCosts[${selectBox.value}]`);
+                        variantCost.setAttribute("id",`variantCosts[${selectBox.value}]`);
+                        variantCost.setAttribute("value","00");
 
-                const removeVariant = document.createElement("input");
-                removeVariant.setAttribute("type","checkbox");
-                removeVariant.setAttribute("name",`removeVariant[${selectBox.value}]`);
-                removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
-                removeVariant.setAttribute("value",selectBox.value);
-                hiddenDiv.appendChild(removeVariant);
+                    innerDiv2.appendChild(labelName2);
+                    innerDiv2.appendChild(variantCost);
+                rootDiv.appendChild(innerDiv2);
 
-                selectBox.options.remove(selectBox.selectedIndex);
-                console.log(selectBox.options);
-                defaultRadioButtons = document.querySelectorAll("input[type='radio']");
+                //Bottom controls
+                const innerDiv3 = document.createElement("div");
+                    const innerDiv3_1 = document.createElement("div");
+                        const defaultButton = document.createElement("input");
+                            defaultButton.setAttribute("type", "radio");
+                            defaultButton.setAttribute("name", "defaultVariant");
+                            defaultButton.setAttribute("id", selectBox.value);
+                            defaultButton.setAttribute("value", selectBox.value);
+                            if(!defaultVariantPresent()){
+                                defaultButton.setAttribute("checked", "checked");
+                            }
+                        const labelDefault = document.createElement("label");
+                            labelDefault.setAttribute("for", selectBox.value);
+                            labelDefault.innerText = "Default";
+
+                        innerDiv3_1.appendChild(defaultButton);
+                        innerDiv3_1.appendChild(labelDefault);
+                        
+                    const innerDiv3_2 = document.createElement("div");
+                        const removeVariant = document.createElement("input");
+                            removeVariant.setAttribute("type","checkbox");
+                            removeVariant.setAttribute("name",`removeVariant[${selectBox.value}]`);
+                            removeVariant.setAttribute("id",`removeVariant[${selectBox.value}]`);
+                            removeVariant.setAttribute("value",selectBox.value);
+                        const labelRemove = document.createElement("label");
+                            labelRemove.setAttribute("for", `removeVariant[${selectBox.value}]`);
+                            labelRemove.innerText = "Rimuovi"; 
+
+                        innerDiv3_2.appendChild(removeVariant);
+                        innerDiv3_2.appendChild(labelRemove);
+
+                    innerDiv3.appendChild(innerDiv3_1);
+                    innerDiv3.appendChild(innerDiv3_2);
+
+                rootDiv.appendChild(innerDiv3);
+
+                variantContainer.appendChild(rootDiv);
             })
     }
 }

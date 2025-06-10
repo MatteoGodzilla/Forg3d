@@ -6,6 +6,24 @@ h3 {
     font-weight: normal;
 }
 
+h2 {
+    text-align: center;
+    margin: var(--padding-large);
+}
+
+div.info {
+    margin: var(--padding-small);
+    padding: var(--padding-small);
+}
+
+div.info > p{
+    font-weight: bold;
+}
+
+div.info > p > span{
+    font-weight: normal;
+}
+
 main > h2, aside > h2 {
     text-align: center;
     margin: var(--padding-large);

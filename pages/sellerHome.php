@@ -39,7 +39,15 @@
     foreach ($rows as $row) {
         $nome = $row["nome"];
     }
-    
+
+    #Query Followers
+    $query_followers = "SELECT COUNT(emailCompratore) AS followers FROM Follow WHERE emailVenditore = ?";
+    $stmt = mysqli_prepare($connection, $query_followers);
+    mysqli_stmt_bind_param($stmt,"s",$email );
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $followers = mysqli_fetch_assoc($result)["followers"];
+
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +64,11 @@
         require_once("components/header.php");
         create_header();
     ?>
+
+    <h2>Info</h2>
+    <div class="info">
+        <p>Followers: <span><?= $followers ?></span></p>
+    </div>
 
     <main>
         <h2>Listino prodotti</h2>
