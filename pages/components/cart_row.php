@@ -6,7 +6,7 @@
         <div>
             <a href="product.php?id=<?=$row["idProdotto"]?>">
                     <?php if(isset($row["immagine"]) && $row["immagine"]!=null && file_exists($rootDir.$row["immagine"])) {?>
-                        <img  src="<?= $row["immagine"]?>"> </img>
+                        <img  alt = "foto prodotto" src="<?= $row["immagine"]?>"> </img>
                     <?php }else{?>
                         <img  alt = "immagine non trovata" src="https://placehold.co/800x600"> </img>
                     <?php }?>

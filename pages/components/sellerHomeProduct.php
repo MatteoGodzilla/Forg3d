@@ -4,9 +4,9 @@
 <article class="product">
     <!--TODO: add image in list -->
     <?php if(isset($product["immagine"]) && $product["immagine"] != null && file_exists($rootDir.$product["immagine"])){ ?>
-        <img src="<?= $product["immagine"] ?>" alt="immagine prodotto" />
+        <img alt="immagine prodotto" src="<?= $product["immagine"] ?>"  />
     <?php } else { ?>
-        <img src="https://placehold.co/800x600?text=Immagine+non+trovata" alt="immagine non trovata" />
+        <img alt="immagine non trovata" src="https://placehold.co/800x600?text=Immagine+non+trovata"  />
     <?php } ?>
     <div>
         <p><?php echo ($product['nome']); ?> <?php echo ($product['visibile'] == 2 ? "":"(Nascosto)") ?></p>

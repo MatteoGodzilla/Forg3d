@@ -6,7 +6,7 @@
         <?php foreach($images as $immagine){ ?>
             <?php if(file_exists($rootDir.$immagine["nomeFile"])) {?>
                 <div class ="image" >
-                    <img  src="<?= $immagine["nomeFile"]?>"> </img>
+                    <img  alt = "foto prodotto" src="<?= $immagine["nomeFile"]?>"> </img>
                 </div>
             <?php }else{?>
                 <div class ="image" >
