@@ -3,8 +3,8 @@ session_start();
 require_once("../../php/db.php");
 require_once("../../php/session.php");
 
-//non autorizzato
-if(!utenteLoggato() || getUserType()!=UserType::BUYER->value){
+//Gli admin non possono mettere recensioni
+if(!utenteLoggato() || getUserType() === UserType::ADMIN->value){
     header("Location: /");
     exit();
 }
