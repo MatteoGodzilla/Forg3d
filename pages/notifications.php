@@ -92,7 +92,7 @@
     ?>
     
     <?php if(sizeof($notifs_read)==0 && sizeof($notifs) ==0){?>
-        <h4>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi,lo vedrai dalla campanella nella parte alta dello schermo!</h4>
+        <p>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi,lo vedrai dalla campanella nella parte alta dello schermo!</p>
     <?php } ?>
 </body>
 </html>

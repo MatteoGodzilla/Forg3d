@@ -15,13 +15,16 @@ if(getUserType() != UserType::SELLER->value){
 }
 
 $email = getSessionEmail();
-$query_orders = "SELECT P.id as idProdotto,M.nomeColore as variante, P.nome as nome ,
-O.emailCompratore as buyer ,O.id as OrderId,O.stato as stato,OI.quantita as quantita,OI.prezzo as prezzo,
-FIRST_VALUE(I.nomeFile) OVER (PARTITION BY  O.id,P.id, P.nome, O.emailCompratore, OI.quantita,O.stato,M.nomeColore,OI.prezzo) AS immagine 
-FROM Ordine O INNER JOIN InfoOrdine OI ON OI.idOrdine = O.id
-INNER JOIN Variante V on V.id = OI.idVariante INNER JOIN Prodotto P ON V.idProdotto = P.id
-LEFT JOIN ImmaginiProdotto I ON P.id = I.idProdotto INNER JOIN Materiale M ON M.id = V.idMateriale
-WHERE O.emailVenditore = ? ORDER BY O.stato";
+$query_orders = "SELECT DISTINCT P.id as idProdotto, M.nomeColore as variante, P.nome as nome, 
+    O.emailCompratore as buyer, O.id as OrderId, O.stato as stato, OI.quantita as quantita, OI.prezzo as prezzo, 
+    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY O.id,P.id, P.nome, O.emailCompratore, OI.quantita,O.stato,M.nomeColore,OI.prezzo) AS immagine 
+    FROM Ordine O 
+    INNER JOIN InfoOrdine OI ON OI.idOrdine = O.id
+    INNER JOIN Variante V on V.id = OI.idVariante 
+    INNER JOIN Prodotto P ON V.idProdotto = P.id
+    INNER JOIN Materiale M ON M.id = V.idMateriale
+    LEFT JOIN ImmaginiProdotto I ON P.id = I.idProdotto 
+    WHERE O.emailVenditore = ? ORDER BY O.stato";
 
 $stmt = mysqli_prepare($connection, $query_orders);
 mysqli_stmt_bind_param($stmt,"s",$email);

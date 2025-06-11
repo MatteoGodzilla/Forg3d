@@ -15,7 +15,7 @@ if(utenteLoggato()){
 }
 
 if(!isset($_POST) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
-    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"durante il login,i dati forniti erano incompleti"));
+    header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Durante il login, i dati forniti erano incompleti"));
     exit();
 }
 
@@ -72,17 +72,17 @@ if(isset($rows[0])){
             case UserType::SELLER->value:
                 switch($rows[0]["stato"]){
                     case 0:
-                        header("Location:".feedback(REDIRECT_FAILED,AlertType::WARNING->value,"Il tuo account è attualmente in esaminazione per essere approvato,riporva più tardi."));
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::WARNING->value,"Il tuo account è attualmente in esaminazione per essere approvato, riprova più tardi."));
                         exit();
                     case 1:
                         setSession($email,UserType::SELLER->value);
                         header("Location:".REDIRECT_VENDITORE);
                         exit();
                     case 2:
-                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Il tuo account è venditore è stato rifiutato,crea un nuovo account o contatta un amministratore."));
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Il tuo account venditore è stato rifiutato, crea un nuovo account o contatta un amministratore (help@forg3d.com)."));
                         exit();
                     case 3:
-                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Questo account è stato bandito,perfavore contatta un amministratore."));
+                        header("Location:".feedback(REDIRECT_FAILED,AlertType::ERROR->value,"Questo account è stato bandito, contatta un amministratore (help@forg3d.com)."));
                         exit();
                 }
             case UserType::ADMIN->value:

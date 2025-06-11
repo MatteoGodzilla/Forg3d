@@ -101,6 +101,9 @@ addVariantButton.onclick = () => {
                 rootDiv.appendChild(innerDiv3);
 
                 variantContainer.appendChild(rootDiv);
+                // Update possible materials
+                selectBox.options.remove(selectBox.index);
+                defaultRadioButtons = document.querySelectorAll("input[type='radio']");
             })
     }
 }

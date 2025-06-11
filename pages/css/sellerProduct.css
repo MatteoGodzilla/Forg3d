@@ -1,6 +1,6 @@
 @import url("./variables.css");
 
-body > h2, form > h2 {
+body > h2, form > h2, body > p {
     text-align: center;
 }
 
@@ -10,6 +10,7 @@ body > h2, form > h2 {
     justify-content: space-between;
     padding: var(--padding-small);
     background-color: var(--light-background);
+    flex-direction: column;
 }
 
 .seller-details {
@@ -28,7 +29,12 @@ body > h2, form > h2 {
 .seller-actions {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: var(--padding-small);
+}
+
+.seller-actions > form {
+    width: auto;
 }
 
 .seller-actions > button {
@@ -65,3 +71,8 @@ form.follow-btn > input[type="submit"]{
     border:none;
 }
 
+@media (min-width: 40em){
+    div.seller-info {
+        flex-direction: row;
+    }
+}

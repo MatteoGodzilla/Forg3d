@@ -13,7 +13,6 @@ if(!isset($_POST) || !isset($_POST["name"]) || !isset($_POST["surname"]) || !iss
     exit();
 }
 
-
 $email = $_POST["email"];
 $type = $_POST["type"];
 $clearPassword = $_POST["password"];
@@ -23,7 +22,6 @@ $hashedPassword = password_hash($clearPassword,PASSWORD_DEFAULT);
 $BaseQuery = "INSERT INTO Utente(nome,cognome,email,password,telefono) VALUES(?,?,?,?,?)";
 $SpecificQuery = "";
 $token = "";
-
 
 switch ($type) {
     case "0":
@@ -46,9 +44,6 @@ switch ($type) {
         exit();
 }
 
-
-
-
 if($type!="2"){
     //transaction of 2 inserts
     $connection->begin_transaction();
@@ -61,7 +56,7 @@ if($type!="2"){
         mysqli_stmt_bind_param($stmt,"s", $email);
         mysqli_stmt_execute($stmt);
         $connection->commit();
-        header("Location:".feedback(REDIRECT_FAILED,AlertType::SUCCESS->value,"registrazione completata!Se sei venditore,attendi prima di loggarti cosi che possiamo verificare il tuo account"));
+        header("Location:".feedback(REDIRECT_FAILED,AlertType::SUCCESS->value,"Registrazione completata! Se sei venditore, attendi prima di loggarti cosi che possiamo verificare il tuo account"));
         exit();
     }catch (mysqli_sql_exception $exception) {
         $connection->rollback();

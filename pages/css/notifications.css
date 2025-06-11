@@ -1,6 +1,6 @@
 @import url("variables.css");
 
-body > h2 , body > h3{
+body > h2 , body > h3, body > p{
     text-align: center;
     margin: var(--padding-large);
 }
