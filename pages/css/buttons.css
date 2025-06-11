@@ -46,4 +46,22 @@ a.detail{
     text-align: center;
 }
 
+/*Generico basato su tipo utente*/
+
+#buyerButton {
+    background-color: var(--light-primary-compratore);
+}
+
+#sellerButton {
+    background-color: var(--light-primary-venditore);
+}
+
+#adminButton {
+    background-color: var(--light-primary-admin);
+}
+
+#changePassword{
+    background-color: var(--light-danger);
+}
+
 

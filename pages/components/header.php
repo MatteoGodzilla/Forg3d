@@ -5,6 +5,7 @@
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
                 <?php generateSymbol(); ?>
+
                 <a href="/notifications.php">
                     <div id="notifications">
                         <span class="material-symbols-outlined">notifications</span>
@@ -12,6 +13,9 @@
                             <span class="notification-badge"><?=$notifCount?></span>
                         <?php }?>
                     </div>
+                </a>
+                <a href="/profile.php">
+                    <span class="material-symbols-outlined">account_circle</span>
                 </a>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>

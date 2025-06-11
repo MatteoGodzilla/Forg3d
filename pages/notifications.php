@@ -29,7 +29,7 @@
             break;
         case UserType::ADMIN->value:
             $query_notifiche = "SELECT id, emailMittente,creazione,titolo, descrizione FROM Notifica WHERE 
-            (emailMittente is null) AND 
+            (emailMittente is null AND emailDestinatario is NULL) AND 
             id NOT in (SELECT idNotifica FROM NotificaLetta WHERE destinatario=?)
             ORDER BY creazione DESC";
             $stmt = mysqli_prepare($connection, $query_notifiche);
