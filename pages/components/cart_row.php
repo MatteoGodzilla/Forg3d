@@ -20,7 +20,7 @@
             <p>Variante:<?=$row["variante"]?></p>
             <p>Quantità:</p>
             <input name="quantity[]" type="number" min="1" value=<?=$row["quantita"]?>>
-            <h3 id="subtotale">Subtotale: €<?=$row["quantita"]*$row["prezzo"]?></h3>
+            <h3 id="subtotale">Subtotale: €<?= number_format($row["quantita"]*$row["prezzo"] / 100, 2);?></h3>
             <a class="button-delete" href="./../api/removeFromCart.php?id=<?=$row["id"]?>">Rimuovi</a>
         </div>
     </div>

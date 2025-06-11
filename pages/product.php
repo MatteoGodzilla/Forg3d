@@ -8,15 +8,16 @@ $varianti = [];
 
 // Controlla se l'ID del prodotto è stato passato
 if (!isset($_GET) || !isset($_GET['id'])) {
-    die("");// Modifica all pagina home
+    header("Location: /");
+    exit();
 }
 
 //Prendo l'Id del prodotto cliccato
 $idProdotto = $_GET['id'];
 
 //Query per cercare le informazioni da mostrare nella pagina del prodotto
-$query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, v.emailUtente AS venditoreEmail,
-            u.nome AS venditoreNome, u.cognome AS venditoreCognome
+$query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, 
+            v.emailUtente AS venditoreEmail, v.stato, u.nome AS venditoreNome, u.cognome AS venditoreCognome
             FROM Prodotto p
             JOIN Venditore v ON p.emailVenditore = v.emailUtente
             JOIN Utente u ON v.emailUtente = u.email
@@ -29,9 +30,9 @@ mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
-
 if ($result->num_rows === 0) {
     header("Location:");//Aggiungiamo la pagina che ci pare
+    exit();
 }
 
 //Ottengo il risultato
@@ -42,8 +43,15 @@ $emailUtente = getSessionEmail();
 if (!$prodotto['visibile']) {
     // Se non è admin e non è il venditore stesso
     if ($tipoUtente != UserType::ADMIN->value && $emailUtente !== $prodotto['venditoreEmail']) {
-        die("");// Modifica all pagina home
+        header("Location: /");
+        exit();
     }
+}
+
+//Il prodotto non deve essere visibile se il venditore non è visibile
+if($prodotto["stato"] != 1){
+    header("Location: /");
+    exit();
 }
 
 // Query per ottenere le varianti del prodotto
@@ -184,7 +192,6 @@ $graph = createReviewTree($reviews);
             <!--<h3>Scrivi una recensione</h3>-->
             <form id="reviewForm" class="hidden" action="/api/addReview.php" method="POST">
                 <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
-                <!-- TODO: replace text display to star display -->
                 <label for="score" >Valutazione: <span>4</span>/5</label> 
                 <input id="score" name="score" type="range" min=0 max=5 step=1 value=3 />
                 <label for="reviewTitle">Titolo:</label>

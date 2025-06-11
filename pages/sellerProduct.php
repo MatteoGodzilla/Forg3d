@@ -7,6 +7,7 @@ include_once("../php/session.php");
 include_once("../php/feedback.php");
 
 if (!isset($_GET['email']) || empty($_GET['email'])) {
+    header("Location: /");
 	exit;
 }
 
@@ -14,7 +15,7 @@ $emailVenditore = $_GET['email'];
 $emailUtente = getSessionEmail();
 $isFollowing = false;
 
-$queryInfo = "SELECT u.nome, u.cognome
+$queryInfo = "SELECT u.nome, u.cognome, v.stato
                 FROM Venditore v
                 JOIN Utente u ON v.emailUtente = u.email
                 WHERE v.emailUtente = ?";
@@ -25,10 +26,17 @@ mysqli_stmt_execute($stmtSeller);
 $resultSeller = mysqli_stmt_get_result($stmtSeller);
 
 if (!$resultSeller || mysqli_num_rows($resultSeller) < 0) {
-	echo "Seller non trovato";
+	//echo "Seller non trovato";
+    header("Location: /");
+	exit;
 }
 
 $seller = mysqli_fetch_assoc($resultSeller);
+
+if($seller["stato"] != 1){
+    header("Location: /");
+	exit;
+}
 
 // Recupera i prodotti visibili
 $products = [];

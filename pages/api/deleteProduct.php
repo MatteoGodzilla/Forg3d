@@ -28,8 +28,6 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $check = mysqli_fetch_assoc($result);
 
-//TODO: Product removal if it was never bought in the first place
-
 if($check["visibile"] != 0){
     //Fake removal in database
     $query_remove = "UPDATE Prodotto SET visibile=0 WHERE id = ? AND emailVenditore = ?";

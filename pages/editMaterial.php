@@ -55,7 +55,7 @@ if(isset($_GET["id"])){
     </form>
 </body>
 
-<!--Script per sincronizzare elisse e color picker (TODO: Capire dove spostare questo)-->
+<!--Script per sincronizzare elisse e color picker -->
 <script>
     const colorPicker = document.getElementById("colore");
     //const ellipse = document.getElementById("color-indicator");

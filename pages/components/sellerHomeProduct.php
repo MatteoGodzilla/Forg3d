@@ -2,7 +2,6 @@
     $rootDir = realpath($_SERVER["DOCUMENT_ROOT"]); 
 ?>
 <article class="product">
-    <!--TODO: add image in list -->
     <?php if(isset($product["immagine"]) && $product["immagine"] != null && file_exists($rootDir.$product["immagine"])){ ?>
         <img alt="immagine prodotto" src="<?= $product["immagine"] ?>"  />
     <?php } else { ?>

@@ -18,7 +18,7 @@ window.onload = () => {
                     "variante": variantId, 
                     "quantita": quantita 
                 }).toString())
-                var subtotal = (parseInt(quantita)*parseInt(cost));
+                var subtotal = (parseInt(quantita)*parseInt(cost) / 100);
                 totalElm.innerText = `Subtotale: €${subtotal}`;
             }
         }
