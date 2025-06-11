@@ -40,9 +40,9 @@ if($seller["stato"] != 1){
 
 // Recupera i prodotti visibili
 $products = [];
-$query_prodotti =  "SELECT p.id, p.nome, p.fileModello, p.visibile,
-                        u.nome AS venditoreNome, u.cognome AS venditoreCognome, FIRST_VALUE(I.nomeFile)
-						OVER (PARTITION BY  p.id, p.nome, p.fileModello, p.visibile,u.nome,u.cognome) AS immagine
+$query_prodotti =  "SELECT DISTINCT p.id, p.nome, p.fileModello, p.visibile,
+                    u.nome AS venditoreNome, u.cognome AS venditoreCognome, FIRST_VALUE(I.nomeFile)
+                    OVER (PARTITION BY  p.id, p.nome, p.fileModello, p.visibile,u.nome,u.cognome) AS immagine
                     FROM Prodotto p
                     JOIN Venditore v ON p.emailVenditore = v.emailUtente
                     JOIN Utente u ON u.email = v.emailUtente
