@@ -105,7 +105,7 @@ if(isset($_FILES["images"])){
 }
 
 //Handle Variants
-if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
+if(isset($_POST["materialIds"]) && isset($_POST["variantCostsWhole"]) && isset($_POST["variantCostsCents"])){
     $query_hide = "UPDATE Variante SET visibile = 0 WHERE idProdotto = ? "; 
     $stmt = mysqli_prepare($connection, $query_hide);
     mysqli_stmt_bind_param($stmt,"i", $id);
@@ -116,7 +116,7 @@ if(isset($_POST["materialIds"]) && isset($_POST["variantCosts"])){
     $defaultReadded = false;
     $lastMaterialId = -1;
     foreach($_POST["materialIds"] as $materialId){
-        $variantCost = $_POST["variantCosts"][$materialId];
+        $variantCost = $_POST["variantCostsWhole"][$materialId]*100 + $_POST["variantCostsCents"][$materialId];
 
         if(!isset($_POST["removeVariant"]) || !in_array($materialId, $_POST["removeVariant"])){
             mysqli_stmt_bind_param($stmt, "iii", $id, $materialId, $variantCost);

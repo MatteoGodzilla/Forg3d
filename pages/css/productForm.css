@@ -113,13 +113,19 @@ div.variantInfo label{
 } 
 
 div.variantInfo input[type="number"]{
-    width:100%;
     flex-grow:1;
     background-color: var(--light-background);
     border-style: none;
     border-radius: 20px;
     font-size: var(--font-small);
     padding-left: var(--padding-small);
+    text-align: right;
+    width: 3em;
+}
+
+div.variantInfo input[type="number"]:last-of-type {
+    flex-grow: 0;
+    text-align: left;
 }
 
 form input[type="submit"] {

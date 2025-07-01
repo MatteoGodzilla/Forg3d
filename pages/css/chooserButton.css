@@ -18,13 +18,13 @@ form > button#typeSwitcher::before, form > button#typeSwitcher::after {
 
 form > button#typeSwitcher::before{
     content: "Venditore";
-    color: var(--light-primary-venditore);
+    color: var(--light-primary-venditore-dark);
     top:calc(var(--height)/2);
 }
 
 form > button#typeSwitcher::after{
     content: "Compratore";
-    color: var(--light-primary-compratore);
+    color: var(--light-primary-compratore-dark);
     top:calc(var(--height)/2);
 }
 
