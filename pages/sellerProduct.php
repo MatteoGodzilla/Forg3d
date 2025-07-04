@@ -133,5 +133,6 @@ $isFollowing = mysqli_stmt_num_rows($stmt) > 0;
             <p>Nessun prodotto trovato.</p>
         <?php endif; ?>
         <script src="./js/report.js"></script>
+        <script src="./js/darkMode.js"></script>
 	</body>
 </html>

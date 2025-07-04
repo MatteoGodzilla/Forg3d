@@ -211,5 +211,6 @@ $graph = createReviewTree($reviews);
     </aside>
      
     <script src="js/replyToReview.js"></script>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

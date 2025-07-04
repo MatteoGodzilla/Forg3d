@@ -17,7 +17,9 @@ h3{
     width: calc(100% - var(--padding-small) * 2);
     margin-left: var(--padding-small);
     margin-left: var(--padding-small);
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
+    /* Exception */
+    color: var(--light-text);
 }
 
 #model-viewer.hidden {
@@ -36,7 +38,7 @@ h3{
 div.variantOption{
     display: flex;
     padding: var(--padding-small);
-    background-color:var(--light-background);
+    background-color:var(--background);
     text-align: center;
 }
 
@@ -48,18 +50,24 @@ div.variantOption > div {
 
 div.variantOption span {
     display: block;
+    font-family: var(--font-family-paragraph);
     text-align: left;
 }
 
 div.variantOption small{
     color: gray;
     display: block;
+    font-family: var(--font-family-paragraph);
     text-align: left;
+}
+
+div.variantOption > svg > ellipse {
+    stroke: var(--opposite);
 }
 
 div.image-container{
     position: relative;
-    background-color: var(--light-background);
+    background-color: var(--background);
     margin: var(--padding-small);
 }
 
@@ -68,7 +76,7 @@ div.image-container{
 }
 
 div.image{
-    background-color: var(--light-image-container);
+    background-color: var(--container);
 }
 
 div.image > img{
@@ -90,13 +98,20 @@ div.image-button{
 div.image-button > button{
     width: 25%;
     background-color: transparent;
-    color: var(--light-text);
-    border-radius: 3px 0 0 3px;
+    color: var(--text);
     transition: background-color 1s;
+    --rounded-radius: 40px;
+}
+
+div.image-button > button:first-of-type{
+    border-radius: 0px var(--rounded-radius) var(--rounded-radius) 0px;
+}
+div.image-button > button:last-of-type{
+    border-radius: var(--rounded-radius) 0px 0px var(--rounded-radius);
 }
 
 div.image-button > button:hover {
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
 }
 
 /* Review form */
@@ -105,14 +120,18 @@ div.image-button > button:hover {
     margin: var(--padding-small);
     width: calc(100% - var(--padding-small) * 2 );
     box-sizing: border-box;
-    background-color: var(--light-primary-compratore); 
+    background-color: var(--buyer); 
     padding: var(--padding-small);
     font-size: 1.5em;
+    /* Exception */
+    color: var(--light-text);
 }
 
 
 #toggleReviewForm > *{
     vertical-align: middle;
+    /* Exception */
+    color: var(--light-text);
 }
 
 form.hidden {
@@ -121,19 +140,21 @@ form.hidden {
 
 /* Copied from form.css */
 form > input[type="submit"] {
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
     border-style: none;
+    /* Exception */
+    color: var(--light-text);
 }
 
 /* Review reply stuff */
 button.showReplyForm {
-    background-color: var(--light-container);
-    color: var(--light-ok);
+    background-color: var(--container);
+    color: var(--ok);
     padding: var(--padding-small);
 }
 
 form.reply > textarea {
-    background-color: var(--light-background);
+    background-color: var(--background);
 }
 
 form.reply > input[type="submit"] {
@@ -149,16 +170,20 @@ form.reply > input[type="submit"] {
     margin-right: var(--padding-small);
     width: calc(100% - var(--padding-small) * 2 );
     box-sizing: border-box;
-    background-color: var(--light-danger); 
+    background-color: var(--danger); 
     padding: var(--padding-small);
+    /* Exception */
+    color: var(--light-text);
 }
 
 #toggleReportForm > *{
     vertical-align: middle;
+    /* Exception */
+    color: var(--light-text);
 }
 
 form#reportForm > input[type="submit"] {
-    background-color: var(--light-danger);
+    background-color: var(--danger);
 }
 
 form.hidden2 {

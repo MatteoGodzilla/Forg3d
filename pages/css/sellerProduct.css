@@ -9,7 +9,7 @@ body > h2, form > h2, body > p {
     align-items: stretch;
     justify-content: space-between;
     padding: var(--padding-small);
-    background-color: var(--light-background);
+    background-color: var(--background);
     flex-direction: column;
 }
 
@@ -40,12 +40,16 @@ body > h2, form > h2, body > p {
 .seller-actions > button {
     padding: var(--padding-small);
     font-size: 1.5em;
-    background-color: var(--light-danger);
+    background-color: var(--danger);
+    /* Exception */
+    color: var(--light-text);
 }
 
 .seller-actions > button > span {
     display: inline;
     vertical-align: middle;
+    /* Exception */
+    color: var(--light-text);
 }
 
 .report-form.hidden2 {
@@ -59,16 +63,18 @@ body > h2, form > h2, body > p {
 
 .report-form > button {
     margin-top: var(--padding-small);
-    background-color: var(--light-danger);
+    background-color: var(--danger);
     cursor: pointer;
     width: 100%;
 }
 
 form.follow-btn > input[type="submit"]{
     width: auto;
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
     transition: none;
     border:none;
+    /* Exception */
+    color: var(--light-text);
 }
 
 @media (min-width: 40em){

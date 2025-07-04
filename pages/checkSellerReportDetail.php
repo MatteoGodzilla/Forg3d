@@ -69,6 +69,7 @@ $user = $rows[0];
         foreach($reports as $report){
             sellerReportDetail($report);
         }
-    ?>
+?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

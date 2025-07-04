@@ -1,5 +1,5 @@
 div.products {
-    background-color: var(--light-background);
+    background-color: var(--background);
     display: grid;
     gap: var(--padding-small);
     padding: var(--padding-small);
@@ -7,7 +7,7 @@ div.products {
 }
 
 article.product {
-    background-color: var(--light-container);
+    background-color: var(--container);
     display:flex;
     flex-wrap:wrap;
     align-items:center;

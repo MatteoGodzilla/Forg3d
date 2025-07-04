@@ -27,7 +27,7 @@
 }
 
 .header-content #logout, .header-content #login{
-    background-image: linear-gradient(to bottom right, var(--light-primary-compratore), var(--light-primary-venditore));
+    background-image: linear-gradient(to bottom right, var(--buyer), var(--seller));
     color: var(--light-text);
     padding: var(--padding-small) var(--padding-large);
     border-radius: 70px;
@@ -57,4 +57,9 @@
   color: white;
 
   font-size: 12px;
+}
+
+#theme-toggle{
+    cursor: pointer;
+    user-select: none;
 }

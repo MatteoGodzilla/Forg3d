@@ -7,11 +7,11 @@ form {
 }
 
 input[name="search"] {
-    background-color: var(--light-container);
+    background-color: var(--container);
     width: 100%;
     padding: var(--padding-large);
     border-width: var(--padding-small);
-    border-color: var(--light-background);
+    border-color: var(--background);
     border-style: solid;
     border-radius: 100px;
 }

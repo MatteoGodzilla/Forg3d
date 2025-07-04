@@ -10,24 +10,24 @@ form {
 }
 
 form > input[type="submit"].buyer {
-    background-color: var(--light-primary-compratore);
-    border-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
+    border-color: var(--buyer);
 }
 
 form > input[type="submit"].seller {
-    background-color: var(--light-primary-venditore);
-    border-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    border-color: var(--seller);
 }
 
 
 form > input[type="submit"].admin {
-    background-color: var(--light-primary-admin);
-    border-color: var(--light-primary-admin);
+    background-color: var(--admin);
+    border-color: var(--admin);
 }
 
 form > input[type="submit"][disabled] {
-    background-color: var(--light-container);
-    border-color: var(--light-container);
+    background-color: var(--container);
+    border-color: var(--container);
 }
 
 body > h2 {
@@ -48,5 +48,5 @@ form > p{
 }
 
 #changePassword[disabled]{
-    background-color: var(--light-container);
+    background-color: var(--container);
 }

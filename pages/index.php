@@ -123,7 +123,9 @@ if(isset($_GET['search'])){
                 }
             ?>
             </div>
-		<?php endif; ?>
+        <?php endif; ?>
+
+        <script src="./js/darkMode.js"></script>
 	</body>
 </html>
 

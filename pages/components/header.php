@@ -17,11 +17,13 @@
                 <a href="/profile.php">
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
+                <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>
         <?php } else { ?>
             <div id="userProfile">
-            <a id="login" href="./login.php">Login</a>
+                <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
+                <a id="login" href="./login.php">Login</a>
             </div>
         <?php } ?>
 	</div>

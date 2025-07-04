@@ -20,6 +20,8 @@ form input[type="text"]{
     width: 100%;
     box-sizing: border-box;
     margin-bottom: var(--padding-small);
+    background-color: var(--container);
+    border-width: 0px;
 }
 
 form input[type="file"]{
@@ -38,9 +40,11 @@ div#immaginiEsistenti img{
 form button#showModel {
     display:block;
     width: 100%;
-    background-color: var(--light-primary-ausiliar);
+    background-color: var(--primary-ausiliar);
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
+    /* Exception */
+    color: var(--light-text);
 }
 
 form div#model-viewer.hidden {
@@ -57,7 +61,7 @@ form div#model-viewer {
 
 form select {
     width: 100%;
-    background-color: var(--light-container);
+    background-color: var(--container);
     border: none;
     font-size: var(--font-small);
 }
@@ -65,17 +69,19 @@ form select {
 form input#addVariant{
     border-radius: 70px;
     width: 100%;
-    background-color: var(--light-primary-ausiliar);
+    background-color: var(--primary-ausiliar);
     border: none;
     padding: var(--padding-small);
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
     cursor: pointer;
     font-size: 1em;
+    /* Exception */
+    color: var(--light-text);
 }
 
 form div#variantContainer{
-    background-color: var(--light-background);
+    background-color: var(--background);
 }
 
 div.variantInfo{
@@ -114,13 +120,15 @@ div.variantInfo label{
 
 div.variantInfo input[type="number"]{
     flex-grow:1;
-    background-color: var(--light-background);
+    background-color: var(--background);
     border-style: none;
     border-radius: 20px;
     font-size: var(--font-small);
     padding-left: var(--padding-small);
+    padding-right: var(--padding-small);
     text-align: right;
     width: 3em;
+    -moz-appearance: textfield;
 }
 
 div.variantInfo input[type="number"]:last-of-type {
@@ -129,9 +137,11 @@ div.variantInfo input[type="number"]:last-of-type {
 }
 
 form input[type="submit"] {
-    background-color: var(--light-primary-venditore);
-    border-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    border-color: var(--seller);
     cursor: pointer;
+    /* Exception */
+    color: var(--light-text);
 }
 
 @media (min-width: 82em){

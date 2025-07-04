@@ -56,5 +56,6 @@
         require_once("components/adminCommands.php");
         adminInterface($pendingRequests,$sellerReports,$productReports);
     ?>
+    <script src="./js/darkMode.js"></script>
 </body>
 </html>

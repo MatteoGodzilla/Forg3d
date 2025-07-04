@@ -13,27 +13,31 @@ body > a {
     display:block;
     margin:var(--padding-small);
     padding:var(--padding-small);
-    color: var(--light-text);
+    color: var(--text);
     border-radius: 70px;
     text-align: center;
     font-size:1.5em;
 }
 
 body > a#seller, body> a#readAll{
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    /* Exception */
+    color: var(--light-text);
 }
 
 body > a#admin, body>a#deleteAll{
-    background-color: var(--light-primary-admin);
+    background-color: var(--admin);
+    /* Exception */
+    color: var(--light-text);
 }
 
 a.delete,a.delete > *{
-    color: var(--light-primary-admin)
+    color: var(--admin)
 }
 
 
 a.read, a.read > *{
-    color: var(--light-ok)
+    color: var(--ok)
 }
 
 
@@ -41,7 +45,7 @@ a.read, a.read > *{
 div.notification  {
     margin: var(--padding-small); 
     padding: var(--padding-small);
-    background-color: var(--light-container);
+    background-color: var(--container);
 }
 
 div.notification > h3, div.notifContainer > form > p{

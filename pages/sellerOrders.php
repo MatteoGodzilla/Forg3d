@@ -91,5 +91,6 @@ foreach($rows as $order){
         } ?>
     </section>
     <script src="./js/toggleOrders.js"></script>
+    <script src="./js/darkMode.js"></script>
 </body>
 </html>

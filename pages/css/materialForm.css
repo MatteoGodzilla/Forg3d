@@ -11,7 +11,7 @@ body > h2 {
 form input[type="color"] {
     width:75px;
     height:75px;
-    border-color:black;
+    border-color: var(--opposite);
     border-style:solid;
     border-radius:50px;
 }
@@ -26,9 +26,13 @@ form > div > input[type="text"] {
     margin-left: var(--padding-small);
     font-size: 1.2em;
     flex-grow: 1;
+    background-color: var(--background);
+    border-width: 0px;
 }
 
 form > input[type="submit"] {
-    background-color: var(--light-primary-venditore);
-    border-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    border-color: var(--seller);
+    /* Exception */
+    color: var(--light-text);
 }

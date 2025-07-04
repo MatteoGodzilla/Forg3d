@@ -38,7 +38,7 @@ div.review > p:last-of-type {
 
 div.replies {
     margin-left: calc(var(--padding-small) / 2);
-    border-left: calc(var(--padding-small) / 2) var(--light-background) solid;
+    border-left: calc(var(--padding-small) / 2) var(--background) solid;
     display: flex;
     align-items: stretch;
     flex-direction: column;

@@ -1,9 +1,14 @@
 @import url(./styleReference.css);
 @import url(./variables.css);
 
-h3,h2,p{
+h3,p{
     text-align: center;
     padding-top: var(--padding-small);
+}
+
+h2 {
+    text-align: center;
+    padding-top: var(--padding-large);
 }
 
 .cart-row{

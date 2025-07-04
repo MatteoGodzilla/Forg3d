@@ -39,5 +39,6 @@ $sellers = mysqli_fetch_all($result, MYSQLI_ASSOC);
             sellerRequest($seller);
         }
     ?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

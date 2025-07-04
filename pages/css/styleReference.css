@@ -1,15 +1,15 @@
 * {
-    color: var(--light-text);
+    color: var(--text);
     margin: 0px;
     padding: 0px;
 }
 
 body {
-    background-color: var(--light-background);
+    background-color: var(--background);
 }
 
 header {
-    background-color: var(--light-container);
+    background-color: var(--container);
     padding: var(--padding-small);
 }
 
@@ -42,31 +42,31 @@ button{
 }
 
 div{
-    background-color: var(--light-container);
+    background-color: var(--container);
 }
 
 a {
     font-family: var(--font-family-paragraph);
-    color: var(--light-link);
+    color: var(--link);
     text-decoration: none;
 }
 
 .compratore {
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
 }
 
 .venditore {
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
 }
 
 .admin {
-    background-color: var(--light-primary-admin);
+    background-color: var(--admin);
 }
 
 .warning{
-    background: var(--light-warning);
+    background: var(--warning);
 }
 
 .ok{
-    background: var(--light-ok);
+    background: var(--ok);
 }

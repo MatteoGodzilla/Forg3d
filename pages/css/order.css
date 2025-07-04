@@ -25,13 +25,19 @@ button {
 
 button > span {
     vertical-align: middle;
+    /* Exception */
+    color: var(--light-text); 
 }
 
 button.buyer {
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
+    /* Exception */
+    color: var(--light-text); 
 }
 button.seller {
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    /* Exception */
+    color: var(--light-text); 
 }
 section.hidden {
     display:none;
@@ -41,7 +47,7 @@ section.hidden {
 
 div.order{
     text-align: center;
-    background-color: var(--light-container);
+    background-color: var(--container);
     margin: var(--padding-small);
     padding: var(--padding-small);
 

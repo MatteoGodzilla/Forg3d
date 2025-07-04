@@ -51,5 +51,6 @@
         ?>
 	</body>
     <script src="./js/checkRepeatedPassword.js" ></script>
+    <script src="./js/darkMode.js"></script>
 </html>
 

@@ -89,5 +89,6 @@
         }
     ?>
     </aside>
+    <script src="./js/darkMode.js"></script>
 </body>
 </html>

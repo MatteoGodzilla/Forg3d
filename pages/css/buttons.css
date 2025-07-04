@@ -6,32 +6,33 @@
 a.button-create {
     font-size:1.5em;
     margin: var(--padding-small);
-    color: var(--light-ok);
+    color: var(--ok);
 }
 
 a.button-delete {
     font-size:1.5em;
     margin: var(--padding-small);
-    color: var(--light-primary-admin);
+    color: var(--admin);
 }
 
 /*Buttons for accepting and deniying requests*/
 a.button-accept {
     padding: var(--padding-small);
-    color: var(--light-ok);
+    color: var(--ok);
 }
 
 a.button-deny {
     padding: var(--padding-small);
-    color: var(--light-primary-admin);
+    color: var(--admin);
 }
 
 /*Admin buttons for functionalities*/
 a.functional{
     display:block;
-    background-color: var(--light-danger);
+    background-color: var(--danger);
     margin:var(--padding-medium);
     padding:var(--padding-medium);
+    /* Exception */
     color: var(--light-text);
     border-radius: 70px;
     text-align: center;
@@ -42,26 +43,35 @@ a.functional{
 a.detail{
     display: block;
     padding-bottom: var(--padding-small);
-    color: var(--light-primary-admin);
+    color: var(--admin);
     text-align: center;
 }
 
 /*Generico basato su tipo utente*/
 
 #buyerButton {
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
+    border-width: 0;
+    /* Exception */
+    color: var(--light-text);
 }
 
 #sellerButton {
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
+    border-width: 0;
+    /* Exception */
+    color: var(--light-text);
 }
 
 #adminButton {
-    background-color: var(--light-primary-admin);
+    background-color: var(--admin);
+    border-width: 0;
+    /* Exception */
+    color: var(--light-text);
 }
 
 #changePassword{
-    background-color: var(--light-danger);
+    background-color: var(--danger);
 }
 
 

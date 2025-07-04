@@ -37,9 +37,10 @@ main > h3, aside > h3 {
 
 main > a, aside > a{
     display:block;
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
     margin:var(--padding-small);
     padding:var(--padding-small);
+    /* Exception */
     color: var(--light-text);
     border-radius: 70px;
     text-align: center;
@@ -47,7 +48,7 @@ main > a, aside > a{
 }
 
 article {
-    background-color: var(--light-container);
+    background-color: var(--container);
     margin: var(--padding-small);
     display:flex;
     flex-wrap:wrap;
@@ -77,6 +78,10 @@ article> div > div {
 
 article.material > svg {
     margin:var(--padding-small);
+}
+
+article.material > svg > ellipse{
+    stroke: var(--opposite);
 }
 
 @media (min-width: 60em){

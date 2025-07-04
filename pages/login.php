@@ -59,7 +59,6 @@ if(utenteLoggato()){
                 create_popup($_GET["message"],$_GET["messageType"]);
             } 
          ?>
-	</body>
-
-
+        <script src="js/darkMode.js"></script>
+    </body>
 </html>

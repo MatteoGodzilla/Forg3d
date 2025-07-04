@@ -70,6 +70,7 @@ $product = $rows[0];
         foreach($reports as $report){
             productReportDetail($report);
         }
-    ?>
+?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

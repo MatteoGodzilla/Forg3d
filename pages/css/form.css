@@ -21,7 +21,7 @@ form > label{
 }
 
 form > input {
-    background-color: var(--light-container);
+    background-color: var(--container);
     border-style: none;
     font-size: 1.2em;
 }
@@ -38,7 +38,7 @@ form > input[type="submit"] {
 
 form > textarea {
     resize: vertical;
-    background-color: var(--light-container);
+    background-color: var(--container);
     border-color: transparent;
     border-width: 0px;
     font-family: var(--font-family-paragraph);

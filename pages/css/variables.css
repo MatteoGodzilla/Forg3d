@@ -21,10 +21,61 @@
     --light-warning:#D8D827;
     --light-ok:#60B569;
     --light-image-container:#ededed;
+    /*dark mode*/
+    --dark-background: #000000;
+    --dark-container: #585858;
+    --dark-primary-ausiliar: #f0cf89;
+    --dark-text: #ffd6d6;
+    --dark-link:#BDD4FE;
+    --dark-primary-compratore: #029CDA;
+    --dark-primary-compratore-dark: #7EDAFF;
+    --dark-primary-venditore: #28DC1E;
+    --dark-primary-venditore-dark: #62FF59;
+    --dark-primary-admin: #FF8492;
+    --dark-danger:#FF5669;
+    --dark-warning:#D8D827;
+    --dark-ok:#79DE84;
+    --dark-image-container:#ededed;
     /* Fonts */
     --font-family-header: "Merriweather Sans", sans-serif;
     --font-family-paragraph: "Roboto Flex", sans-serif;
     /*Font sizes*/
     --font-small: 1.5em;
     --font-big: 3em;
+}
+
+body {
+    --background: var(--light-background);
+    --container: var(--light-container);
+    --text: var(--light-text);
+    --link: var(--light-link);
+    --primary-ausiliar: var(--light-primary-ausiliar);
+    --buyer: var(--light-primary-compratore);
+    --buyer-alt: var(--light-primary-compratore-dark);
+    --seller: var(--light-primary-venditore);
+    --seller-alt: var(--light-primary-venditore-dark);
+    --admin: var(--light-primary-admin);
+    --danger: var(--light-danger);
+    --warning: var(--light-warning);
+    --ok: var(--light-ok);
+    --image-container: var(--light-image-container);
+    --opposite: var(--dark-background);
+}
+
+body.dark {
+    --background: var(--dark-background);
+    --container: var(--dark-container);
+    --text: var(--dark-text);
+    --link: var(--dark-link);
+    --primary-ausiliar: var(--dark-primary-ausiliar);
+    --buyer: var(--dark-primary-compratore);
+    --buyer-alt: var(--dark-primary-compratore-dark);
+    --seller: var(--dark-primary-venditore);
+    --seller-alt: var(--dark-primary-venditore-dark);
+    --admin: var(--dark-primary-admin);
+    --danger: var(--dark-danger);
+    --warning: var(--dark-warning);
+    --ok: var(--dark-ok);
+    --image-container: var(--dark-image-container);
+    --opposite: var(--light-background);
 }

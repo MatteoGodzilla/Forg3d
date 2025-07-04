@@ -6,7 +6,7 @@ form > button#typeSwitcher {
     margin-bottom: var(--padding-large);
     padding: var(--padding-small);
     overflow-x:clip;
-    background-color: var(--light-container);
+    background-color: var(--container);
     cursor: pointer;
 }
 
@@ -18,13 +18,13 @@ form > button#typeSwitcher::before, form > button#typeSwitcher::after {
 
 form > button#typeSwitcher::before{
     content: "Venditore";
-    color: var(--light-primary-venditore-dark);
+    color: var(--seller-alt);
     top:calc(var(--height)/2);
 }
 
 form > button#typeSwitcher::after{
     content: "Compratore";
-    color: var(--light-primary-compratore-dark);
+    color: var(--buyer-alt);
     top:calc(var(--height)/2);
 }
 
@@ -47,17 +47,17 @@ form > button#typeSwitcher > span {
     display: block;
     width: var(--height);
     height:var(--height);
-    background-color:var(--light-background);
+    background-color:var(--background);
     border-radius:100px;
     transition: left 1s, background-color 1s;
 }
 
 form > button#typeSwitcher.buyer > span {
     left:0%;
-    background-color: var(--light-primary-venditore);
+    background-color: var(--seller);
 }
 
 form > button#typeSwitcher.seller > span {
     left:calc(100% - var(--height));
-    background-color: var(--light-primary-compratore);
+    background-color: var(--buyer);
 }

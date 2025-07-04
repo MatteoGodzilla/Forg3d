@@ -1,7 +1,7 @@
 @import url(./variables.css);
 
 div#error-popup{
-    background-color: var(--light-danger);
+    background-color: var(--danger);
     font-size: var(--font-small);
     margin-left: auto;
     margin-top: var(--padding-large);
@@ -15,7 +15,7 @@ div#error-popup{
 }
 
 div#warning-popup{
-    background-color: var(--light-warning);
+    background-color: var(--warning);
     font-size: var(--font-small);
     margin-left: auto;
     margin-top: var(--padding-large);
@@ -29,7 +29,7 @@ div#warning-popup{
 }
 
 div#success-popup{
-    background-color: var(--light-ok);
+    background-color: var(--ok);
     font-size: var(--font-small);
     margin-left: auto;
     margin-top: var(--padding-large);

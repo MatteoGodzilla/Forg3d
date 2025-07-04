@@ -41,6 +41,7 @@ $reports = mysqli_fetch_all($result, MYSQLI_ASSOC);
         foreach($reports as $report){
             sellerReport($report);
         }
-    ?>
+?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

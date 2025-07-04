@@ -57,7 +57,6 @@
 <head>
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--<link rel="stylesheet" href="./css/sellerHome.css" />-->
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/notifications.css" />
     <link rel="stylesheet" href="./css/form.css" />
@@ -67,23 +66,29 @@
         require_once("components/header.php");
         create_header();
     ?>
-    <?php if(getUserType()==UserType::ADMIN->value || getUserType()== UserType::SELLER->value){ ?>
-        <a href="<?=getUserType()==UserType::ADMIN->value? "adminNotification.php" : "sellerNotification.php" ?>" id ="<?=getUserType()==UserType::ADMIN->value? "admin" : "seller" ?>">Invia Notifica</a>
-    <?php }?>
-        <?php if(sizeof($notifs)>0) {?>
-            <h2>Notifiche nuove</h2>
-            <a href="./api/readNotification.php" id ="readAll">Segna tutte come lette</a>
-        <?php } ?>
+    <?php if(getUserType()==UserType::ADMIN->value){ ?>
+        <a href="adminNotification.php" id="admin">Invia notifica globale</a>
+    <?php } else if(getUserType()== UserType::SELLER->value) { ?>
+        <a href="sellerNotification.php" id="seller">Invia notifica globale</a>
+    <?php } ?>
+
+    <?php if(sizeof($notifs)>0) {?>
+        <h2>Notifiche nuove</h2>
+        <a href="./api/readNotification.php" id ="readAll">Segna tutte come lette</a>
+    <?php } ?>
+
     <?php 
         require_once("components/notification.php");
         foreach($notifs as $notification){
             createNotification($notification);
         }
     ?>
+
     <?php if(sizeof($notifs_read)>0) {?>
         <h2>Notifiche lette</h2>
         <a href="./api/hideNotification.php" id ="deleteAll">Cancella tutte</a>
     <?php } ?>
+
     <?php 
         require_once("components/notification.php");
         foreach($notifs_read as $notification){
@@ -94,5 +99,7 @@
     <?php if(sizeof($notifs_read)==0 && sizeof($notifs) ==0){?>
         <p>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi,lo vedrai dalla campanella nella parte alta dello schermo!</p>
     <?php } ?>
+    
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

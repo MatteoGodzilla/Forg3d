@@ -196,5 +196,6 @@ if(isset($_GET) && isset($_GET['id'])){
         </script>
     <?php } ?>
     <script src="./js/editProduct.js"> </script>
+    <script src="./js/darkMode.js"> </script>
 </body>
 </html>

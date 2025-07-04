@@ -42,6 +42,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
         foreach($products as $product){
             productReport($product);
         }
-    ?>
+?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>

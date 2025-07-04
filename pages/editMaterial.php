@@ -53,27 +53,26 @@ if(isset($_GET["id"])){
         </div>
         <input type="submit" value="<?= isset($_GET["id"]) ? "Salva modifiche":"Crea nuovo materiale"?>">
     </form>
+    <!--Script per sincronizzare elisse e color picker -->
+    <script>
+        const colorPicker = document.getElementById("colore");
+        //const ellipse = document.getElementById("color-indicator");
+        const textColor = document.getElementById("colore-manuale");
+
+        colorPicker.addEventListener("input", () => {
+          //ellipse.setAttribute("fill", colorPicker.value);
+          textColor.value = colorPicker.value;
+        });
+
+        textColor.addEventListener("input", () => {
+          var color= textColor.value;
+          //regex controlla se il testo è un colore valido
+          if (/^#[0-9a-fA-F]{6}$/.test(color)){
+            //ellipse.setAttribute("fill", color);
+            colorPicker.value= color;
+          }
+        });
+    </script>
+    <script src="./js/darkMode.js"></script>
 </body>
-
-<!--Script per sincronizzare elisse e color picker -->
-<script>
-    const colorPicker = document.getElementById("colore");
-    //const ellipse = document.getElementById("color-indicator");
-    const textColor = document.getElementById("colore-manuale");
-
-    colorPicker.addEventListener("input", () => {
-      //ellipse.setAttribute("fill", colorPicker.value);
-      textColor.value = colorPicker.value;
-    });
-
-    textColor.addEventListener("input", () => {
-      var color= textColor.value;
-      //regex controlla se il testo è un colore valido
-      if (/^#[0-9a-fA-F]{6}$/.test(color)){
-        //ellipse.setAttribute("fill", color);
-        colorPicker.value= color;
-      }
-    });
-    
-</script>
 </html>

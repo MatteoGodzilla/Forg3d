@@ -50,5 +50,6 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
             showBan($user,isset($_GET["Products"]));
         }
     ?>
+    <script src="js/darkMode.js"></script>
 </body>
 </html>
