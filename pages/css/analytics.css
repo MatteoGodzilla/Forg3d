@@ -1,6 +1,6 @@
 @import url("./css/variables.css");
 
-h2{
+h2,p{
     text-align: center;
     margin-top: var(--padding-small);
 }
@@ -9,6 +9,7 @@ div#stats{
     margin: var(--padding-large) auto;
     width: 75%;
     text-align: center;
+    border-radius: 70px;
 }
 
 @media (min-width: 60em){
