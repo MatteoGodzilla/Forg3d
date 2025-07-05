@@ -14,9 +14,15 @@
                         <?php }?>
                     </div>
                 </a>
+
                 <a href="/profile.php">
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
+
+                <span class="material-symbols-outlined">
+                analytics
+                </span>
+                
                 <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
             </div>

@@ -4,8 +4,6 @@ require_once("../../php/session.php");
 require_once("../../php/feedback.php");
 
 const REDIRECT_FAILED = "../login.php";
-const REDIRECT_COMPRATORE = "../index.php";
-const REDIRECT_VENDITORE = "../sellerHome.php";
 const REDIRECT_ADMIN = "../adminHome.php";
 
 if(!isset($_POST) || !isset($_POST["name"]) || !isset($_POST["surname"]) || !isset($_POST["cellphone"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["type"])){
@@ -93,10 +91,12 @@ if($type!="2"){
         mysqli_stmt_execute($stmt);
     
         $connection->commit();
-        header("Location:".REDIRECT_ADMIN);
+        header("Location:".REDIRECT_FAILED);
+        exit();
     }catch (mysqli_sql_exception $exception) {
         $connection->rollback();
         header("Location:".REDIRECT_FAILED);
+        exit();
     }
     
 }
