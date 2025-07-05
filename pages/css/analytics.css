@@ -1,0 +1,18 @@
+@import url("./css/variables.css");
+
+h2{
+    text-align: center;
+    margin-top: var(--padding-small);
+}
+
+div#stats{
+    margin: var(--padding-large) auto;
+    width: 75%;
+    text-align: center;
+}
+
+@media (min-width: 60em){
+    div#stats  {
+        width: 50%;
+    }
+}

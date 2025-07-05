@@ -19,9 +19,9 @@
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
 
-                <span class="material-symbols-outlined">
-                analytics
-                </span>
+                <a href="/analytics.php">
+                    <span class="material-symbols-outlined">analytics</span>
+                </a>
                 
                 <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
                 <a id="logout" href="./api/handleLogout.php">Logout</a>
