@@ -1,6 +1,6 @@
 @import url("./css/variables.css");
 
-h2,p{
+h2,p,input[type="radio"]{
     text-align: center;
     margin-top: var(--padding-small);
 }
@@ -10,6 +10,14 @@ div#stats{
     width: 75%;
     text-align: center;
     border-radius: 70px;
+}
+
+div#choices{
+    margin: var(--padding-small) auto;
+    display: flex;
+    justify-content: center;
+    background-color:var(--light-background);
+    gap: 1.5em;
 }
 
 @media (min-width: 60em){
