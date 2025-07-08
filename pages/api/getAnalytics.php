@@ -65,15 +65,6 @@
     }
     else if(getUserType() == UserType::SELLER->value){
 
-        //followers
-        $count_followers = "SELECT COUNT(emailCompratore) as Tot FROM Follow WHERE emailVenditore = ?";
-        $stmt = mysqli_prepare($connection, $count_followers);
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $analytics["i tuoi followers:"] = $row[0]["Tot"];
-
         //Total revenue
         $money_earn = "SELECT COALESCE(CAST(SUM(prezzo*quantita)/100 AS DECIMAL(10,2)),0) as Tot FROM InfoOrdine INNER JOIN Ordine ON Ordine.id = InfoOrdine.idOrdine
         WHERE emailVenditore = ? AND ".$time_constraint;
@@ -97,7 +88,7 @@
         //Most sold product
         $most_sold = "SELECT COALESCE(SUM(quantita),0) as Tot,Prodotto.Nome as Nome,Prodotto.id AS pId FROM InfoOrdine INNER JOIN Ordine ON Ordine.id = InfoOrdine.idOrdine
         INNER JOIN Variante ON InfoOrdine.idVariante = Variante.id INNER JOIN Prodotto ON Variante.idProdotto = Prodotto.id 
-        WHERE Prodotto.emailVenditore = ? AND ".$time_constraint." GROUP BY pId ORDER BY Tot";
+        WHERE Prodotto.emailVenditore = ? AND ".$time_constraint." GROUP BY pId ORDER BY Tot DESC";
         $stmt = mysqli_prepare($connection, $most_sold);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -113,7 +104,7 @@
         //Most revenue product
         $most_sold = "SELECT COALESCE(CAST(SUM(InfoOrdine.quantita*InfoOrdine.prezzo)/100 AS DECIMAL(10,2)),0) as Tot,Prodotto.Nome as Nome,Prodotto.id AS pId FROM InfoOrdine INNER JOIN Ordine ON Ordine.id = InfoOrdine.idOrdine
         INNER JOIN Variante ON InfoOrdine.idVariante = Variante.id INNER JOIN Prodotto ON Variante.idProdotto = Prodotto.id 
-        WHERE Prodotto.emailVenditore = ? AND ".$time_constraint." GROUP BY pId ORDER BY Tot";
+        WHERE Prodotto.emailVenditore = ? AND ".$time_constraint." GROUP BY pId ORDER BY Tot DESC";
         $stmt = mysqli_prepare($connection, $most_sold);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);

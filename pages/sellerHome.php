@@ -65,10 +65,9 @@
         create_header();
     ?>
 
-    <h2>Info</h2>
-    <div class="info">
-        <p>Followers: <span><?= $followers ?></span></p>
-    </div>
+
+    <p>Followers: <?= $followers ?></p>
+
 
     <main>
         <h2>Listino prodotti</h2>
