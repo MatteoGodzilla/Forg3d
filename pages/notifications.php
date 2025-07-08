@@ -69,7 +69,7 @@
     <?php if(getUserType()==UserType::ADMIN->value){ ?>
         <a href="adminNotification.php" id="admin">Invia notifica globale</a>
     <?php } else if(getUserType()== UserType::SELLER->value) { ?>
-        <a href="sellerNotification.php" id="seller">Invia notifica globale</a>
+        <a href="sellerNotification.php" id="seller">Invia notifica</a>
     <?php } ?>
 
     <?php if(sizeof($notifs)>0) {?>
