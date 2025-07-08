@@ -147,7 +147,9 @@ $graph = createReviewTree($reviews);
                 foreach($varianti as $variante){
                     varianteOption($variante, true);
                 }
-            ?>
+?>
+                <label for="quantity">Quantità:</label>
+                <input type="number" id="quantity"name="quantity" min=1 value=1 />
                 <input type="submit" value="Aggiungi al Carrello" />
             </form>
 

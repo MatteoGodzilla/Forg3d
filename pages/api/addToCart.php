@@ -7,6 +7,8 @@ if(!utenteLoggato() || getUserType()!=UserType::BUYER->value){
     header("Location: /");
 }
 
+$email = getSessionEmail();
+
 if(!isset($_POST["choice"])){
     header("Location: /");
 }
@@ -38,7 +40,7 @@ $variant = $rows[0];
 //aggiungi riga
 $query_cart = "INSERT INTO Carrello(emailCompratore,idVariante,quantita) VALUES(?,?,?)";
 $stmt = mysqli_prepare($connection, $query_cart);
-mysqli_stmt_bind_param($stmt,"sii",getSessionEmail(),$idVariante,$quantity);
+mysqli_stmt_bind_param($stmt,"sii", $email, $idVariante, $quantity);
 mysqli_stmt_execute($stmt);
 header("Location: /cart.php");
 ?>
