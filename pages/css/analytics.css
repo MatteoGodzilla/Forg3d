@@ -7,20 +7,22 @@ h2,p,input[type="radio"]{
 
 div#stats{
     margin: var(--padding-large) auto;
+    padding: var(--padding-small);
     width: 75%;
     text-align: center;
-    border-radius: 70px;
+    min-width: 16em;
 }
 
 div#choices{
     margin: var(--padding-small) auto;
-    display: flex;
+    display: grid;
     justify-content: center;
-    background-color:var(--light-background);
+    background-color:var(--background);
     gap: 1.5em;
+    grid-template-columns: auto auto;
 }
 
-@media (min-width: 60em){
+@media (max-width: 40em){
     div#stats  {
         width: 50%;
     }
