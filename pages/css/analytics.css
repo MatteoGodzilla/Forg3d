@@ -24,15 +24,8 @@ div#graphs{
     margin: var(--padding-large) var(--padding-small);
     padding: var(--padding-small);
     text-align: center;
+    position: relative;
 }
-
-/*
-@media(min-width: 560px){
-    div#choices {
-        grid-template-columns: auto auto auto auto;
-    }
-}
-*/
 
 @media(min-width: 1024px){
     main {

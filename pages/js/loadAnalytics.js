@@ -11,6 +11,7 @@ const units = {
 }
 
 let time_limit = "always"
+let chart = undefined
 
 //ui bindings
 
@@ -43,12 +44,15 @@ themeToggle.addEventListener("click", () => {
     load_analyitcs();
 });
 
+body.onresize = () => {
+    chart.resize();
+}
+
 // actual functions
 
 function set_chart_colors(){
     const style = window.getComputedStyle(document.body) 
     Chart.defaults.backgroundColor = style.getPropertyValue("--background");
-    //Chart.defaults.borderColor = style.getPropertyValue("--text");
     Chart.defaults.color = style.getPropertyValue("--text");
 }
 
@@ -84,7 +88,7 @@ function load_analyitcs(){
 
                     //generate graph
                     canvas = document.createElement('canvas');
-                    new Chart(canvas, {
+                    chart = new Chart(canvas, {
                         type: 'line',
                         data: {
                             labels: labels,
