@@ -60,7 +60,7 @@ function load_analyitcs(){
                     const sales = obj[key].map(item => parseFloat(item.Tot));
                     console.log(sales);
                     console.log(labels);
-                    const p = document.createElement('p');
+                    const p = document.createElement('h3');
                     p.textContent = `${key}`
                     analyticsDiv.appendChild(p);
 
@@ -91,7 +91,7 @@ function load_analyitcs(){
                             x: {
                                 title: {
                                 display: true,
-                                text: key
+                                text: units[time_limit]
                                 }
                             }
                             }

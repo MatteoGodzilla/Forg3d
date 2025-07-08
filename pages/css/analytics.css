@@ -25,7 +25,6 @@ div#choices{
 div#graphs{
     margin: var(--padding-large) auto;
     padding: var(--padding-small);
-    width: 75%;
     text-align: center;
     min-width: 16em;
 }
