@@ -22,6 +22,14 @@ div#choices{
     grid-template-columns: auto auto;
 }
 
+div#graphs{
+    margin: var(--padding-large) auto;
+    padding: var(--padding-small);
+    width: 75%;
+    text-align: center;
+    min-width: 16em;
+}
+
 @media (max-width: 40em){
     div#stats  {
         width: 50%;
