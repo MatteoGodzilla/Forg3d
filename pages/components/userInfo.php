@@ -1,6 +1,8 @@
 <?php function userInfoForm($user): void{ ?>
 
-<a id="logout" class="<?=getIdFromUserType(getUserType())?>" href="./api/handleLogout.php">Logout</a>
+<div id="logout-container">
+    <a id="logout" class="<?=getIdFromUserType(getUserType())?>" href="./api/handleLogout.php">Logout</a>
+</div>
 
 <h2>I tuoi dati</h2>
 <form action="./api/editUser.php" method="POST">
