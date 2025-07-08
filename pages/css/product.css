@@ -13,6 +13,10 @@ h3{
     text-align: center;
 }
 
+#description {
+    text-align: justify;
+}
+
 #showModel {
     width: calc(100% - var(--padding-small) * 2);
     margin-left: var(--padding-small);
@@ -188,6 +192,12 @@ form#reportForm > input[type="submit"] {
 
 form.hidden2 {
     display: none;
+}
+
+section {
+    max-width: 60em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (min-width: 60em){

@@ -16,7 +16,7 @@ if (!isset($_GET) || !isset($_GET['id'])) {
 $idProdotto = $_GET['id'];
 
 //Query per cercare le informazioni da mostrare nella pagina del prodotto
-$query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, 
+$query =   "SELECT p.id, p.nome, p.descrizione, p.fileModello, p.visibile, 
             v.emailUtente AS venditoreEmail, v.stato, u.nome AS venditoreNome, u.cognome AS venditoreCognome
             FROM Prodotto p
             JOIN Venditore v ON p.emailVenditore = v.emailUtente
@@ -110,16 +110,20 @@ $graph = createReviewTree($reviews);
         include_once("./components/header.php");
         create_header();
     ?>
-    
+
     <main>
         <?php 
             include_once("./components/image-container.php");
             create_image_container($resultImmagini);
         ?>
         <script src="./js/image-container.js"></script>
+    </main>
+    <aside>
         <h2><?php echo htmlspecialchars($prodotto['nome']); ?></h2>
         <p><strong>Venditore:</strong> 
-            <a href="../sellerProduct.php?email=<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>"> <?php echo htmlspecialchars($prodotto['venditoreNome']) . ' ' . htmlspecialchars($prodotto['venditoreCognome']); ?></a></p>
+            <a href="../sellerProduct.php?email=<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>"> <?php echo htmlspecialchars($prodotto['venditoreNome']) . ' ' . htmlspecialchars($prodotto['venditoreCognome']); ?></a>
+        </p>
+        <p id="description"><?php echo(nl2br(htmlspecialchars($prodotto['descrizione']))); ?></p>
         <?php if(isset($prodotto['fileModello'])){ ?>
             <button id="showModel">Mostra modello 3D</button>
             <div class="hidden" id="model-viewer"></div>
@@ -180,9 +184,9 @@ $graph = createReviewTree($reviews);
         <?php } else { ?>
             <script src="js/productWithoutModel.js"></script>
         <?php } ?>
-    </main>
+    </aside>
 
-    <aside>
+    <section>
         <h3>Recensioni</h3>
         <?php if ($tipoUtente==UserType::BUYER->value){ ?>
             <button id="toggleReviewForm"> 
@@ -208,7 +212,7 @@ $graph = createReviewTree($reviews);
                 createReview($review, $idProdotto, 0);
             }
         ?> 
-    </aside>
+    </section>
      
     <script src="js/replyToReview.js"></script>
     <script src="js/darkMode.js"></script>

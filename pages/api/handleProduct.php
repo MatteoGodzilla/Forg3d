@@ -12,12 +12,13 @@ if(!utenteLoggato() || getUserType() != UserType::SELLER->value ){
 
 $emailVenditore = getSessionEmail(); 
 
-if(!isset($_POST["productName"]) || !isset($_POST["defaultVariant"])){
+if(!isset($_POST["productName"]) || !isset($_POST["defaultVariant"]) || !isset($_POST["description"])){
     header("Location: /sellerHome.php");
     exit();
 }
 
 $name = $_POST["productName"];
+$description = $_POST["description"];
 $visible = 1;
 if(isset($_POST["visible"])){
     $visible = 2;
@@ -41,9 +42,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         exit();
     }
 
-    $query_update = "UPDATE Prodotto SET nome=?, visibile=?, varianteDefault=? WHERE id=?";
+    $query_update = "UPDATE Prodotto SET nome=?, descrizione=?, visibile=?, varianteDefault=? WHERE id=?";
     $stmt = mysqli_prepare($connection, $query_update);
-    mysqli_stmt_bind_param($stmt, "siii", $name, $visible, $defaultVariant, $id);
+    mysqli_stmt_bind_param($stmt, "ssiii", $name, $description, $visible, $defaultVariant, $id);
     mysqli_stmt_execute($stmt);
 
     //Notification should only be sent for buyer-visible products
@@ -52,10 +53,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
 } else {
     //add new product 
-    $query = "INSERT INTO Prodotto(emailVenditore, nome, visibile, varianteDefault) VALUES (?,?,?,?)";
+    $query = "INSERT INTO Prodotto(emailVenditore, nome, descrizione, visibile, varianteDefault) VALUES (?,?,?,?)";
     $stmt = mysqli_prepare($connection, $query);
 
-    mysqli_stmt_bind_param($stmt, "ssii", $emailVenditore, $name, $visible, $defaultVariant);
+    mysqli_stmt_bind_param($stmt, "sssii", $emailVenditore, $name, $description, $visible, $defaultVariant);
     mysqli_stmt_execute($stmt);
     $id = mysqli_insert_id($connection);
 

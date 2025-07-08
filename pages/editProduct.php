@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once("../php/db.php");
 require_once("../php/session.php");
 require_once("./components/productVariant.php");
 require_once("./components/sellerEditProductImage.php");
 require_once("./components/sellerEditProductMaterial.php");
-session_start();
 
 if(!utenteLoggato() || getUserType() != UserType::SELLER->value){
     header("Location: /");
@@ -17,7 +17,7 @@ if(isset($_GET) && isset($_GET['id'])){
     $idProduct = $_GET['id'];
 
     //Query per cercare le informazioni da mostrare nella pagina del prodotto
-    $query =   "SELECT p.id, p.nome, p.fileModello, p.visibile, p.varianteDefault, v.emailUtente AS venditoreEmail,
+    $query =   "SELECT p.id, p.nome, p.descrizione, p.fileModello, p.visibile, p.varianteDefault, v.emailUtente AS venditoreEmail,
                 u.nome AS venditoreNome, u.cognome AS venditoreCognome
                 FROM Prodotto p
                 JOIN Venditore v ON p.emailVenditore = v.emailUtente
@@ -96,6 +96,7 @@ if(isset($_GET) && isset($_GET['id'])){
 	?>
     <h2>Modifica Prodotto</h2>
     <form action="api/handleProduct.php" method="POST" enctype="multipart/form-data">
+        <input type="submit" value="Salva modifiche" />
         <fieldset>
             <legend>Informazioni generali</legend>
             <?php 
@@ -110,9 +111,15 @@ if(isset($_GET) && isset($_GET['id'])){
                 <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
             />
 
+            <label for="description">Descrizione</label>
+            <!-- Has to be on the same line, otherwise the text area grabs the tabs -->
+            <textarea name="description" id="description"><?php if(isset($product['descrizione'])) echo($product['descrizione'])?></textarea>
+
             <label for="visible">Visibile</label>
             <input type="checkbox" name="visible" id="visible" 
-                <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?>/>
+                <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?> 
+            />
+
 
             <?php if (isset($product['fileModello']) && $product["fileModello"] != ""){ ?>
                 <button id="showModel">Mostra modello 3D caricato</button>
@@ -169,7 +176,6 @@ if(isset($_GET) && isset($_GET['id'])){
             ?> 
             </div>
         </fieldset>
-        <input type="submit" value="Salva modifiche" />
     </form>
 
     <?php if (isset($product['fileModello']) && $product["fileModello"] != ""){ ?>

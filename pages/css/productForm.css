@@ -24,6 +24,14 @@ form input[type="text"]{
     border-width: 0px;
 }
 
+form textarea {
+    background-color: var(--container);
+    border-width: 0;
+    display: block;
+    width: 100%;
+    resize: vertical;
+}
+
 form input[type="file"]{
     margin-top: var(--padding-small);
     margin-bottom: var(--padding-small);
