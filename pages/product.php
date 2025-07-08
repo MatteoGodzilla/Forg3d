@@ -17,12 +17,14 @@ $idProdotto = $_GET['id'];
 
 //Query per cercare le informazioni da mostrare nella pagina del prodotto
 $query =   "SELECT p.id, p.nome, p.descrizione, p.fileModello, p.visibile, 
-            v.emailUtente AS venditoreEmail, v.stato, u.nome AS venditoreNome, u.cognome AS venditoreCognome
+            v.emailUtente AS venditoreEmail, v.stato, u.nome AS venditoreNome, u.cognome AS venditoreCognome,
+            AVG(r.valutazione) as mediaRecensioni, COUNT(r.id) as numRecensioni
             FROM Prodotto p
             JOIN Venditore v ON p.emailVenditore = v.emailUtente
             JOIN Utente u ON v.emailUtente = u.email
-            WHERE p.id = ?"
-;
+            LEFT JOIN Recensione r ON r.idProdotto = p.id
+            WHERE p.id = ? and r.inRispostaA is NULL
+            GROUP BY p.id" ;
 
 //Eseguo la connessione
 $stmt = mysqli_prepare($connection, $query);
@@ -120,10 +122,27 @@ $graph = createReviewTree($reviews);
     </main>
     <aside>
         <h2><?php echo htmlspecialchars($prodotto['nome']); ?></h2>
-        <p><strong>Venditore:</strong> 
+        <p>
+            <strong>Venditore:</strong> 
             <a href="../sellerProduct.php?email=<?php echo htmlspecialchars($prodotto['venditoreEmail']); ?>"> <?php echo htmlspecialchars($prodotto['venditoreNome']) . ' ' . htmlspecialchars($prodotto['venditoreCognome']); ?></a>
         </p>
-        <p id="description"><?php echo(nl2br(htmlspecialchars($prodotto['descrizione']))); ?></p>
+        <?php if($prodotto["numRecensioni"] > 0 ){ ?>
+            <p>
+                <strong> Voto medio:</strong> <?= $prodotto["mediaRecensioni"]; ?>
+                <span class="material-symbols-outlined filled">star</span>
+                su <?= $prodotto["numRecensioni"]; ?> 
+                <?php if($prodotto["numRecensioni"] == 1) {
+                    echo("recensione");
+                } else {
+                    echo("recensioni");
+                } ?>
+            </p>
+        <?php } ?>
+        <p id="description">
+            <?php if(isset($prodotto["descrizione"])) {
+                echo(nl2br(htmlspecialchars($prodotto["descrizione"])));
+            } ?>
+        </p>
         <?php if(isset($prodotto['fileModello'])){ ?>
             <button id="showModel">Mostra modello 3D</button>
             <div class="hidden" id="model-viewer"></div>
@@ -149,7 +168,7 @@ $graph = createReviewTree($reviews);
                 }
 ?>
                 <label for="quantity">Quantità:</label>
-                <input type="number" id="quantity"name="quantity" min=1 value=1 />
+                <input type="number" id="quantity" name="quantity" min=1 value=1 />
                 <input type="submit" value="Aggiungi al Carrello" />
             </form>
 
