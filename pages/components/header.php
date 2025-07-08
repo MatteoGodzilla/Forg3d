@@ -4,7 +4,7 @@
 		<a href="/"><h1>Forg3d</h1></a>
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
-                <?php generateSymbol(); ?>
+
 
                 <a href="/notifications.php">
                     <div id="notifications">
@@ -14,10 +14,16 @@
                         <?php }?>
                     </div>
                 </a>
-
+                
                 <a href="/profile.php">
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
+
+
+                <?php generateSymbol(); ?>
+
+
+
 
                 <a href="/analytics.php">
                     <span class="material-symbols-outlined">analytics</span>
@@ -47,13 +53,13 @@
         <a href="../cart.php"><span class="material-symbols-outlined">shopping_cart</span></a>
     <?php }?>
      <?php if (getUserType()==UserType::SELLER->value){ ?>
+        <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>
         <div id="orders">
             <a href="./../sellerOrders.php"><span class="material-symbols-outlined">receipt_long</span></a>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                     <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
         </div>
-        <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
         <a href="./../adminHome.php"><span class="material-symbols-outlined">home</span></a>

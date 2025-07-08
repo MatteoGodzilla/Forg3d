@@ -11,18 +11,15 @@ h2 {
     margin: var(--padding-large);
 }
 
-div.info {
+
+
+p#followers{
     margin: var(--padding-small);
-    padding: var(--padding-small);
+    text-align: center;
+    font-size: 1.4em;
 }
 
-div.info > p{
-    font-weight: bold;
-}
 
-div.info > p > span{
-    font-weight: normal;
-}
 
 main > h2, aside > h2 {
     text-align: center;

@@ -66,7 +66,7 @@
     ?>
 
 
-    <p>Followers: <?= $followers ?></p>
+    <p id="followers">I tuoi followers: <?= $followers ?></p>
 
 
     <main>

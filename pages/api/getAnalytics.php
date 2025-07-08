@@ -14,7 +14,7 @@
     $time_constraint = "TRUE";
     if(isset($_GET["limit"])){
         if($_GET["limit"]==="week"){
-            $time_constraint = "MONTH(CURDATE())=MONTH(Ordine.dataCreazione) AND WEEK(CURDATE())=WEEK(InfoOrdine.dataCreazione)";
+            $time_constraint = "MONTH(CURDATE())=MONTH(Ordine.dataCreazione) AND WEEK(CURDATE(),3)=WEEK(Ordine.dataCreazione,3)";
         }
         if($_GET["limit"]==="month"){
             $time_constraint = "MONTH(CURDATE())=MONTH(Ordine.dataCreazione)";
