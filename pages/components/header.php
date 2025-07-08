@@ -24,7 +24,7 @@
                 </a>
                 
                 <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
-                <a id="logout" href="./api/handleLogout.php">Logout</a>
+                <!--<a id="logout" href="./api/handleLogout.php">Logout</a>-->
             </div>
         <?php } else { ?>
             <div id="userProfile">

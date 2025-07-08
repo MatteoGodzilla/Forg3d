@@ -1,8 +1,9 @@
 <?php
+    session_start();
     require_once("../php/db.php");
     require_once("../php/session.php");
     require_once("../php/feedback.php");
-    session_start();
+    include_once("./../php/constants.php");
 
     if(!utenteLoggato()){
         header("Location: /login.php");
@@ -35,18 +36,19 @@
         <link rel="stylesheet" href="./css/buttons.css" />
         <link rel="stylesheet" href="./css/popups.css" />
         <link rel="stylesheet" href="./css/registerForm.css" />
+        <link rel="stylesheet" href="./css/profile.css" />
     </head>
-	<body>
+    <body>
         <?php
             require_once("components/header.php");
-            require_once("components/userInfo.php");
-            require_once("../php/session.php");
             include_once("./components/popups.php");
-            include_once("./../php/constants.php");
             create_header();
             if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
                 create_popup($_GET["message"],$_GET["messageType"]);
-            } 
+            }
+        ?>
+        <?php
+            require_once("components/userInfo.php");
             userInfoForm($user);
         ?>
 	</body>

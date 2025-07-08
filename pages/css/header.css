@@ -10,17 +10,18 @@
     padding: var(--padding-small);
 }
 
-.header-content > h1{
-    display: inline-block;
-    padding: 0px;
+.header-content > a{
+    width: 100%;
+    text-align: center;
 }
 
-.header-content #userProfile {
+#userProfile {
     margin-left: auto; /*used to force the element on the end of the flexbox */
+    margin-right: auto;
     margin-top: var(--padding-small);
 }
 
-.header-content .material-symbols-outlined {
+.header-content span.material-symbols-outlined {
     vertical-align: middle;
     font-size: 2em;
     margin-right: var(--padding-small);
@@ -62,4 +63,16 @@
 #theme-toggle{
     cursor: pointer;
     user-select: none;
+    margin-right: 0px;
+}
+
+@media(min-width: 560px){
+    .header-content > a{
+        width: auto;
+        text-align: left;
+    }
+
+    #userProfile {
+        margin-right: 0px;
+    }
 }

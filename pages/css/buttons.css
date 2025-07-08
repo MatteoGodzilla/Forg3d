@@ -49,21 +49,21 @@ a.detail{
 
 /*Generico basato su tipo utente*/
 
-#buyerButton {
+.buyerButton {
     background-color: var(--buyer);
     border-width: 0;
     /* Exception */
     color: var(--light-text);
 }
 
-#sellerButton {
+.sellerButton {
     background-color: var(--seller);
     border-width: 0;
     /* Exception */
     color: var(--light-text);
 }
 
-#adminButton {
+.adminButton {
     background-color: var(--admin);
     border-width: 0;
     /* Exception */

@@ -1,5 +1,6 @@
 <?php function userInfoForm($user): void{ ?>
 
+<a id="logout" class="<?=getIdFromUserType(getUserType())?>" href="./api/handleLogout.php">Logout</a>
 
 <h2>I tuoi dati</h2>
 <form action="./api/editUser.php" method="POST">
@@ -10,7 +11,7 @@
     <input type="text" name="surname" id="surname" value ="<?=$user["cognome"]?>" required />
     <label for="cellphone">Telefono</label>
     <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" value ="<?=$user["telefono"]?>" id="cellphone" required />
-    <input type="submit" id = "<?=getIdFromUserType(getUserType())?>" value="Aggiorna">
+    <input type="submit" class="<?=getIdFromUserType(getUserType())?>" value="Aggiorna">
 </form>
 
 <h2>Modifica Password</h2>

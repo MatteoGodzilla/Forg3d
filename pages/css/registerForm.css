@@ -47,6 +47,3 @@ form > p{
     font-size: 1.2em;
 }
 
-#changePassword[disabled]{
-    background-color: var(--container);
-}
