@@ -4,11 +4,10 @@
     border-radius: 70px;
     border: 0;
     font-size: 1.5em;
-    vertical-align: middle;
     max-width: 650px;
     margin-top: var(--padding-large);
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--padding-small);
+    margin-right: var(--padding-small);
 }
 
 #changePassword[disabled]{

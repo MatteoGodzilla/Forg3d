@@ -1,38 +1,56 @@
-time_limit = "always"
-load_analyitcs();
+const alwaysOption = document.querySelector("input[value='always']");
+const YearOption = document.querySelector("input[value='year']");
+const MonthOption = document.querySelector("input[value='month']");
+const WeekOption = document.querySelector("input[value='week']");
 
-units = {
+const units = {
     "always":"year",
     "year":"month",
     "month":"week",
     "week":"day"
 }
 
-const alwaysOption = document.querySelector("input[value='always']");
-const YearOption = document.querySelector("input[value='year']");
-const MonthOption = document.querySelector("input[value='month']");
-const WeekOption = document.querySelector("input[value='week']");
+let time_limit = "always"
+
+//ui bindings
 
 alwaysOption.onclick = () => {
     time_limit = "always"
+    set_chart_colors();
     load_analyitcs();
 }
 
 YearOption.onclick = () => {
     time_limit = "year"
+    set_chart_colors();
     load_analyitcs();
 }
 
 MonthOption.onclick = () => {
     time_limit = "month"
+    set_chart_colors();
     load_analyitcs();
 }
 
 WeekOption.onclick = () => {
     time_limit = "week"
+    set_chart_colors();
     load_analyitcs();
 }
 
+themeToggle.addEventListener("click", () => { 
+    set_chart_colors()
+    load_analyitcs();
+});
+
+// actual functions
+
+function set_chart_colors(){
+    const style = window.getComputedStyle(document.body) 
+    Chart.defaults.backgroundColor = style.getPropertyValue("--background");
+    //Chart.defaults.borderColor = style.getPropertyValue("--text");
+    Chart.defaults.color = style.getPropertyValue("--text");
+}
 
 function load_analyitcs(){
     fetch(`/api/getAnalytics.php?limit=`+time_limit)
@@ -60,9 +78,9 @@ function load_analyitcs(){
                     const sales = obj[key].map(item => parseFloat(item.Tot));
                     console.log(sales);
                     console.log(labels);
-                    const p = document.createElement('h3');
-                    p.textContent = `${key}`
-                    analyticsDiv.appendChild(p);
+                    //const p = document.createElement('h3');
+                    //p.textContent = `${key}`
+                    //analyticsDiv.appendChild(p);
 
                     //generate graph
                     canvas = document.createElement('canvas');
@@ -71,11 +89,10 @@ function load_analyitcs(){
                         data: {
                             labels: labels,
                             datasets: [{
-                            label: key,
-                            data: sales,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
+                                label: key,
+                                data: sales,
+                                borderColor: '#36A2EB',
+                                backgroundColor: '#9BD0F5',
                             }]
                         },
                         options: {
@@ -105,3 +122,8 @@ function load_analyitcs(){
             });
 }
 
+function init(){
+    set_chart_colors();
+    load_analyitcs();
+}
+init()

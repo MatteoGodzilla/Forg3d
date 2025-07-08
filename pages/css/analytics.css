@@ -6,31 +6,51 @@ h2,p,input[type="radio"]{
 }
 
 div#stats{
-    margin: var(--padding-large) auto;
+    margin: var(--padding-large) var(--padding-small);
     padding: var(--padding-small);
-    width: 75%;
     text-align: center;
-    min-width: 16em;
 }
 
 div#choices{
-    margin: var(--padding-small) auto;
     display: grid;
+    grid-template-columns: auto auto;
     justify-content: center;
+    padding: var(--padding-small);
     background-color:var(--background);
     gap: 1.5em;
-    grid-template-columns: auto auto;
 }
 
 div#graphs{
-    margin: var(--padding-large) auto;
+    margin: var(--padding-large) var(--padding-small);
     padding: var(--padding-small);
     text-align: center;
-    min-width: 16em;
 }
 
+/*
+@media(min-width: 560px){
+    div#choices {
+        grid-template-columns: auto auto auto auto;
+    }
+}
+*/
+
+@media(min-width: 1024px){
+    main {
+        display: inline-block;
+        width: 66%;
+        vertical-align: top;
+    }
+    aside {
+        display: inline-block; 
+        width: 33%;
+        vertical-align: top;
+    }
+}
+
+/*
 @media (max-width: 40em){
     div#stats  {
         width: 50%;
     }
 }
+*/

@@ -26,21 +26,23 @@
             create_header();
 
         ?>
+        <main>
+        <h2>Storico Vendite</h2>
+        <div id="graphs"></div>
+        </main>
 
+        <aside>
+        <h2>Timeframe</h2>
         <div id="choices">
             <label><input type = "radio" checked  name="limit" value="always" >Di sempre</label>
             <label><input type = "radio" name="limit" value="year" >Ultimo Anno</label>
             <label><input type = "radio" name="limit" value="month" >Ultimo mese</label>
             <label><input type = "radio" name="limit" value="week" >Ultima settimana</label>
         </div>
-                <h2>Grafici</h2>
-        <div id="graphs">
-            
-        </div>
-                <h2>Statistiche</h2>
-        <div id="stats">
-            
-        </div>
+
+        <h2>Statistiche</h2>
+        <div id="stats"></div>
+        </aside>
 
         <?php
             if(isset($_GET["message"]) && isset($_GET["messageType"])){ 
@@ -51,7 +53,7 @@
         ?>
 	</body>
     <script src="./js/darkMode.js"></script>
-    <script src="./js/loadAnalytics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/loadAnalytics.js"></script>
 </html>
 
