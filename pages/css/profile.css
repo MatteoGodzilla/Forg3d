@@ -1,0 +1,16 @@
+#logout {
+    color: var(--light-text);
+    padding: var(--padding-small) var(--padding-large);
+    border-radius: 70px;
+    border: 0;
+    font-size: 1.5em;
+    vertical-align: middle;
+    max-width: 650px;
+    margin-top: var(--padding-large);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#changePassword[disabled]{
+    background-color: var(--container);
+}
