@@ -66,6 +66,7 @@
         require_once("components/header.php");
         create_header();
     ?>
+    <main>
     <?php if(getUserType()==UserType::ADMIN->value){ ?>
         <a href="adminNotification.php" id="admin">Invia notifica globale</a>
     <?php } else if(getUserType()== UserType::SELLER->value) { ?>
@@ -83,7 +84,7 @@
             createNotification($notification);
         }
     ?>
-
+    
     <?php if(sizeof($notifs_read)>0) {?>
         <h2>Notifiche lette</h2>
         <a href="./api/hideNotification.php" id ="deleteAll">Cancella tutte</a>
@@ -97,8 +98,9 @@
     ?>
     
     <?php if(sizeof($notifs_read)==0 && sizeof($notifs) ==0){?>
-        <p>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi,lo vedrai dalla campanella nella parte alta dello schermo!</p>
+        <p>Nulla da leggere qua! Quanto ti arriveranno nuovi messaggi, lo vedrai dalla campanella nella parte alta dello schermo!</p>
     <?php } ?>
+    </main>
     
     <script src="js/darkMode.js"></script>
 </body>

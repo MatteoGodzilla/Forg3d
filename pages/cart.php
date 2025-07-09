@@ -49,18 +49,20 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
             require_once("components/header.php");
             create_header();
         ?>
-        <h2>Il tuo carrello</h2>
-            
-        <?php if(sizeof($rows)!=0){ ?>
-            <input type="submit" value="Paga e completa l'ordine">
-            <?php
-            include_once("./components/cart_row.php");
-            foreach($rows as $cart_row){ 
-                cart_row($cart_row);
-            } ?>
-        <?php } else { ?>
-            <h3>(Nessun articolo nel carrello, vai a fare shopping!)</h3>
-        <?php }?>
+        <main>
+            <h2>Il tuo carrello</h2>
+                
+            <?php if(sizeof($rows)!=0){ ?>
+                <input type="submit" value="Paga e completa l'ordine">
+                <?php
+                include_once("./components/cart_row.php");
+                foreach($rows as $cart_row){ 
+                    cart_row($cart_row);
+                } ?>
+            <?php } else { ?>
+                <h3>(Nessun articolo nel carrello, vai a fare shopping!)</h3>
+            <?php }?>
+        </main>
         <script src="./js/updateQuantities.js"></script>
     </form>
     <script src="./js/darkMode.js"></script>

@@ -2,11 +2,13 @@
     require_once("../php/db.php");
     require_once("../php/session.php");
     require_once("../php/feedback.php");
+    require_once("../php/constants.php");
     session_start();
 
     if(!utenteLoggato()){
         header("Location: /login.php");
     }
+    $type = getUserType();
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +19,11 @@
         <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/buttons.css" />
         <link rel="stylesheet" href="./css/popups.css" />
-        <link rel="stylesheet" href="./css/analytics.css" />
+        <?php if($type == UserType::BUYER->value) { ?>
+           <link rel="stylesheet" href="./css/analytics-buyer.css" /> 
+       <?php } else { ?>
+            <link rel="stylesheet" href="./css/analytics.css" />
+        <?php } ?>
     </head>
 	<body>
         <?php
@@ -26,22 +32,23 @@
             create_header();
 
         ?>
-        <main>
-        <h2>Storico Vendite</h2>
-        <div id="graphs"></div>
-        </main>
-
+        <?php if($type == UserType::SELLER->value) { ?>
+            <main>
+                <h2>Storico Vendite</h2>
+                <div id="graphs"></div>
+            </main>
+        <?php } ?>
         <aside>
-        <h2>Timeframe</h2>
-        <div id="choices">
-            <label><input type = "radio" checked  name="limit" value="always" >Di sempre</label>
-            <label><input type = "radio" name="limit" value="year" >Ultimo Anno</label>
-            <label><input type = "radio" name="limit" value="month" >Ultimo mese</label>
-            <label><input type = "radio" name="limit" value="week" >Ultima settimana</label>
-        </div>
+            <h2>Timeframe</h2>
+            <div id="choices">
+                <label><input type = "radio" checked  name="limit" value="always" >Di sempre</label>
+                <label><input type = "radio" name="limit" value="year" >Ultimo Anno</label>
+                <label><input type = "radio" name="limit" value="month" >Ultimo mese</label>
+                <label><input type = "radio" name="limit" value="week" >Ultima settimana</label>
+            </div>
 
-        <h2>Statistiche</h2>
-        <div id="stats"></div>
+            <h2>Statistiche</h2>
+            <div id="stats"></div>
         </aside>
 
         <?php

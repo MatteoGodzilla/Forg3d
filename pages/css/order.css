@@ -16,6 +16,16 @@ p{
     font-size: var(--font-small);
 }
 
+main {
+    max-width: var(--max-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+main > div {
+    background-color: var(--background);
+}
+
 button {
     display:block;
     width: calc(100% - var(--padding-small) * 2);
@@ -84,5 +94,13 @@ div.order> div  {
     
     div.order  *{
         max-height: 30em;
+    }
+}
+
+@media(min-width: 1000px){
+    main {
+        display: grid;
+        max-width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }

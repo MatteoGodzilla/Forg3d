@@ -6,6 +6,7 @@
     --padding-small: 10px;
     --padding-medium: 15px;
     --padding-large: 20px;
+    --max-width: 650px;
     /*light mode*/
     --light-background: #F2F2F2;
     --light-container: #DECED0;

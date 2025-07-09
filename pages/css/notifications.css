@@ -1,15 +1,21 @@
 @import url("variables.css");
 
-body > h2 , body > h3, body > p{
+main {
+    max-width: var(--max-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+main > h2 , main > h3, main > p{
     text-align: center;
     margin: var(--padding-large);
 }
 
-body > h3, body> h4 {
+main > h3, main> h4 {
     margin-top: var(--padding-large);
 }
 
-body > a {
+main > a {
     display:block;
     margin:var(--padding-small);
     padding:var(--padding-small);
@@ -19,13 +25,14 @@ body > a {
     font-size:1.5em;
 }
 
-body > a#seller, body> a#readAll{
+
+main > a#seller, main> a#readAll{
     background-color: var(--seller);
     /* Exception */
     color: var(--light-text);
 }
 
-body > a#admin, body>a#deleteAll{
+main > a#admin, main>a#deleteAll{
     background-color: var(--admin);
     /* Exception */
     color: var(--light-text);

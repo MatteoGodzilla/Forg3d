@@ -27,16 +27,9 @@ div#graphs{
     position: relative;
 }
 
-@media(min-width: 1024px){
-    main {
-        display: inline-block;
-        width: 66%;
-        vertical-align: top;
-    }
-    aside {
-        display: inline-block; 
-        width: 33%;
-        vertical-align: top;
-    }
+aside {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-right: auto;
+    margin-left: auto;
 }
-

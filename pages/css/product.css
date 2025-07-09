@@ -198,11 +198,6 @@ form.hidden2 {
     display: none;
 }
 
-section {
-    max-width: 60em;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 @media (min-width: 60em){
     main {
@@ -216,5 +211,10 @@ section {
         width: 33%;
         box-sizing: border-box;
         vertical-align: top;
+    }
+    section {
+        max-width: var(--max-width);
+        margin-left: auto;
+        margin-right: auto;
     }
 }

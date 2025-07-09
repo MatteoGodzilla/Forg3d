@@ -11,6 +11,12 @@ h2 {
     padding-top: var(--padding-large);
 }
 
+main {
+    max-width: var(--max-width);
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .cart-row{
     text-align: center;
     margin: var(--padding-large);
