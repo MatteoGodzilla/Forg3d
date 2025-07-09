@@ -70,7 +70,7 @@
         //Most sold product
         $most_sold = "SELECT COALESCE(SUM(quantita),0) as Tot,Prodotto.Nome as Nome,Prodotto.id AS pId FROM InfoOrdine INNER JOIN Ordine ON Ordine.id = InfoOrdine.idOrdine
         INNER JOIN Variante ON InfoOrdine.idVariante = Variante.id INNER JOIN Prodotto ON Variante.idProdotto = Prodotto.id 
-        WHERE Prodotto.emailVenditore = ?  AND DATEDIFF(CURDATE(), Ordine.dataCreazione)<=".$time_constraint;
+        WHERE Prodotto.emailVenditore = ?  AND DATEDIFF(CURDATE(), Ordine.dataCreazione)<=".$time_constraint." GROUP BY Prodotto.id ORDER BY Tot DESC";
         $stmt = mysqli_prepare($connection, $most_sold);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
