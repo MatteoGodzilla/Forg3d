@@ -210,6 +210,12 @@ div.star-preview > span:first-of-type {
     width: 24px;
 }
 
+section, aside {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media (min-width: 60em){
     main {
         display: inline-block;
@@ -222,10 +228,5 @@ div.star-preview > span:first-of-type {
         width: 33%;
         box-sizing: border-box;
         vertical-align: top;
-    }
-    section {
-        max-width: var(--max-width);
-        margin-left: auto;
-        margin-right: auto;
     }
 }
