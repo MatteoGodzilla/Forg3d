@@ -198,6 +198,17 @@ form.hidden2 {
     display: none;
 }
 
+div.star-preview {
+    display: flex;
+    background-color: var(--background);
+    justify-content: space-between;
+    padding: 0px;
+}
+
+div.star-preview > span:first-of-type {
+    /* set from the width of the other material icons */
+    width: 24px;
+}
 
 @media (min-width: 60em){
     main {

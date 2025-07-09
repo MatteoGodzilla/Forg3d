@@ -1,7 +1,9 @@
 <?php function create_header(){ ?>
 <header>
-	<div class="header-content">
-		<a href="/"><h1>Forg3d</h1></a>
+	<nav>
+        <a href="/">
+            <h1>Forg3d</h1>
+        </a>
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
 
@@ -19,11 +21,7 @@
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
 
-
                 <?php generateSymbol(); ?>
-
-
-
 
                 <a href="/analytics.php">
                     <span class="material-symbols-outlined">analytics</span>
@@ -38,37 +36,45 @@
                 <a id="login" href="./login.php">Login</a>
             </div>
         <?php } ?>
-	</div>
+	</nav>
 </header>
 <?php } ?>
 
 <?php function generateSymbol(){ ?>
     <?php if (getUserType()==UserType::BUYER->value){ ?>
         <div id="orders">
-            <a href="./../buyersOrders.php" ><span class="material-symbols-outlined">receipt_long</span></a>
+            <a href="./../buyersOrders.php" >
+                <span class="material-symbols-outlined">receipt_long</span>
+            </a>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                 <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
         </div>
-        <a href="../cart.php"><span class="material-symbols-outlined">shopping_cart</span></a>
-    <?php }?>
-     <?php if (getUserType()==UserType::SELLER->value){ ?>
-        <a href="./../sellerHome.php"><span class="material-symbols-outlined">home</span></a>
+        <a href="../cart.php">
+            <span class="material-symbols-outlined">shopping_cart</span>
+        </a>
+     <?php } ?>
+     <?php if (getUserType()==UserType::SELLER->value) { ?>
+        <a href="./../sellerHome.php">
+            <span class="material-symbols-outlined">home</span>
+        </a>
         <div id="orders">
-            <a href="./../sellerOrders.php"><span class="material-symbols-outlined">receipt_long</span></a>
+            <a href="./../sellerOrders.php">
+                <span class="material-symbols-outlined">receipt_long</span>
+            </a>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
-                    <span class="notification-badge"><?=$orderCount?></span>
+                <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
         </div>
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
-        <a href="./../adminHome.php"><span class="material-symbols-outlined">home</span></a>
+        <a href="./../adminHome.php">
+            <span class="material-symbols-outlined">home</span>
+        </a>
     <?php }?>
 <?php } ?>
 
-
-<?php
-    function getNotificationsCount(){
+<?php function getNotificationsCount(){
     require_once("../php/db.php");
     global $connection;
     $email = getSessionEmail();
@@ -105,8 +111,7 @@
     }
 ?>
 
-<?php
-    function getOrdersCount(){
+<?php function getOrdersCount(){
     require_once("../php/db.php");
     global $connection;
     $email = getSessionEmail();

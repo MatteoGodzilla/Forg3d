@@ -2,7 +2,7 @@
 @import url(./variables.css);
 @import url(./materialIcons.css);
 
-.header-content{
+nav {
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -10,7 +10,7 @@
     padding: var(--padding-small);
 }
 
-.header-content > a{
+nav > a{
     width: 100%;
     text-align: center;
 }
@@ -21,13 +21,13 @@
     margin-top: var(--padding-small);
 }
 
-.header-content span.material-symbols-outlined {
+nav span.material-symbols-outlined {
     vertical-align: middle;
     font-size: 2em;
     margin-right: var(--padding-small);
 }
 
-.header-content #logout, .header-content #login{
+nav #logout, nav #login{
     background-image: linear-gradient(to bottom right, var(--buyer), var(--seller));
     color: var(--light-text);
     padding: var(--padding-small) var(--padding-large);
@@ -67,7 +67,7 @@
 }
 
 @media(min-width: 560px){
-    .header-content > a{
+    nav > a{
         width: auto;
         text-align: left;
     }

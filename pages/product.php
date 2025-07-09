@@ -217,7 +217,15 @@ $graph = createReviewTree($reviews);
             <!--<h3>Scrivi una recensione</h3>-->
             <form id="reviewForm" class="hidden" action="/api/addReview.php" method="POST">
                 <input type="hidden" name="idProduct" value="<?= $idProdotto ?>">
-                <label for="score" >Valutazione: <span>4</span>/5</label> 
+                <label for="score" >Valutazione: <span>3</span>/5</label> 
+                <div class="star-preview">
+                    <span></span>
+                    <span class="material-symbols-outlined filled">star</span>
+                    <span class="material-symbols-outlined filled">star</span>
+                    <span class="material-symbols-outlined filled">star</span>
+                    <span class="material-symbols-outlined">star</span>
+                    <span class="material-symbols-outlined">star</span>
+                </div>
                 <input id="score" name="score" type="range" min=0 max=5 step=1 value=3 />
                 <label for="reviewTitle">Titolo:</label>
                 <input id ="reviewTitle" name="title" type="text" />
