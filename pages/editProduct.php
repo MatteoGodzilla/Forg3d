@@ -125,12 +125,12 @@ if(isset($_GET) && isset($_GET['id'])){
                 <button id="showModel">Mostra modello 3D caricato</button>
                 <div class="hidden" id="model-viewer"></div>
             <?php } ?>
-            <label for="3dPreview">Sostituisci file 3D</label>
+            <label for="3dPreview">Sostituisci file 3D (.stl)</label>
             <input type="file" name="3dPreview" id="3dPreview"/>
         </fieldset>
         <fieldset>
             <legend>Immagini</legend>
-            <label for="addImage">Aggiungi nuove immagini</label>
+            <label for="addImage">Aggiungi nuove immagini (.jpeg, .jpg, .png,.webp)</label>
             <input type="file" name="images[]" id="addImage" multiple/>
             <div id="immaginiEsistenti">
                 <?php 

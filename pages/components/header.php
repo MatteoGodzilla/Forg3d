@@ -7,7 +7,6 @@
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
 
-
                 <a href="/notifications.php">
                     <div id="notifications">
                         <span class="material-symbols-outlined">notifications</span>
@@ -45,10 +44,10 @@
         <div id="orders">
             <a href="./../buyersOrders.php" >
                 <span class="material-symbols-outlined">receipt_long</span>
-            </a>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                 <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
+            </a>
         </div>
         <a href="../cart.php">
             <span class="material-symbols-outlined">shopping_cart</span>
@@ -61,10 +60,10 @@
         <div id="orders">
             <a href="./../sellerOrders.php">
                 <span class="material-symbols-outlined">receipt_long</span>
-            </a>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                 <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
+            </a>
         </div>
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
