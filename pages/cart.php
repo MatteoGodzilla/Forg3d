@@ -32,6 +32,16 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$query_total = "SELECT SUM(V.prezzo * C.quantita) as totale
+    FROM Carrello C 
+    INNER JOIN Variante V ON C.idVariante = V.id
+    WHERE emailCompratore = ?";
+
+$stmt = mysqli_prepare($connection, $query_total);
+mysqli_stmt_bind_param($stmt,"s",$email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$total = mysqli_fetch_assoc($result)["totale"];
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +61,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         ?>
         <main>
             <h2>Il tuo carrello</h2>
-                
+            <p id="total">Totale: €<?= number_format($total / 100, 2);?></p>
             <?php if(sizeof($rows)!=0){ ?>
                 <input type="submit" value="Paga e completa l'ordine">
                 <?php

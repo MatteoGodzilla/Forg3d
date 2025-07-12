@@ -17,6 +17,10 @@ main {
     margin-left: auto;
 }
 
+#total {
+    font-size: 1.5em;
+}
+
 .cart-row{
     text-align: center;
     margin: var(--padding-large);
@@ -81,7 +85,6 @@ input[type="submit"]{
     border-radius: 100px;
     border-style: none;
     font-size: 1.5em;
-    font-weight: bold;
 }
 
 @media(min-width: 35em){

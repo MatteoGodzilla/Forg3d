@@ -2,14 +2,13 @@
 <header>
 	<nav>
         <a href="/">
-            <h1>Forg3d</h1>
+            <h1 title="Home">Forg3d</h1>
         </a>
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
-
                 <a href="/notifications.php">
                     <div id="notifications">
-                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="material-symbols-outlined" title="Notifiche">notifications</span>
                         <?php if(($notifCount = getNotificationsCount()) > 0){ ?>
                             <span class="notification-badge"><?=$notifCount?></span>
                         <?php }?>
@@ -17,21 +16,21 @@
                 </a>
                 
                 <a href="/profile.php">
-                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="material-symbols-outlined" title="Profilo">account_circle</span>
                 </a>
 
                 <?php generateSymbol(); ?>
 
                 <a href="/analytics.php">
-                    <span class="material-symbols-outlined">analytics</span>
+                    <span class="material-symbols-outlined" title="Statistiche">analytics</span>
                 </a>
                 
-                <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
+                <span id="theme-toggle" class="material-symbols-outlined" title="Cambio tema">bedtime</span>
                 <!--<a id="logout" href="./api/handleLogout.php">Logout</a>-->
             </div>
         <?php } else { ?>
             <div id="userProfile">
-                <span id="theme-toggle" class="material-symbols-outlined">bedtime</span>
+                <span id="theme-toggle" class="material-symbols-outlined" title="Cambio tema">bedtime</span>
                 <a id="login" href="./login.php">Login</a>
             </div>
         <?php } ?>
@@ -42,7 +41,7 @@
 <?php function generateSymbol(){ ?>
     <?php if (getUserType()==UserType::BUYER->value){ ?>
         <div id="orders">
-            <a href="./../buyersOrders.php" >
+            <a href="./../buyersOrders.php" title="Ordini">
                 <span class="material-symbols-outlined">receipt_long</span>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                 <span class="notification-badge"><?=$orderCount?></span>
@@ -50,16 +49,16 @@
             </a>
         </div>
         <a href="../cart.php">
-            <span class="material-symbols-outlined">shopping_cart</span>
+            <span class="material-symbols-outlined" title="Carrello">shopping_cart</span>
         </a>
      <?php } ?>
      <?php if (getUserType()==UserType::SELLER->value) { ?>
         <a href="./../sellerHome.php">
-            <span class="material-symbols-outlined">home</span>
+            <span class="material-symbols-outlined" title="Dashboard Venditore">home</span>
         </a>
         <div id="orders">
             <a href="./../sellerOrders.php">
-                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="material-symbols-outlined" title="Ordini">receipt_long</span>
             <?php if(($orderCount = getOrdersCount()) > 0){ ?>
                 <span class="notification-badge"><?=$orderCount?></span>
             <?php }?>
@@ -68,7 +67,7 @@
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
         <a href="./../adminHome.php">
-            <span class="material-symbols-outlined">home</span>
+            <span class="material-symbols-outlined" title="Dashboard Admin">home</span>
         </a>
     <?php }?>
 <?php } ?>
