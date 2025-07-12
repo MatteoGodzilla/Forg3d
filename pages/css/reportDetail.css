@@ -3,7 +3,7 @@
 
 #banSeller{
     display:block;
-    background-color: var(--light-danger);
+    background-color: var(--danger);
     margin:var(--padding-medium);
     padding:var(--padding-medium);
     color: var(--light-text);
@@ -14,7 +14,7 @@
 
 #deleteAll{
     display:block;
-    background-color: var(--light-ok);
+    background-color: var(--ok);
     margin:var(--padding-medium);
     padding:var(--padding-medium);
     color: var(--light-text);

@@ -7,7 +7,7 @@ h2{text-align: center;}
 div.ban-element {
     font-size:1.5em;
     margin: var(--padding-large);
-    color: var(--light-container);
+    color: var(--container);
     padding: var(--padding-small);
     text-wrap: wrap;
 }
