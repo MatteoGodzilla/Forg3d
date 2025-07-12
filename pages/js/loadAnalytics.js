@@ -78,13 +78,14 @@ function load_analyitcs(){
                 const analyticsDiv = document.getElementById("graphs");
                 analyticsDiv.innerHTML = '';
                 for(const [key,arr] of Object.entries(obj)){
+                    const section = document.createElement('section')
                     const labels = obj[key].map(item => item[units[time_limit]]);
                     const sales = obj[key].map(item => parseFloat(item.Tot));
                     console.log(sales);
                     console.log(labels);
-                    //const p = document.createElement('h3');
-                    //p.textContent = `${key}`
-                    //analyticsDiv.appendChild(p);
+                    const p = document.createElement('h2');
+                    p.textContent = `${key}`
+                    section.appendChild(p);
 
                     //generate graph
                     canvas = document.createElement('canvas');
@@ -118,7 +119,8 @@ function load_analyitcs(){
                             }
                         }
                     });
-                    analyticsDiv.appendChild(canvas);
+                    section.appendChild(canvas);
+                    analyticsDiv.appendChild(section)
                 }
                 if(analyticsDiv.innerHTML == ''){
                     analyticsDiv.innerHTML = "<p>Nessun grafico da mostrare</p>"
