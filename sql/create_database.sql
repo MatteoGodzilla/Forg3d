@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `InfoOrdine` (
   `idOrdine` int(11) NOT NULL,
   `idVariante` int(11) NOT NULL,
   `prezzo` int(11) NOT NULL,
-  `quantita` tinyint(4) NOT NULL DEFAULT 1,
+  `quantita` int(11) NOT NULL DEFAULT 1,
   KEY `idOrdine` (`idOrdine`),
   KEY `idVariante` (`idVariante`),
   CONSTRAINT `InfoOrdine_ibfk_1` FOREIGN KEY (`idOrdine`) REFERENCES `Ordine` (`id`),

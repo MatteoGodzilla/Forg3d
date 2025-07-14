@@ -93,7 +93,7 @@ div.order a.button-accept {
     background: var(--ok);
     padding-right: var(--padding-large);
     padding-left: var(--padding-large);
-    border-radius: 999px
+    border-radius: 999px;
     /* Exception */
     color: var(--light-text);
 }

@@ -21,7 +21,8 @@ if(isset($_GET['search'])){
 			$query_prodotti = "SELECT DISTINCT p.id, p.nome, p.fileModello, p.visibile,
 								u.nome AS venditoreNome, u.cognome AS venditoreCognome,
 								FIRST_VALUE(I.nomeFile) OVER (
-									PARTITION BY p.id, p.nome, p.fileModello, p.visibile, u.nome, u.cognome
+                                    PARTITION BY p.id, p.nome, p.fileModello, p.visibile, u.nome, u.cognome
+                                    ORDER BY I.id
 								) AS immagine
 							FROM Prodotto p
 							JOIN Venditore v ON p.emailVenditore = v.emailUtente

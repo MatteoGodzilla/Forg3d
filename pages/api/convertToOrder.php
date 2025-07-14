@@ -22,7 +22,7 @@ try{
     for($i=0;$i<sizeof($_POST["ids"]);$i=$i+1){
         //parametri
         $idCart = $_POST["rows"][$i];
-        $quantity = $_POST["quantity"][$i];
+        $quantity = min($_POST["quantity"][$i], 9999);
         $idVariant = $_POST["ids"][$i];
 
         //4 query per elemento,ottenere info,una per eliminare il carrello,una per aggiungere l'ordine e una per l info ordine 
@@ -55,7 +55,6 @@ try{
         mysqli_stmt_bind_param($stmt,"i", $idCart);
         mysqli_stmt_execute($stmt);
 
-
         //query 2
         $insert_order ="INSERT INTO Ordine(emailCompratore,emailVenditore,stato) VALUES(?,?,0)";
         $stmt = mysqli_prepare($connection, $insert_order);
@@ -73,6 +72,7 @@ try{
     $connection->commit();
 }
 catch(mysqli_sql_exception $exception){
+    echo($exception);
     $connection->rollback();
     exit();
 }

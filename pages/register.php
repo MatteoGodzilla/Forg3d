@@ -42,5 +42,6 @@
         <?php } ?>
 
         <script src="./js/validateRegistration.js" ></script>
+        <script src="./js/darkMode.js" ></script>
 	</body>
 </html>

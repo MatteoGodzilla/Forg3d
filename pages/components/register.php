@@ -8,7 +8,7 @@
     <label for="surname">Cognome</label>
     <input type="text" name="surname" id="surname" required />
     <label for="cellphone">Telefono</label>
-    <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" id="cellphone" required />
+    <input type="text" inputmode="numeric" pattern="[0-9\+]\d*" name="cellphone" id="cellphone" required />
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required />
     <label for="passwordConfirm">Conferma Password</label>

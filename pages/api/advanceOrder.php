@@ -40,7 +40,7 @@ if(sizeof($rows)>0){
         mysqli_stmt_bind_param($stmt,"is",$id,$email);
         mysqli_stmt_execute($stmt);
 
-        sendSellerNotificationSpecific($connection,$seller,"Ordine spedito (Notifica di sistema)","Ciao, ho confermato la spedizione tuo ordine #".$id,$buyer);
+        sendSellerNotificationSpecific($connection,$seller,"Ordine spedito (Notifica di sistema)","Ciao, ho confermato la spedizione del tuo ordine #".$id,$buyer);
     }
     else if($stato==1){
         $query = "UPDATE Ordine SET stato = 2 WHERE id= ? AND emailCompratore=?";

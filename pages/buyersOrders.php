@@ -17,7 +17,7 @@ if(getUserType()!=UserType::BUYER->value){
 $email = getSessionEmail();
 $query_orders = "SELECT DISTINCT P.id as idProdotto,M.nomeColore as variante, P.nome as nome, 
     O.emailVenditore as seller, O.id as OrderId, O.stato as stato, OI.quantita as quantita, OI.prezzo as prezzo,
-    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY O.id, P.id, P.nome, O.emailVenditore, OI.quantita, O.stato, M.nomeColore, OI.prezzo) AS immagine 
+    FIRST_VALUE(I.nomeFile) OVER (PARTITION BY O.id, P.id, P.nome, O.emailVenditore, OI.quantita, O.stato, M.nomeColore, OI.prezzo ORDER BY I.id) AS immagine 
     FROM Ordine O 
     INNER JOIN InfoOrdine OI ON OI.idOrdine = O.id
     INNER JOIN Variante V on V.id = OI.idVariante 
@@ -48,8 +48,8 @@ foreach($rows as $order){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carrello</title>
     <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/order.css" />
     <link rel="stylesheet" href="./css/buttons.css" />
+    <link rel="stylesheet" href="./css/order.css" />
 </head>
 <body>
     <?php
