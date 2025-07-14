@@ -139,26 +139,6 @@ if(isset($_GET['search'])){
         <link rel="stylesheet" href="./css/productList.css" />
         <link rel="stylesheet" href="./css/sellerList.css" />
 	</head>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const toggle = document.getElementById("filterToggle");
-			const dropdown = document.getElementById("filterDropdown");
-
-			toggle.addEventListener("click", function (e) {
-				e.stopPropagation(); // Previene la chiusura immediata
-				dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-			});
-
-			// Chiude il dropdown se clicchi fuori
-			document.addEventListener("click", function (e) {
-				if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
-					dropdown.style.display = "none";
-				}
-			});
-		});
-	</script>
-
 	<body>
         <?php 
             include_once("./components/header.php");
@@ -233,6 +213,7 @@ if(isset($_GET['search'])){
         <?php endif; ?>
 
         <script src="./js/darkMode.js"></script>
+		<script src="./js/home-filter.js"></script>
 	</body>
 </html>
 
