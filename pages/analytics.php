@@ -5,7 +5,7 @@
     require_once("../php/constants.php");
     session_start();
 
-    if(!utenteLoggato()){
+    if(!utenteLoggato() || getUserType()==UserType::BUYER->value){
         header("Location: /login.php");
     }
     $type = getUserType();
@@ -32,22 +32,20 @@
             create_header();
 
         ?>
-        <?php if($type == UserType::SELLER->value) { ?>
             <main>
-                <h2>Storico Vendite</h2>
                 <div id="graphs"></div>
             </main>
-        <?php } ?>
         <aside>
-            <h2>Timeframe</h2>
+            <h3>Timeframe</h3>
             <div id="choices">
-                <label><input type = "radio" checked  name="limit" value="always" >Di sempre</label>
-                <label><input type = "radio" name="limit" value="year" >Ultimo Anno</label>
+                <label><input type = "radio" checked name="limit" value="week" >Ultima settimana</label>
                 <label><input type = "radio" name="limit" value="month" >Ultimo mese</label>
-                <label><input type = "radio" name="limit" value="week" >Ultima settimana</label>
+                <label><input type = "radio" name="limit" value="year" >Ultimo Anno</label>
+                <label><input type = "radio" name="limit" value="always" >Di sempre</label>
+
             </div>
 
-            <h2>Statistiche</h2>
+            <h3>Statistiche</h3>
             <div id="stats"></div>
         </aside>
 

@@ -1,6 +1,6 @@
 @import url("./css/variables.css");
 
-h2,p,input[type="radio"]{
+h2,h3,p,input[type="radio"]{
     text-align: center;
     margin-top: var(--padding-small);
 }
@@ -20,9 +20,16 @@ div#choices{
     gap: 1.5em;
 }
 
+div#graphs section{
+    background-color:var(--container);
+    margin: var(--padding-large) var(--padding-small);
+    padding: var(--padding-small)
+}
+
 div#graphs{
     margin: var(--padding-large) var(--padding-small);
     padding: var(--padding-small);
+    background-color:transparent;
     text-align: center;
     position: relative;
 }

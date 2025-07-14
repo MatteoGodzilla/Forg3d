@@ -10,7 +10,7 @@ const units = {
     "week":"day"
 }
 
-let time_limit = "always"
+let time_limit = "week"
 let chart = undefined
 
 //ui bindings

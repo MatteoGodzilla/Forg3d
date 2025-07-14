@@ -19,11 +19,7 @@
                     <span class="material-symbols-outlined" title="Profilo">account_circle</span>
                 </a>
 
-                <?php generateSymbol(); ?>
-
-                <a href="/analytics.php">
-                    <span class="material-symbols-outlined" title="Statistiche">analytics</span>
-                </a>
+                <?php generateUserTypeSymbols(); ?>
                 
                 <span id="theme-toggle" class="material-symbols-outlined" title="Cambio tema">bedtime</span>
                 <!--<a id="logout" href="./api/handleLogout.php">Logout</a>-->
@@ -38,7 +34,7 @@
 </header>
 <?php } ?>
 
-<?php function generateSymbol(){ ?>
+<?php function generateUserTypeSymbols(){ ?>
     <?php if (getUserType()==UserType::BUYER->value){ ?>
         <div id="orders">
             <a href="./../buyersOrders.php" title="Ordini">
@@ -64,10 +60,18 @@
             <?php }?>
             </a>
         </div>
+
+        <a href="/analytics.php">
+            <span class="material-symbols-outlined" title="Statistiche">analytics</span>
+        </a>
     <?php }?>
     <?php if (getUserType()==UserType::ADMIN->value){ ?>
         <a href="./../adminHome.php">
             <span class="material-symbols-outlined" title="Dashboard Admin">home</span>
+        </a>
+
+        <a href="/analytics.php">
+            <span class="material-symbols-outlined" title="Statistiche">analytics</span>
         </a>
     <?php }?>
 <?php } ?>

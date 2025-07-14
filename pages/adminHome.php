@@ -51,7 +51,6 @@
         require_once("components/header.php");
         create_header();
     ?>
-    <h2>Bentornato</h2>
     <?php 
         require_once("components/adminCommands.php");
         adminInterface($pendingRequests,$sellerReports,$productReports);
