@@ -26,3 +26,58 @@ h2, p.not-found {
     text-align: center;
 }
 
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: var(--padding-small);
+    background-color: var(--background);
+    z-index: 10;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.filter-wrapper {
+    position: relative;
+}
+
+.filter-icon {
+    cursor: pointer;
+    font-size: 28px;
+    padding: 4px;
+    color: var(--text-secondary);
+}
+
+.filter-dropdown {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background-color: var(--container);
+    border: 1px solid var(--background);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: var(--padding-small);
+    z-index: 100;
+    min-width: 150px;
+}
+
+.filter-dropdown label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.filter-dropdown input[type="radio"] {
+    margin-right: 8px;
+}
+
