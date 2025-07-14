@@ -22,10 +22,13 @@ if(!isset($_GET["id"])){
     //global wipe
     $query = "SELECT id FROM Notifica 
     WHERE id NOT IN (SELECT idNotifica FROM NotificaLetta WHERE destinatario = ?) 
-    AND ((emailMittente is NULL AND (emailDestinatario is NULL OR emailDestinatario=?)) 
-    OR ((emailMittente IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?)) AND (emailDestinatario=? OR emailDestinatario is NULL)))";
+
+    AND (emailDestinatario = ? 
+    OR (emailDestinatario is NULL AND emailMittente is NULL) 
+    OR (emailMittente IN (SELECT emailVenditore FROM Follow WHERE emailCompratore=?) AND emailDestinatario is NULL))";
+
     $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt,"ssss", $email,$email,$email,$email);
+    mysqli_stmt_bind_param($stmt,"sss", $email,$email,$email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $ids = mysqli_fetch_all($result, MYSQLI_ASSOC);
