@@ -87,6 +87,17 @@ div.order> div  {
     flex : 1 1 42%;
 }
 
+div.order a.button-accept {
+    display: inline-block;
+    font-size: 1.5em;
+    background: var(--ok);
+    padding-right: var(--padding-large);
+    padding-left: var(--padding-large);
+    border-radius: 999px
+    /* Exception */
+    color: var(--light-text);
+}
+
 @media (min-width: 40em){
     div.order {
         flex-direction: row;

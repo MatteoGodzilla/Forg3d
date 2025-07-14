@@ -24,12 +24,26 @@ form input[type="text"]{
     border-width: 0px;
 }
 
+form label[for="visible"] {
+    line-height: 2em;
+}
+
+form input[type="checkbox"] {
+    display: inline-block;
+    line-height: 2em;
+}
+
+form label[for="description"]{
+    display:block;
+}
+
 form textarea {
     background-color: var(--container);
     border-width: 0;
     display: block;
     width: 100%;
     resize: vertical;
+    min-height: 15em;
 }
 
 form input[type="file"]{

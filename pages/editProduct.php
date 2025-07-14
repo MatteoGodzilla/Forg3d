@@ -111,14 +111,14 @@ if(isset($_GET) && isset($_GET['id'])){
                 <?php echo(isset($product) ? "value='".$product['nome']."'" : "")?> 
             />
 
-            <label for="description">Descrizione</label>
-            <!-- Has to be on the same line, otherwise the text area grabs the tabs -->
-            <textarea name="description" id="description"><?php if(isset($product['descrizione'])) echo($product['descrizione'])?></textarea>
-
-            <label for="visible">Visibile</label>
+            <label for="visible">Prodotto in elenco</label>
             <input type="checkbox" name="visible" id="visible" 
                 <?php echo(isset($product['visibile']) && $product['visibile'] == 2 ? 'checked' : '')?> 
             />
+
+            <label for="description">Descrizione</label>
+            <!-- Has to be on the same line, otherwise the text area grabs the tabs -->
+            <textarea name="description" id="description"><?php if(isset($product['descrizione'])) echo($product['descrizione'])?></textarea>
 
 
             <?php if (isset($product['fileModello']) && $product["fileModello"] != ""){ ?>

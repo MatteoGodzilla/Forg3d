@@ -61,14 +61,15 @@ $total = mysqli_fetch_assoc($result)["totale"];
         ?>
         <main>
             <h2>Il tuo carrello</h2>
-            <p id="total">Totale: €<?= number_format($total / 100, 2);?></p>
             <?php if(sizeof($rows)!=0){ ?>
-                <input type="submit" value="Paga e completa l'ordine">
                 <?php
-                include_once("./components/cart_row.php");
-                foreach($rows as $cart_row){ 
-                    cart_row($cart_row);
-                } ?>
+                    include_once("./components/cart_row.php");
+                    foreach($rows as $cart_row){ 
+                        cart_row($cart_row);
+                    } 
+                ?>
+                <p id="total">Totale: €<?= number_format($total / 100, 2);?></p>
+                <input type="submit" value="Paga e completa l'ordine">
             <?php } else { ?>
                 <h3>(Nessun articolo nel carrello, vai a fare shopping!)</h3>
             <?php }?>
