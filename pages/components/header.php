@@ -7,22 +7,20 @@
         <?php if (utenteLoggato()){?>
             <div id="userProfile">
                 <a href="/notifications.php">
-                    <div id="notifications">
-                        <span class="material-symbols-outlined" title="Notifiche">notifications</span>
-                        <?php if(($notifCount = getNotificationsCount()) > 0){ ?>
+                <div id="notifications">
+                    <span class="material-symbols-outlined" title="Notifiche">notifications</span>
+                    <?php if(($notifCount = getNotificationsCount()) > 0){ ?>
                             <span class="notification-badge"><?=$notifCount?></span>
-                        <?php }?>
-                    </div>
-                </a>
-                
-                <a href="/profile.php">
-                    <span class="material-symbols-outlined" title="Profilo">account_circle</span>
-                </a>
+                    <?php }?>
+                </div>
+            </a>
 
                 <?php generateUserTypeSymbols(); ?>
-                
                 <span id="theme-toggle" class="material-symbols-outlined" title="Cambio tema">bedtime</span>
                 <!--<a id="logout" href="./api/handleLogout.php">Logout</a>-->
+                <a href="/profile.php">
+                    <span id="user-icon" class="material-symbols-outlined" title="Profilo">account_circle</span>
+                </a>
             </div>
         <?php } else { ?>
             <div id="userProfile">

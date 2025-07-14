@@ -21,6 +21,10 @@ nav > a{
     margin-top: var(--padding-small);
 }
 
+#user-icon{
+    margin-right: 0;
+}
+
 nav span.material-symbols-outlined {
     vertical-align: middle;
     font-size: 2em;
@@ -63,7 +67,6 @@ nav #logout, nav #login{
 #theme-toggle{
     cursor: pointer;
     user-select: none;
-    margin-right: 0px;
 }
 
 @media(min-width: 560px){
