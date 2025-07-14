@@ -81,7 +81,8 @@ mysqli_stmt_execute($stmt);
 $resultImmagini = mysqli_stmt_get_result($stmt);
 
 //Query delle recensioni
-$query_recensioni = "SELECT id, email, valutazione, titolo, testo, inRispostaA FROM Recensione WHERE idProdotto = ? ORDER BY dataCreazione";
+$query_recensioni = "SELECT id, email, valutazione, titolo, testo, inRispostaA, TIMESTAMPDIFF(second, dataCreazione, CURRENT_TIMESTAMP()) as dataCreazione
+                    FROM Recensione WHERE idProdotto = ? ORDER BY dataCreazione";
 $stmt = mysqli_prepare($connection, $query_recensioni);
 mysqli_stmt_bind_param($stmt,"i", $idProdotto);
 mysqli_stmt_execute($stmt);

@@ -1,4 +1,34 @@
+
 <?php 
+function formatRelativeDate($seconds) {
+    if($seconds == 1){
+        return "1 secondo fa.";
+    } elseif($seconds < 60){
+        return $seconds . " secondi fa.";
+    } elseif(floor($seconds/60) == 1){
+        return "1 minuto fa.";
+    } elseif(floor($seconds/60) < 60){
+        return floor($seconds/60) . " minuti fa.";
+    } elseif(floor($seconds/3600) == 1){
+        return "1 ora fa.";
+    } elseif(floor($seconds/3600) < 24){
+        return floor($seconds/3600) . " ore fa.";
+    } elseif(floor($seconds/86400) == 1){
+        return "1 giorno fa." ;
+    } elseif(floor($seconds/86400) < 30){
+        //Yes, i know this is kinda wrong
+        return floor($seconds/86400) . " giorni fa.";
+    } elseif(floor($seconds/2592000) == 1){
+        return "1 mese fa.";
+    } elseif(floor($seconds/2592000) < 365){
+        return floor($seconds/2592000) . " mesi fa.";
+    } elseif(floor($seconds/94608000) == 1){
+        return "1 anno fa.";
+    } else {
+        return floor($seconds/946080000) . " anni fa.";
+    }
+}
+
 //NOTE: $review is an object of type ReviewNode made for the tree
 //the database row is inside $review->review
 function createReview($review, $productId, $depth) {
@@ -31,6 +61,7 @@ function createReview($review, $productId, $depth) {
     <?php } ?>
     <p><?= htmlspecialchars($review->review["testo"]) ?></p>
     <p><?= htmlspecialchars($review->review["email"]) ?></p>
+    <p><?= formatRelativeDate($review->review["dataCreazione"]) ?></p>
 
     <div class="replies">
         <?php 
@@ -58,3 +89,4 @@ function createReview($review, $productId, $depth) {
     </div>
 </div>
 <?php } ?>
+
