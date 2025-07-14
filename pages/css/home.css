@@ -6,22 +6,6 @@ form {
     top: 0px;
 }
 
-input[name="search"] {
-    background-color: var(--container);
-    width: 100%;
-    padding: var(--padding-large);
-    border-width: var(--padding-small);
-    border-color: var(--background);
-    border-style: solid;
-    border-radius: 100px;
-    text-align: center;
-}
-
-input[name="search"]:focus-visible {
-    border-color: var(--buyer);
-    outline-style: none;
-}
-
 h2, p.not-found {
     text-align: center;
 }
@@ -59,9 +43,9 @@ h2, p.not-found {
     display: none;
     position: absolute;
     top: 35px;
-    right: 0;
+    left: 0;
     background-color: var(--container);
-    border: 1px solid var(--background);
+    border: 1px solid var(--opposite);
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: var(--padding-small);
@@ -81,3 +65,49 @@ h2, p.not-found {
     margin-right: 8px;
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--container);
+    border: var(--padding-small) solid var(--background);
+    border-radius: 100px;
+    padding: 0 var(--padding-small);
+    gap: var(--padding-small);
+    position: relative;
+}
+
+.search-bar input[name="search"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: var(--padding-large) 0;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text);
+    text-align: center;
+}
+
+.search-bar input[name="search"]::placeholder{
+    text-align: center;
+}
+
+/* Le icone */
+.search-icon,
+.filter-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Wrapper mantiene posizione per dropdown */
+.filter-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}

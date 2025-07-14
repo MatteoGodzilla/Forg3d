@@ -171,29 +171,31 @@ if(isset($_GET['search'])){
 			$filter = isset($_GET['filter']) ? $_GET['filter'] : 'tutto';
 			?>
 
-			<input type="search" name="search" 
-           placeholder="Cerca prodotti o venditori..." 
-           value="<?php echo htmlspecialchars($query); ?>" />
-
-			<button type="submit" class="search-button">
-				<span class="material-symbols-outlined">search</span>
-			</button>
-
-			<div class="filter-wrapper">
-				<span class="material-symbols-outlined filter-icon" id="filterToggle">filter_list</span>
-				<div class="filter-dropdown" id="filterDropdown">
-					<label><input type="radio" name="filter" value="tutto" <?php if($filter=='tutto') echo 'checked'; ?>> Tutto</label>
-					<label><input type="radio" name="filter" value="prodotti" <?php if($filter=='prodotti') echo 'checked'; ?>> Prodotti</label>
-					<label><input type="radio" name="filter" value="venditori" <?php if($filter=='venditori') echo 'checked'; ?>> Venditori</label>
-					<?php if ($email): ?>
-						<label><input type="radio" name="filter" value="seguiti" <?php if($filter=='seguiti') echo 'checked'; ?>> Seguiti</label>
-					<?php endif; ?>
+			<div class="search-bar">
+				<div class="filter-wrapper">
+					<span class="material-symbols-outlined filter-icon" id="filterToggle">filter_list</span>
+					<div class="filter-dropdown" id="filterDropdown">
+						<label><input type="radio" name="filter" value="tutto" <?php if($filter=='tutto') echo 'checked'; ?>> Tutto</label>
+						<label><input type="radio" name="filter" value="prodotti" <?php if($filter=='prodotti') echo 'checked'; ?>> Prodotti</label>
+						<label><input type="radio" name="filter" value="venditori" <?php if($filter=='venditori') echo 'checked'; ?>> Venditori</label>
+						<?php if ($email): ?>
+							<label><input type="radio" name="filter" value="seguiti" <?php if($filter=='seguiti') echo 'checked'; ?>> Seguiti</label>
+						<?php endif; ?>
+					</div>
 				</div>
+
+				<input type="search" name="search"
+					placeholder="Cerca prodotti o venditori..."
+					value="<?php echo htmlspecialchars($query); ?>" />
+
+				<button type="submit" class="search-icon">
+					<span class="material-symbols-outlined">search</span>
+				</button>
 			</div>
 		</form>
 
 		<?php if (isset($_GET['search'])): ?>
-			<?php if ($filter === 'venditori' || $filter === 'tutto' || $filter === 'seguiti'): ?>
+			<?php if ($filter !== 'prodotti'): ?>
 				<h2>Venditori</h2>
 				<?php if (count($sellers) > 0): ?>
 					<div class="sellers">
@@ -202,7 +204,7 @@ if(isset($_GET['search'])){
 					<?php endforeach; ?>
 					</div>
 				<?php else: ?>
-					<p>Nessun venditore trovato.</p>
+					<p class="not-found">Nessun venditore trovato.</p>
 				<?php endif; ?>
             <?php endif; ?>
 
@@ -215,7 +217,7 @@ if(isset($_GET['search'])){
 					<?php endforeach; ?>
 					</div>
 				<?php else: ?>
-					<p>Nessun prodotto trovato.</p>
+					<p class="not-found">Nessun prodotto trovato.</p>
 				<?php endif; ?>
 			<?php endif; ?>
 
