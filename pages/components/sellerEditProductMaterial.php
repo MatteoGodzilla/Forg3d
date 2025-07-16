@@ -10,8 +10,8 @@
     <div>
         <input type="number" name="variantCostsWhole[<?= $variant["id"] ?>]" id="variantCostsWhole[<?= $variant["id"] ?>]" value="<?= floor($variant["prezzo"] / 100) ?>"/>
         <p>,</p>
-        <input type="number" name="variantCostsCents[<?= $variant["id"] ?>]" id="variantCostsCents[<?= $variant["id"] ?>]" value="<?= $variant["prezzo"] % 100 ?>" min=0 max=99 step=1/>
-        <label for="variantCosts[<?= $variant["id"] ?>]">€</label>
+        <input type="number" name="variantCostsCents[<?= $variant["id"] ?>]" id="variantCostsCents[<?= $variant["id"] ?>]" value="<?= $variant["prezzo"] % 100 ?>" min=0 max=99 step=1 />
+        <label for="variantCostsWhole[<?= $variant["id"] ?>]">€</label>
     </div>
     <div>
         <div>

@@ -12,7 +12,7 @@
     <label for="surname">Cognome</label>
     <input type="text" name="surname" id="surname" value ="<?=$user["cognome"]?>" required />
     <label for="cellphone">Telefono</label>
-    <input type="text" inputmode="numeric" pattern="\d*" name="cellphone" value ="<?=$user["telefono"]?>" id="cellphone" required />
+    <input type="text" inputmode="numeric" pattern="[0-9\+]\d*" name="cellphone" value ="<?=$user["telefono"]?>" id="cellphone" required />
     <input type="submit" class="<?=getIdFromUserType(getUserType())?>" value="Aggiorna">
 </form>
 

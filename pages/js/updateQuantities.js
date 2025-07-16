@@ -4,7 +4,7 @@ window.onload = () => {
     const rows = document.querySelectorAll("input[name='rows[]']");
     const costs = document.querySelectorAll("input[name='costs[]']");
     const total = document.querySelector("#total");
-    const subtotals = document.querySelectorAll("h3[id='subtotale']");
+    const subtotals = document.querySelectorAll("h3[id^='subtotale']");
 
     for(let i = 0; i < inputQuantities.length; i++){
         inputQuantities[i].onchange = () => {
@@ -18,7 +18,7 @@ window.onload = () => {
                     "id": productId, 
                     "variante": variantId, 
                     "quantita": quantita 
-                }).toString())
+                }).toString()
                 .then(res => res.json())
                 .then(json => {
                     const totalCost = json["total"] / 100;

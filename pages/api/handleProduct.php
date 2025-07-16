@@ -53,7 +53,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
 } else {
     //add new product 
-    $query = "INSERT INTO Prodotto(emailVenditore, nome, descrizione, visibile, varianteDefault) VALUES (?,?,?,?)";
+    $query = "INSERT INTO Prodotto(emailVenditore, nome, descrizione, visibile, varianteDefault) VALUES (?,?,?,?,?)";
     $stmt = mysqli_prepare($connection, $query);
 
     mysqli_stmt_bind_param($stmt, "sssii", $emailVenditore, $name, $description, $visible, $defaultVariant);

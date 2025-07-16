@@ -66,6 +66,7 @@ body > h2, form > h2, body > p {
     background-color: var(--danger);
     cursor: pointer;
     width: 100%;
+    color: var(--light-text);
 }
 
 form.follow-btn > input[type="submit"]{

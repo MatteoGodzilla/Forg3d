@@ -44,6 +44,7 @@ form textarea {
     width: 100%;
     resize: vertical;
     min-height: 15em;
+    font-family: var(--font-family-paragraph);
 }
 
 form input[type="file"]{

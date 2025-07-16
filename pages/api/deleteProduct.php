@@ -35,7 +35,7 @@ if($check["visibile"] != 0){
     mysqli_stmt_bind_param($stmt, "is", $id, $email);
     mysqli_stmt_execute($stmt);
     //Send notification of removal, if it was visible
-    if($visible == 2){ 
+    if($check["visibile"] == 2){ 
         sendRemovedProduct($connection, $email);
     }
 }
